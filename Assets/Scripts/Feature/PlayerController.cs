@@ -76,6 +76,7 @@ namespace Player.Controller
                     velocity.y = -2f;
             }
 
+
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
 
@@ -152,6 +153,19 @@ namespace Player.Controller
             {
                 velocity = Vector3.zero;
                 transform.position = initialPosition;
+            }
+        }
+
+        // remove Cursor
+        private void OnApplicationFocus(bool focus)
+        {
+            if (focus) 
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
             }
         }
     }
