@@ -14,6 +14,11 @@ namespace Player.Controller
         private PlayerAction playerControls;
         private CharacterController controller;
 
+        [Header("Shooting")]
+        private Camera mainCamera;
+        private int floorMask;
+        [SerializeField] private GameObject shootTargetObject;
+
         [Header("Movement")]
         public bool isSprintDefault = false;
 
@@ -43,12 +48,15 @@ namespace Player.Controller
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+            floorMask = LayerMask.GetMask("Floor");
         }
 
         private void Start()
         {
             initialPosition = transform.position;
             speed = isSprintDefault ? sprintSpeed : moveSpeed;
+
+            mainCamera = Camera.main;
 
             playerControls = InputManager.PlayerAction;
             RegisterInputCallbacks();
@@ -82,6 +90,42 @@ namespace Player.Controller
             CheckOutOfBound();
         }
 
+        #region Rotation
+        private void FixedUpdate()
+        {
+            Aim();
+        }
+
+        /// <summary>
+        /// Turn player based on the mouse movement
+        /// </summary>
+        private void Aim()
+        {
+            var (isSuccess, position) = GetMousePosition();
+            if(isSuccess)
+            {
+                var direction = position - transform.position;
+                direction.y = 0;
+                shootTargetObject.transform.position = transform.position + direction.normalized;
+                transform.forward = direction;
+            }
+        }
+
+        private (bool isSuccess, Vector3 position) GetMousePosition()
+        {
+            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if(Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, floorMask))
+            {
+                return (isSuccess: true, position: hitInfo.point);  
+            }
+            else 
+            {
+                return (isSuccess: false, position: Vector3.zero);  
+            }
+        }
+        #endregion
+
         #region Callbacks
         private void RegisterInputCallbacks()
         {
@@ -110,8 +154,8 @@ namespace Player.Controller
             if (rawInputMovement.magnitude > 0.1f)
             {
                 float targetAngle = Mathf.Atan2(rawInputMovement.x, rawInputMovement.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                // float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                // transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
