@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
+    public Transform PlayerPosition;
     [SerializeField] private GameObject enemyToSpawn;
     [SerializeField] private Vector3 spawnAreaSize;
 
@@ -17,12 +19,15 @@ public class EnemySpawner : MonoBehaviour
     private int currentWave = 0;
     private float timeSinceLastWave = 0f;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void SpawnPrefab()
     {
         Vector3 randomSpawnPoint = GetRandomSpawnPoint();
+        GameObject enemyInstance = Instantiate(enemyToSpawn, randomSpawnPoint, Quaternion.identity);
 
-        // Check for overlap with obstacles before spawning
-        Instantiate(enemyToSpawn, randomSpawnPoint, Quaternion.identity);
     }
 
     private Vector3 GetRandomSpawnPoint()
@@ -32,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
                         Random.Range(-spawnAreaSize.z / 2f, spawnAreaSize.z / 2f));
 
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.GetAreaFromName("Walkable")))
         {
             return hit.position;
         }
@@ -59,8 +64,6 @@ public class EnemySpawner : MonoBehaviour
             timeSinceLastWave = 0f;
             currentSpawnCount += enemiesPerWave;
             currentWave++;
-
-            Debug.Log("Wave " + currentWave + " spawned.");
         }
     }
 

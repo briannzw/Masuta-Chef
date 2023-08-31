@@ -9,24 +9,21 @@ public class MoveTo : MonoBehaviour
     private Transform destination;
     [SerializeField] private float distanceToDestination = 5f;
     private NavMeshAgent agent;
-    private float timerSinceSpawn = 1f;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     void Start()
     {
-        destination = GameObject.FindWithTag("Player").transform;
-        agent = GetComponent<NavMeshAgent>();
+        destination = EnemySpawner.Instance.PlayerPosition;
     }
 
     private void Update()
     {
-        if(timerSinceSpawn > 0)
-        {
-            timerSinceSpawn -= Time.deltaTime;
-            agent.ResetPath();
-        }
-
-
-        if (Vector3.Distance(transform.position, destination.position) < distanceToDestination)
+        agent.destination = destination.position;
+        if (agent.remainingDistance < distanceToDestination)
         {
             agent.isStopped = true;
         }
@@ -34,11 +31,5 @@ public class MoveTo : MonoBehaviour
         {
             agent.isStopped = false;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        agent.destination = destination.position;
-
     }
 }
