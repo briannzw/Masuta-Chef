@@ -8,6 +8,7 @@ namespace Player.Controller
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerController instance;
         [Header("References")]
         public Animator Animator;
 
@@ -43,6 +44,7 @@ namespace Player.Controller
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+            instance = this;
         }
 
         private void Start()
