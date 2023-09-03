@@ -199,6 +199,17 @@ namespace Player.Controller
             }
         }
 
+        #region Environment
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody rb = hit.collider.attachedRigidbody;
+            if (rb && !rb.isKinematic)
+            {
+                rb.velocity = hit.moveDirection * PushForce * (speed / moveSpeed);
+            }
+        }
+        #endregion
+
         // remove Cursor
         private void OnApplicationFocus(bool focus)
         {
