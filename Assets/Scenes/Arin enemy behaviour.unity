@@ -814,6 +814,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 16562251793129373, guid: f93444c88e88c4548af139841d4b0c2a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 227213067308148503, guid: f93444c88e88c4548af139841d4b0c2a,
         type: 3}
       propertyPath: m_Name
@@ -869,10 +874,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2864426777615351283, guid: f93444c88e88c4548af139841d4b0c2a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951819213504069612, guid: f93444c88e88c4548af139841d4b0c2a,
+        type: 3}
+      propertyPath: Projectile
+      value: 
+      objectReference: {fileID: 2184255381922559018, guid: 62ec97874d4e36f4e83671884c9230bc,
+        type: 3}
     - target: {fileID: 7951819213504069612, guid: f93444c88e88c4548af139841d4b0c2a,
         type: 3}
       propertyPath: <MoveSpeed>k__BackingField
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951819213504069612, guid: f93444c88e88c4548af139841d4b0c2a,
+        type: 3}
+      propertyPath: <Projectile>k__BackingField
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7951819213504069612, guid: f93444c88e88c4548af139841d4b0c2a,
         type: 3}
@@ -2249,7 +2270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933338045}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 1e-45, z: -1e-45, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000016701605, z: -0.0000000079906055, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2965,8 +2986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPosition: {fileID: 1832258754}
-  enemyToSpawn: {fileID: 8849380876502409976, guid: 8e9b22393d5341e44b80dad6576d7b56,
-    type: 3}
+  enemyToSpawn: {fileID: 2142297742}
   spawnAreaSize: {x: 30, y: 1, z: 30}
   maxSpawnCount: 15
   enemiesPerWave: 3
@@ -3396,7 +3416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007945553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 1e-45, z: -1e-45, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000016701605, z: -0.0000000079906055, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3540,6 +3560,12 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &2142297742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 227213067308148503, guid: f93444c88e88c4548af139841d4b0c2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 640959174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

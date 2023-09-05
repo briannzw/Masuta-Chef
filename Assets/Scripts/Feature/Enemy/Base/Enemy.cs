@@ -12,11 +12,14 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     [field: SerializeField] public float MaxDistanceTowardsPlayer { get; set; } = 2f;
     [field: SerializeField] public float MoveSpeed { get; set; } = 3.25f;
 
+    [SerializeField] public GameObject Projectile;
+
     #region State Machine Variables
     public EnemyStateMachine StateMachine { get; set; }
     public EnemyIdleState EnemyIdleState { get; set; }
     public EnemyChaseState EnemyChaseState { get; set; }
     public EnemyAttackState EnemyAttackState { get; set; }
+    
     #endregion
 
     private void Awake()

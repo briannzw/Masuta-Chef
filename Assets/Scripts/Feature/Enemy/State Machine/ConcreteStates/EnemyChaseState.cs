@@ -31,7 +31,19 @@ public class EnemyChaseState : EnemyState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        if(enemy.Agent.remainingDistance < enemy.MaxDistanceTowardsPlayer)
+        // Get the velocity vector from the NavMesh Agent
+        Vector3 velocity = enemy.Agent.velocity;
+
+        // Check if there is any movement (magnitude > 0)
+        if (velocity.magnitude > 0)
+        {
+            // Calculate the rotation angle
+            Quaternion targetRotation = Quaternion.LookRotation(velocity);
+
+            // Smoothly rotate towards the target rotation
+            enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, Time.deltaTime * enemy.Agent.angularSpeed);
+        }
+        if (enemy.Agent.remainingDistance < enemy.MaxDistanceTowardsPlayer)
         {
             enemy.StateMachine.ChangeState(enemy.EnemyAttackState);
         }
