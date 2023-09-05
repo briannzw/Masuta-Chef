@@ -18,5 +18,16 @@ namespace Character.Stats
         }
 
         protected float _currentValue;
+
+        public CharacterDynamicStat()
+        {
+            _currentValue = BaseValue;
+        }
+
+        public CharacterDynamicStat(float baseValue) : this()
+        {
+            BaseValue = baseValue;
+            _currentValue = BaseValue;
+        }
     }
 }
