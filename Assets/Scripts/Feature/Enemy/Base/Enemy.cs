@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
 {
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
-    public Transform TargetDestination { get; set; }
+    public virtual Transform TargetDestination { get; set; }
     public NavMeshAgent Agent { get; set; }
     [field: SerializeField] public float MaxDistanceTowardsPlayer { get; set; } = 2f;
     [field: SerializeField] public float MoveSpeed { get; set; } = 3.25f;
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
 
     private void Update()
     {
-        Agent.destination = EnemySpawner.Instance.PlayerPosition.position;
+        Agent.destination = TargetDestination.position;
         StateMachine.CurrentEnemyState.FrameUpdate();
         Agent.speed = MoveSpeed;
     }

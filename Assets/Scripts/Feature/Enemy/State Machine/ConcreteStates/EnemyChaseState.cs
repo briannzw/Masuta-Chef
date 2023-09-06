@@ -19,7 +19,7 @@ public class EnemyChaseState : EnemyState
         base.EnterState();
         Debug.Log("Chassiiing!");
         enemy.Agent.isStopped = false;
-        enemy.Agent.destination = EnemySpawner.Instance.PlayerPosition.position;
+        enemy.Agent.destination = enemy.TargetDestination.position;
     }
 
     public override void ExitState()
