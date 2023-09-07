@@ -25,23 +25,21 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     public EnemyIdleState EnemyIdleState { get; set; }
     public EnemyChaseState EnemyChaseState { get; set; }
     public EnemyShootState EnemyShootState { get; set; }
-    
+
     #endregion
 
     private void Awake()
     {
+        Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
-
         EnemyIdleState = new EnemyIdleState(this, StateMachine);
         EnemyChaseState = new EnemyChaseState(this, StateMachine);
         EnemyShootState = new EnemyShootState(this, StateMachine);
     }
     private void Start()
     {
-        Agent = GetComponent<NavMeshAgent>();
         CurrentHealth = MaxHealth;
         StateMachine.Initialize(EnemyChaseState);
-        
     }
 
     private void Update()

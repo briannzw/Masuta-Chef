@@ -6,10 +6,7 @@ using UnityEngine.AI;
 public class EnemyShootState : EnemyState
 {
     private float timer = 0f;
-    public EnemyShootState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
-    {
-        
-    }
+    public EnemyShootState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine) { }
 
     public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
     {
@@ -31,16 +28,9 @@ public class EnemyShootState : EnemyState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        // Calculate the direction from this object to the player
         Vector3 directionToPlayer = EnemySpawner.Instance.PlayerPosition.position - enemy.transform.position;
-
-        // Make the object always face the player's direction
         enemy.transform.rotation = Quaternion.LookRotation(directionToPlayer);
-
-        // Update the timer
         timer += Time.deltaTime;
-
-        // Check if it's time to shoot again
         if (timer >= enemy.ShootInterval)
         {
             ShootProjectile();
