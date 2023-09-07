@@ -2185,7 +2185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933338045}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3411,14 +3411,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 0}
-  interactRadius: 5
-  interactAngle: 125
-  targetMask:
+  InteractRadius: 5
+  InteractAngle: 125
+  TargetMask:
     serializedVersion: 2
     m_Bits: 128
-  faceInteractable: 0
-  rotateSpeed: 70
-  nearestInteractable: {fileID: 0}
+  NearestInteractable: {fileID: 0}
 --- !u!1 &1965934676
 GameObject:
   m_ObjectHideFlags: 0
@@ -3525,7 +3523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007945553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
