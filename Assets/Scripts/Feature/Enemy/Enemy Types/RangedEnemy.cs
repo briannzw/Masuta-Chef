@@ -15,4 +15,10 @@ public class RangedEnemy : Enemy
     public override float ShootInterval => shootInterval;
     public override GameObject Projectile => projectileObj;
     public override EnemyState EnemyCombatBehaviour => EnemyShootState;
+
+    private new void Awake()
+    {
+        base.Awake();
+        StateMachine.Initialize(EnemyChasePlayerState);
+    }
 }

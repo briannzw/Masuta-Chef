@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     public NavMeshAgent Agent { get; set; }
     [field: SerializeField] public float MaxDistanceTowardsPlayer { get; set; } = 2f;
     [field: SerializeField] public float MoveSpeed { get; set; } = 3.25f;
-
+    public virtual EnemyState EnemyCombatBehaviour { get; set; }
 
 
     #region Ranged Enemy Variable
@@ -24,18 +24,17 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     public virtual float MeleeInterval { get; set; } = 1f;
     #endregion
 
-    public virtual EnemyState EnemyCombatBehaviour { get; set; }
-
     #region State Machine Variables
     public EnemyStateMachine StateMachine { get; set; }
     public EnemyIdleState EnemyIdleState { get; set; }
     public EnemyChasePlayerState EnemyChasePlayerState { get; set; }
     public EnemyShootState EnemyShootState { get; set; }
     public EnemyMeleeState EnemyMeleeState { get; set; }
+    public EnemyWanderState EnemyWanderState { get; set; }
 
     #endregion
 
-    private void Awake()
+    protected void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
@@ -43,11 +42,11 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
         EnemyChasePlayerState = new EnemyChasePlayerState(this, StateMachine);
         EnemyShootState = new EnemyShootState(this, StateMachine);
         EnemyMeleeState = new EnemyMeleeState(this, StateMachine);
+        EnemyWanderState = new EnemyWanderState(this, StateMachine);
     }
     private void Start()
     {
         CurrentHealth = MaxHealth;
-        StateMachine.Initialize(EnemyChasePlayerState);
     }
 
     private void Update()

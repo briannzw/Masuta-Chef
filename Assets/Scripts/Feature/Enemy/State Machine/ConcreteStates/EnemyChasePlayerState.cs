@@ -15,7 +15,6 @@ public class EnemyChasePlayerState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
-        Debug.Log("Chassiiing!");
         enemy.Agent.isStopped = false;
         enemy.Agent.destination = enemy.TargetDestination.position;
     }

@@ -9,4 +9,10 @@ public class MeleeEnemy : Enemy
     public override Transform TargetDestination => EnemySpawner.Instance.PlayerPosition;
     public override EnemyState EnemyCombatBehaviour => EnemyMeleeState;
     public override float MeleeInterval => meleeAttackInterval;
+
+    private new void Awake()
+    {
+        base.Awake();
+        StateMachine.Initialize(EnemyChasePlayerState);
+    }
 }
