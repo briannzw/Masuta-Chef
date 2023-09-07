@@ -14,14 +14,16 @@ namespace Player.Interaction
         private PlayerAction playerControls;
 
         [Header("Parameters")]
-        public float interactRadius = 5;
-        [Range(0, 360)] public float interactAngle = 125;
+        public float InteractRadius = 5;
+        [Range(0, 360)] public float InteractAngle = 125;
 
-        public LayerMask targetMask;
+        public LayerMask TargetMask;
 
-        public bool faceInteractable;
-        public float rotateSpeed = 70;
-        public GameObject nearestInteractable;
+        /*public bool faceInteractable;
+        public float RotateSpeed = 70;
+        */
+
+        public GameObject NearestInteractable;
 
         private List<GameObject> detectedInteractables;
 
@@ -56,7 +58,7 @@ namespace Player.Interaction
 
         private void Update()
         {
-            if (nearestInteractable == null) return;
+            if (NearestInteractable == null) return;
             if (!playerControls.Gameplay.enabled) return;
 
             if (playerControls.Gameplay.Move.IsPressed())
@@ -70,18 +72,18 @@ namespace Player.Interaction
         {
             if (!playerControls.Gameplay.Interact.enabled) return;
 
-            detectedInteractables = ColliderDetector.Find<GameObject>(transform.position - transform.forward, interactRadius + transform.forward.magnitude, targetMask, transform.forward, interactAngle);
-            nearestInteractable = null;
+            detectedInteractables = ColliderDetector.Find<GameObject>(transform.position - transform.forward, InteractRadius + transform.forward.magnitude, TargetMask, transform.forward, InteractAngle);
+            NearestInteractable = null;
 
             if (detectedInteractables.Count > 0)
             {
-                nearestInteractable = detectedInteractables.OrderBy(
+                NearestInteractable = detectedInteractables.OrderBy(
                     obj => (transform.position - obj.transform.position).sqrMagnitude).ToArray()[0];
 
-                IInteractable interactable = nearestInteractable.GetComponent<IInteractable>();
+                IInteractable interactable = NearestInteractable.GetComponent<IInteractable>();
                 if (interactable == null)
                 {
-                    Debug.Log(nearestInteractable.name + " does not contain IInteractable interface.");
+                    Debug.Log(NearestInteractable.name + " does not contain IInteractable interface.");
                     return;
                 }
 
@@ -94,25 +96,25 @@ namespace Player.Interaction
 
         private void CancelInteraction()
         {
-            if (nearestInteractable)
+            if (NearestInteractable)
             {
-                IInteractable interactable = nearestInteractable.GetComponent<IInteractable>();
+                IInteractable interactable = NearestInteractable.GetComponent<IInteractable>();
                 if (interactable == null)
                 {
-                    Debug.Log(nearestInteractable.name + " does not contain IInteractable interface.");
+                    Debug.Log(NearestInteractable.name + " does not contain IInteractable interface.");
                     return;
                 }
 
                 interactable.ExitInteract();
             }
 
-            nearestInteractable = null;
+            NearestInteractable = null;
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, interactRadius);
+            Gizmos.DrawWireSphere(transform.position, InteractRadius);
         }
     }
 }

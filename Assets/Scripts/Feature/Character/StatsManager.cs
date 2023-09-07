@@ -7,6 +7,7 @@ public class StatsManager : MonoBehaviour
 {
     public KeyCode Key;
     public KeyCode Key2;
+    public KeyCode Key3;
     public Character.Character OtherStats;
     public float DamageScaling = 1f;
 
@@ -26,6 +27,10 @@ public class StatsManager : MonoBehaviour
         if (Input.GetKeyDown(Key2))
         {
             OtherStats.Health.AddModifier(new StatModifier(0.1f, StatModType.PercentMult));
+        }
+        if(Input.GetKeyDown(Key3))
+        {
+
         }
     }
 }

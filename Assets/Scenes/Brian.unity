@@ -3230,6 +3230,7 @@ GameObject:
   - component: {fileID: 1832258756}
   - component: {fileID: 1832258755}
   - component: {fileID: 1832258757}
+  - component: {fileID: 1832258758}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3397,6 +3398,27 @@ MonoBehaviour:
     BaseValue: 0
   DamageMultiplier:
     BaseValue: 1
+--- !u!114 &1832258758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832258750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790d710a3405e5f46b1e67a78f7a1642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
+  interactRadius: 5
+  interactAngle: 125
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  faceInteractable: 0
+  rotateSpeed: 70
+  nearestInteractable: {fileID: 0}
 --- !u!1 &1965934676
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,6 +3466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Key: 107
   Key2: 108
+  Key3: 0
   OtherStats: {fileID: 1832258757}
   DamageScaling: 2
 --- !u!114 &1965934679

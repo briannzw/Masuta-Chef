@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Character
@@ -14,6 +15,10 @@ namespace Character
         public CharacterStat Defense;
         public CharacterStat DamageMultiplier = new CharacterStat(1);
 
+        #region Action
+        public Action OnDie;
+        #endregion
+
         public void TakeDamage(Character other, float scaling = 1)
         {
             // Total Damage Received = (Other's Total Attack * Scaling) - Defense * Final Damage Multiplier
@@ -22,6 +27,9 @@ namespace Character
             if(Health.CurrentValue <= 0f)
             {
                 Debug.Log(name + " Died");
+                // Make sure to Only call OnDie once
+                OnDie?.Invoke();
+                Destroy(gameObject);
             }
         }
     }
