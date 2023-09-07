@@ -12,13 +12,19 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     [field: SerializeField] public float MaxDistanceTowardsPlayer { get; set; } = 2f;
     [field: SerializeField] public float MoveSpeed { get; set; } = 3.25f;
 
-    [SerializeField] public GameObject Projectile;
+
+
+    #region Ranged Enemy Variable
+    public virtual GameObject Projectile { get; set; }
+    public virtual float ProjectileSpeed { get; set; } = 14f;
+    public virtual float ShootInterval { get; set; } = 1f;
+    #endregion
 
     #region State Machine Variables
     public EnemyStateMachine StateMachine { get; set; }
     public EnemyIdleState EnemyIdleState { get; set; }
     public EnemyChaseState EnemyChaseState { get; set; }
-    public EnemyAttackState EnemyAttackState { get; set; }
+    public EnemyShootState EnemyShootState { get; set; }
     
     #endregion
 
@@ -28,7 +34,7 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
 
         EnemyIdleState = new EnemyIdleState(this, StateMachine);
         EnemyChaseState = new EnemyChaseState(this, StateMachine);
-        EnemyAttackState = new EnemyAttackState(this, StateMachine);
+        EnemyShootState = new EnemyShootState(this, StateMachine);
     }
     private void Start()
     {

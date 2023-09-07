@@ -45,7 +45,7 @@ public class EnemyChaseState : EnemyState
         }
         if (enemy.Agent.remainingDistance < enemy.MaxDistanceTowardsPlayer)
         {
-            enemy.StateMachine.ChangeState(enemy.EnemyAttackState);
+            enemy.StateMachine.ChangeState(enemy.EnemyShootState);
         }
     }
 

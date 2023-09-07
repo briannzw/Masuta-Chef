@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAttackState : EnemyState
+public class EnemyShootState : EnemyState
 {
-    public float projectileSpeed = 10f;
-    public float shootInterval = 2f;
     private float timer = 0f;
-    public EnemyAttackState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
+    public EnemyShootState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
         
     }
@@ -43,7 +41,7 @@ public class EnemyAttackState : EnemyState
         timer += Time.deltaTime;
 
         // Check if it's time to shoot again
-        if (timer >= shootInterval)
+        if (timer >= enemy.ShootInterval)
         {
             ShootProjectile();
             ResetTimer();
@@ -76,7 +74,7 @@ public class EnemyAttackState : EnemyState
         {
             // Set the velocity of the projectile to shoot it towards the player
             Vector3 directionToPlayer = EnemySpawner.Instance.PlayerPosition.position - enemy.transform.position;
-            projectileRigidbody.velocity = directionToPlayer.normalized * projectileSpeed;
+            projectileRigidbody.velocity = directionToPlayer.normalized * enemy.ProjectileSpeed;
         }
         else
         {

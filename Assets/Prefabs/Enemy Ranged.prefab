@@ -147,7 +147,9 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <MaxDistanceTowardsPlayer>k__BackingField: 8
   <MoveSpeed>k__BackingField: 5
-  Projectile: {fileID: 1177116938407560466, guid: 7fda7a65bbabeb14cb2d73f7adad0cc6,
+  projectileSpeed: 15
+  shootInterval: 1
+  projectileObj: {fileID: 1177116938407560466, guid: 7fda7a65bbabeb14cb2d73f7adad0cc6,
     type: 3}
 --- !u!1 &2829947489752414853
 GameObject:
