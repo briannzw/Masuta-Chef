@@ -49,9 +49,9 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
         CurrentHealth = MaxHealth;
     }
 
-    private void Update()
+    protected void Update()
     {
-        Agent.destination = TargetDestination.position;
+        Agent.SetDestination(TargetDestination.position);
         StateMachine.CurrentEnemyState.FrameUpdate();
         Agent.speed = MoveSpeed;
     }

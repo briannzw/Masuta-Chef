@@ -14,11 +14,13 @@ public class EnemyWanderState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
+        enemy.Agent.isStopped = false;
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        enemy.Agent.isStopped = true;
     }
 
     public override void FrameUpdate()
