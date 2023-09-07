@@ -2171,7 +2171,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933338045}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: -1e-45, z: 1e-45, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.00000001792245, z: -0.000000008574697, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2887,7 +2887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPosition: {fileID: 1832258754}
-  enemyToSpawn: {fileID: 227213067308148503, guid: f93444c88e88c4548af139841d4b0c2a,
+  enemyToSpawn: {fileID: 227213067308148503, guid: 3dd620b18ac3c8344bbab9413f3f7af2,
     type: 3}
   spawnAreaSize: {x: 30, y: 1, z: 30}
   maxSpawnCount: 15
@@ -3318,7 +3318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007945553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: -1e-45, z: 1e-45, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.00000001792245, z: -0.000000008574697, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

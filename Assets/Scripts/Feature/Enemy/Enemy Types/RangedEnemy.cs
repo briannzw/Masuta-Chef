@@ -14,6 +14,5 @@ public class RangedEnemy : Enemy
     public override float ProjectileSpeed => projectileSpeed;
     public override float ShootInterval => shootInterval;
     public override GameObject Projectile => projectileObj;
-
-
+    public override EnemyState EnemyCombatBehaviour => EnemyShootState;
 }

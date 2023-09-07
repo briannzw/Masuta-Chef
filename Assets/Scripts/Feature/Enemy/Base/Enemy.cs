@@ -20,11 +20,18 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     public virtual float ShootInterval { get; set; } = 1f;
     #endregion
 
+    #region Melee Enemy Variable
+    public virtual float MeleeInterval { get; set; } = 1f;
+    #endregion
+
+    public virtual EnemyState EnemyCombatBehaviour { get; set; }
+
     #region State Machine Variables
     public EnemyStateMachine StateMachine { get; set; }
     public EnemyIdleState EnemyIdleState { get; set; }
-    public EnemyChaseState EnemyChaseState { get; set; }
+    public EnemyChasePlayerState EnemyChasePlayerState { get; set; }
     public EnemyShootState EnemyShootState { get; set; }
+    public EnemyMeleeState EnemyMeleeState { get; set; }
 
     #endregion
 
@@ -33,13 +40,14 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
         EnemyIdleState = new EnemyIdleState(this, StateMachine);
-        EnemyChaseState = new EnemyChaseState(this, StateMachine);
+        EnemyChasePlayerState = new EnemyChasePlayerState(this, StateMachine);
         EnemyShootState = new EnemyShootState(this, StateMachine);
+        EnemyMeleeState = new EnemyMeleeState(this, StateMachine);
     }
     private void Start()
     {
         CurrentHealth = MaxHealth;
-        StateMachine.Initialize(EnemyChaseState);
+        StateMachine.Initialize(EnemyChasePlayerState);
     }
 
     private void Update()

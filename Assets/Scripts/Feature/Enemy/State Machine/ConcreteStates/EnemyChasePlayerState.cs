@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyChaseState : EnemyState
+public class EnemyChasePlayerState : EnemyState
 {
-    public EnemyChaseState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine) { }
+    public EnemyChasePlayerState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine) { }
 
     public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
     {
@@ -37,7 +37,7 @@ public class EnemyChaseState : EnemyState
         }
         if (enemy.Agent.remainingDistance < enemy.MaxDistanceTowardsPlayer)
         {
-            enemy.StateMachine.ChangeState(enemy.EnemyShootState);
+            enemy.StateMachine.ChangeState(enemy.EnemyCombatBehaviour);
         }
     }
 

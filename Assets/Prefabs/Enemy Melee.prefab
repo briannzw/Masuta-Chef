@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 3913809925716915092}
   - component: {fileID: 2864426777615351283}
   - component: {fileID: 7469723069948955516}
-  - component: {fileID: 7951819213504069612}
+  - component: {fileID: 3857692396193551964}
   m_Layer: 0
-  m_Name: Enemy Ranged
+  m_Name: Enemy Melee
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -132,7 +132,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7951819213504069612
+--- !u!114 &3857692396193551964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,16 +141,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 227213067308148503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ecd67f8ce1cb464c92a449c2cd24263, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e76d3c51decabe4c846a8af7c873939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
-  <MaxDistanceTowardsPlayer>k__BackingField: 8
-  <MoveSpeed>k__BackingField: 5
-  projectileSpeed: 15
-  shootInterval: 1
-  projectileObj: {fileID: 1177116938407560466, guid: 7fda7a65bbabeb14cb2d73f7adad0cc6,
-    type: 3}
+  <MaxDistanceTowardsPlayer>k__BackingField: 3
+  <MoveSpeed>k__BackingField: 3
+  meleeAttackInterval: 1
 --- !u!1 &2829947489752414853
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,8 +176,8 @@ Transform:
   m_GameObject: {fileID: 2829947489752414853}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.578, z: 0.741}
-  m_LocalScale: {x: 0.10925, y: 0.076901, z: 1}
+  m_LocalPosition: {x: 0, y: 0.578, z: 0.473}
+  m_LocalScale: {x: 0.49653032, y: 0.076901, z: 0.55378}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1905806522770672569}
