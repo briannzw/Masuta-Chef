@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5314450806471266988}
   - component: {fileID: 2176179046261853510}
   - component: {fileID: 4673745122421868456}
+  - component: {fileID: 7621640367590418140}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -128,9 +129,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b33f9029d377214786c6391a88cc20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPosition: {fileID: 4272392837424791712}
+  ButtonDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7621640367590418140}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 1
+  ButtonUpEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7621640367590418140}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+--- !u!114 &7621640367590418140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8473324051878338565}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be72a412bf652f4438e3081b2c711088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 0.2
+  bulletSpeed: 10
   bulletPrefab: {fileID: 7168686472188487822, guid: ba78dac0ee8cc73449fb653037a8c8e5,
     type: 3}
-  player: {fileID: 0}
-  bulletSpeed: 10
-  timeBetweenBullets: 0.2
+  BulletSpawnTransform: {fileID: 4272392837424791712}

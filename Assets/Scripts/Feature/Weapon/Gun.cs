@@ -1,17 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
-    [Header("Shoot Parameter")]
-    public Transform bulletSpawnPosition;
-    public GameObject bulletPrefab;
-    public float bulletSpeed = 10;
-    public float timeBetweenBullets = .2f;
-
-    private bool isCooldown = false;
+    public UnityEvent ButtonDownEvent;
+    public UnityEvent ButtonUpEvent;
     private PlayerAction playerControls;
 
     private void Start()
@@ -36,34 +32,29 @@ public class Gun : MonoBehaviour
         if(playerControls == null) return;
 
         playerControls.Gameplay.Fire.Enable();
-        playerControls.Gameplay.Fire.performed += Shoot;
+        playerControls.Gameplay.Fire.started += OnInputActionStart;
+        playerControls.Gameplay.Fire.canceled += OnInputActionEnd;
     }
 
     private void UnregisterInputCallbacks()
     {
         if(playerControls == null) return;
 
-        playerControls.Gameplay.Fire.performed -= Shoot;
+        playerControls.Gameplay.Fire.started -= OnInputActionStart;
+        playerControls.Gameplay.Fire.canceled -= OnInputActionEnd;
         playerControls.Gameplay.Fire.Disable();
     }
     #endregion
 
-    #region Shoot Callback
-    private void Shoot(InputAction.CallbackContext context)
+    #region Button Event
+    private void OnInputActionStart(InputAction.CallbackContext obj)
     {
-        if(isCooldown) return;
-
-        var bullet = Instantiate(bulletPrefab, bulletSpawnPosition.position, bulletSpawnPosition.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPosition.forward * bulletSpeed;
-
-        StartCoroutine(ShootCooldown());
+        ButtonDownEvent.Invoke();
     }
-
-    private IEnumerator ShootCooldown()
+ 
+    private void OnInputActionEnd(InputAction.CallbackContext obj)
     {
-        isCooldown = true;
-        yield return new WaitForSeconds(timeBetweenBullets);
-        isCooldown = false;
+        ButtonUpEvent.Invoke();
     }
     #endregion
 }

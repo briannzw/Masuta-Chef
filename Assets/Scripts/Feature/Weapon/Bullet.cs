@@ -10,4 +10,9 @@ public class Bullet : MonoBehaviour
     {
         Destroy(this.gameObject,aliveTime);
     }
+
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log("Hit Object" + other.gameObject.name);
+        // Do Something
+    }
 }
