@@ -32,6 +32,21 @@ namespace Player.Controller
         private Vector3 moveDirection;
         private Vector3 initialPosition;
 
+        // Pickup Crate
+        [Header("PickUp")]
+        private bool isHoldingObject = false;
+        private GameObject heldObject;
+        public float pickupDistance = 3f;
+
+        // Drop Crate
+        private bool hasDroppedObject = false;
+
+        // Capsule
+        private float capsuleHeight = 2f;
+        private float capsuleRadius = 0.7f;
+        [SerializeField]
+        private Transform holdPosition;
+
         // Movement Parameters
         private float speed;
         private float turnSmoothVelocity = 0;
@@ -88,6 +103,86 @@ namespace Player.Controller
             controller.Move(velocity * Time.deltaTime);
 
             CheckOutOfBound();
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (!isHoldingObject)
+                {
+                    Debug.Log("Trying to pick up an object...");
+                    PickUpObject();
+                }
+                else
+                {
+                    Debug.Log("Trying to drop the object...");
+                    DropObject();
+                }
+            }
+
+            // Memastikan objek yang dipegang selalu berada di depan pemain
+            if (isHoldingObject && heldObject != null)
+            {
+                Vector3 offset = transform.forward * 1.3f;
+
+                heldObject.transform.position = transform.position + offset;
+            }
+
+            // Periksa apakah objek yang dipegang masih ada
+            if (isHoldingObject && heldObject == null && !hasDroppedObject)
+            {
+                Debug.Log("The held object has been destroyed. Automatically dropping it.");
+                DropObject();
+                isHoldingObject = false;
+                heldObject = null;
+            }
+
+        }
+
+
+
+        // PickUp Object
+        private void PickUpObject()
+        {
+            if (!isHoldingObject)
+            {
+                Collider[] colliders = Physics.OverlapCapsule(transform.position - Vector3.up * capsuleHeight / 2f, transform.position + Vector3.up * capsuleHeight / 2f, capsuleRadius);
+
+                foreach (Collider col in colliders)
+                {
+                    if (col.CompareTag("crate"))
+                    {
+                        // Perhitungan jarak antara pemain dan objek "crate"
+                        float distance = Vector3.Distance(transform.position, col.transform.position);
+
+                        if (distance <= pickupDistance)
+                        {
+                            CrateController crate = col.GetComponent<CrateController>();
+                            if (crate != null && !crate.IsHeld)
+                            {
+                                crate.PickupObject(transform);
+                                isHoldingObject = true;
+                                heldObject = crate.gameObject;
+                                break; // Hentikan iterasi setelah menemukan objek untuk diambil
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        private void DropObject()
+        {
+            if (isHoldingObject && heldObject != null)
+            {
+                CrateController crate = heldObject.GetComponent<CrateController>();
+                if (crate != null)
+                {
+                    crate.DropObject();
+                    isHoldingObject = false;
+                    heldObject = null;
+                }
+            }
         }
 
         #region Rotation
@@ -102,7 +197,7 @@ namespace Player.Controller
         private void Aim()
         {
             var (isSuccess, position) = GetMousePosition();
-            if(isSuccess)
+            if (isSuccess)
             {
                 var direction = position - transform.position;
                 direction.y = 0;
@@ -115,13 +210,13 @@ namespace Player.Controller
         {
             var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if(Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, floorMask))
+            if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, floorMask))
             {
-                return (isSuccess: true, position: hitInfo.point);  
+                return (isSuccess: true, position: hitInfo.point);
             }
-            else 
+            else
             {
-                return (isSuccess: false, position: Vector3.zero);  
+                return (isSuccess: false, position: Vector3.zero);
             }
         }
         #endregion
@@ -192,7 +287,7 @@ namespace Player.Controller
         // Handling
         private void CheckOutOfBound()
         {
-            if(transform.position.y < -5f)
+            if (transform.position.y < -5f)
             {
                 velocity = Vector3.zero;
                 transform.position = initialPosition;
@@ -213,7 +308,7 @@ namespace Player.Controller
         // remove Cursor
         private void OnApplicationFocus(bool focus)
         {
-            if (focus) 
+            if (focus)
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
