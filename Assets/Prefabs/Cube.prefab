@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2795684599674458169}
   - component: {fileID: 5531085603865984367}
   - component: {fileID: 297096605150463723}
+  - component: {fileID: 3974091003176204238}
   - component: {fileID: -3631950739361344644}
   - component: {fileID: -4281071734363043203}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: crate
   m_Icon: {fileID: 0}
@@ -107,6 +108,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3974091003176204238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4816319909867338021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a279772369d4a8a4fa3c2df1642d718f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CombineSpeed: 0
+  Distance: 0
+  areaColliderObjectName: AreaCollider
 --- !u!114 &-3631950739361344644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5c5d3dc94e3ad4d8dbab1b0843d8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwForce: 15
 --- !u!54 &-4281071734363043203
 Rigidbody:
   m_ObjectHideFlags: 0

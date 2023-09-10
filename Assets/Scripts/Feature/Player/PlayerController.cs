@@ -118,6 +118,15 @@ namespace Player.Controller
                 }
             }
 
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                if (isHoldingObject)
+                {
+                    Debug.Log("Throwing the held object...");
+                    ThrowHeldObject();
+                }
+            }
+
             // Memastikan objek yang dipegang selalu berada di depan pemain
             if (isHoldingObject && heldObject != null)
             {
@@ -169,8 +178,6 @@ namespace Player.Controller
             }
         }
 
-
-
         private void DropObject()
         {
             if (isHoldingObject && heldObject != null)
@@ -184,6 +191,26 @@ namespace Player.Controller
                 }
             }
         }
+
+        private void ThrowHeldObject()
+        {
+            if (isHoldingObject && heldObject != null)
+            {
+                CrateController crate = heldObject.GetComponent<CrateController>();
+                if (crate != null)
+                {
+                    // Kalkulasi arah dorongan berdasarkan arah pandangan pemain
+                    Vector3 throwDirection = transform.forward;
+
+                    // Panggil metode ThrowObject pada CrateController dengan arah dorongan yang tepat
+                    crate.ThrowObject(throwDirection);
+
+                    isHoldingObject = false;
+                    heldObject = null;
+                }
+            }
+        }
+
 
         #region Rotation
         private void FixedUpdate()

@@ -9,7 +9,6 @@ public class CombineCrate : MonoBehaviour
 
     public float CombineSpeed;
     public float Distance;
-
     public string areaColliderObjectName = "AreaCollider";
 
     private GameObject areaColliderObject;
@@ -46,6 +45,7 @@ public class CombineCrate : MonoBehaviour
                 case CubeState.Gray:
                     SetCombinedObjectColor(Color.red);
                     currentState = CubeState.Red;
+                    
                     // Hapus kubus lainnya saat menjadi merah
                     Destroy(collision.gameObject);
                     break;
@@ -53,6 +53,7 @@ public class CombineCrate : MonoBehaviour
                     // Ubah kubus menjadi biru jika bertabrakan dengan kubus lain
                     SetCombinedObjectColor(Color.blue);
                     currentState = CubeState.Blue;
+                    
                     // Hapus kubus lainnya saat menjadi biru
                     Destroy(collision.gameObject);
                     break;
@@ -60,6 +61,7 @@ public class CombineCrate : MonoBehaviour
                     // Ubah kubus menjadi kuning jika bertabrakan dengan kubus lain
                     SetCombinedObjectColor(Color.yellow);
                     currentState = CubeState.Yellow;
+                   
                     // Hapus kubus lainnya saat menjadi kuning
                     Destroy(collision.gameObject);
                     break;

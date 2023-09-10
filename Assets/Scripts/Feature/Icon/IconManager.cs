@@ -22,32 +22,39 @@ public class IconManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (IsPlayerInAreaCollider())
         {
-            Debug.Log("E key pressed");
-
             // Check if the player is in the area collider
-            if (IsPlayerInAreaCollider())
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Player is in the AreaCollider");
+                Debug.Log("E key pressed");
 
                 if (combineCrateScript != null)
                 {
-                    CombineCrate.CubeState currentState = combineCrateScript.GetCurrentState();
-                    Debug.Log("CombineCrate script is not null. Current state: " + currentState);
+                    CombineCrate.CubeState? currentState = CheckCrateStateInAreaCollider();
 
-                    // Display icons based on the current state
-                    TampilkanIkonBerdasarkanCurrentState(currentState);
+                    if (currentState != null)
+                    {
+                        Debug.Log("CombineCrate script is not null. Current state: " + currentState.Value);
+
+                        // Display icons based on the current state
+                        TampilkanIkonBerdasarkanCurrentState(currentState.Value);
+                    }
+                    else
+                    {
+                        Debug.LogError("CombineCrate script is null or no 'crate' object found.");
+                    }
                 }
                 else
                 {
                     Debug.LogError("CombineCrate script is null. Ensure it is assigned in the inspector.");
                 }
             }
-            else
-            {
-                Debug.Log("Player is NOT in the AreaCollider");
-            }
+            else { }
+        }
+        else
+        {
+            MatikanSemuaIkon();
         }
     }
 
@@ -74,6 +81,46 @@ public class IconManager : MonoBehaviour
         }
     }
 
+    private CombineCrate.CubeState? CheckCrateStateInAreaCollider()
+    {
+        // Cari semua objek dengan tag "crate" di dalam AreaCollider
+        GameObject areaColliderObject = GameObject.Find("AreaCollider");
+
+        if (areaColliderObject == null)
+        {
+            Debug.LogError("AreaCollider object with the specified name not found.");
+            return null;
+        }
+
+        Collider[] crateColliders = Physics.OverlapBox(
+            areaColliderObject.transform.position,
+            areaColliderObject.GetComponent<BoxCollider>().size / 2, // Mengurangi ukuran area collider untuk memastikan objek 'crate' berada di dalamnya
+            Quaternion.identity,
+            LayerMask.GetMask("Crate") // Pastikan layer "Crate" adalah layer yang digunakan pada objek 'crate'
+        );
+
+        if (crateColliders.Length > 0)
+        {
+            // Ambil komponen CombineCrate dari objek pertama yang ditemukan
+            CombineCrate crateScript = crateColliders[0].GetComponent<CombineCrate>();
+
+            if (crateScript != null)
+            {
+                return crateScript.GetCurrentState();
+            }
+            else
+            {
+                Debug.LogError("CombineCrate script not found on crate object.");
+                return null;
+            }
+        }
+        else
+        {
+            Debug.Log("No 'crate' object found in the AreaCollider.");
+            return null;
+        }
+    }
+
     private bool IsPlayerInAreaCollider()
     {
         // Cari objek AreaCollider berdasarkan namanya
@@ -87,7 +134,7 @@ public class IconManager : MonoBehaviour
 
         Collider[] colliders = Physics.OverlapBox(
             areaColliderObject.transform.position,
-            areaColliderObject.GetComponent<BoxCollider>().size / 2f,
+            areaColliderObject.GetComponent<BoxCollider>().size,
             Quaternion.identity,
             LayerMask.GetMask("Player")
         );
