@@ -4,57 +4,61 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class Gun : MonoBehaviour
+namespace Weapon.Gun
 {
-    public UnityEvent ButtonDownEvent;
-    public UnityEvent ButtonUpEvent;
-    private PlayerAction playerControls;
-
-    private void Start()
+    public class Gun : Weapon
     {
-        playerControls = InputManager.PlayerAction;
-        RegisterInputCallbacks();
-    }
+        public UnityEvent ButtonDownEvent;
+        public UnityEvent ButtonUpEvent;
+        private PlayerAction playerControls;
 
-    private void OnEnable()
-    {
-        RegisterInputCallbacks();
-    }
+        protected override void Start()
+        {
+            base.Start();
+            playerControls = InputManager.PlayerAction;
+            RegisterInputCallbacks();
+        }
 
-    private void OnDisable()
-    {
-        UnregisterInputCallbacks();
-    }
+        private void OnEnable()
+        {
+            RegisterInputCallbacks();
+        }
 
-    #region Callbacks
-    private void RegisterInputCallbacks()
-    {
-        if(playerControls == null) return;
+        private void OnDisable()
+        {
+            UnregisterInputCallbacks();
+        }
 
-        playerControls.Gameplay.Fire.Enable();
-        playerControls.Gameplay.Fire.started += OnInputActionStart;
-        playerControls.Gameplay.Fire.canceled += OnInputActionEnd;
-    }
+        #region Callbacks
+        private void RegisterInputCallbacks()
+        {
+            if (playerControls == null) return;
 
-    private void UnregisterInputCallbacks()
-    {
-        if(playerControls == null) return;
+            playerControls.Gameplay.Fire.Enable();
+            playerControls.Gameplay.Fire.started += OnInputActionStart;
+            playerControls.Gameplay.Fire.canceled += OnInputActionEnd;
+        }
 
-        playerControls.Gameplay.Fire.started -= OnInputActionStart;
-        playerControls.Gameplay.Fire.canceled -= OnInputActionEnd;
-        playerControls.Gameplay.Fire.Disable();
-    }
-    #endregion
+        private void UnregisterInputCallbacks()
+        {
+            if (playerControls == null) return;
 
-    #region Button Event
-    private void OnInputActionStart(InputAction.CallbackContext obj)
-    {
-        ButtonDownEvent.Invoke();
+            playerControls.Gameplay.Fire.started -= OnInputActionStart;
+            playerControls.Gameplay.Fire.canceled -= OnInputActionEnd;
+            playerControls.Gameplay.Fire.Disable();
+        }
+        #endregion
+
+        #region Button Event
+        private void OnInputActionStart(InputAction.CallbackContext obj)
+        {
+            ButtonDownEvent.Invoke();
+        }
+
+        private void OnInputActionEnd(InputAction.CallbackContext obj)
+        {
+            ButtonUpEvent.Invoke();
+        }
+        #endregion
     }
- 
-    private void OnInputActionEnd(InputAction.CallbackContext obj)
-    {
-        ButtonUpEvent.Invoke();
-    }
-    #endregion
 }

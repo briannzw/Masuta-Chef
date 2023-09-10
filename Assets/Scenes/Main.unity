@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 230128984}
   - component: {fileID: 230128983}
   - component: {fileID: 230128982}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2992,7 +2992,7 @@ PrefabInstance:
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
@@ -3002,7 +3002,7 @@ PrefabInstance:
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
@@ -3038,6 +3038,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673745122421868456, guid: d9738ac3c0b67b84592bc889d7ca54c0,
+        type: 3}
+      propertyPath: DamageScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8473324051878338565, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
@@ -3229,6 +3234,7 @@ GameObject:
   - component: {fileID: 1832258756}
   - component: {fileID: 1832258755}
   - component: {fileID: 1832258757}
+  - component: {fileID: 1832258758}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3340,6 +3346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 0}
+  rotationSpeed: 5
   shootTargetObject: {fileID: 241793596}
   isSprintDefault: 0
   moveSpeed: 5
@@ -3388,12 +3395,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health:
     BaseValue: 100
+  Mana:
+    BaseValue: 100
   Attack:
-    BaseValue: 0
+    BaseValue: 5
   Defense:
     BaseValue: 0
   DamageMultiplier:
     BaseValue: 1
+--- !u!114 &1832258758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832258750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790d710a3405e5f46b1e67a78f7a1642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
+  InteractRadius: 5
+  InteractAngle: 125
+  TargetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  NearestInteractable: {fileID: 0}
 --- !u!4 &2003858859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
