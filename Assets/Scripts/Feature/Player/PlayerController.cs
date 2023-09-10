@@ -190,7 +190,7 @@ namespace Player.Controller
         #endregion
 
         // remove Cursor
-        private void OnApplicationFocus(bool focus)
+        /*private void OnApplicationFocus(bool focus)
         {
             if (focus) 
             {
@@ -201,5 +201,6 @@ namespace Player.Controller
                 Cursor.lockState = CursorLockMode.None;
             }
         }
+        */
     }
 }
