@@ -9,6 +9,7 @@ public class JokerEnemy : Enemy
 
     [SerializeField] private float wanderRadius = 10f;     // The radius within which the object can wander.
     [SerializeField] private float wanderTimer = 5f;       // Time between wandering direction changes.
+    [SerializeField] private float detectionRadius = 5f;    // Detect nearby crate radius.
 
     private Transform target;            // The position to move towards.
     private float timer;                 // Timer to control wandering direction changes.
@@ -22,9 +23,13 @@ public class JokerEnemy : Enemy
 
     private new void Update()
     {
-        timer -= Time.deltaTime;
-        if (!Agent.isStopped)
+        StateMachine.CurrentEnemyState.FrameUpdate();
+        Agent.speed = MoveSpeed;
+        CheckForCrate();
+
+        if (StateMachine.CurrentEnemyState == EnemyWanderState && !Agent.isStopped)
         {
+            timer -= Time.deltaTime;
             if (timer <= 0f)
             {
                 // Time to choose a new random destination.
@@ -45,5 +50,26 @@ public class JokerEnemy : Enemy
 
         // Set the new target position.
         Agent.SetDestination(hit.position);
+    }
+
+    private void CheckForCrate()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        float nearestDistance = Mathf.Infinity;
+        GameObject nearestCrate = null;
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("crate"))
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestCrate = collider.gameObject;
+                    Debug.Log("Nearest Crate is " + nearestCrate.name);
+                }
+            }
+        }
     }
 }
