@@ -13,12 +13,15 @@ public class JokerEnemy : Enemy
 
     private Transform target;            // The position to move towards.
     private float timer;                 // Timer to control wandering direction changes.
+    private GameObject nearestCrate;
+    public JokerChaseCrateState JokerChaseCrateState { get; set; }
 
     private new void Awake()
     {
         base.Awake();
         target = transform;
         StateMachine.Initialize(EnemyWanderState);
+        JokerChaseCrateState = new JokerChaseCrateState(this, StateMachine);
     }
 
     private new void Update()
@@ -56,20 +59,36 @@ public class JokerEnemy : Enemy
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
         float nearestDistance = Mathf.Infinity;
-        GameObject nearestCrate = null;
+
+        // Track whether a crate is currently detected
+        bool isCrateDetected = false;
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("crate"))
+            if (collider.CompareTag("Crate"))
             {
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
+
+                // Check if this is the nearest crate
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;
                     nearestCrate = collider.gameObject;
-                    Debug.Log("Nearest Crate is " + nearestCrate.name);
+                    isCrateDetected = true;  // Set the flag to true since a crate is detected
                 }
             }
+        }
+
+        // If a crate is detected, chase it; otherwise, wander
+        if (isCrateDetected)
+        {
+            StateMachine.ChangeState(JokerChaseCrateState);
+            Agent.isStopped = false;
+            Agent.SetDestination(nearestCrate.transform.position);
+        }
+        else
+        {
+            StateMachine.ChangeState(EnemyWanderState);
         }
     }
 }

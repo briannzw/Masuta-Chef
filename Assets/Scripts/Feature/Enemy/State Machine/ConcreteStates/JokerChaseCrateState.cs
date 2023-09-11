@@ -14,11 +14,14 @@ public class JokerChaseCrateState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
+        enemy.Agent.SetDestination(enemy.TargetDestination.position);
+        enemy.Agent.isStopped = false;
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        enemy.Agent.isStopped = true;
     }
 
     public override void FrameUpdate()
