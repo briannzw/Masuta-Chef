@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public class JokerEnemy : Enemy
 {
-    public override Transform TargetDestination => target;
-
+    [Header("Joker Properties")]
     [SerializeField] private float wanderRadius = 10f;     // The radius within which the object can wander.
     [SerializeField] private float wanderTimer = 5f;       // Time between wandering direction changes.
     [SerializeField] private float detectionRadius = 5f;    // Detect nearby crate radius.
@@ -90,5 +89,14 @@ public class JokerEnemy : Enemy
         {
             StateMachine.ChangeState(EnemyWanderState);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Set the color of the Gizmo sphere
+        Gizmos.color = Color.yellow;
+
+        // Draw a wire sphere at the JokerEnemy's position with the specified detectionRadius
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }
