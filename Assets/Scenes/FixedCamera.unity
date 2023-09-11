@@ -673,7 +673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158218, y: -0.000000031042845, z: 0.000000014851936, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158218, y: 0.000000065549486, z: -0.00000003136107, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -20.529999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3278,7 +3278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102888280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158218, y: -0.000000031042845, z: 0.000000014851936, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158218, y: 0.000000065549486, z: -0.00000003136107, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -20.529999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3950,6 +3950,7 @@ GameObject:
   - component: {fileID: 1832258756}
   - component: {fileID: 1832258755}
   - component: {fileID: 1832258757}
+  - component: {fileID: 1832258758}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -4067,7 +4068,7 @@ MonoBehaviour:
   gravity: -9.8
   turnSmoothTime: 0.1
   pickupDistance: 3
-  holdPosition: {fileID: 1832258754}
+  holdPosition: {fileID: 0}
   PushForce: 0
   speedMultiplier: 1
 --- !u!143 &1832258756
@@ -4111,6 +4112,25 @@ MonoBehaviour:
   CombineSpeed: 0
   Distance: 0
   areaColliderObjectName: AreaCollider
+--- !u!114 &1832258758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832258750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e8cf0b24005114ebe04702a4dce767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
+  PickUpRadius: 5
+  PickUpAngle: 125
+  TargetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  NearestPickup: {fileID: 0}
 --- !u!1 &1996330846
 GameObject:
   m_ObjectHideFlags: 0
