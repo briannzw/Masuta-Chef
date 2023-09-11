@@ -30,13 +30,17 @@ public class CombineCrate : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision Enter: " + collision.gameObject.tag);
+
         if (IsInArea() && collision.gameObject.CompareTag("crate"))
         {
             CombineCrate otherCrate = collision.gameObject.GetComponent<CombineCrate>();
 
-            // Pastikan kubus lainnya masih abu-abu
             if (otherCrate.currentState != CubeState.Gray)
+            {
+                Debug.Log("Other crate is not Gray.");
                 return;
+            }
 
             collidingCrates.Add(otherCrate);
 
@@ -45,24 +49,25 @@ public class CombineCrate : MonoBehaviour
                 case CubeState.Gray:
                     SetCombinedObjectColor(Color.red);
                     currentState = CubeState.Red;
-                    
-                    // Hapus kubus lainnya saat menjadi merah
+
+                    Debug.Log("Changing to Red");
+
                     Destroy(collision.gameObject);
                     break;
                 case CubeState.Red:
-                    // Ubah kubus menjadi biru jika bertabrakan dengan kubus lain
                     SetCombinedObjectColor(Color.blue);
                     currentState = CubeState.Blue;
-                    
-                    // Hapus kubus lainnya saat menjadi biru
+
+                    Debug.Log("Changing to Blue");
+
                     Destroy(collision.gameObject);
                     break;
                 case CubeState.Blue:
-                    // Ubah kubus menjadi kuning jika bertabrakan dengan kubus lain
                     SetCombinedObjectColor(Color.yellow);
                     currentState = CubeState.Yellow;
-                   
-                    // Hapus kubus lainnya saat menjadi kuning
+
+                    Debug.Log("Changing to Yellow");
+
                     Destroy(collision.gameObject);
                     break;
                 case CubeState.Yellow:
@@ -72,7 +77,6 @@ public class CombineCrate : MonoBehaviour
 
             Debug.Log("Current State: " + currentState);
 
-            // Hapus satu kubus dari daftar collidingCrates jika sudah bergabung
             if (currentState != CubeState.Gray)
             {
                 collidingCrates[0].collidingCrates.Remove(this);
@@ -80,7 +84,6 @@ public class CombineCrate : MonoBehaviour
             }
         }
     }
-
 
 
     private void FixedUpdate()

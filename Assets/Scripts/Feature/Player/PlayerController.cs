@@ -43,7 +43,7 @@ namespace Player.Controller
 
         // Capsule
         private float capsuleHeight = 2f;
-        private float capsuleRadius = 0.7f;
+        private float capsuleRadius = 2f;
         [SerializeField]
         private Transform holdPosition;
 

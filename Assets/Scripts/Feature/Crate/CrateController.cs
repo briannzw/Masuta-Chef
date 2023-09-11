@@ -26,6 +26,7 @@ public class CrateController : MonoBehaviour
 
         // Set lapisan menjadi "heldCrate" saat dipegang
         gameObject.layer = LayerMask.NameToLayer("heldCrate");
+        gameObject.tag = "crate";
     }
 
     public void DropObject()
