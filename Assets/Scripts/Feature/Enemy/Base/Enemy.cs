@@ -24,6 +24,12 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     public virtual float MeleeInterval { get; set; } = 1f;
     #endregion
 
+    #region Joker Enemy Variable
+    public virtual float WanderRadius { get; set; } = 10f;
+    public virtual float WanderTimer { get; set; } = 5f;
+    public virtual float CrateDetectionRadius { get; set; } = 5f;
+    #endregion
+
     #region State Machine Variables
     public EnemyStateMachine StateMachine { get; set; }
     public EnemyIdleState EnemyIdleState { get; set; }
@@ -31,6 +37,7 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
     public EnemyShootState EnemyShootState { get; set; }
     public EnemyMeleeState EnemyMeleeState { get; set; }
     public EnemyWanderState EnemyWanderState { get; set; }
+    public JokerChaseCrateState JokerChaseCrateState { get; set; }
 
     #endregion
 
@@ -43,6 +50,7 @@ public class Enemy : MonoBehaviour, IEnemyDamageable, IEnemyMoveable
         EnemyShootState = new EnemyShootState(this, StateMachine);
         EnemyMeleeState = new EnemyMeleeState(this, StateMachine);
         EnemyWanderState = new EnemyWanderState(this, StateMachine);
+        JokerChaseCrateState = new JokerChaseCrateState(this, StateMachine);
     }
     private void Start()
     {

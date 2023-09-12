@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class JokerEnemy : Enemy
 {
+    
+    public override float WanderRadius => wanderRadius;
+    public override float WanderTimer => wanderTimer;
+    public override float CrateDetectionRadius => detectionRadius;
     [Header("Joker Properties")]
     [SerializeField] private float wanderRadius = 10f;     // The radius within which the object can wander.
     [SerializeField] private float wanderTimer = 5f;       // Time between wandering direction changes.
@@ -13,14 +17,12 @@ public class JokerEnemy : Enemy
     private Transform target;            // The position to move towards.
     private float timer;                 // Timer to control wandering direction changes.
     private GameObject nearestCrate;
-    public JokerChaseCrateState JokerChaseCrateState { get; set; }
 
     private new void Awake()
     {
         base.Awake();
         target = transform;
         StateMachine.Initialize(EnemyWanderState);
-        JokerChaseCrateState = new JokerChaseCrateState(this, StateMachine);
     }
 
     private new void Update()
@@ -28,30 +30,6 @@ public class JokerEnemy : Enemy
         StateMachine.CurrentEnemyState.FrameUpdate();
         Agent.speed = MoveSpeed;
         CheckForCrate();
-
-        if (StateMachine.CurrentEnemyState == EnemyWanderState && !Agent.isStopped)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0f)
-            {
-                // Time to choose a new random destination.
-                SetNewRandomDestination();
-                timer = wanderTimer;
-            }
-        }
-    }
-
-    private void SetNewRandomDestination()
-    {
-        // Generate a random position within the wander radius.
-        Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
-
-        // Project the position onto the NavMesh to find a valid destination.
-        NavMeshHit hit;
-        NavMesh.SamplePosition(transform.position + randomDirection, out hit, wanderRadius, NavMesh.AllAreas);
-
-        // Set the new target position.
-        Agent.SetDestination(hit.position);
     }
 
     private void CheckForCrate()

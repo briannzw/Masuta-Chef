@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class JokerChaseCrateState : EnemyState
 {
     public JokerChaseCrateState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine){}
@@ -14,7 +14,6 @@ public class JokerChaseCrateState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
-        
         enemy.Agent.isStopped = false;
     }
 
@@ -33,4 +32,6 @@ public class JokerChaseCrateState : EnemyState
     {
         base.PhysicsUpdate();
     }
+
+    
 }
