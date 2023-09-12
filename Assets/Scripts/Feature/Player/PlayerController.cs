@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +15,8 @@ namespace Player.Controller
         private CharacterController controller;
 
         [Header("Shooting")]
-        public float rotationSpeed = 5.0f;
-        private float rotationAngle = 0f;
+        private Camera mainCamera;
+        private int floorMask;
         [SerializeField] private GameObject shootTargetObject;
 
         [Header("Movement")]
@@ -49,12 +48,15 @@ namespace Player.Controller
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+            floorMask = LayerMask.GetMask("Floor");
         }
 
         private void Start()
         {
             initialPosition = transform.position;
             speed = isSprintDefault ? sprintSpeed : moveSpeed;
+
+            mainCamera = Camera.main;
 
             playerControls = InputManager.PlayerAction;
             RegisterInputCallbacks();
@@ -82,26 +84,45 @@ namespace Player.Controller
                     velocity.y = -2f;
             }
 
-            // Aim
-            // if (rawInputAimRotation != Vector2.zero)
-            // {
-
-            // }
-
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
 
             CheckOutOfBound();
         }
 
-        #region Aim
+        #region Rotation
+        private void FixedUpdate()
+        {
+            Aim();
+        }
+
         /// <summary>
         /// Turn player based on the mouse movement
         /// </summary>
-        private void OnAim(InputAction.CallbackContext context)
+        private void Aim()
         {
-            rotationAngle += Input.GetAxis("Mouse X");
-            transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
+            var (isSuccess, position) = GetMousePosition();
+            if(isSuccess)
+            {
+                var direction = position - transform.position;
+                direction.y = 0;
+                shootTargetObject.transform.position = transform.position + direction.normalized;
+                transform.forward = direction;
+            }
+        }
+
+        private (bool isSuccess, Vector3 position) GetMousePosition()
+        {
+            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if(Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, floorMask))
+            {
+                return (isSuccess: true, position: hitInfo.point);  
+            }
+            else 
+            {
+                return (isSuccess: false, position: Vector3.zero);  
+            }
         }
         #endregion
 
@@ -114,7 +135,6 @@ namespace Player.Controller
             playerControls.Gameplay.Move.canceled += OnMoveCanceled;
             playerControls.Gameplay.Sprint.performed += OnSprint;
             playerControls.Gameplay.Sprint.canceled += OnSprintCanceled;
-            playerControls.Gameplay.Aim.performed += OnAim;
         }
         private void UnregisterInputCallbacks()
         {
@@ -124,7 +144,6 @@ namespace Player.Controller
             playerControls.Gameplay.Move.canceled -= OnMoveCanceled;
             playerControls.Gameplay.Sprint.performed -= OnSprint;
             playerControls.Gameplay.Sprint.canceled -= OnSprintCanceled;
-            playerControls.Gameplay.Aim.performed -= OnAim;
         }
         #endregion
 
@@ -135,6 +154,8 @@ namespace Player.Controller
             if (rawInputMovement.magnitude > 0.1f)
             {
                 float targetAngle = Mathf.Atan2(rawInputMovement.x, rawInputMovement.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+                // float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                // transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
@@ -190,7 +211,7 @@ namespace Player.Controller
         #endregion
 
         // remove Cursor
-        /*private void OnApplicationFocus(bool focus)
+        private void OnApplicationFocus(bool focus)
         {
             if (focus) 
             {
@@ -201,6 +222,5 @@ namespace Player.Controller
                 Cursor.lockState = CursorLockMode.None;
             }
         }
-        */
     }
 }

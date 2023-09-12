@@ -14,11 +14,9 @@ GameObject:
   - component: {fileID: 5307491832189870154}
   - component: {fileID: 5454839231404475931}
   - component: {fileID: 3501182680260473328}
-  - component: {fileID: 3600423006951808158}
-  - component: {fileID: -3149410350091397999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8849380876502409976}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.69, y: 1.5, z: -9.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -146,38 +144,3 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &3600423006951808158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8849380876502409976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d58c455552aeb43b71978cb0a269e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health:
-    BaseValue: 100
-  Mana:
-    BaseValue: 100
-  Attack:
-    BaseValue: 0
-  Defense:
-    BaseValue: 0
-  DamageMultiplier:
-    BaseValue: 1
---- !u!114 &-3149410350091397999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8849380876502409976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2c8c0e837f69b45971ed950d7e6482, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lootChance: {fileID: 11400000, guid: a799df37f913c344d8fed09f5640adaa, type: 2}
