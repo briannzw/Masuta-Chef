@@ -5,6 +5,7 @@ namespace Character
 {
     using Kryz.CharacterStats;
     using Stats;
+    using Random = UnityEngine.Random;
 
     public class Character : MonoBehaviour
     {
@@ -13,6 +14,8 @@ namespace Character
         public CharacterDynamicStat Mana = new CharacterDynamicStat(100);
         public CharacterStat Attack;
         public CharacterStat Defense;
+        public CharacterStat Speed = new CharacterStat(50);
+        public CharacterStat Resistance;
         public CharacterStat DamageMultiplier = new CharacterStat(1);
 
         #region Action
@@ -30,6 +33,15 @@ namespace Character
                 // Make sure to Only call OnDie once
                 OnDie?.Invoke();
                 Destroy(gameObject);
+            }
+        }
+
+        public void TakeDebuff()
+        {
+            if(Random.value < 1 - Resistance.Value / 100f)
+            {
+                // Apply Debuff
+                Debug.Log("Debuff applied with " + Resistance.Value + "% Chance to Resist");
             }
         }
     }

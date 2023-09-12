@@ -2185,7 +2185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933338045}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3341,11 +3341,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa1c17dcac57594aa631ccb126dd3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterStats: {fileID: 1832258757}
   Animator: {fileID: 0}
-  shootTargetObject: {fileID: 241793596}
-  isSprintDefault: 0
+  rotationSpeed: 5
+  IsSprintDefault: 0
   moveSpeed: 5
-  sprintSpeed: 8
+  sprintMultiplier: 1.5
   gravity: -9.8
   turnSmoothTime: 0.1
   PushForce: 5
@@ -3396,6 +3397,10 @@ MonoBehaviour:
     BaseValue: 0
   Defense:
     BaseValue: 0
+  Speed:
+    BaseValue: 50
+  Resistance:
+    BaseValue: 0
   DamageMultiplier:
     BaseValue: 1
 --- !u!114 &1832258758
@@ -3415,7 +3420,7 @@ MonoBehaviour:
   InteractAngle: 125
   TargetMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   NearestInteractable: {fileID: 0}
 --- !u!1 &1965934676
 GameObject:
@@ -3464,7 +3469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Key: 107
   Key2: 108
-  Key3: 0
+  Key3: 109
   OtherStats: {fileID: 1832258757}
   DamageScaling: 2
 --- !u!114 &1965934679
@@ -3486,6 +3491,10 @@ MonoBehaviour:
   Attack:
     BaseValue: 1
   Defense:
+    BaseValue: 0
+  Speed:
+    BaseValue: 50
+  Resistance:
     BaseValue: 0
   DamageMultiplier:
     BaseValue: 1
@@ -3523,7 +3532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007945553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
