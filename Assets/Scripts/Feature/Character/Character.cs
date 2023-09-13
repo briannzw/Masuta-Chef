@@ -38,7 +38,7 @@ namespace Character
 
         public void TakeDebuff()
         {
-            if(Random.value < 1 - Resistance.Value / 100f)
+            if(Random.Range(1, 101) > Resistance.Value)
             {
                 // Apply Debuff
                 Debug.Log("Debuff applied with " + Resistance.Value + "% Chance to Resist");
