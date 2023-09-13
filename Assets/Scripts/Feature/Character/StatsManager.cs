@@ -30,7 +30,7 @@ public class StatsManager : MonoBehaviour
         }
         if(Input.GetKeyDown(Key3))
         {
-
+            OtherStats.TakeDebuff(/* TODO : DEBUFF Script */);
         }
     }
 }

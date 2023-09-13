@@ -6,9 +6,13 @@ using UnityEngine.InputSystem;
 
 namespace Player.Controller
 {
+    using Character;
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
+        [Header("External")]
+        public Character CharacterStats;
+
         [Header("References")]
         public Animator Animator;
 
@@ -18,13 +22,12 @@ namespace Player.Controller
         [Header("Shooting")]
         public float rotationSpeed = 5.0f;
         private float rotationAngle = 0f;
-        [SerializeField] private GameObject shootTargetObject;
 
         [Header("Movement")]
-        public bool isSprintDefault = false;
+        public bool IsSprintDefault = false;
 
         public float moveSpeed = 5f;
-        public float sprintSpeed = 8f;
+        public float sprintMultiplier = 1.5f;
         public float gravity = -9.8f;
         public float turnSmoothTime = 0.1f;
 
@@ -35,6 +38,7 @@ namespace Player.Controller
 
         // Movement Parameters
         private float speed;
+        private bool isSprint;
         private float turnSmoothVelocity = 0;
 
         public float Speed => speed;
@@ -54,7 +58,9 @@ namespace Player.Controller
         private void Start()
         {
             initialPosition = transform.position;
-            speed = isSprintDefault ? sprintSpeed : moveSpeed;
+            if (CharacterStats != null) moveSpeed = CharacterStats.Speed.Value / 10;
+            speed = IsSprintDefault ? moveSpeed * sprintMultiplier : moveSpeed;
+            isSprint = IsSprintDefault;
 
             playerControls = InputManager.PlayerAction;
             RegisterInputCallbacks();
@@ -73,6 +79,8 @@ namespace Player.Controller
         private void Update()
         {
             moveDirection = GetMovementInputDirection();
+            if (CharacterStats != null) moveSpeed = CharacterStats.Speed.Value / 10;
+            speed = isSprint ? moveSpeed * sprintMultiplier : moveSpeed;
             velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
 
             // Gravity
@@ -81,12 +89,6 @@ namespace Player.Controller
                 if (velocity.y < 0f)
                     velocity.y = -2f;
             }
-
-            // Aim
-            // if (rawInputAimRotation != Vector2.zero)
-            // {
-
-            // }
 
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
@@ -159,12 +161,12 @@ namespace Player.Controller
 
         private void OnSprint(InputAction.CallbackContext context)
         {
-            speed = isSprintDefault ? moveSpeed : sprintSpeed;
+            isSprint = !IsSprintDefault;
         }
 
         private void OnSprintCanceled(InputAction.CallbackContext context)
         {
-            speed = isSprintDefault ? sprintSpeed : moveSpeed;
+            isSprint = IsSprintDefault;
         }
         #endregion
 
