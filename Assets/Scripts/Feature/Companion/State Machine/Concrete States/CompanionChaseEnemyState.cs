@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompanionIdleState : CompanionState
+public class CompanionChaseEnemyState : CompanionState
 {
-    public CompanionIdleState(Companion companion, CompanionStateMachine companionStateMachine) : base(companion, companionStateMachine){}
+    public CompanionChaseEnemyState(Companion companion, CompanionStateMachine companionStateMachine) : base(companion, companionStateMachine)
+    {
+    }
 
     public override void AnimationTriggerEvent(Companion.AnimationTriggerType triggerType)
     {
@@ -14,20 +16,17 @@ public class CompanionIdleState : CompanionState
     public override void EnterState()
     {
         base.EnterState();
-        companion.Agent.isStopped = true;
-        Debug.Log("Companion Idle");
+        Debug.Log("Companion Chase Enemy");
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        companion.Agent.isStopped = false;
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        
     }
 
     public override void PhysicsUpdate()

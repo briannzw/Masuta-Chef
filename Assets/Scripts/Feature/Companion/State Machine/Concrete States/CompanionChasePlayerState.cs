@@ -15,6 +15,7 @@ public class CompanionChasePlayerState : CompanionState
     {
         base.EnterState();
         companion.Agent.isStopped = false;
+        Debug.Log("Companion Chase Player");
     }
 
     public override void ExitState()
@@ -27,13 +28,7 @@ public class CompanionChasePlayerState : CompanionState
     {
         Debug.Log("Is Chasing PLayer");
         base.FrameUpdate();
-        companion.Agent.SetDestination(EnemySpawner.Instance.PlayerPosition.position);
-        Vector3 velocity = companion.Agent.velocity;
-        if (velocity.magnitude > 0)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(velocity);
-            companion.transform.rotation = Quaternion.Slerp(companion.transform.rotation, targetRotation, Time.deltaTime * companion.Agent.angularSpeed);
-        }
+
         if (companion.Agent.remainingDistance < companion.MaxDistanceTowardsPlayer)
         {
             companion.Agent.isStopped = true;

@@ -13,12 +13,16 @@ public class Companion : MonoBehaviour
     [field: SerializeField] public float MoveSpeed { get; set; } = 3.25f;
     public virtual CompanionState CompanionCombatBehaviour { get; set; }
     public virtual float DetectEnemyRadius { get; set; } = 10f;
+    public virtual float AttackRange { get; set; }
+    public virtual float AttackInterval { get; set; }
     // Start is called before the first frame update
 
     #region State Machine Variables
     public CompanionStateMachine StateMachine { get; set; }
     public CompanionChasePlayerState CompanionChasePlayerState { get; set; }
     public CompanionIdleState CompanionIdleState { get; set; }
+    public CompanionChaseEnemyState CompanionChaseEnemyState { get; set; }
+    
     #endregion
 
     protected void Awake()
@@ -27,6 +31,8 @@ public class Companion : MonoBehaviour
         StateMachine = new CompanionStateMachine();
         CompanionChasePlayerState = new CompanionChasePlayerState(this, StateMachine);
         CompanionIdleState = new CompanionIdleState(this, StateMachine);
+        CompanionChaseEnemyState = new CompanionChaseEnemyState(this, StateMachine);
+        
 
         CurrentHealth = MaxHealth;
 
