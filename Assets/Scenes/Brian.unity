@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 230128984}
   - component: {fileID: 230128983}
   - component: {fileID: 230128982}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2948,7 +2948,6 @@ Transform:
   - {fileID: 460606338}
   - {fileID: 1247044207}
   - {fileID: 585417120}
-  - {fileID: 1965934677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1422875877
@@ -2993,7 +2992,7 @@ PrefabInstance:
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
@@ -3003,7 +3002,7 @@ PrefabInstance:
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
@@ -3039,6 +3038,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673745122421868456, guid: d9738ac3c0b67b84592bc889d7ca54c0,
+        type: 3}
+      propertyPath: DamageScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8473324051878338565, guid: d9738ac3c0b67b84592bc889d7ca54c0,
         type: 3}
@@ -3342,6 +3346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 0}
+  rotationSpeed: 5
   shootTargetObject: {fileID: 241793596}
   isSprintDefault: 0
   moveSpeed: 5
@@ -3393,7 +3398,7 @@ MonoBehaviour:
   Mana:
     BaseValue: 100
   Attack:
-    BaseValue: 0
+    BaseValue: 5
   Defense:
     BaseValue: 0
   DamageMultiplier:
@@ -3415,80 +3420,8 @@ MonoBehaviour:
   InteractAngle: 125
   TargetMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   NearestInteractable: {fileID: 0}
---- !u!1 &1965934676
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1965934677}
-  - component: {fileID: 1965934678}
-  - component: {fileID: 1965934679}
-  m_Layer: 0
-  m_Name: Temp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1965934677
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965934676}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1386656613}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1965934678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965934676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 792f955e5fe7f9446bf6db555d8bd2f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Key: 107
-  Key2: 108
-  Key3: 0
-  OtherStats: {fileID: 1832258757}
-  DamageScaling: 2
---- !u!114 &1965934679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965934676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d58c455552aeb43b71978cb0a269e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health:
-    BaseValue: 100
-  Mana:
-    BaseValue: 100
-  Attack:
-    BaseValue: 1
-  Defense:
-    BaseValue: 0
-  DamageMultiplier:
-    BaseValue: 1
 --- !u!4 &2003858859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 935698104886402750, guid: d9738ac3c0b67b84592bc889d7ca54c0,
