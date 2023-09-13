@@ -6,13 +6,17 @@ namespace Loot
 {
     using Character;
     using Chance;
+    using Object;
 
     //public enum LootRarity { UltraRare, SuperRare, Rare, Common }
 
     [RequireComponent(typeof(Character))]
-    public class LootDropChance : MonoBehaviour
+    public class LootDropController : MonoBehaviour
     {
-        [SerializeField] private LootChance lootChance;
+        [SerializeField] private float weaponLootChance = 5;
+        [SerializeField] private WeaponLootChance weaponLoots;
+        [SerializeField] private float recipeLootChance = 100;
+        [SerializeField] private RecipeLootChance recipeLoots;
         private Character character;
 
         private void Awake()
@@ -23,14 +27,23 @@ namespace Loot
 
         private void DropLoot()
         {
-            Instantiate(RandomLootPrefab(), transform.position, Quaternion.identity);
+            if(Random.Range(0, 100) < weaponLootChance && !weaponLoots.IsEmpty)
+                Instantiate(weaponLoots.LootPrefab, transform.position, Quaternion.identity);
+            if (Random.Range(0, 100) < recipeLootChance && !recipeLoots.IsEmpty)
+            {
+                GameObject go = Instantiate(recipeLoots.LootPrefab, transform.position, Quaternion.identity);
+                RecipeLootObject lootObject = go.GetComponent<RecipeLootObject>();
+                RecipeLoot recipeLoot = RandomRecipeLoot(recipeLoots);
+                lootObject.Recipe = recipeLoot.Recipe;
+                lootObject.Count = Random.Range(recipeLoot.MinCount, recipeLoot.MaxCount + 1);
+            }
             character.OnDie -= DropLoot;
         }
 
-        private GameObject RandomLootPrefab()
+        private WeaponLoot RandomWeaponLoot(WeaponLootChance lootChance)
         {
             int index = 0;
-            float pick = UnityEngine.Random.value * lootChance.LootWeight;
+            float pick = Random.value * lootChance.LootWeight;
             float cumulativeWeight = lootChance.LootList[0].RandomWeight;
 
             while (pick > cumulativeWeight && index < lootChance.LootList.Count - 1)
@@ -39,7 +52,22 @@ namespace Loot
                 cumulativeWeight += lootChance.LootList[index].RandomWeight;
             }
 
-            return lootChance.LootList[index].Prefab;
+            return lootChance.LootList[index];
+        }
+
+        private RecipeLoot RandomRecipeLoot(RecipeLootChance lootChance)
+        {
+            int index = 0;
+            float pick = Random.value * lootChance.LootWeight;
+            float cumulativeWeight = lootChance.LootList[0].RandomWeight;
+
+            while (pick > cumulativeWeight && index < lootChance.LootList.Count - 1)
+            {
+                index++;
+                cumulativeWeight += lootChance.LootList[index].RandomWeight;
+            }
+
+            return lootChance.LootList[index];
         }
     }
 }

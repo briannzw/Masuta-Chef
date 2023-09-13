@@ -6,7 +6,6 @@ namespace Loot
     [Serializable]
     public class Loot
     {
-        public GameObject Prefab;
         public int RandomWeight;
     }
 }
