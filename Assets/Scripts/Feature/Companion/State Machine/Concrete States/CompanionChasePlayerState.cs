@@ -26,16 +26,13 @@ public class CompanionChasePlayerState : CompanionState
 
     public override void FrameUpdate()
     {
-        Debug.Log("Is Chasing PLayer");
+        //Debug.Log("Is Chasing PLayer");
         base.FrameUpdate();
 
-        if (companion.Agent.remainingDistance < companion.MaxDistanceTowardsPlayer)
+        if (companion.Agent.remainingDistance <= companion.MinDistanceTowardsPlayer)
         {
             companion.Agent.isStopped = true;
-        }
-        else
-        {
-            companion.Agent.isStopped = false;
+            companion.StateMachine.ChangeState(companion.CompanionIdleState);
         }
     }
 

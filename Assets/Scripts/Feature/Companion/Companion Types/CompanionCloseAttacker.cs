@@ -26,7 +26,7 @@ public class CompanionCloseAttacker : Companion
     {
         StateMachine.CurrentCompanionState.FrameUpdate();
         CheckForEnemy();
-        if (MaxDistanceTowardsPlayer > 11)
+        if (MaxDistanceTowardsPlayer > detectEnemyRadius)
         {
             StateMachine.ChangeState(CompanionChasePlayerState);
         }

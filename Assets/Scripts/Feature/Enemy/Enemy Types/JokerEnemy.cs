@@ -65,7 +65,11 @@ public class JokerEnemy : Enemy
         }
         else
         {
-            StateMachine.ChangeState(EnemyWanderState);
+            if(StateMachine.CurrentEnemyState != EnemyWanderState)
+            {
+                StateMachine.ChangeState(EnemyWanderState);
+            }
+            
         }
     }
 
