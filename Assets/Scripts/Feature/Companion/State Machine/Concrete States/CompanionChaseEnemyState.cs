@@ -35,15 +35,16 @@ public class CompanionChaseEnemyState : CompanionState
         if (currentChasedEnemy != null)
         {
             // Set the agent's destination to the position of the nearest enemy
-            companion.Agent.SetDestination(currentChasedEnemy.transform.position);
+            companion.UpdateAgentDestination(currentChasedEnemy);
             Debug.Log("Chasing enemy: " + currentChasedEnemy.name);
         }
-        //If straying to far from the player then chase the player instead
-        //float distanceToPlayer = Vector3.Distance(companion.transform.position, EnemySpawner.Instance.PlayerPosition.position);
-        //if (distanceToPlayer > companion.MaxDistanceTowardsPlayer)
-        //{
-        //    companion.StateMachine.ChangeState(companion.CompanionChasePlayerState);
-        //}
+
+        //If straying to far from the player, then chase the player instead
+        float distanceToPlayer = Vector3.Distance(companion.transform.position, EnemySpawner.Instance.PlayerPosition.position);
+        if (distanceToPlayer >= companion.DetectEnemyRadius)
+        {
+            companion.StateMachine.ChangeState(companion.CompanionChasePlayerState);
+        }
     }
 
     public override void PhysicsUpdate()

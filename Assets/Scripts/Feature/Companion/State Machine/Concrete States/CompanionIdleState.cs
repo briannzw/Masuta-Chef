@@ -27,6 +27,11 @@ public class CompanionIdleState : CompanionState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+        companion.UpdateAgentDestination(EnemySpawner.Instance.PlayerPosition.gameObject);
+        if (companion.Agent.remainingDistance >= companion.MaxDistanceTowardsPlayer)
+        {
+            companion.StateMachine.ChangeState(companion.CompanionChasePlayerState);
+        }
         
     }
 

@@ -17,7 +17,7 @@ GameObject:
   m_Layer: 0
   m_Name: Companion Shooter
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5bce510faf40a2b47b76f2f92a2cac53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,10 +145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 50
-  <MaxDistanceTowardsPlayer>k__BackingField: 3
+  <MaxDistanceTowardsPlayer>k__BackingField: 6
   <MinDistanceTowardsPlayer>k__BackingField: 3
   <MoveSpeed>k__BackingField: 3.25
-  enemyTag: Enemy
   detectEnemyRadius: 10
   attackRange: 7
   projectile: {fileID: 0}
@@ -216,7 +215,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5bce510faf40a2b47b76f2f92a2cac53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

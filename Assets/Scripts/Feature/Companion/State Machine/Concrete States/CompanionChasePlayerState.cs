@@ -15,6 +15,7 @@ public class CompanionChasePlayerState : CompanionState
     {
         base.EnterState();
         companion.Agent.isStopped = false;
+        
         Debug.Log("Companion Chase Player");
     }
 
@@ -28,10 +29,10 @@ public class CompanionChasePlayerState : CompanionState
     {
         //Debug.Log("Is Chasing PLayer");
         base.FrameUpdate();
-
+        Debug.Log(companion.Agent.remainingDistance);
+        companion.UpdateAgentDestination(EnemySpawner.Instance.PlayerPosition.gameObject);
         if (companion.Agent.remainingDistance <= companion.MinDistanceTowardsPlayer)
         {
-            companion.Agent.isStopped = true;
             companion.StateMachine.ChangeState(companion.CompanionIdleState);
         }
     }

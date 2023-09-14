@@ -13,6 +13,7 @@ public class CompanionShooter : Companion
 
     private Quaternion targetRotation;
     private GameObject thisNearestEnemy;
+    private GameObject currentDestination;
 
 
     #region Override Companion Variable
@@ -27,6 +28,7 @@ public class CompanionShooter : Companion
     private new void Awake()
     {
         base.Awake();
+        OnAgentDestinationChanged += HandleAgentDestinationChanged;
         StateMachine.Initialize(CompanionChasePlayerState);
         CompanionShootState = new CompanionShootState(this, StateMachine);
     }
@@ -37,8 +39,14 @@ public class CompanionShooter : Companion
         HandleStateMachine();
         CheckForEnemy();
         UpdateRotation();
-
+        Agent.SetDestination(currentDestination.transform.position);
+        DistanceToPlayer = Vector3.Distance(EnemySpawner.Instance.PlayerPosition.position, transform.position);
         Agent.speed = MoveSpeed;
+    }
+
+    private void OnDisable()
+    {
+        OnAgentDestinationChanged -= HandleAgentDestinationChanged;
     }
 
     private void HandleStateMachine()
@@ -81,7 +89,7 @@ public class CompanionShooter : Companion
             }
         }
 
-        // If an enemy is detected, chase it; otherwise, chase player
+        // If an enemy is detected, chase it
         if (isEnemyDetected)
         {
             // Only change state if the nearest enemy has changed
@@ -96,36 +104,27 @@ public class CompanionShooter : Companion
                 }
                 else
                 {
-                    // Handle the case where thisNearestEnemy is unexpectedly null
-                    // You may want to add error handling or debug logs here.
                     Debug.Log("Nearest enemy is unexpectedly null");
                 }
             }
-            //    float enemyDistance = Vector3.Distance(transform.position, newNearestEnemy.transform.position);
-            //    if (enemyDistance < attackRange && StateMachine.CurrentCompanionState == CompanionChaseEnemyState)
-            //    {
-            //        StateMachine.ChangeState(CompanionShootState);
-            //        Vector3 directionToEnemy = newNearestEnemy.transform.position - transform.position;
-            //        transform.rotation = Quaternion.LookRotation(directionToEnemy);
-            //    }
-            //    else
-            //    {
-            //        StateMachine.ChangeState(CompanionChaseEnemyState);
-            //        Agent.isStopped = false;
-            //        Agent.SetDestination(newNearestEnemy.transform.position);
-            //    }
-
-            //else
-            //{
-            //    // Handle the case where newNearestEnemy is unexpectedly null
-            //    // You may want to add error handling or debug logs here.
-            //}
         }
-        //else
-        //{
-        //    StateMachine.ChangeState(CompanionChasePlayerState);
-        //    Agent.SetDestination(EnemySpawner.Instance.PlayerPosition.position);
-        //}
+    }
+
+    private void HandleAgentDestinationChanged(GameObject newAgentDestination)
+    {
+        // Do something with the new nearest enemy, such as updating AI behavior or targeting
+        if (newAgentDestination != null)
+        {
+            Debug.Log("New Agent Destination is not null");
+            Debug.Log(newAgentDestination.transform.position);
+            // Set the current agent's destination to the position of the new destination
+            currentDestination = newAgentDestination;
+        }
+
+        if (newAgentDestination == null)
+        {
+            Debug.Log("New Agent Destination is Null");
+        }
     }
 
     private void OnDrawGizmos()

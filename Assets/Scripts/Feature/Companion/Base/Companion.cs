@@ -17,8 +17,8 @@ public class Companion : MonoBehaviour
     public virtual float AttackRange { get; set; }
     public virtual float AttackInterval { get; set; }
 
-    public string enemyTag = "Enemy";
-    // Start is called before the first frame update
+    [HideInInspector]
+    public float DistanceToPlayer { get; set; }
 
     #region State Machine Variables
     public CompanionStateMachine StateMachine { get; set; }
@@ -59,6 +59,30 @@ public class Companion : MonoBehaviour
     }
     #endregion
 
+    #region Agent Destination Delegate and Update
+    public event System.Action<GameObject> OnAgentDestinationChanged;
+
+    private GameObject agentDestination;
+
+    public GameObject AgentDestination
+    {
+        get { return agentDestination; }
+        private set
+        {
+            if (agentDestination != value)
+            {
+                agentDestination = value;
+                OnAgentDestinationChanged?.Invoke(agentDestination);
+            }
+        }
+    }
+
+    public void UpdateAgentDestination (GameObject newAgentDestination)
+    {
+        AgentDestination = newAgentDestination;
+        Debug.Log("Agent destination updated to: " + (newAgentDestination != null ? newAgentDestination.name : "null"));
+    }
+    #endregion
     protected void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
@@ -75,9 +99,7 @@ public class Companion : MonoBehaviour
         // Update is called once per frame
     protected void Update()
     {
-        Agent.SetDestination(TargetDestination.position);
         StateMachine.CurrentCompanionState.FrameUpdate();
-        Agent.speed = MoveSpeed;
     }
 
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
