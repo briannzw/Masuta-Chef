@@ -39,29 +39,33 @@ namespace Cooking.Gameplay.TapNumber
         {
             gameEnded = true;
             if (missedTap >= TargetMissCount[CurrentDifficulty]) Debug.Log("Result : BAD");
-            else if (successTap >= TargetCount[CurrentDifficulty])
-            {
-                Debug.Log("Result : GOOD"); 
-                // TBD
-                if(false)
-                    Debug.Log("Result : PERFECT");
-            }
+            else if (successTap >= TargetCount[CurrentDifficulty]) Debug.Log("Result : PERFECT"); 
+            else if(successTap < TargetCount[CurrentDifficulty]) Debug.Log("Result : GOOD");
         }
 
         public void TapSuccess(int num)
         {
             if (num == lastTapNum + 1)
-            {
                 successTap++;
-                lastTapNum = num;
-            }
             else
-                TapMissed();
+            {
+                Debug.Log("Number not ascending : " + lastTapNum);
+                missedTap++;
+            }
+            lastTapNum = num;
         }
 
         public void TapMissed()
         {
             missedTap++;
         }
+
+        #region GUI
+        private void OnGUI()
+        {
+            GUI.skin.label.fontSize = 50;
+            GUI.Label(new Rect(10, 10, 500, 200), "Missed Count : " + missedTap);
+        }
+        #endregion
     }
 }
