@@ -331,10 +331,30 @@ MonoBehaviour:
   MainArea: {fileID: 198864938}
   BarArea: {fileID: 10075843}
   BarScale: 0.25
-  BarSpeed: 0.1
-  DirectionChange: 1
-  DirChangeMinFrequency: 2
-  DirChangeMaxFrequency: 10
+  currentDifficulty: 2
+  barSpeed:
+    _serializedList:
+    - Key: 0
+      Value: 0.1
+    - Key: 1
+      Value: 0.15
+    - Key: 2
+      Value: 0.2
+  directionChange: 1
+  dirChangeFrequency:
+    _serializedList:
+    - Key: 0
+      Value:
+        Min: 8
+        Max: 12
+    - Key: 1
+      Value:
+        Min: 5
+        Max: 10
+    - Key: 2
+      Value:
+        Min: 2
+        Max: 5
   MainSize: 0
 --- !u!1 &538286302
 GameObject:

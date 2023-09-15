@@ -16,7 +16,7 @@ namespace Cooking.Gameplay.TapNumber
         [SerializeField] private GameObject numberPrefab;
 
         [Header("Parameters")]
-        [SerializeField] private SerializedDictionary<CookingDifficulty, CookingNumberMinMax> minMaxSpawnFrequency;
+        [SerializeField] private SerializedDictionary<CookingDifficulty, CookingDifficultyFrequency> minMaxSpawnFrequency;
 
         private int spawnedCount = 0;
 
@@ -38,11 +38,11 @@ namespace Cooking.Gameplay.TapNumber
                 go.transform.localPosition = randomPos;
                 spawnedCount++;
                 CookingNumberController controller = go.GetComponent<CookingNumberController>();
-                controller.Duration = Random.Range(manager.NumberDuration[manager.CurrentDifficulty].MinTime, manager.NumberDuration[manager.CurrentDifficulty].MaxTime);
+                controller.Duration = Random.Range(manager.NumberDuration[manager.CurrentDifficulty].Min, manager.NumberDuration[manager.CurrentDifficulty].Max);
                 controller.Manager = manager;
                 controller.NumberText.text = spawnedCount.ToString();
                 if (spawnedCount >= manager.TargetCount[manager.CurrentDifficulty]) yield break;
-                yield return new WaitForSeconds(Random.Range(minMaxSpawnFrequency[manager.CurrentDifficulty].MinTime, minMaxSpawnFrequency[manager.CurrentDifficulty].MaxTime));
+                yield return new WaitForSeconds(Random.Range(minMaxSpawnFrequency[manager.CurrentDifficulty].Min, minMaxSpawnFrequency[manager.CurrentDifficulty].Max));
             }
         }
 

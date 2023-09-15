@@ -660,16 +660,16 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
-        MinTime: 1
-        MaxTime: 2
+        Min: 2
+        Max: 3
     - Key: 1
       Value:
-        MinTime: 0.5
-        MaxTime: 1.25
+        Min: 1
+        Max: 2
     - Key: 2
       Value:
-        MinTime: 0.25
-        MaxTime: 1
+        Min: 0.5
+        Max: 1
 --- !u!114 &2003834432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,16 +704,16 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
-        MinTime: 5
-        MaxTime: 5
+        Min: 5
+        Max: 5
     - Key: 1
       Value:
-        MinTime: 4
-        MaxTime: 5
+        Min: 4
+        Max: 4
     - Key: 2
       Value:
-        MinTime: 2
-        MaxTime: 3
+        Min: 3
+        Max: 3
 --- !u!4 &2003834433
 Transform:
   m_ObjectHideFlags: 0

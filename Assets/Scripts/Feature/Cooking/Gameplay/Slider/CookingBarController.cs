@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Cooking.Gameplay.Slider
 {
+    using AYellowpaper.SerializedCollections;
     public class CookingBarController : MonoBehaviour
     {
         [Header("References")]
@@ -13,10 +14,10 @@ namespace Cooking.Gameplay.Slider
         [Range(0f, 1f)] public float BarScale;
 
         [Header("Difficulty")]
-        [Range(0f, 1f)] public float BarSpeed;
-        public bool DirectionChange;
-        public float DirChangeMinFrequency = 2;
-        public float DirChangeMaxFrequency = 5;
+        [SerializeField] private CookingDifficulty currentDifficulty;
+        [SerializeField] private SerializedDictionary<CookingDifficulty, float> barSpeed;
+        [SerializeField] private bool directionChange;
+        [SerializeField] private SerializedDictionary<CookingDifficulty, CookingDifficultyFrequency> dirChangeFrequency;
 
         private float dirTimer;
         private float dirRandomTime;
@@ -32,7 +33,7 @@ namespace Cooking.Gameplay.Slider
 
             SetArea();
 
-            dirRandomTime = Random.Range(DirChangeMinFrequency, DirChangeMaxFrequency);
+            dirRandomTime = Random.Range(dirChangeFrequency[currentDifficulty].Min, dirChangeFrequency[currentDifficulty].Max);
             // Random direction
             StartCoroutine(MoveBar(Random.Range(0, 2) * 2 - 1));
         }
@@ -50,18 +51,18 @@ namespace Cooking.Gameplay.Slider
             while (true)
             {
                 // If enable Direction Change
-                if (DirectionChange)
+                if (directionChange)
                 {
                     dirTimer += Time.deltaTime;
                     if (dirTimer > dirRandomTime)
                     {
                         direction *= -1;
                         dirTimer = 0f;
-                        dirRandomTime = Random.Range(DirChangeMinFrequency, DirChangeMaxFrequency);
+                        dirRandomTime = Random.Range(dirChangeFrequency[currentDifficulty].Min, dirChangeFrequency[currentDifficulty].Max);
                     }
                 }
 
-                currentOffset += direction * (BarSpeed * MainSize) * Time.deltaTime;
+                currentOffset += direction * (barSpeed[currentDifficulty] * MainSize) * Time.deltaTime;
                 // Snap to Left
                 if (barHalf + currentOffset <= 0f)
                 {

@@ -12,7 +12,7 @@ namespace Cooking.Gameplay.TapNumber
         public CookingDifficulty CurrentDifficulty;
         public SerializedDictionary<CookingDifficulty, int> TargetCount;
         public SerializedDictionary<CookingDifficulty, int> TargetMissCount;
-        public SerializedDictionary<CookingDifficulty, CookingNumberMinMax> NumberDuration;
+        public SerializedDictionary<CookingDifficulty, CookingDifficultyFrequency> NumberDuration;
 
         private float timer = 0f;
         private bool gameEnded = false;
