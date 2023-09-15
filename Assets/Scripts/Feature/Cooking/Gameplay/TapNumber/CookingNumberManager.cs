@@ -3,20 +3,16 @@ using UnityEngine;
 namespace Cooking.Gameplay.TapNumber
 {
     using AYellowpaper.SerializedCollections;
-    public enum CookingTapNumberDifficulty
-    {
-        Easy, Medium, Hard
-    }
     public class CookingNumberManager : MonoBehaviour
     {
         [Header("Parameters")]
         public float GameTime = 60f;
 
         [Header("Difficulty")]
-        public CookingTapNumberDifficulty CurrentDifficulty;
-        public SerializedDictionary<CookingTapNumberDifficulty, int> TargetCount;
-        public SerializedDictionary<CookingTapNumberDifficulty, int> TargetMissCount;
-        public SerializedDictionary<CookingTapNumberDifficulty, CookingNumberMinMax> NumberDuration;
+        public CookingDifficulty CurrentDifficulty;
+        public SerializedDictionary<CookingDifficulty, int> TargetCount;
+        public SerializedDictionary<CookingDifficulty, int> TargetMissCount;
+        public SerializedDictionary<CookingDifficulty, CookingNumberMinMax> NumberDuration;
 
         private float timer = 0f;
         private bool gameEnded = false;

@@ -16,7 +16,7 @@ namespace Cooking.Gameplay.TapNumber
         [SerializeField] private GameObject numberPrefab;
 
         [Header("Parameters")]
-        [SerializeField] private SerializedDictionary<CookingTapNumberDifficulty, CookingNumberMinMax> minMaxSpawnFrequency;
+        [SerializeField] private SerializedDictionary<CookingDifficulty, CookingNumberMinMax> minMaxSpawnFrequency;
 
         private int spawnedCount = 0;
 
