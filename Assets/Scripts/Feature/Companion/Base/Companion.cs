@@ -9,12 +9,12 @@ public class Companion : MonoBehaviour
     public float CurrentHealth { get; set; }
     public virtual Transform TargetDestination { get; set; }
     public NavMeshAgent Agent { get; set; }
-    [field: SerializeField] public float MaxDistanceTowardsPlayer { get; set; } = 10f;
+    [field: SerializeField] public float MaxIdleDistance { get; set; } = 10f;
     [field: SerializeField] public float MinDistanceTowardsPlayer { get; set; } = 3f;
     [field: SerializeField] public float MoveSpeed { get; set; } = 3.25f;
     public virtual CompanionState CompanionCombatBehaviour { get; set; }
     public virtual float DetectEnemyRadius { get; set; } = 10f;
-    public virtual float AttackRange { get; set; }
+    [field: SerializeField] public virtual float AttackRange { get; set; }
     public virtual float AttackInterval { get; set; }
 
     [HideInInspector]
@@ -25,6 +25,7 @@ public class Companion : MonoBehaviour
     public CompanionChasePlayerState CompanionChasePlayerState { get; set; }
     public CompanionIdleState CompanionIdleState { get; set; }
     public CompanionChaseEnemyState CompanionChaseEnemyState { get; set; }
+    public CompanionShootState CompanionShootState { get; set; }
 
     #endregion
 
@@ -55,7 +56,6 @@ public class Companion : MonoBehaviour
     public void UpdateNearestEnemy(GameObject newNearestEnemy)
     {
         NearestEnemy = newNearestEnemy;
-        Debug.Log("Nearest enemy updated to: " + (newNearestEnemy != null ? newNearestEnemy.name : "null"));
     }
     #endregion
 
@@ -80,7 +80,6 @@ public class Companion : MonoBehaviour
     public void UpdateAgentDestination (GameObject newAgentDestination)
     {
         AgentDestination = newAgentDestination;
-        Debug.Log("Agent destination updated to: " + (newAgentDestination != null ? newAgentDestination.name : "null"));
     }
     #endregion
     protected void Awake()
@@ -90,7 +89,8 @@ public class Companion : MonoBehaviour
         CompanionChasePlayerState = new CompanionChasePlayerState(this, StateMachine);
         CompanionIdleState = new CompanionIdleState(this, StateMachine);
         CompanionChaseEnemyState = new CompanionChaseEnemyState(this, StateMachine);
-        
+        CompanionShootState = new CompanionShootState(this, StateMachine);
+
 
         CurrentHealth = MaxHealth;
 

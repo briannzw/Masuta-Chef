@@ -19,7 +19,6 @@ public class CompanionChaseEnemyState : CompanionState
         base.EnterState();
         companion.Agent.isStopped = false;
         companion.OnNearestEnemyChanged += HandleNearestEnemyChanged; //Subscribe to the event of nearest enemy
-        Debug.Log("Initiating Enter state Companion Chase Enemy");
     }
 
     public override void ExitState()
@@ -32,18 +31,16 @@ public class CompanionChaseEnemyState : CompanionState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        if (currentChasedEnemy != null)
-        {
-            // Set the agent's destination to the position of the nearest enemy
-            companion.UpdateAgentDestination(currentChasedEnemy);
-            Debug.Log("Chasing enemy: " + currentChasedEnemy.name);
-        }
-
-        //If straying to far from the player, then chase the player instead
-        float distanceToPlayer = Vector3.Distance(companion.transform.position, EnemySpawner.Instance.PlayerPosition.position);
+        companion.UpdateAgentDestination(CompanionScanEnemy.currentNearestEnemy);
+        float distanceToPlayer = Vector3.Distance(companion.transform.position, GameManager.Instance.PlayerGameObject.transform.position);
         if (distanceToPlayer >= companion.DetectEnemyRadius)
         {
             companion.StateMachine.ChangeState(companion.CompanionChasePlayerState);
+            Debug.Log("From chasing enemy to player");
+        }
+        if(companion.CompanionCombatBehaviour == companion.CompanionShootState && companion.Agent.remainingDistance < companion.AttackRange)
+        {
+            companion.StateMachine.ChangeState(companion.CompanionShootState);
         }
     }
 
@@ -54,19 +51,9 @@ public class CompanionChaseEnemyState : CompanionState
 
     private void HandleNearestEnemyChanged(GameObject newNearestEnemy)
     {
-        Debug.Log("This event is called");
-        // Do something with the new nearest enemy, such as updating AI behavior or targeting
         if (newNearestEnemy != null)
         {
-            Debug.Log("Nearest enemy is not null");
-            Debug.Log(newNearestEnemy.transform.position);
-            // Set the current agent's destination to the position of the nearest enemy
             currentChasedEnemy = newNearestEnemy;
-        }
-
-        if(newNearestEnemy == null)
-        {
-            Debug.Log("New Nearest Enemy is Null");
         }
     }
 }

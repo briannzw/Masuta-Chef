@@ -13,13 +13,13 @@ GameObject:
   - component: {fileID: 3913809925716915092}
   - component: {fileID: 2864426777615351283}
   - component: {fileID: 7469723069948955516}
-  - component: {fileID: -7031781252721311046}
-  - component: {fileID: -4681995273397734350}
-  - component: {fileID: -2453715840074593917}
+  - component: {fileID: 6121037914021106972}
+  - component: {fileID: 8768633309124232109}
+  - component: {fileID: 3442138595449725896}
   m_Layer: 0
-  m_Name: Companion Shooter
+  m_Name: Companion Test
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5bce510faf40a2b47b76f2f92a2cac53, type: 2}
+  - {fileID: 2100000, guid: 927f099b796f3864ebbd4b1131f1451b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,7 +104,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -134,28 +134,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-7031781252721311046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227213067308148503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71b0aaf5f03369488bfe9db22739698, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 50
-  <MaxIdleDistance>k__BackingField: 6
-  <MinDistanceTowardsPlayer>k__BackingField: 3
-  <MoveSpeed>k__BackingField: 3.25
-  <AttackRange>k__BackingField: 7
-  projectile: {fileID: 7168686472188487822, guid: ba78dac0ee8cc73449fb653037a8c8e5,
-    type: 3}
-  projectileSpeed: 14
-  shootInterval: 1
---- !u!114 &-4681995273397734350
+--- !u!114 &6121037914021106972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dad6e346211ce64cbd648095437df34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-2453715840074593917
+--- !u!114 &8768633309124232109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,6 +159,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectEnemyRadius: 10
+--- !u!114 &3442138595449725896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227213067308148503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1b230ec3f6efa498fece39da7d8e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 50
+  <MaxIdleDistance>k__BackingField: 5
+  <MinDistanceTowardsPlayer>k__BackingField: 3
+  <MoveSpeed>k__BackingField: 3.25
 --- !u!1 &2829947489752414853
 GameObject:
   m_ObjectHideFlags: 0

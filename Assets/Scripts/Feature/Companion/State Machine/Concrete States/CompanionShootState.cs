@@ -30,15 +30,23 @@ public class CompanionShootState : CompanionState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+        float distanceToEnemy = Vector3.Distance(companion.transform.position, CompanionScanEnemy.currentNearestEnemy.transform.position);     
         timer += Time.deltaTime;
-        if (timer >= companion.ShootInterval)
+        Vector3 directionToEnemy = CompanionScanEnemy.currentNearestEnemy.transform.position - companion.transform.position;
+        companion.transform.rotation = Quaternion.LookRotation(directionToEnemy);
+        if (timer >= companion.ShootInterval && distanceToEnemy < companion.AttackRange)
         {
             ShootProjectile();
             ResetTimer();
         }
-        if (companion.Agent.remainingDistance > companion.DetectEnemyRadius)
+        if (distanceToEnemy > companion.AttackRange)
         {
             companion.StateMachine.ChangeState(companion.CompanionChaseEnemyState);
+        }
+        
+        if (Vector3.Distance(companion.transform.position, GameManager.Instance.PlayerGameObject.transform.position) > companion.DetectEnemyRadius)
+        {
+            companion.StateMachine.ChangeState(companion.CompanionChasePlayerState);
         }
     }
 
@@ -64,8 +72,8 @@ public class CompanionShootState : CompanionState
         if (projectileRigidbody != null)
         {
             // Set the velocity of the projectile to shoot it towards the player
-            Vector3 directionToPlayer = EnemySpawner.Instance.PlayerPosition.position - companion.transform.position;
-            projectileRigidbody.velocity = directionToPlayer.normalized * companion.ProjectileSpeed;
+            Vector3 directionToEnemy = CompanionScanEnemy.currentNearestEnemy.transform.position - companion.transform.position;
+            projectileRigidbody.velocity = directionToEnemy.normalized * companion.ProjectileSpeed;
         }
         else
         {

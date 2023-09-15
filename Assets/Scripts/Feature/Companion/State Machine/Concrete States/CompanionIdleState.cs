@@ -15,20 +15,21 @@ public class CompanionIdleState : CompanionState
     {
         base.EnterState();
         companion.Agent.isStopped = true;
-        Debug.Log("Companion Idle");
+        companion.OnNearestEnemyChanged += HandleNearestEnemyChanged;
+        Debug.Log("Enter Companion Idle State");
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        companion.Agent.isStopped = false;
+        companion.OnNearestEnemyChanged -= HandleNearestEnemyChanged;
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        companion.UpdateAgentDestination(EnemySpawner.Instance.PlayerPosition.gameObject);
-        if (companion.Agent.remainingDistance >= companion.MaxDistanceTowardsPlayer)
+        
+        if (companion.Agent.remainingDistance >= companion.MaxIdleDistance)
         {
             companion.StateMachine.ChangeState(companion.CompanionChasePlayerState);
         }
@@ -38,5 +39,13 @@ public class CompanionIdleState : CompanionState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+
+    private void HandleNearestEnemyChanged(GameObject newNearestEnemy)
+    {
+        if (newNearestEnemy != null)
+        {
+            companion.StateMachine.ChangeState(companion.CompanionChaseEnemyState);
+        }
     }
 }

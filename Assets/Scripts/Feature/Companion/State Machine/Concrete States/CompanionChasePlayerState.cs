@@ -15,22 +15,22 @@ public class CompanionChasePlayerState : CompanionState
     {
         base.EnterState();
         companion.Agent.isStopped = false;
-        
-        Debug.Log("Companion Chase Player");
+        companion.OnNearestEnemyChanged += HandleNearestEnemyChanged;
+        Debug.Log("Entering State Companion Chase Player");
     }
 
     public override void ExitState()
     {
         base.ExitState();
         companion.Agent.isStopped = true;
+        companion.OnNearestEnemyChanged -= HandleNearestEnemyChanged;
     }
 
     public override void FrameUpdate()
     {
         //Debug.Log("Is Chasing PLayer");
         base.FrameUpdate();
-        Debug.Log(companion.Agent.remainingDistance);
-        companion.UpdateAgentDestination(EnemySpawner.Instance.PlayerPosition.gameObject);
+        companion.UpdateAgentDestination(GameManager.Instance.PlayerGameObject.gameObject);
         if (companion.Agent.remainingDistance <= companion.MinDistanceTowardsPlayer)
         {
             companion.StateMachine.ChangeState(companion.CompanionIdleState);
@@ -40,5 +40,14 @@ public class CompanionChasePlayerState : CompanionState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+
+    private void HandleNearestEnemyChanged(GameObject newNearestEnemy)
+    {
+        if (newNearestEnemy != null)
+        {
+            companion.UpdateAgentDestination(newNearestEnemy);
+            companion.StateMachine.ChangeState(companion.CompanionChaseEnemyState);
+        }
     }
 }
