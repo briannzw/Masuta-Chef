@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player.Controller
 {
+    using Input;
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : PlayerInputControl
     {
         [Header("References")]
         public Animator Animator;
-
-        private PlayerAction playerControls;
         private CharacterController controller;
 
         [Header("Movement")]
@@ -45,23 +42,11 @@ namespace Player.Controller
             controller = GetComponent<CharacterController>();
         }
 
-        private void Start()
+        protected override void Start()
         {
             initialPosition = transform.position;
             speed = isSprintDefault ? sprintSpeed : moveSpeed;
-
-            playerControls = InputManager.PlayerAction;
-            RegisterInputCallbacks();
-        }
-
-        private void OnEnable()
-        {
-            RegisterInputCallbacks();
-        }
-
-        private void OnDisable()
-        {
-            UnregisterInputCallbacks();
+            base.Start();
         }
 
         private void Update()
@@ -83,7 +68,7 @@ namespace Player.Controller
         }
 
         #region Callbacks
-        private void RegisterInputCallbacks()
+        protected override void RegisterInputCallbacks()
         {
             if (playerControls == null) return;
 
@@ -92,7 +77,7 @@ namespace Player.Controller
             playerControls.Gameplay.Sprint.performed += OnSprint;
             playerControls.Gameplay.Sprint.canceled += OnSprintCanceled;
         }
-        private void UnregisterInputCallbacks()
+        protected override void UnregisterInputCallbacks()
         {
             if (playerControls == null) return;
 
@@ -122,6 +107,17 @@ namespace Player.Controller
         }
         #endregion
 
+        #region Movement Handling
+        private void CheckOutOfBound()
+        {
+            if(transform.position.y < -5f)
+            {
+                velocity = Vector3.zero;
+                transform.position = initialPosition;
+            }
+        }
+        #endregion
+
         #region Callback Functions
         private void OnMove(InputAction.CallbackContext context)
         {
@@ -145,14 +141,5 @@ namespace Player.Controller
         }
         #endregion
 
-        // Handling
-        private void CheckOutOfBound()
-        {
-            if(transform.position.y < -5f)
-            {
-                velocity = Vector3.zero;
-                transform.position = initialPosition;
-            }
-        }
     }
 }
