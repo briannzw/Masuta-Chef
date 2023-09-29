@@ -33,8 +33,8 @@ public class RayGunController : MonoBehaviour
     #region Shoot Callback
     private void Shoot()
     {
-        rayBullet.SetPosition(0, bulletOrigin.transform.position);
-        rayBullet.SetPosition(1, new Vector3(0, shootTarget.transform.position.y, 10));
+        rayBullet.SetPosition(0, bulletOrigin.transform.localPosition);
+        rayBullet.SetPosition(1, new Vector3(0, bulletOrigin.transform.position.y, shootTarget.transform.position.z));
 
         StartCoroutine(ShootCooldown());
     }

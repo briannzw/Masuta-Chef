@@ -18,6 +18,8 @@ namespace Player.Controller
         [Header("Shooting")]
         public float rotationSpeed = 5.0f;
         private float rotationAngle = 0f;
+        int floorMask;
+    float camRayLength = 100f;
         [SerializeField] private GameObject shootTargetObject;
 
         [Header("Movement")]
@@ -49,6 +51,8 @@ namespace Player.Controller
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+
+            floorMask = LayerMask.GetMask("Floor");
         }
 
         private void Start()
@@ -100,8 +104,20 @@ namespace Player.Controller
         /// </summary>
         private void OnAim(InputAction.CallbackContext context)
         {
-            rotationAngle += Input.GetAxis("Mouse X");
-            transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
+            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // Vector3 camRay = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+
+            // Debug.Log(camRay);
+            RaycastHit floorHit;
+
+            if(Physics.Raycast(camRay, out floorHit, Mathf.Infinity, floorMask))
+            {
+                Vector3 playerToMouse = floorHit.point - transform.position;
+                playerToMouse.y = 0;
+                Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+
+                transform.localRotation = newRotation;
+            }
         }
         #endregion
 
@@ -189,17 +205,17 @@ namespace Player.Controller
         }
         #endregion
 
-        // remove Cursor
-        private void OnApplicationFocus(bool focus)
-        {
-            if (focus) 
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-        }
+        // // remove Cursor
+        // private void OnApplicationFocus(bool focus)
+        // {
+        //     if (focus) 
+        //     {
+        //         Cursor.lockState = CursorLockMode.Locked;
+        //     }
+        //     else
+        //     {
+        //         Cursor.lockState = CursorLockMode.None;
+        //     }
+        // }
     }
 }
