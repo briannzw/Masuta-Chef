@@ -1,8 +1,9 @@
+using UnityEngine;
+
 namespace Character.Stat
 {
     using AYellowpaper.SerializedCollections;
     using Kryz.CharacterStats;
-    using System;
 
     [System.Serializable]
     public class Stats
@@ -22,6 +23,15 @@ namespace Character.Stat
                 { StatsEnum.Resistance, new CharacterStat() },
                 { StatsEnum.DamageMultiplier, new CharacterStat(1) }
             };
+        }
+
+        // For weapon or single instance applier
+        public void RemoveAllModifiersFromSource(object source)
+        {
+            foreach(var stat in StatList)
+            {
+                stat.Value.RemoveAllModifiersFromSource(source);
+            }
         }
     }
 }
