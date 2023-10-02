@@ -31,8 +31,8 @@ namespace Character.StatEffect
         [ReadOnly, ConditionalField(nameof(Behaviour), false, EffectBehaviour.Duration)] public float Timer = 0f;
         [ConditionalField(nameof(Behaviour), false, EffectBehaviour.Duration)] public float Duration;
         [ConditionalField(nameof(Behaviour), false, EffectBehaviour.Duration)] public bool UseInterval;
-        [ConditionalField(nameof(UseInterval))] public float Interval;
-        [ConditionalField(nameof(UseInterval))][ReadOnly] public float IntervalTimer = 0f;
+        [ConditionalField(new []{ nameof(Behaviour), nameof(UseInterval) }, new[] { false, false }, EffectBehaviour.Duration)][ReadOnly] public float IntervalTimer = 0f;
+        [ConditionalField(new []{ nameof(Behaviour), nameof(UseInterval) }, new[] { false, false }, EffectBehaviour.Duration)] public float Interval;
 
         public bool DurationEnds => Timer >= Duration;
 
