@@ -18,11 +18,10 @@ public class CompanionTaunter : Companion
     {
         base.Update();
         DetectTarget();
-
+        Taunt();
         if (followEnemy && Agent.remainingDistance <= StopDistance && DistanceFromPlayer < MaxDistanceFromPlayer)
         {
             StateMachine.ChangeState(NPCAttackState);
-            Taunt();
         }
 
         if (followEnemy)
@@ -51,39 +50,53 @@ public class CompanionTaunter : Companion
 
     void Taunt()
     {
-
-        Collider[] colliders = Physics.OverlapSphere(GameManager.playerTransform.position, DetectionRadius);
-        float closestDistance = Mathf.Infinity;
-        Transform[] closestEnemies = new Transform[maxTauntedEnemies];
+        Collider[] colliders = Physics.OverlapSphere(transform.position, DetectionRadius);
+        List<Transform> closestEnemies = new List<Transform>();
 
         foreach (Collider collider in colliders)
         {
             if (collider.CompareTag("Enemy"))
             {
-                float distanceToEnemy = Vector3.Distance(GameManager.playerTransform.position, collider.transform.position);
-                for (int i = 0; i < closestEnemies.Length; i++)
+                Transform enemyTransform = collider.transform;
+                float distanceToEnemy = Vector3.Distance(transform.position, enemyTransform.position);
+
+                // Check if enemy is closer than the existing closest enemies
+                bool isCloserEnemy = closestEnemies.Count < maxTauntedEnemies || distanceToEnemy < Vector3.Distance(transform.position, closestEnemies[closestEnemies.Count - 1].position);
+
+                if (isCloserEnemy)
                 {
-                    if (closestEnemies[i] == null || distanceToEnemy < closestDistance)
+                    // Insert the enemy in the correct position based on distance
+                    for (int i = 0; i < closestEnemies.Count; i++)
                     {
-                        closestEnemies[i] = collider.transform;
-                        closestDistance = distanceToEnemy;
-                        break;
+                        if (distanceToEnemy < Vector3.Distance(transform.position, closestEnemies[i].position))
+                        {
+                            closestEnemies.Insert(i, enemyTransform);
+                            break;
+                        }
+                    }
+
+                    // If the list is not full yet, add the enemy to the end
+                    if (closestEnemies.Count < maxTauntedEnemies)
+                    {
+                        closestEnemies.Add(enemyTransform);
+                    }
+
+                    // Ensure the list does not exceed maxTauntedEnemies
+                    if (closestEnemies.Count > maxTauntedEnemies)
+                    {
+                        closestEnemies.RemoveAt(closestEnemies.Count - 1);
                     }
                 }
             }
         }
 
+        // Set taunt properties for the closest enemies
         foreach (Transform enemy in closestEnemies)
         {
             if (enemy != null && isAlive)
             {
-                enemy.GetComponent<NPC>().TargetPosition = transform.position;
                 enemy.GetComponent<Enemy>().IsTaunted = true;
-            }
-
-            if (!isAlive)
-            {
-                enemy.GetComponent<Enemy>().IsTaunted = false;
+                enemy.GetComponent<NPC>().TargetPosition = transform.position;
             }
         }
     }

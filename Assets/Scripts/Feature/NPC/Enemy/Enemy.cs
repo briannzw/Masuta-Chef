@@ -18,8 +18,11 @@ public class Enemy : NPC
     {
         Debug.Log("Is Taunted: " + IsTaunted);
         base.Update();
-        if(!IsTaunted)
+        if (!IsTaunted)
+        {
             TargetPosition = GameManager.playerTransform.position;
+        }
+            
 
         if (Agent.remainingDistance <= StopDistance)
         {
@@ -30,14 +33,9 @@ public class Enemy : NPC
             Agent.isStopped = false;
         }
 
-        if (IsTaunted)
+        if (IsTaunted && Agent.remainingDistance > 5f)
         {
-            currentTauntTimer -= Time.deltaTime;
-            if (currentTauntTimer <= 0f)
-            {
-                RemoveTauntEffect();
-                currentTauntTimer = maxTauntTimer;
-            }
+            RemoveTauntEffect();
         }
     }
 
