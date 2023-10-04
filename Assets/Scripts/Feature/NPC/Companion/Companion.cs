@@ -17,6 +17,10 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
     protected Transform enemy;
     protected float wanderTimer = 0;
     protected bool shouldWander = false;
+    [SerializeField] Transform companionSlotPosition;
+    [SerializeField] protected float minDistanceFromPlayer;
+
+    [SerializeField] private float minDistanceSlotFromPlayer;
 
     private new void Awake()
     {
@@ -80,16 +84,22 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
     protected new void Update()
     {
         DistanceFromPlayer = Vector3.Distance(transform.position, GameManager.playerTransform.position);
+        
+
         base.Update();
+        NavMeshHit hit;
         if (followEnemy)
         {
             Agent.isStopped = false;
         }
         else if(!shouldWander)
         {
-            TargetPosition = GameManager.playerTransform.position;
-
-            if (Agent.remainingDistance <= MaxDistanceFromPlayer)
+            NavMesh.SamplePosition(companionSlotPosition.position, out hit, Mathf.Infinity, 1 << NavMesh.GetAreaFromName("Walkable"));
+            float distanceSlot = Mathf.Abs(hit.position.y - companionSlotPosition.position.y);
+            if (distanceSlot < 1f)
+                TargetPosition = hit.position;                
+            
+            if (Agent.remainingDistance <= minDistanceFromPlayer)
             {
                 Agent.isStopped = true;
             }

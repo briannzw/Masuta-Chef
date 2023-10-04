@@ -7,6 +7,7 @@ public class NPC : MonoBehaviour
 {
     public Animator Animator;
     public Transform TargetTransform;
+    public float MoveSpeed;
     public Vector3 TargetPosition { get; set; }
 
     private Vector3 targetPosition;
@@ -24,6 +25,7 @@ public class NPC : MonoBehaviour
         NPCMoveState = new NPCMoveState(this, StateMachine);
         NPCAttackState = new NPCAttackState(this, StateMachine);
         Agent = GetComponent<NavMeshAgent>();
+        Agent.speed = MoveSpeed;
     }
     // Start is called before the first frame update
     void Start()

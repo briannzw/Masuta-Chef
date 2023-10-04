@@ -31,7 +31,7 @@ public class CompanionAttackerClose : Companion
             StateMachine.ChangeState(NPCAttackState);
         }
 
-        if (!followEnemy && DistanceFromPlayer <= MaxDistanceFromPlayer)
+        if (!followEnemy && DistanceFromPlayer <= minDistanceFromPlayer)
         {
             Agent.isStopped = false;
             shouldWander = true;

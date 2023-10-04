@@ -21,29 +21,18 @@ public class CompanionAttackerRanged : Companion
 
         if (followEnemy)
         {
-            // Calculate the direction from this GameObject to the target
             Vector3 direction = enemy.position - transform.position;
-
-            // Create a rotation that looks in the calculated direction
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-            // Rotate towards the target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        if (followEnemy && Agent.remainingDistance <= StopDistance && DistanceFromPlayer < MaxDistanceFromPlayer)
-        {
-            StateMachine.ChangeState(NPCAttackState);
-        }
-
-        if (!followEnemy && DistanceFromPlayer <= MaxDistanceFromPlayer)
+        if (!followEnemy && DistanceFromPlayer <= minDistanceFromPlayer)
         {
             Agent.isStopped = false;
             shouldWander = true;
             wanderTimer -= Time.deltaTime;
             if (wanderTimer <= 0f)
             {
-                // Time to choose a new random destination.
                 Wander();
                 wanderTimer = WanderInterval;
             }

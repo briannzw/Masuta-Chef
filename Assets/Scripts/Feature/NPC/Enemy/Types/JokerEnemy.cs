@@ -81,6 +81,5 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
                 wanderTimer = WanderInterval;
             }
         }
-
     }
 }
