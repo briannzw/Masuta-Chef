@@ -2053,7 +2053,7 @@ MonoBehaviour:
   DPSLabel: {fileID: 685598883}
   DPSUpdateInterval: 0.5
   StatsUpdateInterval: 0.5
-  ResetTimer: 5
+  ResetTime: 5
 --- !u!136 &1770287283
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2230,13 +2230,13 @@ MonoBehaviour:
   Type: 0
   ApplyEffectFirst: 0
   <Effects>k__BackingField:
-  - StatsAffected: 3
-    StatValue: 10
+  - StatsAffected: 0
+    StatValue: 15
     StatModifierType: 100
     overwriteOrder: 0
     priorityOrder: 0
     Behaviour: 1
-    StatusEffect: 1
+    StatusEffect: 3
     Timer: 0
     Duration: 5
     UseInterval: 1
