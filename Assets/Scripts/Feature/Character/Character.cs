@@ -51,7 +51,7 @@ namespace Character
             healthStat.ChangeCurrentValue(statMod);
             Debug.Log(healthStat.CurrentValue);
 
-            if (healthStat.Value <= 0) OnDie?.Invoke();
+            if (healthStat.CurrentValue <= 0) OnDie?.Invoke();
         }
 
         public void TakeHeal(float healAmount = 0, float multiplier = 1, StatModifier statMod = null)
