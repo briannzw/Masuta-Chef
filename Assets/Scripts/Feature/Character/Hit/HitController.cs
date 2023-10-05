@@ -32,9 +32,9 @@ namespace Character.Hit
 
             if(ApplyEffectFirst) ApplyEffect(character);
 
-            if (Type == HitType.Damage) character.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, Value.Multiplier);
+            if (Type == HitType.Damage) character.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
             // Changeable
-            if (Type == HitType.Heal) character.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, Value.Multiplier);
+            if (Type == HitType.Heal) character.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
 
             if(!ApplyEffectFirst) ApplyEffect(character);
         }

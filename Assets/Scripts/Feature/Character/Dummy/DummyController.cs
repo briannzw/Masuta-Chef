@@ -39,10 +39,10 @@ namespace Character.Dummy
             InvokeRepeating("SetLabel", 0, StatsUpdateInterval);
         }
 
-        public override void TakeDamage(float totalAttack, float multiplier = 1)
+        public override void TakeDamage(float totalAttack, StatsEnum dynamicEnum, float multiplier = 1)
         {
-            base.TakeDamage(totalAttack, multiplier);
-            CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;
+            base.TakeDamage(totalAttack, dynamicEnum, multiplier);
+            if (dynamicEnum != StatsEnum.Health) return;
             lastDamageDealt += (float)Math.Round((totalAttack - Stats.StatList[StatsEnum.Defense].Value) * multiplier, 4);
             resetTimer = 0f;
             hitCount++;
