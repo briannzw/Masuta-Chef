@@ -38,7 +38,7 @@ namespace Character.Dummy
             InvokeRepeating("SetLabel", 0, StatsUpdateInterval);
         }
 
-        public override void TakeDamage(float totalAttack = 0, float multiplier = 1, StatModifier statMod = null)
+        public override void TakeDamage(float totalAttack, float multiplier = 1)
         {
             base.TakeDamage(totalAttack, multiplier);
             CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;

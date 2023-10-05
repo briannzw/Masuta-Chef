@@ -38,29 +38,24 @@ namespace Character
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
         }
 
-        public virtual void TakeDamage(float totalAttack = 0, float multiplier = 1, StatModifier statMod = null)
+        public virtual void TakeDamage(float totalAttack, float multiplier = 1)
         {
             CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;
 
             // Total Damage Received = (Base Attack + Weapon Attack - Defense) * Final Damage Multiplier
-            if (statMod == null)
-                statMod = new StatModifier(-(totalAttack - Stats.StatList[StatsEnum.Defense].Value) * multiplier, StatModType.Flat);
-            
+            StatModifier statMod = new StatModifier(-(totalAttack - Stats.StatList[StatsEnum.Defense].Value) * multiplier, StatModType.Flat);
             if (statMod.Value > 0) statMod.Value = 0;
-            
+
             healthStat.ChangeCurrentValue(statMod);
-            Debug.Log(healthStat.CurrentValue);
 
             if (healthStat.CurrentValue <= 0) OnDie?.Invoke();
         }
 
-        public void TakeHeal(float healAmount = 0, float multiplier = 1, StatModifier statMod = null)
+        public void TakeHeal(float healAmount, float multiplier = 1)
         {
             CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;
 
-            if (statMod == null)
-                statMod = new StatModifier(healAmount * multiplier, StatModType.Flat);
-
+            StatModifier statMod = new StatModifier(healAmount * multiplier, StatModType.Flat);
             if(statMod.Value < 0) statMod.Value = 0;
 
             healthStat.ChangeCurrentValue(statMod);
@@ -148,8 +143,8 @@ namespace Character
 
         private void TakeEffect(Effect effect)
         {
-            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(0, 1, effect.Modifier);
-            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(0, 1, effect.Modifier);
+            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(effect.Modifier.Value, 1);
+            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, 1);
             else
                 Stats.StatList[effect.StatsAffected].AddModifier(effect.Modifier);
         }
