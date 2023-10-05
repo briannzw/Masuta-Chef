@@ -20,11 +20,10 @@ namespace Character.Dummy
         [Header("Parameters")]
         public float DPSUpdateInterval = 0.5f;
         public float StatsUpdateInterval = 0.5f;
-        public float ResetTime = 5f;
+        public float ResetTimer = 5f;
 
         private float lastDamageDealt = 0f;
         private float elapsedTime = 0f;
-        private float resetTimer = 0f;
         private float timer = 0f;
 
         private float damagePerSecond = 0f;
@@ -39,12 +38,12 @@ namespace Character.Dummy
             InvokeRepeating("SetLabel", 0, StatsUpdateInterval);
         }
 
-        public override void TakeDamage(float totalAttack, StatsEnum dynamicEnum, float multiplier = 1)
+        public override void TakeDamage(float totalAttack = 0, float multiplier = 1, StatModifier statMod = null)
         {
-            base.TakeDamage(totalAttack, dynamicEnum, multiplier);
-            if (dynamicEnum != StatsEnum.Health) return;
-            lastDamageDealt += (float)Math.Round((totalAttack - Stats.StatList[StatsEnum.Defense].Value) * multiplier, 4);
-            resetTimer = 0f;
+            base.TakeDamage(totalAttack, multiplier);
+            CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;
+            lastDamageDealt += (float)Math.Round(healthStat.CurrentValue - (totalAttack - Stats.StatList[StatsEnum.Defense].Value) * multiplier, 4);
+            elapsedTime = 0f;
             hitCount++;
             SetLabel();
         }
@@ -54,7 +53,6 @@ namespace Character.Dummy
             if (Mathf.Round(lastDamageDealt) == 0f) return;
 
             elapsedTime += Time.deltaTime;
-            resetTimer += Time.deltaTime;
             timer += Time.deltaTime;
             if(timer > DPSUpdateInterval)
             {
@@ -62,7 +60,7 @@ namespace Character.Dummy
                 damagePerSecond = lastDamageDealt / elapsedTime;
                 SetDPSLabel();
             }
-            if (resetTimer > ResetTime)
+            if (elapsedTime > ResetTimer)
             {
                 lastDamageDealt = 0f;
                 elapsedTime = 0f;

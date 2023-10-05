@@ -2053,7 +2053,7 @@ MonoBehaviour:
   DPSLabel: {fileID: 685598883}
   DPSUpdateInterval: 0.5
   StatsUpdateInterval: 0.5
-  ResetTime: 5
+  ResetTimer: 5
 --- !u!136 &1770287283
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2230,27 +2230,15 @@ MonoBehaviour:
   Type: 0
   ApplyEffectFirst: 0
   <Effects>k__BackingField:
-  - StatsAffected: 0
-    StatValue: 20
+  - StatsAffected: 3
+    StatValue: 10
     StatModifierType: 100
     overwriteOrder: 0
     priorityOrder: 0
     Behaviour: 1
-    StatusEffect: 3
+    StatusEffect: 1
     Timer: 0
     Duration: 5
-    UseInterval: 1
-    IntervalTimer: 0
-    Interval: 1
-  - StatsAffected: 0
-    StatValue: 5
-    StatModifierType: 100
-    overwriteOrder: 0
-    priorityOrder: 0
-    Behaviour: 1
-    StatusEffect: 2
-    Timer: 0
-    Duration: 10
     UseInterval: 1
     IntervalTimer: 0
     Interval: 1
@@ -2484,25 +2472,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Value:
-    CharacterAttack: 0
+    CharacterAttack: 25
     WeaponAttack: 5
     Multiplier: 1
   TargetTag: Enemy
-  Type: 1
+  Type: 0
   ApplyEffectFirst: 0
   <Effects>k__BackingField:
-  - StatsAffected: 0
-    StatValue: 1
+  - StatsAffected: 3
+    StatValue: 5
     StatModifierType: 100
     overwriteOrder: 0
     priorityOrder: 0
-    Behaviour: 1
-    StatusEffect: 2
+    Behaviour: 0
+    StatusEffect: 1
     Timer: 0
-    Duration: 5
-    UseInterval: 1
+    Duration: 0
+    UseInterval: 0
     IntervalTimer: 0
-    Interval: 1
+    Interval: 0
   AreaDuration: 30
   Behaviour: 1
 --- !u!65 &2005834260
