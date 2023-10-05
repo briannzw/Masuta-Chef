@@ -116,7 +116,7 @@ namespace Character
         private IEnumerator ApplyEffect(Effect effect)
         {
             // Apply on time 0
-            if(!effect.UseInterval) TakeEffect(effect);
+            TakeEffect(effect);
 
             // While there's still duration left
             while (!effect.DurationEnds)

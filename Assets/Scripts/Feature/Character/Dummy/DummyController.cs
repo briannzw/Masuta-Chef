@@ -44,7 +44,6 @@ namespace Character.Dummy
             base.TakeDamage(totalAttack, multiplier);
             CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;
             lastDamageDealt += (float)Math.Round((totalAttack - Stats.StatList[StatsEnum.Defense].Value) * multiplier, 4);
-            Debug.Log(lastDamageDealt);
             resetTimer = 0f;
             hitCount++;
             SetLabel();
