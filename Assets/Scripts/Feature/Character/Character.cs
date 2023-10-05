@@ -38,32 +38,31 @@ namespace Character
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
         }
 
-        public virtual void TakeDamage(float totalAttack = 0, float multiplier = 1, StatModifier statMod = null)
+        public virtual void TakeDamage(float damageAmount, StatsEnum dynamicEnum, float multiplier = 1)
         {
-            CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;
+            if (Stats.StatList[dynamicEnum] is not CharacterDynamicStat) return;
+
+            CharacterDynamicStat Stat = Stats.StatList[dynamicEnum] as CharacterDynamicStat;
 
             // Total Damage Received = (Base Attack + Weapon Attack - Defense) * Final Damage Multiplier
-            if (statMod == null)
-                statMod = new StatModifier(-(totalAttack - Stats.StatList[StatsEnum.Defense].Value) * multiplier, StatModType.Flat);
-            
+            StatModifier statMod = new StatModifier(-(damageAmount - (dynamicEnum == StatsEnum.Health ? Stats.StatList[StatsEnum.Defense].Value : 0)) * multiplier, StatModType.Flat);
             if (statMod.Value > 0) statMod.Value = 0;
-            
-            healthStat.ChangeCurrentValue(statMod);
-            Debug.Log(healthStat.CurrentValue);
 
-            if (healthStat.Value <= 0) OnDie?.Invoke();
+            Stat.ChangeCurrentValue(statMod);
+
+            if (Stat.CurrentValue <= 0 && dynamicEnum == StatsEnum.Health) OnDie?.Invoke();
         }
 
-        public void TakeHeal(float healAmount = 0, float multiplier = 1, StatModifier statMod = null)
+        public void TakeHeal(float healAmount, StatsEnum dynamicEnum, float multiplier = 1)
         {
-            CharacterDynamicStat healthStat = Stats.StatList[StatsEnum.Health] as CharacterDynamicStat;
+            if (Stats.StatList[dynamicEnum] is not CharacterDynamicStat) return;
 
-            if (statMod == null)
-                statMod = new StatModifier(healAmount * multiplier, StatModType.Flat);
+            CharacterDynamicStat Stat = Stats.StatList[dynamicEnum] as CharacterDynamicStat;
 
+            StatModifier statMod = new StatModifier(healAmount * multiplier, StatModType.Flat);
             if(statMod.Value < 0) statMod.Value = 0;
 
-            healthStat.ChangeCurrentValue(statMod);
+            Stat.ChangeCurrentValue(statMod);
         }
 
         public void AddEffect(Effect effect)
@@ -121,7 +120,7 @@ namespace Character
         private IEnumerator ApplyEffect(Effect effect)
         {
             // Apply on time 0
-            if(!effect.UseInterval) TakeEffect(effect);
+            TakeEffect(effect);
 
             // While there's still duration left
             while (!effect.DurationEnds)
@@ -148,8 +147,8 @@ namespace Character
 
         private void TakeEffect(Effect effect)
         {
-            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(0, 1, effect.Modifier);
-            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(0, 1, effect.Modifier);
+            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(effect.Modifier.Value, effect.StatsAffected, 1);
+            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, effect.StatsAffected, 1);
             else
                 Stats.StatList[effect.StatsAffected].AddModifier(effect.Modifier);
         }

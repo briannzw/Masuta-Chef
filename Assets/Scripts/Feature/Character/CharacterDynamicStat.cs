@@ -30,7 +30,7 @@ namespace Character.Stat
 
         public void ChangeCurrentValue(StatModifier mod)
         {
-            float finalValue = _currentValue;
+            float finalValue = Mathf.Clamp(_currentValue, 0 , Value);
 
             if (mod.Type == StatModType.Flat)
             {
