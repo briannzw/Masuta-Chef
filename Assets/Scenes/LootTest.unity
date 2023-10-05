@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1462,7 +1462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943753664}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
   m_LocalPosition: {x: 0, y: 15, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2061,6 +2061,7 @@ GameObject:
   - component: {fileID: 1378510527}
   - component: {fileID: 1378510526}
   - component: {fileID: 1378510525}
+  - component: {fileID: 1378510531}
   m_Layer: 0
   m_Name: Dummy (1)
   m_TagString: Enemy
@@ -2227,6 +2228,19 @@ Transform:
   - {fileID: 504012818}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378510531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378510524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4cae42ddbff6b54badec192853241e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootChance: {fileID: 11400000, guid: 93829f268d69a1946b9718152fc4ffdd, type: 2}
 --- !u!1 &1386656612
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,6 +2382,7 @@ GameObject:
   - component: {fileID: 1770287284}
   - component: {fileID: 1770287283}
   - component: {fileID: 1770287282}
+  - component: {fileID: 1770287285}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Enemy
@@ -2534,6 +2549,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1770287285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770287277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4cae42ddbff6b54badec192853241e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootChance: {fileID: 11400000, guid: 93829f268d69a1946b9718152fc4ffdd, type: 2}
 --- !u!1 &1794794421
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,8 +30,9 @@ MonoBehaviour:
       type: {class: RecipeLoot, ns: Loot, asm: Assembly-CSharp}
       data:
         Type: 0
-        Chance: 0
-        Recipes: []
+        Chance: 100
+        Recipes:
+        - {fileID: 11400000, guid: f136afa23cd7cab47866b6e17df8a3db, type: 2}
     - rid: 409706738627117058
       type: {class: WeaponLoot, ns: Loot, asm: Assembly-CSharp}
       data:
