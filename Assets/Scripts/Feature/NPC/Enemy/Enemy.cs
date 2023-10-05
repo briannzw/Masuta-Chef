@@ -6,7 +6,7 @@ public class Enemy : NPC
 {
     public bool IsTaunted = false;
     private float currentTauntTimer;
-    private float maxTauntTimer = 5f;
+    [SerializeField] private float maxTauntTimer = 0.1f;
     private new void Awake()
     {
         base.Awake();
@@ -16,8 +16,9 @@ public class Enemy : NPC
 
     protected new void Update()
     {
-        Debug.Log("Is Taunted: " + IsTaunted);
+        //Debug.Log("Is Taunted: " + IsTaunted);
         base.Update();
+        currentTauntTimer -= Time.deltaTime;
         if (!IsTaunted)
         {
             TargetPosition = GameManager.playerTransform.position;
@@ -33,7 +34,7 @@ public class Enemy : NPC
             Agent.isStopped = false;
         }
 
-        if (IsTaunted && Agent.remainingDistance > 5f)
+        if (IsTaunted && Agent.remainingDistance > 5f || IsTaunted && currentTauntTimer <= 0f)
         {
             RemoveTauntEffect();
         }
@@ -42,5 +43,7 @@ public class Enemy : NPC
     void RemoveTauntEffect()
     {
         IsTaunted = false;
+        Agent.isStopped = false;
+        currentTauntTimer = maxTauntTimer;
     }
 }

@@ -17,7 +17,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
     protected Transform enemy;
     protected float wanderTimer = 0;
     protected bool shouldWander = false;
-    [SerializeField] Transform companionSlotPosition;
+    public Transform companionSlotPosition;
     [SerializeField] protected float minDistanceFromPlayer;
 
     [SerializeField] private float minDistanceSlotFromPlayer;
@@ -84,31 +84,34 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
     protected new void Update()
     {
         DistanceFromPlayer = Vector3.Distance(transform.position, GameManager.playerTransform.position);
-        
 
         base.Update();
         NavMeshHit hit;
+
+        // Determine the target position based on different conditions
+        Vector3 targetPosition;
         if (followEnemy)
         {
+            targetPosition = TargetPosition;
             Agent.isStopped = false;
         }
-        else if(!shouldWander)
+        else if (!shouldWander)
         {
             NavMesh.SamplePosition(companionSlotPosition.position, out hit, Mathf.Infinity, 1 << NavMesh.GetAreaFromName("Walkable"));
             float distanceSlot = Mathf.Abs(hit.position.y - companionSlotPosition.position.y);
-            if (distanceSlot < 1f)
-                TargetPosition = hit.position;                
-            
-            if (Agent.remainingDistance <= minDistanceFromPlayer)
-            {
-                Agent.isStopped = true;
-            }
-            else
-            {
-                Agent.isStopped = false;
-            }
+            targetPosition = (distanceSlot < 1f) ? hit.position : TargetPosition;
+            Agent.isStopped = Agent.remainingDistance <= minDistanceFromPlayer;
+        }
+        else
+        {
+            // If neither followEnemy nor shouldWander is true, set target position to current position
+            targetPosition = transform.position;
+            Agent.isStopped = false;
         }
 
+        TargetPosition = targetPosition;
+
+        // Change state based on distance from player
         if (DistanceFromPlayer > MaxDistanceFromPlayer)
         {
             StateMachine.ChangeState(NPCMoveState);

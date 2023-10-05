@@ -84,11 +84,14 @@ public class CompanionTaunter : Companion
                     // Ensure the list does not exceed maxTauntedEnemies
                     if (closestEnemies.Count > maxTauntedEnemies)
                     {
+                        closestEnemies[closestEnemies.Count - 1].GetComponent<Enemy>().IsTaunted = false;
                         closestEnemies.RemoveAt(closestEnemies.Count - 1);
                     }
                 }
             }
         }
+
+        Debug.Log(closestEnemies.Count);
 
         // Set taunt properties for the closest enemies
         foreach (Transform enemy in closestEnemies)
