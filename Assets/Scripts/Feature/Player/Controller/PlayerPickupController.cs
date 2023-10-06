@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Linq;
 
 namespace Player.Controller
 {
@@ -17,8 +19,10 @@ namespace Player.Controller
         public LayerMask TargetMask;
         private bool isHoldingObject = false;
         private bool isPlayerNearGrid;
+        private bool isCheckingObjectInGrid = false;
         private GameObject heldObject; // Objek yang sedang dipegang
         private GameObject nearestPickable;
+        private IPickable pickable;
 
         [Header("Capsule")]
         public float capsuleHeight = 2f;
@@ -162,7 +166,6 @@ namespace Player.Controller
         }
         #endregion
 
-
         #region Callback Function
         private void OnPickUp(InputAction.CallbackContext context)
         {
@@ -280,23 +283,16 @@ namespace Player.Controller
             }
         }
 
+
         private void OnThrow(InputAction.CallbackContext context)
         {
             if (isHoldingObject && heldObject != null)
             {
-                Node nearestCell = FindNearestCellToPlayer();
-                if (nearestCell != null && !nearestCell.isPlaceable)
-                {
-                    // Jika sel sudah terisi, cari sel kosong terdekat
-                    nearestCell = FindNearestEmptyCell(nearestCell);
-                }
-                GameObject snapAreaObject = GameObject.Find("AreaCollider");
-
                 // Release the object from the player's transform
                 heldObject.transform.parent = null;
 
                 // Melepaskan objek setelah melempar
-                IPickable pickable = heldObject.GetComponent<IPickable>();
+                pickable = heldObject.GetComponent<IPickable>();
                 if (pickable != null)
                 {
                     // Debug log untuk memberi tahu bahwa objek dilempar
@@ -311,18 +307,69 @@ namespace Player.Controller
                     }
 
                     pickable.Throw();
+                    // Mulai coroutine untuk memeriksa apakah objek masuk ke dalam daftar CrateGrid selama 4 detik
+                    StartCoroutine(CheckObjectInCrateGridForSeconds(3f));
 
-                    // Mengatur kembali nilai-nilai isHoldingObject dan heldObject
                     isHoldingObject = false;
-                    heldObject = null;
-
-                    return;
+                 
                 }
             }
         }
-
-
         #endregion
+
+        private bool IsObjectInCrateGrid(GameObject obj)
+        {
+            return crateCombine != null && crateCombine.CrateGrid.Any(crate => crate == obj);
+        }
+
+        private IEnumerator CheckObjectInCrateGridForSeconds(float seconds)
+        {
+            isCheckingObjectInGrid = true;
+            float startTime = Time.time;
+            Node nearestCell = FindNearestCellToPlayer();
+            if (nearestCell != null && !nearestCell.isPlaceable)
+            {
+                // Jika sel sudah terisi, cari sel kosong terdekat
+                nearestCell = FindNearestEmptyCell(nearestCell);
+            }
+            GameObject snapAreaObject = GameObject.Find("AreaCollider");
+
+            while (Time.time - startTime < seconds)
+            {
+                if (pickable != null)
+                {
+                    // Cek apakah objek yang dilempar ada dalam daftar CrateGrid
+                    bool objectInCrateGrid = IsObjectInCrateGrid(heldObject);
+
+                    Debug.Log("Checking if " + heldObject.name + " is in CrateGrid. Result: " + objectInCrateGrid);
+
+                    if (objectInCrateGrid)
+                    {
+                        // Objek masuk ke dalam daftar CrateGrid, lakukan tindakan yang sesuai
+                        Debug.Log("Object entered CrateGrid: " + heldObject.name);
+                        // Menandai sel yang akan diisi sebagai terisi
+                        nearestCell.isPlaceable = false;
+                        // Jika jarak kurang dari snapToGridDistance, snap objek ke sel grid
+                        heldObject.transform.position = new Vector3(nearestCell.cellPosition.x, 3f, nearestCell.cellPosition.z);
+                        heldObject.transform.rotation = Quaternion.identity;
+
+                        // Mengambil referensi ke objek "AreaCollider" dalam hierarki
+                        pickable.Holder = snapAreaObject.transform;
+                        isCheckingObjectInGrid = false; // Hentikan pemeriksaan setelah objek masuk
+                        heldObject = null;
+                        yield break;
+                    }
+                }
+                else
+                {
+                    Debug.Log("heldobject ny nulll bye");
+                }
+
+                yield return null; // Tunggu frame selanjutnya
+            }
+            heldObject = null;
+            isCheckingObjectInGrid = false;
+        }
 
         private void OnDrawGizmos()
         {
