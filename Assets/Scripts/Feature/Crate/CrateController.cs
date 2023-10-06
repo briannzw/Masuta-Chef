@@ -6,9 +6,11 @@ public class CrateController : MonoBehaviour, IPickable
     private Transform holder;
     private Rigidbody rb;
     private int originalLayer;
+
     public Transform Holder
     {
         get { return holder; }
+        set { holder = value; }
     }
 
     public float ThrowForce

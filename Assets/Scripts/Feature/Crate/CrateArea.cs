@@ -113,7 +113,7 @@ public class CrateArea : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                Vector3 worldPosition = new Vector3(i * (cellSize + spacing), 0.51f, j * (cellSize + spacing));
+                Vector3 worldPosition = new Vector3(i * (cellSize + spacing) + (-0.57f) , 2.51f, j * (cellSize + spacing) + 19.4f);
                 Transform obj = Instantiate(GridCellPrefab, worldPosition, Quaternion.identity, transform);
                 obj.name = "Cell" + name;
 
@@ -129,6 +129,21 @@ public class CrateArea : MonoBehaviour
         }
     }
 
+    public void SnapCrateToCell(int x, int y)
+    {
+        if (x >= 0 && x < width && y >= 0 && y < height)
+        {
+            isCellOccupied[x, y] = true;
+        }
+    }
+    public bool IsCellOccupied(int x, int y)
+    {
+        if (x >= 0 && x < width && y >= 0 && y < height)
+        {
+            return isCellOccupied[x, y];
+        }
+        return false;
+    }
     public void AddFilledCells()
     {
         filledCellCount = filledCellCount + 1;
@@ -176,16 +191,3 @@ public class CrateArea : MonoBehaviour
     #endregion
 }
 
-public class Node
-{
-    public bool isPlaceable;
-    public Vector3 cellPosition;
-    public Transform obj;
-
-    public Node(bool isPlaceable, Vector3 cellPosition, Transform obj)
-    {
-        this.isPlaceable = isPlaceable;
-        this.cellPosition = cellPosition;
-        this.obj = obj;
-    }
-}

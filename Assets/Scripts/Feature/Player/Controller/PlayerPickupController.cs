@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Player.Controller
 {
+    using Area.Interactable;
     using Input;
     public class PlayerPickupController : PlayerInputControl
     {
@@ -24,11 +25,12 @@ namespace Player.Controller
         public float capsuleRadius = 1f;
         public Transform holdPosition;
 
-        private CrateArea crateArea;
+        private CrateCombine crateCombine;
 
         protected override void Start()
         {
-            crateArea = FindObjectOfType<CrateArea>();
+            crateCombine = FindObjectOfType<CrateCombine>();
+
             base.Start();
         }
 
@@ -83,20 +85,21 @@ namespace Player.Controller
 
         }
 
+        #region Find Nearest
         private Node FindNearestCellToPlayer()
         {
-            if (crateArea != null)
+            if (crateCombine != null)
             {
                 Node nearestCell = null;
                 float nearestDistance = float.MaxValue;
-                int gridWidth = crateArea.GetWidth();
-                int gridHeight = crateArea.GetHeight();
+                int gridWidth = crateCombine.GetWidth();
+                int gridHeight = crateCombine.GetHeight();
 
                 for (int i = 0; i < gridWidth; i++)
                 {
                     for (int j = 0; j < gridHeight; j++)
                     {
-                        Node cell = crateArea.GetNodeAt(i, j);
+                        Node cell = crateCombine.GetNodeAt(i, j);
                         if (cell != null)
                         {
                             float distance = Vector3.Distance(transform.position, cell.cellPosition);
@@ -128,7 +131,7 @@ namespace Player.Controller
                         int x = Mathf.RoundToInt(currentCell.cellPosition.x) + i;
                         int z = Mathf.RoundToInt(currentCell.cellPosition.z) + j;
 
-                        Node cell = crateArea.GetNodeAt(x, z);
+                        Node cell = crateCombine.GetNodeAt(x, z);
                         if (cell != null && cell.isPlaceable)
                         {
                             return cell; // Mengembalikan sel kosong terdekat yang ditemukan
@@ -139,6 +142,8 @@ namespace Player.Controller
 
             return null; // Tidak ada sel kosong yang ditemukan dalam jarak tertentu
         }
+
+        #endregion
 
         #region Callback
         protected override void RegisterInputCallbacks()
@@ -161,8 +166,11 @@ namespace Player.Controller
         #region Callback Function
         private void OnPickUp(InputAction.CallbackContext context)
         {
+            GameObject snapAreaObject = GameObject.Find("AreaCollider");
+
             if (!isHoldingObject && heldObject == null)
             {
+
                 // Jika tidak memegang objek, coba mengambil objek terdekat
                 if (nearestPickable != null)
                 {
@@ -170,7 +178,24 @@ namespace Player.Controller
                     IPickable pickable = nearestPickable.GetComponent<IPickable>();
 
                     if (pickable != null)
-                    {        
+                    {
+                        if (pickable.Holder != null && pickable.Holder.name == "AreaCollider")
+                        {
+                            // Lakukan sesuatu jika Holder adalah "AreaCollider"
+                            Debug.Log("Holder adalah AreaCollider");
+                            // Hapus objek dari CrateGrid di CrateCombine
+                            if (crateCombine != null)
+                            {
+                                // Hapus objek yang diambil dari CrateGrid
+                                crateCombine.RemoveFromCrateGrid(nearestPickable);
+                                Node nearestCell = FindNearestCellToPlayer();
+                                nearestCell.isPlaceable = true;
+
+                                Debug.Log("Yey remooovee");
+                            }
+                            else { Debug.Log("null nih bosque"); }
+                        }
+
                         // Memulai pengambilan objek
                         pickable.StartPickup(gameObject);
 
@@ -194,9 +219,9 @@ namespace Player.Controller
                 if (context.performed)
                 {
                     // Panggil fungsi DetectPlayerNearGrid dari CombineCrate untuk memeriksa apakah pemain dekat dengan grid
-                    if (crateArea != null)
+                    if (crateCombine != null)
                     {
-                        isPlayerNearGrid = crateArea.IsPlayerNearGrid();
+                        isPlayerNearGrid = crateCombine.IsPlayerNearGrid();
                     }
 
                     Node nearestCell = FindNearestCellToPlayer();
@@ -224,16 +249,16 @@ namespace Player.Controller
                             if (nearestCell != null)
                             {
                                 // Periksa jarak dari objek ke sel grid terdekat
-                                float distanceToGrid = Vector3.Distance(heldObject.transform.position, nearestCell.cellPosition);
-
-                                if (distanceToGrid < 3f)
+                                if (isPlayerNearGrid)
                                 {
                                     // Menandai sel yang akan diisi sebagai terisi
                                     nearestCell.isPlaceable = false;
-                                    crateArea.AddFilledCells();
                                     // Jika jarak kurang dari snapToGridDistance, snap objek ke sel grid
-                                    heldObject.transform.position = new Vector3(nearestCell.cellPosition.x, 1f, nearestCell.cellPosition.z);
+                                    heldObject.transform.position = new Vector3(nearestCell.cellPosition.x, 3f, nearestCell.cellPosition.z);
                                     heldObject.transform.rotation = Quaternion.identity;
+
+                                    // Mengambil referensi ke objek "AreaCollider" dalam hierarki
+                                    pickable.Holder = snapAreaObject.transform;
                                 }
                             }
                             else
@@ -259,6 +284,14 @@ namespace Player.Controller
         {
             if (isHoldingObject && heldObject != null)
             {
+                Node nearestCell = FindNearestCellToPlayer();
+                if (nearestCell != null && !nearestCell.isPlaceable)
+                {
+                    // Jika sel sudah terisi, cari sel kosong terdekat
+                    nearestCell = FindNearestEmptyCell(nearestCell);
+                }
+                GameObject snapAreaObject = GameObject.Find("AreaCollider");
+
                 // Release the object from the player's transform
                 heldObject.transform.parent = null;
 

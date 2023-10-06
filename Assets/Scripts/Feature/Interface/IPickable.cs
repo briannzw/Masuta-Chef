@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IPickable
 {
-    Transform Holder { get; } 
+    Transform Holder { get; set; } 
 
     float ThrowForce { get; }
 
