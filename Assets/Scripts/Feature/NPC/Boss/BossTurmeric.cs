@@ -48,10 +48,10 @@ public class BossTurmeric : MonoBehaviour
 
             for (int i = 0; i < numberOfExplosions; i++)
             {
-                Vector3 randomExplosionPosition = transform.position + Random.onUnitSphere * swampRadius;
+                Vector3 randomExplosionPosition = Random.insideUnitSphere * swampRadius;
                 
                 NavMeshHit hit;
-                NavMesh.SamplePosition(transform.position + randomExplosionPosition, out hit, swampRadius, NavMesh.AllAreas);
+                NavMesh.SamplePosition(transform.position + randomExplosionPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
                 randomExplosionPosition.y = 0.5f;
                 randomExplosionPosition = hit.position;
                 GameObject explosion = Instantiate(explosionPrefab, randomExplosionPosition, Quaternion.identity);
