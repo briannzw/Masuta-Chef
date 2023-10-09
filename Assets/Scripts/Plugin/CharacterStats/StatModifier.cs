@@ -9,8 +9,8 @@ namespace Kryz.CharacterStats
 
 	public class StatModifier
 	{
-		public readonly float Value;
-		public readonly StatModType Type;
+		public float Value;
+		public StatModType Type;
 		public readonly int Order;
 		public readonly object Source;
 

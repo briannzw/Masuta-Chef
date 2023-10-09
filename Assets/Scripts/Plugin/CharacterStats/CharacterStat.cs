@@ -41,7 +41,7 @@ namespace Kryz.CharacterStats
 		public virtual void AddModifier(StatModifier mod)
 		{
 			isDirty = true;
-			statModifiers.Add(mod);
+            statModifiers.Add(mod);
 		}
 
 		public virtual bool RemoveModifier(StatModifier mod)
@@ -49,7 +49,7 @@ namespace Kryz.CharacterStats
 			if (statModifiers.Remove(mod))
 			{
 				isDirty = true;
-				return true;
+                return true;
 			}
 			return false;
 		}
@@ -61,7 +61,7 @@ namespace Kryz.CharacterStats
 			if (numRemovals > 0)
 			{
 				isDirty = true;
-				return true;
+                return true;
 			}
 			return false;
 		}
