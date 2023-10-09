@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Loot
 {
-    public enum LootType { Recipe, Weapon }
+    public enum LootType { Recipe, Weapon, Medkit, Ingredients }
 
     [Serializable]
     public abstract class Loot
