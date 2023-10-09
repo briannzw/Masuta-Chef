@@ -7,6 +7,7 @@ public class Enemy : NPC
     public bool IsTaunted = false;
     private float currentTauntTimer;
     [SerializeField] private float maxTauntTimer = 0.1f;
+    [SerializeField] float rotationSpeed = 5.0f;
     private new void Awake()
     {
         base.Awake();
@@ -18,6 +19,7 @@ public class Enemy : NPC
     {
         //Debug.Log("Is Taunted: " + IsTaunted);
         base.Update();
+        RotateToTarget(rotationSpeed);
         currentTauntTimer -= Time.deltaTime;
         if (!IsTaunted)
         {
@@ -45,5 +47,17 @@ public class Enemy : NPC
         IsTaunted = false;
         Agent.isStopped = false;
         currentTauntTimer = maxTauntTimer;
+    }
+
+    protected void RotateToTarget(float rotationSpeed)
+    {
+        // Calculate the direction from this GameObject to the target
+        Vector3 direction = TargetPosition - transform.position;
+
+        // Create a rotation that looks in the calculated direction
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        // Rotate towards the target rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }

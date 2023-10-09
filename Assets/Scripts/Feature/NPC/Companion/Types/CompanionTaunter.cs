@@ -91,8 +91,6 @@ public class CompanionTaunter : Companion
             }
         }
 
-        Debug.Log(closestEnemies.Count);
-
         // Set taunt properties for the closest enemies
         foreach (Transform enemy in closestEnemies)
         {
