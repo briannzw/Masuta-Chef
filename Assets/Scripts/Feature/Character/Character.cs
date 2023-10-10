@@ -28,12 +28,12 @@ namespace Character
 
         public Character(StatsPreset preset)
         {
-            Stats = preset.Stats;
+            Stats = new Stats(preset.Stats);
         }
 
         private void Awake()
         {
-            if(StatsPreset != null) Stats = StatsPreset.Stats;
+            if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
         }
