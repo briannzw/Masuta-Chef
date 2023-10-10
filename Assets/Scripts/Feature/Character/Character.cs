@@ -51,6 +51,8 @@ namespace Character
             Stat.ChangeCurrentValue(statMod);
 
             if (Stat.CurrentValue <= 0 && dynamicEnum == StatsEnum.Health) OnDie?.Invoke();
+
+            Debug.Log((Stats.StatList[dynamicEnum] as CharacterDynamicStat).CurrentValue);
         }
 
         public void TakeHeal(float healAmount, StatsEnum dynamicEnum, float multiplier = 1)

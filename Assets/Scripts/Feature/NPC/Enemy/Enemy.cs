@@ -19,7 +19,6 @@ public class Enemy : NPC
     {
         //Debug.Log("Is Taunted: " + IsTaunted);
         base.Update();
-        RotateToTarget(rotationSpeed);
         currentTauntTimer -= Time.deltaTime;
         if (!IsTaunted)
         {
@@ -30,6 +29,7 @@ public class Enemy : NPC
         if (Agent.remainingDistance <= StopDistance)
         {
             Agent.isStopped = true;
+            RotateToTarget(rotationSpeed);
         }
         else
         {
@@ -53,6 +53,7 @@ public class Enemy : NPC
     {
         // Calculate the direction from this GameObject to the target
         Vector3 direction = TargetPosition - transform.position;
+        direction.y = 0;
 
         // Create a rotation that looks in the calculated direction
         Quaternion targetRotation = Quaternion.LookRotation(direction);
