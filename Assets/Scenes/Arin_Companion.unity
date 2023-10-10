@@ -1636,7 +1636,8 @@ PrefabInstance:
         type: 3}
       propertyPath: StatsPreset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 134563626cd63364480532904e4863ee,
+        type: 2}
     - target: {fileID: 863474709318824485, guid: ddf4fe37e33f98c4fb2af302797decee,
         type: 3}
       propertyPath: Stats.StatList._serializedList.Array.data[0].Value.BaseValue
@@ -3037,10 +3038,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6634725989155680599, guid: ddf4fe37e33f98c4fb2af302797decee, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3567144789649554938, guid: ddf4fe37e33f98c4fb2af302797decee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1590466693}
   m_SourcePrefab: {fileID: 100100000, guid: ddf4fe37e33f98c4fb2af302797decee, type: 3}
 --- !u!43 &396052822
 Mesh:
@@ -27541,6 +27547,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1590466687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3567144789649554938, guid: ddf4fe37e33f98c4fb2af302797decee,
+    type: 3}
+  m_PrefabInstance: {fileID: 380373570}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1590466693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590466687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da51be4a55b754b41b831d50903e3f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1605443415
 Mesh:
   m_ObjectHideFlags: 0
@@ -28986,7 +29010,8 @@ PrefabInstance:
         type: 3}
       propertyPath: StatsPreset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 134563626cd63364480532904e4863ee,
+        type: 2}
     - target: {fileID: 863474709318824485, guid: ddf4fe37e33f98c4fb2af302797decee,
         type: 3}
       propertyPath: Stats.StatList._serializedList.Array.data[0].Value.BaseValue
@@ -35224,7 +35249,8 @@ PrefabInstance:
         type: 3}
       propertyPath: StatsPreset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: b192eaa1c88b7104fb97606f6b350aeb,
+        type: 2}
     - target: {fileID: 4768947446379554580, guid: 6524ca34e7ee17b419ee263c59218b65,
         type: 3}
       propertyPath: Stats.StatList._serializedList.Array.data[0].Value.BaseValue

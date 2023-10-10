@@ -103,8 +103,8 @@ GameObject:
   - component: {fileID: 3177818799873198574}
   - component: {fileID: 9146126078078587039}
   - component: {fileID: -3339235332238347523}
-  - component: {fileID: 863474709318824485}
   - component: {fileID: 2323804213126964297}
+  - component: {fileID: 4858773088647684687}
   m_Layer: 8
   m_Name: Enemy Ranged
   m_TagString: Enemy
@@ -245,7 +245,34 @@ MonoBehaviour:
   IsTaunted: 0
   maxTauntTimer: 0.1
   rotationSpeed: 5
---- !u!114 &863474709318824485
+--- !u!54 &2323804213126964297
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2609905847538178790}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &4858773088647684687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,33 +309,6 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
---- !u!54 &2323804213126964297
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2609905847538178790}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &3362469876523438622
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 916502925245096781}
   - component: {fileID: 6383528804023539058}
   - component: {fileID: 8479227706945756191}
-  - component: {fileID: 6634725989155680599}
+  - component: {fileID: 6530950896379661585}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6634725989155680599
+--- !u!114 &6530950896379661585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
