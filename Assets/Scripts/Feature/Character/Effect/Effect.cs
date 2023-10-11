@@ -8,6 +8,11 @@ namespace Character.StatEffect
     using MyBox;
 
     public enum EffectBehaviour { Instant, Duration }
+    public class EffectTimer
+    {
+        public float Timer;
+        public float IntervalTimer;
+    }
 
     [System.Serializable]
     public class Effect
@@ -28,13 +33,9 @@ namespace Character.StatEffect
         public StatusEffects StatusEffect;
 
         [Space]
-        [ReadOnly, ConditionalField(nameof(Behaviour), false, EffectBehaviour.Duration)] public float Timer = 0f;
         [ConditionalField(nameof(Behaviour), false, EffectBehaviour.Duration)] public float Duration;
         [ConditionalField(nameof(Behaviour), false, EffectBehaviour.Duration)] public bool UseInterval;
-        [ConditionalField(new []{ nameof(Behaviour), nameof(UseInterval) }, new[] { false, false }, EffectBehaviour.Duration)][ReadOnly] public float IntervalTimer = 0f;
         [ConditionalField(new []{ nameof(Behaviour), nameof(UseInterval) }, new[] { false, false }, EffectBehaviour.Duration)] public float Interval;
-
-        public bool DurationEnds => Timer >= Duration;
 
         public void Initialize()
         {

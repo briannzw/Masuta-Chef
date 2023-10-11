@@ -7,7 +7,7 @@ namespace Character.Hit
     using StatEffect;
     public class AOEController : HitController
     {
-        public float AreaDuration;
+        public float AreaDuration = 10;
         public AOEBehaviour Behaviour;
 
         // ApplyOnStay

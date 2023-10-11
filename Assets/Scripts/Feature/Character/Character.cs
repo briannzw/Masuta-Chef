@@ -23,6 +23,7 @@ namespace Character
         [Header("Effect")]
         protected List<Effect> CurrentStatusEffects;
         protected Dictionary<Effect, Coroutine> StatusEffectCoroutines;
+        protected Dictionary<Effect, EffectTimer> DurationEffectInternalTimer;
 
         public Action OnDie;
 
@@ -36,6 +37,7 @@ namespace Character
             if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
+            DurationEffectInternalTimer = new Dictionary<Effect, EffectTimer>();
         }
 
         public virtual void TakeDamage(float damageAmount, StatsEnum dynamicEnum, float multiplier = 1)
@@ -70,7 +72,15 @@ namespace Character
             CurrentStatusEffects.Add(effect);
             if(effect.Behaviour == EffectBehaviour.Duration)
             {
-                if (effect.DurationEnds) return;
+                if (DurationEffectInternalTimer.ContainsKey(effect))
+                {
+                    if (DurationEffectInternalTimer[effect].Timer > effect.Duration) return;
+                }
+                else
+                {
+                    if(effect.UseInterval) TakeEffect(effect);
+                    DurationEffectInternalTimer.Add(effect, new EffectTimer());
+                }
                 
                 StatusEffectCoroutines.Add(effect, StartCoroutine(ApplyEffect(effect)));
                 return;
@@ -93,7 +103,11 @@ namespace Character
         {
             if (CurrentStatusEffects.Remove(effect))
             {
-                if (effect.Behaviour == EffectBehaviour.Duration) PauseEffect(effect);
+                if (effect.Behaviour == EffectBehaviour.Duration)
+                {
+                    PauseEffect(effect);
+                    DurationEffectInternalTimer.Remove(effect);
+                }
                 Stats.StatList[effect.StatsAffected].RemoveAllModifiersFromSource(effect);
                 return;
             }
@@ -120,29 +134,29 @@ namespace Character
         private IEnumerator ApplyEffect(Effect effect)
         {
             // Apply on time 0
-            TakeEffect(effect);
+            if(!effect.UseInterval) TakeEffect(effect);
 
             // While there's still duration left
-            while (!effect.DurationEnds)
+            while (DurationEffectInternalTimer[effect].Timer < effect.Duration)
             {
-                effect.Timer += Time.deltaTime;
+                DurationEffectInternalTimer[effect].Timer += Time.deltaTime;
                 if (!effect.UseInterval)
                 {
                     yield return null;
                     continue;
                 }
 
-                effect.IntervalTimer += Time.deltaTime;
-                if (effect.IntervalTimer > effect.Interval)
+                DurationEffectInternalTimer[effect].IntervalTimer += Time.deltaTime;
+                if (DurationEffectInternalTimer[effect].IntervalTimer > effect.Interval)
                 {
-                    effect.IntervalTimer = 0f;
+                    DurationEffectInternalTimer[effect].IntervalTimer = 0f;
                     TakeEffect(effect);
                 }
                 yield return null;
             }
 
             // If duration ends
-            RemoveEffect(effect);
+            PauseEffect(effect);
         }
 
         private void TakeEffect(Effect effect)
