@@ -42,9 +42,10 @@ namespace Spawner
 
                 Vector3 position = RandomSpawnPosition(transform, spawnOffset, spawnArea);
                 Quaternion rotation = (randomizeRotation) ? Random.rotation : Quaternion.identity;
+                rotation.x = 0f; rotation.z = 0f;
 
                 GameObject go = poolManager.Pools[spawnPrefab].Get();
-                go.transform.position = position + spawnOffset;
+                go.transform.position = position;
                 go.transform.rotation = rotation;
                 go.GetComponent<SpawnObject>().Spawner = this;
             }
