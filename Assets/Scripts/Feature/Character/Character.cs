@@ -9,6 +9,7 @@ namespace Character
     using MyBox;
     using Stat;
     using StatEffect;
+    using Random = UnityEngine.Random;
 
     public class Character : MonoBehaviour
     {
@@ -69,6 +70,7 @@ namespace Character
 
         public void AddEffect(Effect effect)
         {
+            if ((effect.StatusEffect == StatusEffects.Debuff || effect.StatusEffect == StatusEffects.Burn) && CheckResistance()) return;
             CurrentStatusEffects.Add(effect);
             if(effect.Behaviour == EffectBehaviour.Duration)
             {
@@ -165,6 +167,11 @@ namespace Character
             else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, effect.StatsAffected, 1);
             else
                 Stats.StatList[effect.StatsAffected].AddModifier(effect.Modifier);
+        }
+
+        private bool CheckResistance()
+        {
+            return Stats.StatList[StatsEnum.Resistance].Value >= Random.Range(1, 101);
         }
     }
 }
