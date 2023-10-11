@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Spawner
 {
-    public abstract class SpawnObject : MonoBehaviour
+    public class SpawnObject : MonoBehaviour
     {
         public Spawner Spawner;
         public virtual void Release()
