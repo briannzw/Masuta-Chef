@@ -19,7 +19,6 @@ public class BossTurmeric : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -49,7 +48,7 @@ public class BossTurmeric : MonoBehaviour
             for (int i = 0; i < numberOfExplosions; i++)
             {
                 Vector3 randomExplosionPosition = Random.insideUnitSphere * swampRadius;
-                
+
                 NavMeshHit hit;
                 NavMesh.SamplePosition(transform.position + randomExplosionPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
                 randomExplosionPosition.y = 0.5f;

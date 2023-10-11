@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22090c3525153a646b1d3ba0cedb9219, type: 3}
-  m_Name: Minion
+  m_Name: Companion Taunter
   m_EditorClassIdentifier: 
   Stats:
     StatList:
       _serializedList:
       - Key: 0
         Value:
-          BaseValue: 20000
+          BaseValue: 2000
       - Key: 2
         Value:
-          BaseValue: 300
+          BaseValue: 100
       - Key: 3
         Value:
           BaseValue: 50
@@ -29,7 +29,7 @@ MonoBehaviour:
           BaseValue: 70
       - Key: 5
         Value:
-          BaseValue: 10
+          BaseValue: 50
       - Key: 6
         Value:
           BaseValue: 1
