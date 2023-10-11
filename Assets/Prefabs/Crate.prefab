@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4150318748693437144}
   - component: {fileID: 1243679347371465655}
   - component: {fileID: 5754620734434685907}
+  - component: {fileID: 1306469154919621162}
   m_Layer: 6
   m_Name: Crate
   m_TagString: crate
@@ -133,3 +134,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1306469154919621162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4423516174392846161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09ac02bc8c4c824cad79bf0ff383ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crateColor: 0
+  redMaterial: {fileID: 2100000, guid: 007d0012c20ea9748a5551caeb458a5a, type: 2}
+  blueMaterial: {fileID: 2100000, guid: f875e27ce12b4ba44a946254543f9b20, type: 2}
+  greenMaterial: {fileID: 2100000, guid: df5742ae52c56d44aa8d2c7eac621cb7, type: 2}
+  crateRenderer: {fileID: 0}
+  throwForce: 10

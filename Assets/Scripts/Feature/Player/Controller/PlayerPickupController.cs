@@ -29,11 +29,11 @@ namespace Player.Controller
         public float capsuleRadius = 1f;
         public Transform holdPosition;
 
-        private CrateCombine crateCombine;
+        private CrateArea crateArea;
 
         protected override void Start()
         {
-            crateCombine = FindObjectOfType<CrateCombine>();
+            crateArea = FindObjectOfType<CrateArea>();
 
             base.Start();
         }
@@ -92,18 +92,18 @@ namespace Player.Controller
         #region Find Nearest
         private Node FindNearestCellToPlayer()
         {
-            if (crateCombine != null)
+            if (crateArea != null)
             {
                 Node nearestCell = null;
                 float nearestDistance = float.MaxValue;
-                int gridWidth = crateCombine.GetWidth();
-                int gridHeight = crateCombine.GetHeight();
+                int gridWidth = crateArea.GetWidth();
+                int gridHeight = crateArea.GetHeight();
 
                 for (int i = 0; i < gridWidth; i++)
                 {
                     for (int j = 0; j < gridHeight; j++)
                     {
-                        Node cell = crateCombine.GetNodeAt(i, j);
+                        Node cell = crateArea.GetNodeAt(i, j);
                         if (cell != null)
                         {
                             float distance = Vector3.Distance(transform.position, cell.cellPosition);
@@ -135,7 +135,7 @@ namespace Player.Controller
                         int x = Mathf.RoundToInt(currentCell.cellPosition.x) + i;
                         int z = Mathf.RoundToInt(currentCell.cellPosition.z) + j;
 
-                        Node cell = crateCombine.GetNodeAt(x, z);
+                        Node cell = crateArea.GetNodeAt(x, z);
                         if (cell != null && cell.isPlaceable)
                         {
                             return cell; // Mengembalikan sel kosong terdekat yang ditemukan
@@ -186,11 +186,11 @@ namespace Player.Controller
                         {
                             // Lakukan sesuatu jika Holder adalah "AreaCollider"
                             Debug.Log("Holder adalah AreaCollider");
-                            // Hapus objek dari CrateGrid di CrateCombine
-                            if (crateCombine != null)
+                            // Hapus objek dari CrateGrid di crateArea
+                            if (crateArea != null)
                             {
                                 // Hapus objek yang diambil dari CrateGrid
-                                crateCombine.RemoveFromCrateGrid(nearestPickable);
+                                crateArea.RemoveFromCrateGrid(nearestPickable);
                                 Node nearestCell = FindNearestCellToPlayer();
                                 nearestCell.isPlaceable = true;
 
@@ -222,9 +222,9 @@ namespace Player.Controller
                 if (context.performed)
                 {
                     // Panggil fungsi DetectPlayerNearGrid dari CombineCrate untuk memeriksa apakah pemain dekat dengan grid
-                    if (crateCombine != null)
+                    if (crateArea != null)
                     {
-                        isPlayerNearGrid = crateCombine.IsPlayerNearGrid();
+                        isPlayerNearGrid = crateArea.IsPlayerNearGrid();
                     }
 
                     Node nearestCell = FindNearestCellToPlayer();
@@ -319,7 +319,7 @@ namespace Player.Controller
 
         private bool IsObjectInCrateGrid(GameObject obj)
         {
-            return crateCombine != null && crateCombine.CrateGrid.Any(crate => crate == obj);
+            return crateArea != null && crateArea.CrateGrid.Any(crate => crate == obj);
         }
 
         private IEnumerator CheckObjectInCrateGridForSeconds(float seconds)

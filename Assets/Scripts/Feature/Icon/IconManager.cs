@@ -9,7 +9,11 @@ public class IconManager : MonoBehaviour
     public GameObject iconItem;
     public GameObject iconMedkit;
     public GameObject iconWeapon;
+    public GameObject iconWeapon2;
+    public GameObject iconWeapon3;
     public GameObject iconCompanion;
+    public GameObject iconCompanion2;
+    public GameObject iconCompanion3;
 
     private void Start()
     {
@@ -23,6 +27,10 @@ public class IconManager : MonoBehaviour
         iconItem.SetActive(false);
         iconMedkit.SetActive(false);
         iconWeapon.SetActive(false);
+        iconWeapon2.SetActive(false);
+        iconWeapon3.SetActive(false);
         iconCompanion.SetActive(false);
+        iconCompanion2.SetActive(false);
+        iconCompanion3.SetActive(false);
     }
 }

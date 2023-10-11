@@ -18,6 +18,9 @@ public class CrateController : MonoBehaviour, IPickable
         get { return throwForce; }
     }
 
+    public enum CrateColor { Red, Blue, Green };
+    public CrateColor crateColor;
+
     [SerializeField] private float throwForce = 15f;
     public bool IsHeld { get { return isHeld; } }
 
@@ -25,6 +28,23 @@ public class CrateController : MonoBehaviour, IPickable
     {
         rb = GetComponent<Rigidbody>();
         originalLayer = gameObject.layer; // Menyimpan layer asli saat inisialisasi
+
+        // Mengatur warna krate sesuai dengan enum CrateColor
+        switch (crateColor)
+        {
+            case CrateColor.Red:
+                GetComponent<Renderer>().material.color = Color.red;
+                break;
+            case CrateColor.Blue:
+                GetComponent<Renderer>().material.color = Color.blue;
+                break;
+            case CrateColor.Green:
+                GetComponent<Renderer>().material.color = Color.green;
+                break;
+            default:
+                GetComponent<Renderer>().material.color = Color.white; // Warna default jika enum tidak sesuai
+                break;
+        }
     }
 
     public void StartPickup(GameObject picker)
