@@ -21,11 +21,12 @@ namespace Area.Interactable
         private bool wasPlayerNearGrid = false; // Flag untuk menyimpan status sebelumnya
 
         private IconManager iconManager;
+        LootSpawnManager lootSpawnManager;
 
         protected override void Start()
         {
             iconManager = FindObjectOfType<IconManager>();
-
+            lootSpawnManager = FindObjectOfType<LootSpawnManager>();
             base.Start();
             CreateGrid();
         }
@@ -209,7 +210,9 @@ namespace Area.Interactable
                     {
                         iconManager.iconWeapon2.SetActive(true);
                     }
-                }              
+                }
+                // Spawn weaponLootPrefab dekat pemain
+                lootSpawnManager.SpawnWeaponLootNearPlayer();
             }
             if (crateCount == 4)
             {
