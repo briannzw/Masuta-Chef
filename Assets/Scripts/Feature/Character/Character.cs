@@ -14,7 +14,7 @@ namespace Character
     {
         [Header("Stats")]
         public StatsPreset StatsPreset;
-        [ConditionalField(nameof(StatsPreset), inverse:true)] public Stats Stats;
+        [ConditionalField(nameof(StatsPreset), inverse: true)] public Stats Stats;
 
         [Header("Weapon")]
         //public Weapon Weapon;

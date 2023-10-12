@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Character.Stat
 {
     using Kryz.CharacterStats;
+    using static UnityEngine.Rendering.DebugUI;
 
     [Serializable]
     public class CharacterDynamicStat : CharacterStat

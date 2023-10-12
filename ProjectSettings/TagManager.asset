@@ -7,17 +7,20 @@ TagManager:
   - Companion
   - Enemy
   - Crate
+  - AreaCollider
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - heldCrate
   - Water
   - UI
   - 
   - Companion
   - Enemy
   - Player
+  - Crate
+  - Interactable
   - 
   - 
   - 
