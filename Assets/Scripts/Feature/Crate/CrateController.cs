@@ -52,7 +52,7 @@ public class CrateController : MonoBehaviour, IPickable
         // Memindahkan objek ke pemegang (picker)
         holder = picker.transform;
         rb.isKinematic = true;
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        //rb.interpolation = RigidbodyInterpolation.Interpolate;
         isHeld = true;
 
         // Set lapisan menjadi "heldCrate" saat dipegang
