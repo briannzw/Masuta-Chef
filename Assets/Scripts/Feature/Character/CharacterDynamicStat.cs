@@ -30,13 +30,13 @@ namespace Character.Stat
 
         public void ChangeCurrentValue(StatModifier mod)
         {
-            float finalValue = Mathf.Clamp(_currentValue, 0, Value);
+            float finalValue = Mathf.Clamp(_currentValue, 0 , Value);
 
             if (mod.Type == StatModType.Flat)
             {
                 finalValue += mod.Value;
             }
-            else if (mod.Type == StatModType.PercentAdd || mod.Type == StatModType.PercentMult)
+            else if (mod.Type == StatModType.PercentAdd ||mod.Type == StatModType.PercentMult)
             {
                 finalValue *= 1 + mod.Value;
             }

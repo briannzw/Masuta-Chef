@@ -5,7 +5,7 @@ namespace Player.Controller
 {
     using Input;
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : PlayerInputControl
+    public class PlayerMovementController : PlayerInputControl
     {
         [Header("References")]
         public Animator Animator;
