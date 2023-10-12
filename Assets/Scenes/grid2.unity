@@ -207,10 +207,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6abccc48efdcc42985d9a087a3b92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponLootPrefab: {fileID: 2863944105375727532, guid: c7b0d2b6d1c468748a59bba8997df4ce,
-    type: 3}
+  IngredientLootPrefab: {fileID: 0}
+  MedkitLootPrefab: {fileID: 0}
+  weapon1LootPrefab: {fileID: 0}
+  weapon2LootPrefab: {fileID: 0}
+  weapon3LootPrefab: {fileID: 0}
+  Companion1LootPrefab: {fileID: 0}
+  Companion2LootPrefab: {fileID: 0}
+  Companion3LootPrefab: {fileID: 0}
   playerTransform: {fileID: 520930832}
   spawnDistance: 2
+  LootObject: 
+  minimumDistanceToPlayer: 2
 --- !u!1 &9315286
 GameObject:
   m_ObjectHideFlags: 0
@@ -6691,7 +6699,7 @@ PrefabInstance:
     - target: {fileID: 1306469154919621162, guid: bdf60b689a12d8140b8eccf2e45be70a,
         type: 3}
       propertyPath: crateColor
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4118285260937141486, guid: bdf60b689a12d8140b8eccf2e45be70a,
         type: 3}
@@ -7474,7 +7482,7 @@ PrefabInstance:
     - target: {fileID: 1306469154919621162, guid: bdf60b689a12d8140b8eccf2e45be70a,
         type: 3}
       propertyPath: crateColor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4118285260937141486, guid: bdf60b689a12d8140b8eccf2e45be70a,
         type: 3}
@@ -19778,7 +19786,7 @@ PrefabInstance:
     - target: {fileID: 4118285260937141486, guid: bdf60b689a12d8140b8eccf2e45be70a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.23
+      value: 23.15
       objectReference: {fileID: 0}
     - target: {fileID: 4118285260937141486, guid: bdf60b689a12d8140b8eccf2e45be70a,
         type: 3}

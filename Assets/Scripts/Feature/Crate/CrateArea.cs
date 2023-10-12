@@ -187,16 +187,19 @@ namespace Area.Interactable
             if (crateCount == 1)
             {
                 iconManager.iconItem.SetActive(true);
+                lootSpawnManager.LootObject = "Ingredient";
             }
             if (crateCount == 2)
             {
                 iconManager.iconMedkit.SetActive(true);
+                lootSpawnManager.LootObject = "Medkit";
             }
             if (crateCount == 3)
             {
                 if (redCount == crateCount)
                 {
                     iconManager.iconWeapon.SetActive(true);
+                    lootSpawnManager.LootObject = "Weapon1";
                 }
                 else if (greenCount > 0 || blueCount > 0)
                 {
@@ -204,21 +207,22 @@ namespace Area.Interactable
                     int randomValue = Random.Range(0, 2); // Menghasilkan 0 atau 1 secara acak
                     if (randomValue == 0)
                     {
-                        iconManager.iconWeapon3.SetActive(true);
+                        iconManager.iconWeapon2.SetActive(true);
+                        lootSpawnManager.LootObject = "Weapon2";
                     }
                     else
                     {
-                        iconManager.iconWeapon2.SetActive(true);
+                        iconManager.iconWeapon3.SetActive(true);
+                        lootSpawnManager.LootObject = "Weapon3";
                     }
                 }
-                // Spawn weaponLootPrefab dekat pemain
-                lootSpawnManager.SpawnWeaponLootNearPlayer();
             }
             if (crateCount == 4)
             {
                 if (redCount == crateCount)
                 {
                     iconManager.iconCompanion.SetActive(true);
+                    lootSpawnManager.LootObject = "Companion1";
                 }
                 else if (greenCount > 0 || blueCount > 0)
                 {
@@ -226,14 +230,20 @@ namespace Area.Interactable
                     int randomValue = Random.Range(0, 2); // Menghasilkan 0 atau 1 secara acak
                     if (randomValue == 0)
                     {
-                        iconManager.iconCompanion3.SetActive(true);
+                        iconManager.iconCompanion2.SetActive(true);
+                        lootSpawnManager.LootObject = "Companion2";
                     }
                     else
                     {
-                        iconManager.iconCompanion2.SetActive(true);
+                        iconManager.iconCompanion3.SetActive(true);
+                        lootSpawnManager.LootObject = "Companion3";
                     }
                 }
             }
+
+            // SpawnLootPrefab dekat pemain
+            lootSpawnManager.SpawnLootNearPlayer();
+
             // Hapus semua objek dalam CrateGrid sebelum membersihkan list
             foreach (var crate in CrateGrid)
             {

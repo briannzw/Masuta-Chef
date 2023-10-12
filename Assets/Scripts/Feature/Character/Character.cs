@@ -12,7 +12,7 @@ namespace Character
     {
         [Header("Stats")]
         public StatsPreset StatsPreset;
-        [ConditionalField(nameof(StatsPreset), inverse:true)] public Stats Stats;
+        [ConditionalField(nameof(StatsPreset), inverse: true)] public Stats Stats;
 
         [Header("Weapon")]
         //public Weapon Weapon;
@@ -31,7 +31,9 @@ namespace Character
 
         private void Awake()
         {
-            if(StatsPreset != null) Stats = StatsPreset.Stats;
+            if (StatsPreset != null) Stats = StatsPreset.Stats;
+            CurrentStatusEffects = new List<Effect>();
+            StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
         }
     }
 }
