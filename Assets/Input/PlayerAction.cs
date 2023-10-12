@@ -118,9 +118,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Combine"",
+                    ""name"": ""Throw_High"",
                     ""type"": ""Button"",
-                    ""id"": ""5fd921c3-f94b-43a5-8dc6-395889856633"",
+                    ""id"": ""4e7a4cb6-eecf-4c42-a554-2a66a518f42b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -416,12 +416,12 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""39bf2489-8d29-439d-b832-29bf43cdd79f"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""c0237570-1c7c-40e4-bfc7-6d45ba36eae5"",
+                    ""path"": ""<Keyboard>/h"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Combine"",
+                    ""action"": ""Throw_High"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -815,7 +815,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_Throw = m_Gameplay.FindAction("Throw", throwIfNotFound: true);
-        m_Gameplay_Combine = m_Gameplay.FindAction("Combine", throwIfNotFound: true);
+        m_Gameplay_Throw_High = m_Gameplay.FindAction("Throw_High", throwIfNotFound: true);
         // Panel
         m_Panel = asset.FindActionMap("Panel", throwIfNotFound: true);
         m_Panel_Navigate = m_Panel.FindAction("Navigate", throwIfNotFound: true);
@@ -897,7 +897,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_Throw;
-    private readonly InputAction m_Gameplay_Combine;
+    private readonly InputAction m_Gameplay_Throw_High;
     public struct GameplayActions
     {
         private @PlayerAction m_Wrapper;
@@ -912,7 +912,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @Throw => m_Wrapper.m_Gameplay_Throw;
-        public InputAction @Combine => m_Wrapper.m_Gameplay_Combine;
+        public InputAction @Throw_High => m_Wrapper.m_Gameplay_Throw_High;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -952,9 +952,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Throw.started += instance.OnThrow;
             @Throw.performed += instance.OnThrow;
             @Throw.canceled += instance.OnThrow;
-            @Combine.started += instance.OnCombine;
-            @Combine.performed += instance.OnCombine;
-            @Combine.canceled += instance.OnCombine;
+            @Throw_High.started += instance.OnThrow_High;
+            @Throw_High.performed += instance.OnThrow_High;
+            @Throw_High.canceled += instance.OnThrow_High;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -989,9 +989,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Throw.started -= instance.OnThrow;
             @Throw.performed -= instance.OnThrow;
             @Throw.canceled -= instance.OnThrow;
-            @Combine.started -= instance.OnCombine;
-            @Combine.performed -= instance.OnCombine;
-            @Combine.canceled -= instance.OnCombine;
+            @Throw_High.started -= instance.OnThrow_High;
+            @Throw_High.performed -= instance.OnThrow_High;
+            @Throw_High.canceled -= instance.OnThrow_High;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1163,7 +1163,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
-        void OnCombine(InputAction.CallbackContext context);
+        void OnThrow_High(InputAction.CallbackContext context);
     }
     public interface IPanelActions
     {
