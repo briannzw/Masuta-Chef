@@ -78,6 +78,7 @@ namespace Player.Controller
 
             pickupPos.DetachChildren();
             nearestPickable.ExitPickup();
+            nearestPickable = null;
         }
 
         private void OnThrow(InputAction.CallbackContext context)

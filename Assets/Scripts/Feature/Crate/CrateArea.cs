@@ -3,11 +3,15 @@ using UnityEngine;
 
 namespace Crate.Area
 {
+    using Crate.Combine;
     using Interaction;
     using Pickup;
+    using Spawner;
 
     public class CrateArea : MonoBehaviour, IInteractable, IPicker
     {
+        [Header("References")]
+        [SerializeField] private CombineManager combineManager;
         [SerializeField] private int maxCrate = 4;
         [SerializeField] private List<Transform> GridTransform = new();
         private List<CrateController> CrateGrid;
@@ -26,7 +30,26 @@ namespace Crate.Area
         public void Interact(GameObject other = null)
         {
             // DO Combine
-            Debug.Log("TODO : Combine");
+            List<CrateColor> colors = new List<CrateColor>();
+            foreach(var crate in CrateGrid)
+            {
+                if (crate != null) colors.Add(crate.crateColor);
+            }
+
+            if (combineManager.Combine(colors))
+            {
+                currentCrateCount -= colors.Count;
+                for (int i = 0; i < CrateGrid.Count; i++)
+                {
+                    if (CrateGrid[i] == null) continue;
+
+                    if (CrateGrid[i].GetComponent<SpawnObject>() != null)
+                        CrateGrid[i].GetComponent<SpawnObject>().Release();
+                    else Destroy(CrateGrid[i].gameObject);
+
+                    CrateGrid[i] = null;
+                }
+            }
         }
 
         private void OnTriggerStay(Collider other)

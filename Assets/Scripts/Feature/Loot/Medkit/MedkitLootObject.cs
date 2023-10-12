@@ -24,6 +24,7 @@ namespace Loot.Interactable
             if (other.CompareTag("Player"))
             {
                 ApplyEffect(other.GetComponent<Character>());
+                Destroy(gameObject);
             }
         }
     }
