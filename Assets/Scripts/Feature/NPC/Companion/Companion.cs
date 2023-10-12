@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using Character;
 public class Companion : NPC, IWanderNPC, IDetectionNPC
 {
     public float MaxDistanceFromPlayer;
@@ -22,15 +22,23 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
 
     [SerializeField] private float minDistanceSlotFromPlayer;
 
+    private Character.Character chara;
     private new void Awake()
     {
         base.Awake();
         StateMachine.Initialize(NPCMoveState);
         DetectionRadius = 8f;
+        chara = GetComponent<Character.Character>();
+        chara.OnDie += CompanionDie;
     }
     public void Attack()
     {
 
+    }
+
+    private void CompanionDie()
+    {
+        Destroy(gameObject);
     }
 
     public void DetectTarget()
@@ -58,6 +66,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
             if (Agent.remainingDistance <= StopDistance)
             {
                 Agent.isStopped = true;
+                StateMachine.ChangeState(NPCAttackState);
             }
             else
             {
@@ -95,18 +104,12 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
             targetPosition = TargetPosition;
             Agent.isStopped = false;
         }
-        else if (!shouldWander)
+        else
         {
             NavMesh.SamplePosition(companionSlotPosition.position, out hit, Mathf.Infinity, 1 << NavMesh.GetAreaFromName("Walkable"));
             float distanceSlot = Mathf.Abs(hit.position.y - companionSlotPosition.position.y);
             targetPosition = (distanceSlot < 1f) ? hit.position : TargetPosition;
             Agent.isStopped = Agent.remainingDistance <= minDistanceFromPlayer;
-        }
-        else
-        {
-            // If neither followEnemy nor shouldWander is true, set target position to current position
-            targetPosition = transform.position;
-            Agent.isStopped = false;
         }
 
         TargetPosition = targetPosition;
@@ -114,6 +117,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
         // Change state based on distance from player
         if (DistanceFromPlayer > MaxDistanceFromPlayer)
         {
+            TargetPosition = GameManager.playerTransform.position;
             StateMachine.ChangeState(NPCMoveState);
             followEnemy = false;
         }

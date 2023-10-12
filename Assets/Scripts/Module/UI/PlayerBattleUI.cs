@@ -16,6 +16,10 @@ namespace Module.UI
         {
             slider = GetComponentInChildren<Slider>();
             chara = GetComponentInParent<Character>();
+        }
+
+        private void Start()
+        {
             slider.maxValue = (chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).Value;
         }
         private void Update()

@@ -28,7 +28,6 @@ namespace Module.UI
         }
         private void Update()
         {
-            Debug.Log((chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).CurrentValue);
             slider.value = (chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).CurrentValue;
         }
     }

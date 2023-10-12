@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NPCAttackState : NPCState
 {
+    private float timer;
     public NPCAttackState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
     {
     }
@@ -20,10 +21,17 @@ public class NPCAttackState : NPCState
 
     public override void FrameUpdate()
     {
+        Debug.Log("Is in attack state");
         base.FrameUpdate();
-        if(npc.Agent.remainingDistance > npc.StopDistance)
+        npc.Agent.SetDestination(npc.TargetPosition);
+        timer -= Time.deltaTime;
+        if(timer <= 0)
         {
-            npc.StateMachine.ChangeState(npc.NPCMoveState);
+            if (npc.GetComponent<NPC>().selectedWeapon == NPC.AttackType.Ranged)
+            {
+                npc.GetComponent<ShootBall>().Shoot();
+                timer = npc.GetComponent<ShootBall>().ShootInterval;
+            }
         }
     }
 
