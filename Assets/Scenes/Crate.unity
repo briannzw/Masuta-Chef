@@ -2329,7 +2329,7 @@ GameObject:
   - component: {fileID: 54238884}
   - component: {fileID: 54238883}
   - component: {fileID: 54238882}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Crate Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6617,7 +6617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349542722}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
   m_LocalPosition: {x: 10.35, y: 17.43, z: 11.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6703,21 +6703,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1306469154919621162, guid: bdf60b689a12d8140b8eccf2e45be70a,
-        type: 3}
-      propertyPath: Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1306469154919621162, guid: bdf60b689a12d8140b8eccf2e45be70a,
-        type: 3}
-      propertyPath: crateColor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1306469154919621162, guid: bdf60b689a12d8140b8eccf2e45be70a,
-        type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 520930832}
     - target: {fileID: 4118285260937141486, guid: bdf60b689a12d8140b8eccf2e45be70a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6772,11 +6757,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crate (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4423516174392846161, guid: bdf60b689a12d8140b8eccf2e45be70a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Crate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26191,7 +26171,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413993817}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43158215, y: 0.000000015439534, z: -0.0000000073867885, w: 0.9020737}
+  m_LocalRotation: {x: 0.43158215, y: 0.000000015439536, z: -0.00000000738679, w: 0.9020737}
   m_LocalPosition: {x: 10.35, y: 17.43, z: 11.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
