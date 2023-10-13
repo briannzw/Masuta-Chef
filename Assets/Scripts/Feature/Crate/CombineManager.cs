@@ -6,7 +6,7 @@ namespace Crate.Combine
     using AYellowpaper.SerializedCollections;
     using Cooking;
     using Loot.Object;
-    using Loot;
+    using Player.CompanionSlot;
     using UnityEngine.AI;
 
     public class CombineManager : MonoBehaviour
@@ -46,11 +46,16 @@ namespace Crate.Combine
             }
             else if(colors.Count == 4)
             {
-                if(IsSameColor(colors))
+                GameObject companion;
+                if (IsSameColor(colors))
                 {
-                    Instantiate(Companions[colors[0]], hit.position, Quaternion.identity);
+                    companion = Instantiate(Companions[colors[0]], hit.position, Quaternion.identity);
                 }
-                else Instantiate(Companions[colors[Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)]], hit.position, Quaternion.identity);
+                else
+                {
+                    companion = Instantiate(Companions[colors[Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)]], hit.position, Quaternion.identity);
+                }
+                GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().AddCompanion(companion.GetComponent<Companion>());
             }
 
             return true;
