@@ -23,7 +23,6 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
     }
     private new void Update()
     {
-        Debug.Log(pickupPos.childCount);
         StateMachine.CurrentState.FrameUpdate();
         if (Agent.remainingDistance <= StopDistance)
         {

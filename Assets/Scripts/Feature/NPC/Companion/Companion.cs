@@ -104,7 +104,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
         {
             NavMesh.SamplePosition(companionSlotPosition.position, out hit, Mathf.Infinity, 1 << NavMesh.GetAreaFromName("Walkable"));
             float distanceSlot = Mathf.Abs(hit.position.y - companionSlotPosition.position.y);
-            targetPosition = (distanceSlot < 1f) ? hit.position : TargetPosition;
+            targetPosition = (distanceSlot < 2.5f) ? hit.position : TargetPosition;
             Agent.isStopped = Agent.remainingDistance <= minDistanceFromPlayer;
         }
 
