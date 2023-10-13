@@ -5,10 +5,13 @@ using UnityEngine;
 namespace Character.Hit
 {
     using StatEffect;
+
     public class AOEController : HitController
     {
         public float AreaDuration;
         public AOEBehaviour Behaviour;
+        [Header("Settings")]
+        public bool ContinuousHitOnTrigger = false;
 
         // ApplyOnStay
         [SerializeField] private List<Character> characterInArea = new List<Character>();
@@ -25,13 +28,20 @@ namespace Character.Hit
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
             if (TargetTag == null && Source.Holder == null) return;
-            if (TargetTag != null && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag) ))
+            if (TargetTag != null && TargetTag != "" && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag) ))
             {
                 Character chara = other.GetComponent<Character>();
                 if (chara == null) return;
 
                 if (characterAffected.Contains(chara))
                 {
+                    if (ContinuousHitOnTrigger)
+                    {
+                        if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
+                        // Changeable
+                        if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
+                    }
+
                     if (Behaviour == AOEBehaviour.ApplyOnStay)
                     {
                         characterInArea.Add(chara);
@@ -50,7 +60,7 @@ namespace Character.Hit
         private void OnTriggerExit(Collider other)
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
-            if (TargetTag != null && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag)))
+            if (TargetTag != null && TargetTag != "" && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag)))
             {
                 Character chara = other.GetComponent<Character>();
                 if (chara == null) return;
