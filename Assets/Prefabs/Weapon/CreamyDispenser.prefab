@@ -4966,7 +4966,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  AttackArea: {fileID: 0}
+  AttackArea: {fileID: 8920357698855249934}
 --- !u!1 &8920357698855249934
 GameObject:
   m_ObjectHideFlags: 0
@@ -4977,6 +4977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5790247796566603152}
   - component: {fileID: 1188436053181327183}
+  - component: {fileID: 8886566402260313542}
   m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
@@ -5014,7 +5015,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5022,3 +5023,38 @@ CapsuleCollider:
   m_Height: 13
   m_Direction: 1
   m_Center: {x: 0, y: -0.00000011920929, z: 0}
+--- !u!114 &8886566402260313542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920357698855249934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value:
+    CharacterAttack: 0
+    WeaponAttack: 0
+    Multiplier: 1
+  TargetTag: 
+  Type: 0
+  ApplyEffectFirst: 0
+  <Effects>k__BackingField:
+  - StatsAffected: 0
+    StatValue: 100
+    StatModifierType: 100
+    overwriteOrder: 0
+    priorityOrder: 0
+    Behaviour: 0
+    StatusEffect: 3
+    Timer: 0
+    Duration: 0
+    UseInterval: 0
+    IntervalTimer: 0
+    Interval: 0
+  AreaDuration: 1e+10
+  Behaviour: 1
+  characterInArea: []

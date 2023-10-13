@@ -3796,6 +3796,7 @@ MonoBehaviour:
     Interval: 1
   AreaDuration: 30
   Behaviour: 1
+  characterInArea: []
 --- !u!1 &1832258750
 GameObject:
   m_ObjectHideFlags: 0
@@ -4005,7 +4006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b555ef0a8a77843befbf469ce4697c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeWeapon: {fileID: 0}
+  activeWeapon: {fileID: 2573545630882475741}
   weaponSlot:
   - {fileID: 0}
   maxSlot: 1
@@ -4617,6 +4618,7 @@ MonoBehaviour:
     Interval: 1
   AreaDuration: 30
   Behaviour: 1
+  characterInArea: []
 --- !u!65 &2005834260
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4941,10 +4943,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3513131130172153234, guid: ca50ba2b1c2bf814d94aec86fbbcabee,
+        type: 3}
+      propertyPath: holder
+      value: 
+      objectReference: {fileID: 1832258757}
     - target: {fileID: 7105915525453807589, guid: ca50ba2b1c2bf814d94aec86fbbcabee,
         type: 3}
       propertyPath: m_Name
       value: CreamyDispenser
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886566402260313542, guid: ca50ba2b1c2bf814d94aec86fbbcabee,
+        type: 3}
+      propertyPath: <Effects>k__BackingField.Array.data[0].StatModifierType
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920357698855249934, guid: ca50ba2b1c2bf814d94aec86fbbcabee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4957,6 +4974,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2573545630882475735}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2573545630882475741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3513131130172153234, guid: ca50ba2b1c2bf814d94aec86fbbcabee,
+    type: 3}
+  m_PrefabInstance: {fileID: 2573545630882475735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f58135551773b548b6a002040684fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
