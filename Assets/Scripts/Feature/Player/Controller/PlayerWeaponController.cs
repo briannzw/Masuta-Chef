@@ -1,39 +1,38 @@
-using Player.Input;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 namespace Player.Controller
 {
+    using Input;
+    using Weapon;
     public class PlayerWeaponController : PlayerInputControl
     {
         #region Properties
+        [Header("References")]
+        public Weapon ActiveWeapon;
+        public Transform WeaponTransform;
+
         [Header("Weapon Setting")]
-        public Weapon.Weapon activeWeapon;
-        public List<Weapon.Weapon> weaponSlot;
-        public int maxSlot;
+        public List<Weapon> WeaponSlot;
+        public int MaxSlot;
 
         [Header("Shoot Event")]
         public UnityEvent FireEvent;
 
         [Header("Settings")]
         [SerializeField] private LayerMask groundMask;
-
-        private Camera maincamera;
         #endregion
 
         #region Lifecycle
-        // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
-            maincamera = Camera.main;
+            base.Start();
+            ActiveWeapon?.OnEquip(GetComponent<Character.Character>());
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             Aim();
         }
@@ -63,22 +62,19 @@ namespace Player.Controller
         #region Method
         private void OnInputActionStart(InputAction.CallbackContext context)
         {
-            activeWeapon.StartAttack();
+            if(ActiveWeapon == null) return;
+            ActiveWeapon.StartAttack();
         }
 
         private void OnInputActionEnd(InputAction.CallbackContext context)
         {
-            activeWeapon.StopAttack();
+            if(ActiveWeapon == null) return;
+            ActiveWeapon.StopAttack();
         }
 
-        private void OnEquip (InputAction.CallbackContext context)
+        private void OnSwitchWeapon(InputAction.CallbackContext context)
         {
-            
-        }
-
-        private void OnUnequip(InputAction.CallbackContext context)
-        {
-
+            //Check num pressed
         }
 
         private void Aim()
@@ -91,12 +87,39 @@ namespace Player.Controller
                 transform.forward = direction;
             }
         }
+
+        public void Equip(Weapon newWeapon)
+        {
+            Transform weapOrigin;
+
+            if (ActiveWeapon != null)
+            {
+                weapOrigin = ActiveWeapon.transform;
+                // Old Weapon
+                ActiveWeapon.OnUnequip();
+                if(ActiveWeapon.transform.parent != WeaponTransform) weapOrigin = ActiveWeapon.transform.parent;
+                weapOrigin.transform.SetParent(null);
+            }
+
+            // New Weapon
+            ActiveWeapon = newWeapon;
+
+            // For Weapon as child (Models)
+            weapOrigin = newWeapon.transform;
+            if(newWeapon.transform.parent != null)
+            {
+                weapOrigin = newWeapon.transform.parent.transform;
+            }
+            weapOrigin.SetParent(WeaponTransform);
+            weapOrigin.localPosition = Vector3.zero;
+            weapOrigin.localRotation = Quaternion.identity;
+        }
         #endregion
 
         #region Helper Function
         private (bool success, Vector3 position) GetMousePosition()
         {
-            var ray = maincamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
+            var ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
             if (Physics.Raycast(ray, out var hitInfo,Mathf.Infinity, groundMask))
             {
                 return (success: true, position: hitInfo.point);
@@ -105,16 +128,6 @@ namespace Player.Controller
             { 
                 return (success: false, position: Vector3.zero); 
             }
-        }
-
-        protected override void RegisterInputCallbacks()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void UnregisterInputCallbacks()
-        {
-            throw new System.NotImplementedException();
         }
         #endregion
     }

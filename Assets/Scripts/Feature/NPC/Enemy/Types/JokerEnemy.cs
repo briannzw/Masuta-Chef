@@ -15,15 +15,11 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
     [Range(0, 360)] public float PickupAngle = 125;
     private Pickup.IPickable nearestPickable;
     [SerializeField] private Transform pickupPos;
-    private bool hasCrate = false;
+    private bool hasCrate => nearestPickable != null;
     [SerializeField] private float safeDistance = 10f;
-    void Start()
-    {
 
-    }
     private new void Update()
     {
-        Debug.Log(pickupPos.childCount);
         StateMachine.CurrentState.FrameUpdate();
         if (Agent.remainingDistance <= StopDistance)
         {
@@ -49,16 +45,6 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
         if (hasCrate)
         {
             RunAwayFromPlayer();
-        }
-
-        if (pickupPos.childCount == 0)
-        {
-            hasCrate = false;
-        }
-
-        if(Vector3.Distance(pickupPos.position, transform.position) > 4f)
-        {
-            hasCrate = false;
         }
     }
 
@@ -131,7 +117,6 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
                     nearestPickable = null;
                 }
             }
-            hasCrate = true;
         }
     }
 
@@ -145,7 +130,6 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
                 nearestPickable.ExitPickup();
                 nearestPickable = null;
             }
-            hasCrate = false;
         }
 
     }

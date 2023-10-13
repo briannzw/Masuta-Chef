@@ -42,7 +42,7 @@ namespace Crate.Combine
                 {
                     Instantiate(Weapons[colors[0]], hit.position, Quaternion.identity);
                 }
-                else Instantiate(Weapons[colors[Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)]], hit.position, Quaternion.identity);
+                else Instantiate(Weapons[(CrateColor)Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)], hit.position, Quaternion.identity);
             }
             else if(colors.Count == 4)
             {
@@ -53,7 +53,7 @@ namespace Crate.Combine
                 }
                 else
                 {
-                    companion = Instantiate(Companions[colors[Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)]], hit.position, Quaternion.identity);
+                    companion = Instantiate(Companions[(CrateColor)Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)], hit.position, Quaternion.identity);
                 }
                 GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().AddCompanion(companion.GetComponent<Companion>());
             }
