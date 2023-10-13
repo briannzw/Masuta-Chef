@@ -11,7 +11,7 @@ namespace Character.Hit
         public AOEBehaviour Behaviour;
 
         // ApplyOnStay
-        private List<Character> characterInArea = new List<Character>();
+        [SerializeField] private List<Character> characterInArea = new List<Character>();
         // Instant, Hit is only applied once to every Chara.
         private HashSet<Character> characterAffected = new HashSet<Character>();
 
