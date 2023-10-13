@@ -15,6 +15,7 @@ namespace Weapon
         #endregion
 
         #region Method
+
         public override void Attack()
         {
 
@@ -23,6 +24,7 @@ namespace Weapon
         public override void StartAttack()
         {
             base.StartAttack();
+            hitController.Initialize(this);
             animator.SetTrigger("Attack");
         }
         #endregion

@@ -6,11 +6,12 @@ namespace Loot
     using Interactable;
     using Object;
     using System.Collections.Generic;
+    using UnityEngine.AI;
 
     [RequireComponent(typeof(Character))]
     public class LootDropController : MonoBehaviour
     {
-        [SerializeField] private LootChance lootChance;
+        public LootChance lootChance;
         private Character character;
 
         private void Awake()
@@ -21,18 +22,20 @@ namespace Loot
 
         private void DropLoots()
         {
+            NavMesh.SamplePosition(transform.position, out var hit, 10f, 1 << LayerMask.GetMask("Walkable"));
+
             foreach (var loot in RandomLoots())
             {
-                GameObject lootObj = Instantiate(lootChance.LootPrefab[loot.Type], transform.position, Quaternion.identity);
                 if(loot.Type == LootType.Recipe)
                 {
+                    GameObject lootObj = Instantiate(lootChance.LootPrefab[LootType.Recipe], hit.position, Quaternion.identity);
                     int index = Random.Range(0, (loot as RecipeLoot).Recipes.Count);
                     lootObj.GetComponent<RecipeLootObject>().Recipe = (loot as RecipeLoot).Recipes[index];
                 }
                 else if(loot.Type == LootType.Weapon)
                 {
                     int index = Random.Range(0, (loot as WeaponLoot).Weapons.Count);
-                    //lootObj.GetComponent<WeaponLootObject>().Data = (loot as WeaponLoot).Weapons[index];
+                    Instantiate((loot as WeaponLoot).Weapons[index], hit.position, Quaternion.identity);
                 }
             }
             character.OnDie -= DropLoots;

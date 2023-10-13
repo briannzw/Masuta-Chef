@@ -1,5 +1,6 @@
 using Pool;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -31,8 +32,9 @@ namespace Spawner
             poolManager.Add(spawnPrefab, maxSpawnObjectInPool);
         }
 
-        public void Spawn(int amount = 1)
+        public List<GameObject> Spawn(int amount = 1)
         {
+            List<GameObject> spawnObjects = new List<GameObject>();
             for (int i = 0; i < amount; i++)
             {
                 if (poolManager.Pools[spawnPrefab].CountActive >= maxSpawnObjectInPool)
@@ -48,10 +50,12 @@ namespace Spawner
                 GameObject go = poolManager.Pools[spawnPrefab].Get();
                 go.transform.position = position;
                 go.transform.rotation = rotation;
+                spawnObjects.Add(go);
 
                 if(go.GetComponent<SpawnObject>() == null) go.AddComponent<SpawnObject>();
                 go.GetComponent<SpawnObject>().Spawner = this;
             }
+            return spawnObjects;
         }
 
         protected virtual Vector3 RandomSpawnPosition(Transform center, Vector3 offset, Vector3 areaSize)
