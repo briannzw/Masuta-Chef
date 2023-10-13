@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Companion
-  - Enemy
+<<<<<<< HEAD
   - Crate
+=======
+  - Enemy
+>>>>>>> feature/loot
   layers:
   - Default
   - TransparentFX
@@ -14,10 +16,15 @@ TagManager:
   - 
   - Water
   - UI
+<<<<<<< HEAD
+  - Pickable
+  - Interactable
+=======
+  - Interactable
   - 
-  - Companion
-  - Enemy
-  - Player
+>>>>>>> feature/loot
+  - 
+  - 
   - 
   - 
   - 

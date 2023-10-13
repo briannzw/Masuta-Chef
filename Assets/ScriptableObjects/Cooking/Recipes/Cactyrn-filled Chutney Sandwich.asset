@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4b0ec188903b447ae4ec95cf512eb4, type: 3}
+  m_Name: Cactyrn-filled Chutney Sandwich
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  name: Cactyrn-filled Chutney Sandwich
+  Description: This is a Cactyrn-filled Chutney Sandwich Recipe.
+  Ingredients:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: 43b2583e4b1c2ef4caecff3843064e74, type: 2}
+      Value: 5
+  data:
+    CurrentBlueprint: 0
+    NeededBlueprint: 100
