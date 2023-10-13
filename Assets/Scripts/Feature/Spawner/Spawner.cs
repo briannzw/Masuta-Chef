@@ -9,7 +9,7 @@ namespace Spawner
     public class Spawner : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] protected PoolManager poolManager;
+        protected PoolManager poolManager;
         [SerializeField] protected GameObject spawnPrefab;
 
         [Header("Parameters")]
@@ -26,6 +26,7 @@ namespace Spawner
 
         protected virtual void Start()
         {
+            poolManager = PoolManager.Instance;
             OnRelease += Release;
             poolManager.Add(spawnPrefab, maxSpawnObjectInPool);
         }
@@ -42,10 +43,13 @@ namespace Spawner
 
                 Vector3 position = RandomSpawnPosition(transform, spawnOffset, spawnArea);
                 Quaternion rotation = (randomizeRotation) ? Random.rotation : Quaternion.identity;
+                rotation.x = 0f; rotation.z = 0f;
 
                 GameObject go = poolManager.Pools[spawnPrefab].Get();
-                go.transform.position = position + spawnOffset;
+                go.transform.position = position;
                 go.transform.rotation = rotation;
+
+                if(go.GetComponent<SpawnObject>() == null) go.AddComponent<SpawnObject>();
                 go.GetComponent<SpawnObject>().Spawner = this;
             }
         }

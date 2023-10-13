@@ -6,6 +6,18 @@ namespace Pool
 {
     public class PoolManager : MonoBehaviour
     {
+        #region Singleton
+        public static PoolManager Instance { get; private set; }
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else Instance = this;
+        }
+        #endregion
+
         public Dictionary<GameObject, ObjectPool<GameObject>> Pools = new();
 
         public void Add(GameObject prefab, int maxObject)
