@@ -23,7 +23,8 @@ namespace Character.Hit
 
         private void OnTriggerEnter(Collider other)
         {
-            if (TargetTag != null && other.CompareTag(TargetTag))
+            if (Source.Holder == null) return;
+            if (Source.TargetTag != null && other.CompareTag(Source.TargetTag))
             {
                 Character chara = other.GetComponent<Character>();
                 if (chara == null) return;
@@ -47,7 +48,7 @@ namespace Character.Hit
 
         private void OnTriggerExit(Collider other)
         {
-            if (TargetTag != null && other.CompareTag(TargetTag))
+            if (Source.TargetTag != null && other.CompareTag(Source.TargetTag))
             {
                 Character chara = other.GetComponent<Character>();
                 if (chara == null) return;

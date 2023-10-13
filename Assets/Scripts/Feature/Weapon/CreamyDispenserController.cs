@@ -21,8 +21,7 @@ public class CreamyDispenserController : Weapon.Weapon
         base.Start();
         vfx = fireObjectPrefab.GetComponent<ParticleSystem>();
         AOEController aoeController = AttackArea.GetComponent<AOEController>();
-        aoeController.Value.WeaponAttack = stats[WeaponStatsEnum.Power].Value;
-        aoeController.TargetTag = this.TargetTag;
+        aoeController.Initialize(this);
         vfx.Stop();
     }
     protected new void Update()

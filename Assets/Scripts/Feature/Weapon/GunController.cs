@@ -22,8 +22,7 @@ public class GunController : Weapon.Weapon
     {
         var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
         var controller = fireObject.GetComponent<AOEController>();
-        controller.TargetTag = this.TargetTag;
-        controller.Value.WeaponAttack = this.stats[WeaponStatsEnum.Power].Value;
+        controller.Initialize(this);
         fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
     }
     #endregion
