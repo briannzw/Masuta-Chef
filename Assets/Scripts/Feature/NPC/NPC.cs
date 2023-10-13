@@ -5,6 +5,14 @@ using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
+    public enum AttackType
+    {
+        Melee,
+        Ranged,
+        Utility,
+        Joker
+    }
+    public AttackType selectedWeapon;
     public Animator Animator;
     public Transform TargetTransform;
     public float MoveSpeed;

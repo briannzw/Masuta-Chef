@@ -30,23 +30,6 @@ public class CompanionAttackerClose : Companion
         {
             StateMachine.ChangeState(NPCAttackState);
         }
-
-        if (!followEnemy && DistanceFromPlayer <= minDistanceFromPlayer)
-        {
-            Agent.isStopped = false;
-            shouldWander = true;
-            wanderTimer -= Time.deltaTime;
-            if (wanderTimer <= 0f)
-            {
-                // Time to choose a new random destination.
-                Wander();
-                wanderTimer = WanderInterval;
-            }
-        }
-        else
-        {
-            shouldWander = false;
-        }
     }
 
     private void OnDrawGizmos()

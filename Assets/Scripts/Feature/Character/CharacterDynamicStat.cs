@@ -11,7 +11,7 @@ namespace Character.Stat
     {
         public float CurrentValue
         {
-            get { return _currentValue; }
+            get { return Mathf.Clamp(_currentValue, 0, Value); }
             private set { _currentValue = value; }
         }
 
@@ -30,7 +30,7 @@ namespace Character.Stat
 
         public void ChangeCurrentValue(StatModifier mod)
         {
-            float finalValue = Mathf.Clamp(_currentValue, 0 , Value);
+            float finalValue = CurrentValue;
 
             if (mod.Type == StatModType.Flat)
             {
@@ -41,9 +41,7 @@ namespace Character.Stat
                 finalValue *= 1 + mod.Value;
             }
 
-            _currentValue = (float)Math.Round(finalValue, 4);
-
-            CurrentValue = Mathf.Clamp(_currentValue, 0, Value);
+            CurrentValue = (float)Math.Round(finalValue, 4);
         }
     }
 }

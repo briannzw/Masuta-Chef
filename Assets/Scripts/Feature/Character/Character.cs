@@ -28,12 +28,12 @@ namespace Character
 
         public Character(StatsPreset preset)
         {
-            Stats = preset.Stats;
+            Stats = new Stats(preset.Stats);
         }
 
         private void Awake()
         {
-            if(StatsPreset != null) Stats = StatsPreset.Stats;
+            if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
         }
@@ -51,6 +51,8 @@ namespace Character
             Stat.ChangeCurrentValue(statMod);
 
             if (Stat.CurrentValue <= 0 && dynamicEnum == StatsEnum.Health) OnDie?.Invoke();
+
+            Debug.Log((Stats.StatList[dynamicEnum] as CharacterDynamicStat).CurrentValue);
         }
 
         public void TakeHeal(float healAmount, StatsEnum dynamicEnum, float multiplier = 1)

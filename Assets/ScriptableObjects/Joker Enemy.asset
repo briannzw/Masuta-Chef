@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22090c3525153a646b1d3ba0cedb9219, type: 3}
-  m_Name: Player
+  m_Name: Joker Enemy
   m_EditorClassIdentifier: 
   Stats:
     StatList:
@@ -18,21 +18,21 @@ MonoBehaviour:
       - Key: 0
         Value:
           BaseValue: 30000
-      - Key: 1
-        Value:
-          BaseValue: 100
       - Key: 2
         Value:
           BaseValue: 100
       - Key: 3
         Value:
-          BaseValue: 50
+          BaseValue: 80
       - Key: 4
         Value:
-          BaseValue: 50
+          BaseValue: 65
       - Key: 5
         Value:
-          BaseValue: 10
+          BaseValue: 15
       - Key: 6
+        Value:
+          BaseValue: 1
+      - Key: 1
         Value:
           BaseValue: 1
