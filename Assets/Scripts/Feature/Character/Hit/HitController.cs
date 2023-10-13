@@ -10,6 +10,7 @@ namespace Character.Hit
     public class HitController : MonoBehaviour, IApplyEffect
     {
         public Weapon Source;
+        [Tag, ConditionalField(nameof(Source), inverse: true)] public string TargetTag;
         [ConditionalField(nameof(Type), true, HitType.EffectOnly)] public HitValue Value;
 
         public HitType Type;
@@ -40,7 +41,8 @@ namespace Character.Hit
 
         public void Hit(Character character)
         {
-            if (!character.CompareTag(Source.TargetTag)) return;
+            // ONLY APPLIED FOR PLAYABLE BUILD
+            if (TargetTag != null && !character.CompareTag(TargetTag) || (Source != null && !character.CompareTag(Source.TargetTag))) return;
 
             if(ApplyEffectFirst) ApplyEffect(character);
 
