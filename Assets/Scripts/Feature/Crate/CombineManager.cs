@@ -1,0 +1,71 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Crate.Combine
+{
+    using AYellowpaper.SerializedCollections;
+    using Cooking;
+    using Loot.Object;
+    using Loot;
+    using UnityEngine.AI;
+
+    public class CombineManager : MonoBehaviour
+    {
+        [Header("References")]
+        [SerializeField] private GameObject ingredientPrefab;
+        [SerializeField] private GameObject medkitPrefab;
+
+        [Header("Dictionaries")]
+        [SerializeField] private SerializedDictionary<CrateColor, Ingredient> Ingredients;
+        [SerializeField] private SerializedDictionary<CrateColor, GameObject> Weapons;
+        [SerializeField] private SerializedDictionary<CrateColor, GameObject> Companions;
+
+        public bool Combine(List<CrateColor> colors)
+        {
+            NavMesh.SamplePosition(transform.position, out var hit, 10f, 1 << LayerMask.GetMask("Walkable"));
+
+            // Ingredients
+            if (colors.Count == 1)
+            {
+                GameObject lootObj = Instantiate(ingredientPrefab, hit.position, Quaternion.identity);
+                lootObj.GetComponent<IngredientLootObject>().Ingredient = Ingredients[colors[0]];
+            }
+            else if(colors.Count == 2)
+            {
+                if (IsSameColor(colors))
+                    Instantiate(medkitPrefab, hit.position, Quaternion.identity);
+                else return false;
+            }
+            else if(colors.Count == 3)
+            {
+                if (IsSameColor(colors))
+                {
+                    Instantiate(Weapons[colors[0]], hit.position, Quaternion.identity);
+                }
+                else Instantiate(Weapons[colors[Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)]], hit.position, Quaternion.identity);
+            }
+            else if(colors.Count == 4)
+            {
+                if(IsSameColor(colors))
+                {
+                    Instantiate(Companions[colors[0]], hit.position, Quaternion.identity);
+                }
+                else Instantiate(Companions[colors[Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)]], hit.position, Quaternion.identity);
+            }
+
+            return true;
+        }
+
+        private bool IsSameColor(List<CrateColor> colors)
+        {
+            CrateColor singleColor = colors[0];
+
+            for (int i = 1; i < colors.Count; i++)
+            {
+                if (colors[i] != singleColor) return false;
+            }
+
+            return true;
+        }
+    }
+}
