@@ -25,6 +25,7 @@ public class LevelData : ScriptableObject
         internal float spawnTime;
         internal object spawnPositions;
         internal object spawnCount;
+        internal object spawnDelay;
     }
 
     [System.Serializable]

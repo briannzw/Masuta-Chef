@@ -10,8 +10,7 @@ namespace Spawner
     {
         [Header("References")]
         [SerializeField] protected PoolManager poolManager;
-        [SerializeField] protected GameObject spawnPrefab;
-
+        
         [Header("Parameters")]
         [SerializeField] private Vector3 spawnArea = Vector3.one;
         [SerializeField] protected Vector3 spawnOffset;
@@ -20,6 +19,7 @@ namespace Spawner
         [Header("Object Pool")]
         [SerializeField] protected int maxSpawnObjectInPool = 100;
 
+        public GameObject spawnPrefab;
         public Action<SpawnObject> OnRelease;
 
         public int GetActiveSpawnObject() => poolManager.Pools[spawnPrefab].CountActive;

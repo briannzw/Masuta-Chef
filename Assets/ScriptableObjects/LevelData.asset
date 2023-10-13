@@ -12,16 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf2cdb5a30efae438a83a598228f4a5, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  levelName: 
-  levelNumber: 0
-  levelDifficulty: 0
+  levelName: level 1
+  levelNumber: 1
+  levelDifficulty: 1
   mainAreaPrefab: {fileID: 0}
   playerSpawnPoint:
     spawnPointName: 
     spawnPosition: {x: 0, y: 0, z: 0}
-  waves: []
-  enemySpawns: []
+  waves:
+  - waveName: 1
+    numberOfEnemies: 1
+    enemyPrefabs:
+    - {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65, type: 3}
+  enemySpawns:
+  - spawnName: enemy minion
+    enemyPrefab: {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65,
+      type: 3}
+    spawnCount: 1
+    spawnPositions:
+    - {x: 1, y: 1, z: 1}
+  - spawnName: enemy ranged
+    enemyPrefab: {fileID: 2609905847538178790, guid: ddf4fe37e33f98c4fb2af302797decee,
+      type: 3}
+    spawnCount: 1
+    spawnPositions:
+    - {x: 1, y: 1, z: 1}
   playerStats:
     health: 0
     attackDamage: 0
     movementSpeed: 0
+  crateSpawnInterval:
+    crateSpawnMinInterval: 0
+    crateSpawnMaxInterval: 0

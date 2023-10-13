@@ -1,9 +1,8 @@
-using UnityEngine;
-
 namespace Character.Stat
 {
     using AYellowpaper.SerializedCollections;
     using Kryz.CharacterStats;
+    using System;
 
     [System.Serializable]
     public class Stats
@@ -23,6 +22,18 @@ namespace Character.Stat
                 { StatsEnum.Resistance, new CharacterStat() },
                 { StatsEnum.DamageMultiplier, new CharacterStat(1) }
             };
+        }
+
+        public Stats(Stats oldStat)
+        {
+            StatList = new SerializedDictionary<StatsEnum, CharacterStat>();
+            foreach(StatsEnum Enum in Enum.GetValues(typeof(StatsEnum)))
+            {
+                if (oldStat.StatList[Enum] is CharacterDynamicStat)
+                    StatList.Add(Enum, new CharacterDynamicStat(oldStat.StatList[Enum].Value));
+                else
+                    StatList.Add(Enum, new CharacterStat(oldStat.StatList[Enum].Value));
+            }
         }
 
         // For weapon or single instance applier

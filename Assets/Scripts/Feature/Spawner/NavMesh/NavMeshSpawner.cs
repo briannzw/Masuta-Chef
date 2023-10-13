@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +11,8 @@ namespace Spawner
         [Header("NavMesh Randomization")]
         [SerializeField] protected int maxRandomPosIteration = 1000;
         private int randomPosIteration = 0;
+
+        public object Spawners { get; internal set; }
 
         protected override void Start()
         {
@@ -32,6 +37,16 @@ namespace Spawner
             }
 
             return hit.position;
+        }
+
+        internal void Spawn(object spawnCount, int countToSpawn)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal List<NavMeshSpawner> GetSpawners(GameObject gameObject)
+        {
+            throw new NotImplementedException();
         }
     }
 }
