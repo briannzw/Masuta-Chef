@@ -65,6 +65,7 @@ namespace Wave
                     List<GameObject> enemies = spawner.Spawn(spawnCount);
                     foreach(var enemy in enemies)
                     {
+                        if(enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
                         enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
                     }
                     total -= spawnCount;

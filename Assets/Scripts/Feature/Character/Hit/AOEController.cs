@@ -23,8 +23,9 @@ namespace Character.Hit
 
         private void OnTriggerEnter(Collider other)
         {
-            if (Source.Holder == null) return;
-            if (Source.TargetTag != null && other.CompareTag(Source.TargetTag))
+            // ONLY APPLIED FOR PLAYABLE BUILD
+            if (TargetTag == null && Source.Holder == null) return;
+            if (TargetTag != null && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag) ))
             {
                 Character chara = other.GetComponent<Character>();
                 if (chara == null) return;
@@ -48,7 +49,8 @@ namespace Character.Hit
 
         private void OnTriggerExit(Collider other)
         {
-            if (Source.TargetTag != null && other.CompareTag(Source.TargetTag))
+            // ONLY APPLIED FOR PLAYABLE BUILD
+            if (TargetTag != null && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag)))
             {
                 Character chara = other.GetComponent<Character>();
                 if (chara == null) return;
