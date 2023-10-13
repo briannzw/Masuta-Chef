@@ -21,7 +21,6 @@ public class NPCAttackState : NPCState
 
     public override void FrameUpdate()
     {
-        Debug.Log("Is in attack state");
         base.FrameUpdate();
         npc.Agent.SetDestination(npc.TargetPosition);
         timer -= Time.deltaTime;
@@ -31,6 +30,12 @@ public class NPCAttackState : NPCState
             {
                 npc.GetComponent<ShootBall>().Shoot();
                 timer = npc.GetComponent<ShootBall>().ShootInterval;
+            }
+
+            if(npc.GetComponent<NPC>().selectedWeapon == NPC.AttackType.Melee)
+            {
+                npc.GetComponent<MeleeAttack>().Attack();
+                timer = npc.GetComponent<MeleeAttack>().AttackInterval;
             }
         }
     }

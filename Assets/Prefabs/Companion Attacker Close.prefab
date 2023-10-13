@@ -380,6 +380,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5727033904216893008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7408072991236446641}
+  m_Layer: 8
+  m_Name: MeleeAttackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7408072991236446641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727033904216893008}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8743064316903106935}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6145847250420525652
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +539,7 @@ GameObject:
   - component: {fileID: 4786293151030632936}
   - component: {fileID: 5980381704483667448}
   - component: {fileID: 3175299868706620835}
+  - component: {fileID: 8135299211391616620}
   - component: {fileID: 2263422428443571484}
   - component: {fileID: -4670273841599568030}
   m_Layer: 7
@@ -533,6 +565,7 @@ Transform:
   - {fileID: 8501112817901543847}
   - {fileID: 1212638980446911126}
   - {fileID: 3033078967368061109}
+  - {fileID: 7408072991236446641}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3796112321050914018
@@ -630,6 +663,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8135299211391616620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212286518193524450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d55179696ff38e4a8fe7c2d69466344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAttackPos: {fileID: 5727033904216893008}
+  meleeAttackArea: {fileID: 928575690747839946, guid: 6b00bbbfd16d0184a89903bf8ab4b78f,
+    type: 3}
+  AttackInterval: 2
 --- !u!114 &2263422428443571484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,6 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8165f190f1502c5408c3292aaf719fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedWeapon: 0
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   MoveSpeed: 5

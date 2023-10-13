@@ -11,6 +11,7 @@ public class Enemy : NPC
     private Character.Character chara;
     [SerializeField] private float maxTauntTimer = 0.1f;
     [SerializeField] float rotationSpeed = 5.0f;
+    
     private new void Awake()
     {
         base.Awake();
