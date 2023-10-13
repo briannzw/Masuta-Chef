@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Character.Hit
 {
     using StatEffect;
+    using UnityEngine.TextCore.Text;
 
     public class AOEController : HitController
     {
@@ -27,48 +28,76 @@ namespace Character.Hit
         private void OnTriggerEnter(Collider other)
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
-            if (TargetTag == null && Source.Holder == null) return;
-            if (TargetTag != null && TargetTag != "" && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag) ))
+            if (Source != null)
             {
-                Character chara = other.GetComponent<Character>();
-                if (chara == null) return;
+                if (Source.Holder == null || string.IsNullOrEmpty(Source.TargetTag)) return;
 
-                if (characterAffected.Contains(chara))
-                {
-                    if (ContinuousHitOnTrigger)
-                    {
-                        if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
-                        // Changeable
-                        if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
-                    }
-
-                    if (Behaviour == AOEBehaviour.ApplyOnStay)
-                    {
-                        characterInArea.Add(chara);
-                        ApplyEffect(chara);
-                    }
-                    return;
-                }
-                
-                // First Hit Register
-                characterAffected.Add(chara);
-                Hit(chara);
+                if (!other.CompareTag(Source.TargetTag)) return;
             }
+            else
+            {
+                if (string.IsNullOrEmpty(TargetTag)) return;
+                if (!other.CompareTag(TargetTag)) return;
+            }
+
+            Character chara = other.GetComponent<Character>();
+            if (chara == null) return;
+
+            if (characterAffected.Contains(chara))
+            {
+                if (ContinuousHitOnTrigger)
+                {
+                    if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
+                    // Changeable
+                    if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
+                }
+
+                if (Behaviour == AOEBehaviour.ApplyOnStay)
+                {
+                    characterInArea.Add(chara);
+                    ApplyEffect(chara);
+                }
+                return;
+            }
+
+            // First Hit Register
+            characterAffected.Add(chara);
+            Hit(chara);
+
             //else if(other.CompareTag(Source.TargetTag)){ characterInArea.Add(chara); }
         }
 
         private void OnTriggerExit(Collider other)
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
-            if (TargetTag != null && TargetTag != "" && other.CompareTag(TargetTag) || (Source != null && Source.TargetTag != null && other.CompareTag(Source.TargetTag)))
+            if (Source != null)
             {
-                Character chara = other.GetComponent<Character>();
-                if (chara == null) return;
-
-                if (Behaviour == AOEBehaviour.ApplyOnStay)
+                if (Source.Holder == null) return;
+                if (other.CompareTag(Source.TargetTag))
                 {
-                    characterInArea.Remove(chara);
-                    PauseEffect(chara);
+                    Character chara = other.GetComponent<Character>();
+                    if (chara == null) return;
+
+                    if (Behaviour == AOEBehaviour.ApplyOnStay)
+                    {
+                        characterInArea.Remove(chara);
+                        PauseEffect(chara);
+                    }
+                }
+            }
+            else
+            {
+                if (TargetTag == null || TargetTag == string.Empty) return;
+                if (other.CompareTag(TargetTag))
+                {
+                    Character chara = other.GetComponent<Character>();
+                    if (chara == null) return;
+
+                    if (Behaviour == AOEBehaviour.ApplyOnStay)
+                    {
+                        characterInArea.Remove(chara);
+                        PauseEffect(chara);
+                    }
                 }
             }
         }

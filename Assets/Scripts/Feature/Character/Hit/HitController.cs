@@ -42,7 +42,17 @@ namespace Character.Hit
         public void Hit(Character character)
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
-            if (TargetTag != null && !character.CompareTag(TargetTag) || (Source != null && !character.CompareTag(Source.TargetTag))) return;
+            if(Source == null)
+            {
+                if (Source.Holder == null) return;
+                if (string.IsNullOrEmpty(Source.TargetTag)) return;
+                if (!character.CompareTag(Source.TargetTag)) return;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(TargetTag)) return;
+                if (!character.CompareTag(TargetTag)) return;
+            }
 
             if(ApplyEffectFirst) ApplyEffect(character);
 
