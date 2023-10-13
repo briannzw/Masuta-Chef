@@ -34,14 +34,14 @@ public class CreamyDispenserController : Weapon.Weapon
     {
         //base.StartAttack();
         vfx.Play();
-        AttackArea.active = true;
+        AttackArea.SetActive(true);
     }
 
     public override void StopAttack()
     {
         //base.StopAttack();
         vfx.Stop();
-        AttackArea.active = false;
+        AttackArea.SetActive(false);
     }
 
     #region Method
