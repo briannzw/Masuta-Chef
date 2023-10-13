@@ -1,3 +1,4 @@
+using Player.Input;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.Windows;
 
 namespace Player.Controller
 {
-    public class PlayerWeaponController : MonoBehaviour
+    public class PlayerWeaponController : PlayerInputControl
     {
         #region Properties
         [Header("Weapon Setting")]
@@ -22,7 +23,6 @@ namespace Player.Controller
         [SerializeField] private LayerMask groundMask;
 
         private Camera maincamera;
-        private PlayerAction playerControls;
         #endregion
 
         #region Lifecycle
@@ -30,8 +30,6 @@ namespace Player.Controller
         void Start()
         {
             maincamera = Camera.main;
-            playerControls = InputManager.PlayerAction;
-            RegisterInputCallbacks();
         }
 
         // Update is called once per frame
@@ -40,19 +38,10 @@ namespace Player.Controller
             Aim();
         }
 
-        private void OnEnable()
-        {
-            RegisterInputCallbacks();
-        }
-
-        private void OnDisable()
-        {
-            UnregisterInputCallbacks();
-        }
         #endregion
 
         #region Callbacks
-        private void RegisterInputCallbacks()
+        protected override void RegisterInputCallbacks()
         {
             if (playerControls == null) return;
 
@@ -61,7 +50,7 @@ namespace Player.Controller
             playerControls.Gameplay.Fire.canceled += OnInputActionEnd;
         }
 
-        private void UnregisterInputCallbacks()
+        protected override void UnregisterInputCallbacks()
         {
             if (playerControls == null) return;
 
@@ -116,6 +105,16 @@ namespace Player.Controller
             { 
                 return (success: false, position: Vector3.zero); 
             }
+        }
+
+        protected override void RegisterInputCallbacks()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void UnregisterInputCallbacks()
+        {
+            throw new System.NotImplementedException();
         }
         #endregion
     }
