@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Crate
 {
@@ -12,6 +13,7 @@ namespace Crate
         public Transform Holder { get; set; }
         public bool IsHeld => Holder != null;
 
+        public bool RandomColorOnStart = false;
         public CrateColor crateColor;
 
         public Rigidbody rb { get; set; }
@@ -25,6 +27,7 @@ namespace Crate
 
         private void Start()
         {
+            if(RandomColorOnStart) crateColor = (CrateColor) Random.Range(0, Enum.GetNames(typeof(CrateColor)).Length);
             // Mengatur warna krate sesuai dengan enum CrateColor
             switch (crateColor)
             {

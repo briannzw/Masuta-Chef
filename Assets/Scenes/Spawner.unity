@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac1da1dd841afd41a8253b11f78e38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelData: {fileID: 11400000, guid: 4225426808cd7274795241e216deef45, type: 2}
+  levelManager: {fileID: 666763695}
   Spawners:
     _serializedList: []
 --- !u!1 &832575517
@@ -984,6 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 1832258754}
+  LevelManager: {fileID: 666763695}
 --- !u!1 &1553583826
 GameObject:
   m_ObjectHideFlags: 3

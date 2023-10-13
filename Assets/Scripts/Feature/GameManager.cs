@@ -1,3 +1,4 @@
+using Level;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,5 +17,5 @@ public class GameManager : MonoBehaviour
 
     [Header("Static References")]
     public Transform PlayerTransform;
-
+    public LevelManager LevelManager;
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Wave
 {
@@ -11,11 +10,17 @@ namespace Wave
     public class WaveManager : MonoBehaviour
     {
         [Header("References")]
-        public LevelData LevelData;
+        [SerializeField] private LevelManager levelManager;
+        protected LevelData LevelData;
         public SerializedDictionary<GameObject, List<NavMeshSpawner>> Spawners = new SerializedDictionary<GameObject, List<NavMeshSpawner>>();
 
         private float gameTime = 0f;
         private int currentWaveIndex = 0;
+
+        private void Awake()
+        {
+            LevelData = levelManager.CurrentLevel;
+        }
 
         private void Update()
         {

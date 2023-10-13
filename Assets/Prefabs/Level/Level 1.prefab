@@ -20701,6 +20701,7 @@ Transform:
   - {fileID: 5932577615040805037}
   - {fileID: 4160895958671051636}
   - {fileID: 4298090358189223477}
+  - {fileID: 2993749548831816595}
   m_Father: {fileID: 4241932386359998352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5864869965313899675
@@ -24264,6 +24265,58 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &7935171185735799759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2993749548831816595}
+  - component: {fileID: 7201132134800898900}
+  m_Layer: 0
+  m_Name: Crate Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2993749548831816595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7935171185735799759}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4563190563715540634}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7201132134800898900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7935171185735799759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4638e39b23553734eb8a4fbc41941802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 4423516174392846161, guid: bdf60b689a12d8140b8eccf2e45be70a,
+    type: 3}
+  spawnArea: {x: 50, y: 1, z: 50}
+  spawnOffset: {x: 0, y: 1, z: 0}
+  randomizeRotation: 0
+  maxSpawnObjectInPool: 100
+  maxRandomPosIteration: 1000
+  amount: 1
 --- !u!1 &8273604882421969818
 GameObject:
   m_ObjectHideFlags: 0
