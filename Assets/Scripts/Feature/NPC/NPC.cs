@@ -34,6 +34,7 @@ public class NPC : MonoBehaviour
         NPCAttackState = new NPCAttackState(this, StateMachine);
         Agent = GetComponent<NavMeshAgent>();
         Agent.speed = MoveSpeed;
+        Agent.stoppingDistance = StopDistance;
     }
     // Start is called before the first frame update
     void Start()

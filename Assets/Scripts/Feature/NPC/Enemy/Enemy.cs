@@ -34,7 +34,7 @@ public class Enemy : NPC
         currentTauntTimer -= Time.deltaTime;
         if (!IsTaunted)
         {
-            TargetPosition = GameManager.playerTransform.position;
+            TargetPosition = GameManager.Instance.PlayerTransform.position;
         }
 
         if (Agent.remainingDistance <= StopDistance)

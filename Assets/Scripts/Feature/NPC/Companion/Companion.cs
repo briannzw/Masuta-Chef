@@ -31,10 +31,6 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
         chara = GetComponent<Character.Character>();
         chara.OnDie += CompanionDie;
     }
-    public void Attack()
-    {
-
-    }
 
     private void CompanionDie()
     {
@@ -43,7 +39,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
 
     public void DetectTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(GameManager.playerTransform.position, DetectionRadius);
+        Collider[] colliders = Physics.OverlapSphere(GameManager.Instance.PlayerTransform.position, DetectionRadius);
         float closestDistance = Mathf.Infinity;
         Transform closestEnemy = null;
 
@@ -92,7 +88,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
     }
     protected new void Update()
     {
-        DistanceFromPlayer = Vector3.Distance(transform.position, GameManager.playerTransform.position);
+        DistanceFromPlayer = Vector3.Distance(transform.position, GameManager.Instance.PlayerTransform.position);
 
         base.Update();
         NavMeshHit hit;
@@ -117,7 +113,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
         // Change state based on distance from player
         if (DistanceFromPlayer > MaxDistanceFromPlayer)
         {
-            TargetPosition = GameManager.playerTransform.position;
+            TargetPosition = GameManager.Instance.PlayerTransform.position;
             StateMachine.ChangeState(NPCMoveState);
             followEnemy = false;
         }

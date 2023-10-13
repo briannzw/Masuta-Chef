@@ -34,10 +34,10 @@ public class CompanionAttackerClose : Companion
 
     private void OnDrawGizmos()
     {
-        if(GameManager.playerTransform != null)
+        if(GameManager.Instance.PlayerTransform.position != null)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(GameManager.playerTransform.position, DetectionRadius);
+            Gizmos.DrawWireSphere(GameManager.Instance.PlayerTransform.position, DetectionRadius);
         }
     }
 }

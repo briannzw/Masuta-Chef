@@ -153,18 +153,18 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
     void RunAwayFromPlayer()
     {
         // Calculate the distance between the enemy and the player
-        float distanceToPlayer = Vector3.Distance(transform.position, GameManager.playerTransform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, GameManager.Instance.PlayerTransform.position);
 
         // If the player is too close, run away from the player using NavMesh
         if (distanceToPlayer < safeDistance)
         {
             // Calculate the direction away from the player
-            Vector3 runDirection = transform.position - GameManager.playerTransform.position;
+            Vector3 runDirection = transform.position - GameManager.Instance.PlayerTransform.position;
 
             // Calculate the target position by adding the run direction to the enemy's position
             TargetPosition = transform.position + runDirection.normalized * safeDistance;
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(TargetPosition, out hit, 5f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(TargetPosition, out hit, 5f, 1 << NavMesh.GetAreaFromName("Walkable")))
             {
                 TargetPosition = hit.position;
             }
