@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
 {
+    [SerializeField] private float pickCrateRadius = 4f;
     [field: SerializeField] public float DetectionRadius { get; set; }
     public string TargetTag { get; set; }
     [field: SerializeField] public float WanderRadius { get; set; }
@@ -50,7 +51,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
 
     public void DetectTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, DetectionRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, pickCrateRadius);
         float closestDistance = Mathf.Infinity;
         Transform closestCrate = null;
 
