@@ -29,7 +29,7 @@ namespace Player.Controller
         protected override void Start()
         {
             base.Start();
-            ActiveWeapon?.OnEquip(GetComponent<Character.Character>());
+            if(ActiveWeapon != null) ActiveWeapon.OnEquip(GetComponent<Character.Character>());
         }
 
         private void Update()

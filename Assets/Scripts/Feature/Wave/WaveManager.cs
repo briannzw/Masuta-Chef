@@ -6,6 +6,7 @@ namespace Wave
 {
     using AYellowpaper.SerializedCollections;
     using Level;
+    using Loot;
     using Spawner;
     public class WaveManager : MonoBehaviour
     {
@@ -61,7 +62,11 @@ namespace Wave
                         spawner.Spawn(total);
                         total = 0;
                     }
-                    spawner.Spawn(spawnCount);
+                    List<GameObject> enemies = spawner.Spawn(spawnCount);
+                    foreach(var enemy in enemies)
+                    {
+                        enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
+                    }
                     total -= spawnCount;
                     timer = 0f;
                 }

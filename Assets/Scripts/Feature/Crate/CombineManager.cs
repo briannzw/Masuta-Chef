@@ -15,6 +15,9 @@ namespace Crate.Combine
         [SerializeField] private GameObject ingredientPrefab;
         [SerializeField] private GameObject medkitPrefab;
 
+        [Header("Position")]
+        [SerializeField] private Vector3 offset;
+
         [Header("Dictionaries")]
         [SerializeField] private SerializedDictionary<CrateColor, Ingredient> Ingredients;
         [SerializeField] private SerializedDictionary<CrateColor, GameObject> Weapons;
@@ -23,6 +26,8 @@ namespace Crate.Combine
         public bool Combine(List<CrateColor> colors)
         {
             NavMesh.SamplePosition(transform.position, out var hit, 10f, 1 << LayerMask.GetMask("Walkable"));
+
+            hit.position += offset;
 
             // Ingredients
             if (colors.Count == 1)
