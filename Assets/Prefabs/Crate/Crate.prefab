@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1243679347371465655}
   - component: {fileID: 5754620734434685907}
   - component: {fileID: 1306469154919621162}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Crate
   m_TagString: Crate
   m_Icon: {fileID: 0}
@@ -146,4 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09ac02bc8c4c824cad79bf0ff383ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RandomColorOnStart: 1
   crateColor: 0

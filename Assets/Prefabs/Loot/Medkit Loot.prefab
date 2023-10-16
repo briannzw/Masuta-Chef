@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 227412897831345453}
   - component: {fileID: 692663755027954418}
   - component: {fileID: 1649975113477027591}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Medkit Loot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   lifetime: 20
   <Effects>k__BackingField:
   - StatsAffected: 0
-    StatValue: 20
+    StatValue: 2000
     StatModifierType: 100
     overwriteOrder: 0
     priorityOrder: 0

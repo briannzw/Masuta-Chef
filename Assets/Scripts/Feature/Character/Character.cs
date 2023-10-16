@@ -147,7 +147,7 @@ namespace Character
             RemoveEffect(effect);
         }
 
-        private void TakeEffect(Effect effect)
+        public void TakeEffect(Effect effect)
         {
             if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(effect.Modifier.Value, effect.StatsAffected, 1);
             else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, effect.StatsAffected, 1);

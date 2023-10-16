@@ -42,7 +42,7 @@ namespace Character.Hit
         public void Hit(Character character)
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
-            if(Source == null)
+            if(Source != null)
             {
                 if (Source.Holder == null) return;
                 if (string.IsNullOrEmpty(Source.TargetTag)) return;

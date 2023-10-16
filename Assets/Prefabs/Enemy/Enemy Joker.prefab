@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1388417376668846636}
   - component: {fileID: 5548581489195279947}
   - component: {fileID: 642378096491871175}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Enemy Joker
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -232,6 +232,7 @@ MonoBehaviour:
   IsTaunted: 0
   maxTauntTimer: 5
   rotationSpeed: 5
+  pickCrateRadius: 4
   <DetectionRadius>k__BackingField: 7
   <WanderRadius>k__BackingField: 15
   <WanderInterval>k__BackingField: 3

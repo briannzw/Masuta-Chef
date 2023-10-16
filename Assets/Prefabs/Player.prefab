@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 6339605501897313414}
   - component: {fileID: 3467193696550128806}
   - component: {fileID: 851108127196632086}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -592,7 +592,7 @@ MonoBehaviour:
   PickupAngle: 120
   TargetMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 512
   ThrowForce: 10
   ThrowLowAngle: 15
   ThrowHighAngle: 315
@@ -613,7 +613,7 @@ MonoBehaviour:
   InteractAngle: 125
   TargetMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 3072
 --- !u!114 &3467193696550128806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,7 +635,7 @@ MonoBehaviour:
       m_Calls: []
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &851108127196632086
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 695634202304293039}
   - component: {fileID: 5191980429148765842}
   - component: {fileID: -6445478362395283380}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Companion Taunter
   m_TagString: Companion
   m_Icon: {fileID: 0}
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff99a480d3b89f41911e513a9d1beee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedWeapon: 0
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   MoveSpeed: 5

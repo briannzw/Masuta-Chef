@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8471929417207873113}
   - component: {fileID: 2464117433372997242}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Saber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,13 +232,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 8662518602482338326}
+  TargetTag: 
   Value:
     CharacterAttack: 0
-    WeaponAttack: 100
+    WeaponAttack: 600
     Multiplier: 1
   Type: 0
   ApplyEffectFirst: 0
   <Effects>k__BackingField: []
   AreaDuration: 1e+11
   Behaviour: 0
+  ContinuousHitOnTrigger: 1
   characterInArea: []

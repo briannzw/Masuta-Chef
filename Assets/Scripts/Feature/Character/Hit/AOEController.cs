@@ -5,8 +5,6 @@ using UnityEngine;
 namespace Character.Hit
 {
     using StatEffect;
-    using UnityEngine.TextCore.Text;
-
     public class AOEController : HitController
     {
         public float AreaDuration;
