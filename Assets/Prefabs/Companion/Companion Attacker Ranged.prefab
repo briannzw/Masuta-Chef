@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed6b17d5f34eae4b9e8e5072066367e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedWeapon: 1
+  SelectedWeapon: 1
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   MoveSpeed: 5
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3f0795cdb5a5f4ea6785f84f863d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatsPreset: {fileID: 11400000, guid: 8ba7e03b56cc1024d898dce08d75833d, type: 2}
+  StatsPreset: {fileID: 11400000, guid: d56af84787d52414a984c0fba8dc74b7, type: 2}
   Stats:
     StatList:
       _serializedList:
@@ -727,8 +727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da51be4a55b754b41b831d50903e3f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chara: {fileID: 6165715537076772562}
-  slider: {fileID: 9116366767697262245}
 --- !u!1 &8958914655740330219
 GameObject:
   m_ObjectHideFlags: 0

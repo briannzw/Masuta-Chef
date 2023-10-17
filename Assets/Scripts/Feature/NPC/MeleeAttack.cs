@@ -22,12 +22,8 @@ public class MeleeAttack : MonoBehaviour
         GameObject instantiatedObject = Instantiate(meleeAttackArea, spawnPosition, spawnRotation);
         if (instantiatedObject != null)
         {
-            Character.Hit.HitController hitController = instantiatedObject.GetComponent<Character.Hit.HitController>();
-            if (hitController != null)
-            {
-                hitController.Value.CharacterAttack = (chara.Stats.StatList[StatsEnum.Attack] as CharacterDynamicStat).Value;
-            }
+            instantiatedObject.GetComponent<Character.Hit.HitController>().Value.CharacterAttack = chara.Stats.StatList[StatsEnum.Attack].Value;
         }
-        
+
     }
 }

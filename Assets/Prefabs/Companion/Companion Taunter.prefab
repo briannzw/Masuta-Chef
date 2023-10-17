@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 695634202304293039}
   - component: {fileID: 5191980429148765842}
   - component: {fileID: -6445478362395283380}
+  - component: {fileID: 2781501524623450703}
   m_Layer: 6
   m_Name: Companion Taunter
   m_TagString: Companion
@@ -38,6 +39,7 @@ Transform:
   - {fileID: 209561185216686504}
   - {fileID: 3527553835315709098}
   - {fileID: 5861394232836964757}
+  - {fileID: 4199601117347936182}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3821338847684953000
@@ -147,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff99a480d3b89f41911e513a9d1beee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedWeapon: 0
+  SelectedWeapon: 0
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   MoveSpeed: 5
@@ -198,6 +200,22 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
+--- !u!114 &2781501524623450703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204745779977513086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d55179696ff38e4a8fe7c2d69466344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAttackPos: {fileID: 2799912044170779782}
+  meleeAttackArea: {fileID: 928575690747839946, guid: 6b00bbbfd16d0184a89903bf8ab4b78f,
+    type: 3}
+  AttackInterval: 2
 --- !u!1 &974479665228264613
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +501,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2799912044170779782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4199601117347936182}
+  m_Layer: 8
+  m_Name: MeleeAttackPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4199601117347936182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799912044170779782}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3895952252310855480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3687796592302558013
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,5 +847,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da51be4a55b754b41b831d50903e3f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chara: {fileID: -6445478362395283380}
-  slider: {fileID: 1678932231212597916}

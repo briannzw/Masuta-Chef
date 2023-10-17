@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22090c3525153a646b1d3ba0cedb9219, type: 3}
-  m_Name: Ranged Enemy
+  m_Name: Companion Ranged
   m_EditorClassIdentifier: 
   Stats:
     StatList:
       _serializedList:
       - Key: 0
         Value:
-          BaseValue: 6000
+          BaseValue: 5000
+      - Key: 1
+        Value:
+          BaseValue: 100
       - Key: 2
         Value:
           BaseValue: 300
@@ -26,13 +29,10 @@ MonoBehaviour:
           BaseValue: 50
       - Key: 4
         Value:
-          BaseValue: 50
+          BaseValue: 55
       - Key: 5
         Value:
-          BaseValue: 10
+          BaseValue: 20
       - Key: 6
-        Value:
-          BaseValue: 1
-      - Key: 1
         Value:
           BaseValue: 1

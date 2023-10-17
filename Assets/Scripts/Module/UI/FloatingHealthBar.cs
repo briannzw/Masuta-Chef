@@ -20,7 +20,7 @@ namespace Module.UI
 
         private void Start()
         {
-            slider.maxValue = (chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).Value;
+            slider.maxValue = chara.Stats.StatList[StatsEnum.Health].Value;
         }
         private void LateUpdate()
         {

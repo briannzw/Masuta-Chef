@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1594296166155847278}
   - component: {fileID: 1274639797188460813}
   - component: {fileID: 947245129150776365}
+  - component: {fileID: 3446113690889157711}
   m_Layer: 0
   m_Name: EnemyMeleeAttackArea
   m_TagString: Untagged
@@ -66,13 +67,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Source: {fileID: 0}
+  TargetTag: Player
   Value:
     CharacterAttack: 50000
     WeaponAttack: 20
     Multiplier: 1
-  TargetTag: Player
   Type: 0
   ApplyEffectFirst: 0
   <Effects>k__BackingField: []
   AreaDuration: 0.1
   Behaviour: 0
+  ContinuousHitOnTrigger: 0
+  characterInArea: []
+--- !u!114 &3446113690889157711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928575690747839946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Source: {fileID: 0}
+  TargetTag: Companion
+  Value:
+    CharacterAttack: 50000
+    WeaponAttack: 20
+    Multiplier: 1
+  Type: 0
+  ApplyEffectFirst: 0
+  <Effects>k__BackingField: []
+  AreaDuration: 0.1
+  Behaviour: 0
+  ContinuousHitOnTrigger: 0
+  characterInArea: []

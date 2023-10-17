@@ -66,13 +66,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Source: {fileID: 0}
+  TargetTag: Enemy
   Value:
-    CharacterAttack: 30000
+    CharacterAttack: 300000
     WeaponAttack: 20
     Multiplier: 1
-  TargetTag: Enemy
   Type: 0
   ApplyEffectFirst: 0
   <Effects>k__BackingField: []
   AreaDuration: 0.1
   Behaviour: 0
+  ContinuousHitOnTrigger: 0
+  characterInArea: []

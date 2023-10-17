@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2240110501170061358}
   - component: {fileID: 4632231434161317530}
   - component: {fileID: 8280658024822496442}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Crate Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,6 +352,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647208168357749722, guid: af2ad56bbc5de454e90a8255042bc619,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

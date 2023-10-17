@@ -526,8 +526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da51be4a55b754b41b831d50903e3f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chara: {fileID: -4670273841599568030}
-  slider: {fileID: 5023010013339776116}
 --- !u!1 &7212286518193524450
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8165f190f1502c5408c3292aaf719fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedWeapon: 0
+  SelectedWeapon: 0
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   MoveSpeed: 5
