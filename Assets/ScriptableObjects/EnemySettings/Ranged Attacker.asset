@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: Ranged Attacker
   m_EditorClassIdentifier: 
   Prefab: {fileID: 2609905847538178790, guid: ddf4fe37e33f98c4fb2af302797decee, type: 3}
-  StatsPreset: {fileID: 11400000, guid: 1f528ea5d938f0949b28496f7f402dfe, type: 2}
+  StatsPreset: {fileID: 11400000, guid: 134563626cd63364480532904e4863ee, type: 2}
   Stats:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 100
+      - Key: 1
+        Value:
+          BaseValue: 100
     StatList:
       _serializedList:
       - Key: 0

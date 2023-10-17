@@ -8,6 +8,9 @@ namespace Wave
     using Level;
     using Loot;
     using Spawner;
+    using Character;
+    using Character.Stat;
+
     public class WaveManager : MonoBehaviour
     {
         [Header("References")]
@@ -43,13 +46,13 @@ namespace Wave
                 int spawnCount = enemy.Value / Spawners[enemy.Key.Prefab].Count;
                 for (int i = 0; i < Spawners[enemy.Key.Prefab].Count; i++)
                 {
-                    if (i < spawnMod) StartCoroutine(SpawnEnemies(Spawners[enemy.Key.Prefab][i], spawnCount + 1, wave.SpawnPerInterval, wave.SpawnInterval));
-                    else StartCoroutine(SpawnEnemies(Spawners[enemy.Key.Prefab][i], spawnCount, wave.SpawnPerInterval, wave.SpawnInterval));
+                    if (i < spawnMod) StartCoroutine(SpawnEnemies(Spawners[enemy.Key.Prefab][i], spawnCount + 1, wave.SpawnPerInterval, wave.SpawnInterval, enemy.Key.StatsPreset));
+                    else StartCoroutine(SpawnEnemies(Spawners[enemy.Key.Prefab][i], spawnCount, wave.SpawnPerInterval, wave.SpawnInterval, enemy.Key.StatsPreset));
                 }
             }
         }
 
-        private IEnumerator SpawnEnemies(NavMeshSpawner spawner, int total, int spawnCount, float interval)
+        private IEnumerator SpawnEnemies(NavMeshSpawner spawner, int total, int spawnCount, float interval, StatsPreset enemyPreset)
         {
             float timer = 0f;
             while (total > 0)
@@ -60,11 +63,14 @@ namespace Wave
                     if(total < spawnCount)
                     {
                         spawner.Spawn(total);
-                        total = 0;
+                        break;
                     }
+
                     List<GameObject> enemies = spawner.Spawn(spawnCount);
                     foreach(var enemy in enemies)
                     {
+                        if(enemy.GetComponent<Character>() == null) enemy.AddComponent<Character>();
+                        enemy.GetComponent<Character>().StatsPreset = enemyPreset;
                         if(enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
                         enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
                     }

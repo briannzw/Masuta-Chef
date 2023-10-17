@@ -1,7 +1,10 @@
-public enum StatsEnum
+public enum DynamicStatsEnum
 {
     Health,
     Mana,
+}
+public enum StatsEnum
+{
     Attack,
     Defense,
     Speed,

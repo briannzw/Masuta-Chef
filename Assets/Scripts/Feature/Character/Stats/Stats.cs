@@ -4,18 +4,22 @@ namespace Character.Stat
     using Kryz.CharacterStats;
     using System;
 
-    [System.Serializable]
+    [Serializable]
     public class Stats
     {
+        public SerializedDictionary<DynamicStatsEnum, CharacterDynamicStat> DynamicStatList;
         public SerializedDictionary<StatsEnum, CharacterStat> StatList;
 
         // Default Values
         public Stats()
         {
+            DynamicStatList = new SerializedDictionary<DynamicStatsEnum, CharacterDynamicStat>
+            {
+                { DynamicStatsEnum.Health, new CharacterDynamicStat(100) },
+                { DynamicStatsEnum.Mana, new CharacterDynamicStat(100) }
+            };
             StatList = new SerializedDictionary<StatsEnum, CharacterStat>
             {
-                { StatsEnum.Health, new CharacterDynamicStat(100) },
-                { StatsEnum.Mana, new CharacterDynamicStat(100) },
                 { StatsEnum.Attack, new CharacterStat() },
                 { StatsEnum.Defense, new CharacterStat() },
                 { StatsEnum.Speed, new CharacterStat(50) },
@@ -26,13 +30,15 @@ namespace Character.Stat
 
         public Stats(Stats oldStat)
         {
+            DynamicStatList = new SerializedDictionary<DynamicStatsEnum, CharacterDynamicStat>();
             StatList = new SerializedDictionary<StatsEnum, CharacterStat>();
+            foreach(DynamicStatsEnum Enum in Enum.GetValues(typeof(DynamicStatsEnum)))
+            {
+                DynamicStatList.Add(Enum, new CharacterDynamicStat(oldStat.DynamicStatList[Enum].Value));
+            }
             foreach(StatsEnum Enum in Enum.GetValues(typeof(StatsEnum)))
             {
-                if (oldStat.StatList[Enum] is CharacterDynamicStat)
-                    StatList.Add(Enum, new CharacterDynamicStat(oldStat.StatList[Enum].Value));
-                else
-                    StatList.Add(Enum, new CharacterStat(oldStat.StatList[Enum].Value));
+                StatList.Add(Enum, new CharacterStat(oldStat.StatList[Enum].Value));
             }
         }
 

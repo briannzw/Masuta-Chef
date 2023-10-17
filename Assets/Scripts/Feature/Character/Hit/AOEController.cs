@@ -45,9 +45,9 @@ namespace Character.Hit
             {
                 if (ContinuousHitOnTrigger)
                 {
-                    if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
+                    if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
                     // Changeable
-                    if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
+                    if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
                 }
 
                 if (Behaviour == AOEBehaviour.ApplyOnStay)

@@ -38,28 +38,22 @@ namespace Character
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
         }
 
-        public virtual void TakeDamage(float damageAmount, StatsEnum dynamicEnum, float multiplier = 1)
+        public virtual void TakeDamage(float damageAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1)
         {
-            if (Stats.StatList[dynamicEnum] is not CharacterDynamicStat) return;
-
-            CharacterDynamicStat Stat = Stats.StatList[dynamicEnum] as CharacterDynamicStat;
+            CharacterDynamicStat Stat = Stats.DynamicStatList[dynamicEnum];
 
             // Total Damage Received = (Base Attack + Weapon Attack - Defense) * Final Damage Multiplier
-            StatModifier statMod = new StatModifier(-(damageAmount - (dynamicEnum == StatsEnum.Health ? Stats.StatList[StatsEnum.Defense].Value : 0)) * multiplier, StatModType.Flat);
+            StatModifier statMod = new StatModifier(-(damageAmount - (dynamicEnum == DynamicStatsEnum.Health ? Stats.StatList[StatsEnum.Defense].Value : 0)) * multiplier, StatModType.Flat);
             if (statMod.Value > 0) statMod.Value = 0;
 
             Stat.ChangeCurrentValue(statMod);
 
-            if (Stat.CurrentValue <= 0 && dynamicEnum == StatsEnum.Health) OnDie?.Invoke();
-
-            Debug.Log((Stats.StatList[dynamicEnum] as CharacterDynamicStat).CurrentValue);
+            if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health) OnDie?.Invoke();
         }
 
-        public void TakeHeal(float healAmount, StatsEnum dynamicEnum, float multiplier = 1)
+        public void TakeHeal(float healAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1)
         {
-            if (Stats.StatList[dynamicEnum] is not CharacterDynamicStat) return;
-
-            CharacterDynamicStat Stat = Stats.StatList[dynamicEnum] as CharacterDynamicStat;
+            CharacterDynamicStat Stat = Stats.DynamicStatList[dynamicEnum];
 
             StatModifier statMod = new StatModifier(healAmount * multiplier, StatModType.Flat);
             if(statMod.Value < 0) statMod.Value = 0;
@@ -149,8 +143,10 @@ namespace Character
 
         public void TakeEffect(Effect effect)
         {
-            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(effect.Modifier.Value, effect.StatsAffected, 1);
-            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, effect.StatsAffected, 1);
+            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(effect.Modifier.Value, effect.DynamicStatsAffected, 1);
+            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, effect.DynamicStatsAffected, 1);
+            else if (effect.AffectDynamicStat)
+                Stats.DynamicStatList[effect.DynamicStatsAffected].AddModifier(effect.Modifier);
             else
                 Stats.StatList[effect.StatsAffected].AddModifier(effect.Modifier);
         }

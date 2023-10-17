@@ -13,11 +13,28 @@ namespace Character.StatEffect
     public class Effect
     {
         [Header("Values")]
+        public bool AffectDynamicStat = false;
+#if UNITY_EDITOR
+        [ConditionalField(true, nameof(IsNotDynamicStat))]
+#endif
         public StatsEnum StatsAffected;
+#if UNITY_EDITOR
+        [ConditionalField(true, nameof(IsDynamicStat))]
+#endif
+        public DynamicStatsEnum DynamicStatsAffected;
         //public WeaponStatsEnum WeaponStatsAffected;
         [SerializeField] protected float StatValue;
         [SerializeField] protected StatModType StatModifierType;
         public StatModifier Modifier;
+
+#if UNITY_EDITOR
+        private bool IsDynamicStat()
+        {
+            if (StatusEffect == StatusEffects.Heal || StatusEffect == StatusEffects.Burn) AffectDynamicStat = true;
+            return AffectDynamicStat;
+        }
+        private bool IsNotDynamicStat() => !IsDynamicStat();
+#endif
 
         [Header("Advanced")]
         [SerializeField] protected bool overwriteOrder;
