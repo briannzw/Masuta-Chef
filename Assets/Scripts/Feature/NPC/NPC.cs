@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour
         Utility,
         Joker
     }
-    public AttackType selectedWeapon;
+    public AttackType SelectedWeapon;
     public Animator Animator;
     public Transform TargetTransform;
     public float MoveSpeed;

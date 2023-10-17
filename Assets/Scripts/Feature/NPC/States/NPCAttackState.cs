@@ -26,13 +26,13 @@ public class NPCAttackState : NPCState
         timer -= Time.deltaTime;
         if(timer <= 0)
         {
-            if (npc.GetComponent<NPC>().selectedWeapon == NPC.AttackType.Ranged)
+            if (npc.GetComponent<NPC>().SelectedWeapon == NPC.AttackType.Ranged)
             {
                 npc.GetComponent<ShootBall>().Shoot();
                 timer = npc.GetComponent<ShootBall>().ShootInterval;
             }
 
-            if(npc.GetComponent<NPC>().selectedWeapon == NPC.AttackType.Melee)
+            if (npc.GetComponent<NPC>().SelectedWeapon == NPC.AttackType.Melee)
             {
                 npc.GetComponent<MeleeAttack>().Attack();
                 timer = npc.GetComponent<MeleeAttack>().AttackInterval;

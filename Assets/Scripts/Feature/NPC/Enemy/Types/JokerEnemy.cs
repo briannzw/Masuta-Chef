@@ -16,7 +16,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
     [Range(0, 360)] public float PickupAngle = 125;
     private Pickup.IPickable nearestPickable;
     [SerializeField] private Transform pickupPos;
-    private bool hasCrate => nearestPickable != null;
+    private bool hasCrate = false;
     [SerializeField] private float safeDistance = 10f;
 
     private new void Update()
@@ -47,6 +47,11 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
         {
             RunAwayFromPlayer();
         }
+
+        if(pickupPos.childCount < 1)
+        {
+            hasCrate = false;
+        }
     }
 
     public void DetectTarget()
@@ -68,7 +73,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
             }
         }
 
-        if (closestCrate != null)
+        if (closestCrate != null && !closestCrate.gameObject.GetComponent<Crate.CrateController>().IsHeld)
         {
             isPickingUpCrate = true;
             TargetPosition = closestCrate.position;
@@ -107,6 +112,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
             if (nearestObject != null)
             {
                 nearestPickable = nearestObject.GetComponent<Pickup.IPickable>();
+                hasCrate = true;
                 if (nearestPickable != null && nearestPickable.StartPickup(gameObject))
                 {
                     nearestObject.transform.parent = pickupPos;
