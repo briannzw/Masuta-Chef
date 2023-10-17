@@ -27,7 +27,8 @@ namespace Character.Stat
         public Stats(Stats oldStat)
         {
             StatList = new SerializedDictionary<StatsEnum, CharacterStat>();
-            foreach(StatsEnum Enum in Enum.GetValues(typeof(StatsEnum)))
+            StatList.Clear();
+            foreach (StatsEnum Enum in Enum.GetValues(typeof(StatsEnum)))
             {
                 if (oldStat.StatList[Enum] is CharacterDynamicStat)
                     StatList.Add(Enum, new CharacterDynamicStat(oldStat.StatList[Enum].Value));

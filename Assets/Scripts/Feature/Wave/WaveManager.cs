@@ -60,7 +60,7 @@ namespace Wave
                     if(total < spawnCount)
                     {
                         spawner.Spawn(total);
-                        total = 0;
+                        break;
                     }
                     List<GameObject> enemies = spawner.Spawn(spawnCount);
                     foreach(var enemy in enemies)
