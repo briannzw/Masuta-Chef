@@ -10,11 +10,11 @@ namespace Character.Hit
         [SerializeField] private float areaRadius = 5f;
         [SerializeField] private Vector3 areaOffset;
         [SerializeField] private LayerMask targetMask;
-        [SerializeField] private float areaAngle;
+        [SerializeField] private float areaAngle = 120f;
 
         [Header("Parameters")]
-        public float Delay;
-        public float Interval;
+        public float Delay = 0;
+        public float Interval = .5f;
 
         private void OnEnable()
         {
@@ -40,7 +40,7 @@ namespace Character.Hit
         protected void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, areaRadius);
+            Gizmos.DrawWireSphere(transform.position + areaOffset, areaRadius);
             Gizmos.color = Color.yellow;
             GizmosExtensions.DrawWireArc(transform.position + areaOffset, transform.forward, areaAngle, areaRadius);
         }
