@@ -1,5 +1,6 @@
 using Character;
 using Character.Hit;
+using Spawner;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class GunController : Weapon.Weapon
 {
     #region Properties
     public GameObject fireObjectPrefab;
+    public Spawner.Spawner spawner;
     #endregion
 
     protected new void Update()
@@ -20,10 +22,15 @@ public class GunController : Weapon.Weapon
     #region Method
     public override void Attack()
     {
-        var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
-        var controller = fireObject.GetComponent<AOEController>();
-        controller.Initialize(this);
-        fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
+        List<GameObject> bullets = spawner.Spawn();
+        // var fireObject = spawner.Spawn(fireObjectPrefab, transform.position, transform.rotation);
+        foreach (GameObject bullet in bullets)
+        {   
+            bullet.transform.forward = transform.forward;
+        }
+        // var controller = fireObject.GetComponent<AOEController>();
+        // controller.Initialize(this);
+        // fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
     }
     #endregion
 }

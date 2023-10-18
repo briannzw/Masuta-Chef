@@ -32,10 +32,10 @@ public class Enemy : NPC
         //Debug.Log("Is Taunted: " + IsTaunted);
         base.Update();
         currentTauntTimer -= Time.deltaTime;
-        if (!IsTaunted)
-        {
-            TargetPosition = GameManager.Instance.PlayerTransform.position;
-        }
+        // if (!IsTaunted)
+        // {
+        //     TargetPosition = GameManager.Instance.PlayerTransform.position;
+        // }
 
         if (Agent.remainingDistance <= StopDistance)
         {

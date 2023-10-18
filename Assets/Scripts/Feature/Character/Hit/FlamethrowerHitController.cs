@@ -1,18 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using Character.Dummy;
+using Character.Hit;
+using MyBox;
 using UnityEngine;
 
-public class FlamethrowerHitController : MonoBehaviour
+namespace Character.Hit
 {
-    // Start is called before the first frame update
-    void Start()
+    using StatEffect;
+    public class FlamethrowerAOEController : HitController
     {
-        
-    }
+        #region Properties
+        private bool canFire = true;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Get reference from player and weapon
+        private CreamyDispenserController weapon; 
+        #endregion
+
+        #region Collision Controller    
+        private void OnTriggerStay(Collider other) 
+        {
+            if (canFire)
+            {
+                if (!other.CompareTag(TargetTag)) return;
+
+                Character character = other.GetComponent<Character>();
+                if(character == null) return;
+
+                Hit(character);
+                Debug.Log("Hitting Enemy : "+other.name);
+                StartCoroutine(Cooldown());
+            }
+        }
+        #endregion
+
+        #region Helper Function
+        private IEnumerator Cooldown()
+        {
+            canFire = false;
+            yield return new WaitForSeconds(Source.stats[Weapon.Weapon.WeaponStatsEnum.Speed].Value / 100);
+            canFire = true;
+        }   
+        #endregion
     }
 }
+

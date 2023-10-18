@@ -22,7 +22,7 @@ public class CreamyDispenserController : Weapon.Weapon
         vfx = fireObjectPrefab.GetComponent<ParticleSystem>();
         AOEController aoeController = AttackArea.GetComponent<AOEController>();
         aoeController.Initialize(this);
-        vfx.Stop();
+        // this.StopAttack();
     }
     protected new void Update()
     {
@@ -33,14 +33,14 @@ public class CreamyDispenserController : Weapon.Weapon
     {
         //base.StartAttack();
         vfx.Play();
-        AttackArea.SetActive(true);
+        // AttackArea.SetActive(true);
     }
 
     public override void StopAttack()
     {
         //base.StopAttack();
         vfx.Stop();
-        AttackArea.SetActive(false);
+        // AttackArea.SetActive(false);
     }
 
     #region Method
