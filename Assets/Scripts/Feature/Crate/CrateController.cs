@@ -12,6 +12,7 @@ namespace Crate
     {
         public Transform Holder { get; set; }
         public bool IsHeld => Holder != null;
+        public GameObject CurrentPicker;
 
         public bool RandomColorOnStart = false;
         public CrateColor crateColor;
@@ -48,9 +49,9 @@ namespace Crate
 
         public bool StartPickup(GameObject picker)
         {
-            if (IsHeld && !picker.CompareTag("Player")) return false;
-
-            if(Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
+            CurrentPicker = picker;
+            if (IsHeld && !picker.CompareTag("Player") && !picker.CompareTag("Enemy")) return false;
+            if (Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
 
             // Memindahkan objek ke pemegang (picker)
             Holder = picker.transform;

@@ -20,7 +20,7 @@ public class MeleeAttack : MonoBehaviour
         Quaternion spawnRotation = Quaternion.identity; // Set your desired spawn rotation here
 
         GameObject instantiatedObject = Instantiate(meleeAttackArea, spawnPosition, spawnRotation);
-        if(instantiatedObject != null)
+        if (instantiatedObject != null)
         {
             instantiatedObject.GetComponent<Character.Hit.HitController>().Value.CharacterAttack = chara.Stats.StatList[StatsEnum.Attack].Value;
         }

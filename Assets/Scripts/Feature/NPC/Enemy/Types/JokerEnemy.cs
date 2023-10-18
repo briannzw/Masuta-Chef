@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
 {
-    [SerializeField] private float pickCrateRadius = 4f;
+    [SerializeField] private float pickCrateRadius = 2f;
     [field: SerializeField] public float DetectionRadius { get; set; }
     public string TargetTag { get; set; }
     [field: SerializeField] public float WanderRadius { get; set; }
@@ -16,7 +16,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
     [Range(0, 360)] public float PickupAngle = 125;
     private Pickup.IPickable nearestPickable;
     [SerializeField] private Transform pickupPos;
-    private bool hasCrate => nearestPickable != null;
+    private bool hasCrate = false;
     [SerializeField] private float safeDistance = 10f;
 
     private new void Update()
@@ -47,11 +47,16 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
         {
             RunAwayFromPlayer();
         }
+
+        if(pickupPos.childCount < 1)
+        {
+            hasCrate = false;
+        }
     }
 
     public void DetectTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, pickCrateRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, DetectionRadius);
         float closestDistance = Mathf.Infinity;
         Transform closestCrate = null;
 
@@ -68,7 +73,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
             }
         }
 
-        if (closestCrate != null)
+        if (closestCrate != null && (!closestCrate.gameObject.GetComponent<Crate.CrateController>().IsHeld || closestCrate.gameObject.GetComponent<Crate.CrateController>().CurrentPicker.CompareTag("Crate Area")))
         {
             isPickingUpCrate = true;
             TargetPosition = closestCrate.position;
@@ -87,7 +92,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
     {
         if (!hasCrate)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, DetectionRadius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, pickCrateRadius);
             float closestDistance = Mathf.Infinity;
             Transform nearestObject = null;
 
@@ -107,6 +112,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
             if (nearestObject != null)
             {
                 nearestPickable = nearestObject.GetComponent<Pickup.IPickable>();
+                hasCrate = true;
                 if (nearestPickable != null && nearestPickable.StartPickup(gameObject))
                 {
                     nearestObject.transform.parent = pickupPos;
@@ -130,6 +136,7 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
                 pickupPos.DetachChildren();
                 nearestPickable.ExitPickup();
                 nearestPickable = null;
+                hasCrate = false;
             }
         }
 
@@ -173,5 +180,17 @@ public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
         NavMesh.SamplePosition(transform.position + randomDirection, out hit, WanderRadius, NavMesh.AllAreas);
 
         TargetPosition = hit.position;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position, pickCrateRadius);
+        Gizmos.DrawWireSphere(transform.position, DetectionRadius);
+    }
+    private void OnDestroy()
+    {
+        OnPickUpCancel();
     }
 }

@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8f1af5fd7317b459297b65649729f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedWeapon: 0
+  SelectedWeapon: 3
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   MoveSpeed: 5
@@ -232,14 +232,14 @@ MonoBehaviour:
   IsTaunted: 0
   maxTauntTimer: 5
   rotationSpeed: 5
-  pickCrateRadius: 4
+  pickCrateRadius: 2
   <DetectionRadius>k__BackingField: 7
   <WanderRadius>k__BackingField: 15
   <WanderInterval>k__BackingField: 3
   wanderTimer: 0
   TargetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   PickupAngle: 125
   pickupPos: {fileID: 2947546648657412131}
   safeDistance: 10
@@ -257,6 +257,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatsPreset: {fileID: 11400000, guid: 3db166a17191d0648856c3b4bbd940b0, type: 2}
   Stats:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 100
+      - Key: 1
+        Value:
+          BaseValue: 100
     StatList:
       _serializedList:
       - Key: 0
