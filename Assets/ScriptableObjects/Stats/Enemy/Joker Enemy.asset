@@ -10,29 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22090c3525153a646b1d3ba0cedb9219, type: 3}
-  m_Name: Companion Melee
+  m_Name: Joker Enemy
   m_EditorClassIdentifier: 
   Stats:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 10000
+      - Key: 1
+        Value:
+          BaseValue: 100
     StatList:
       _serializedList:
       - Key: 0
         Value:
-          BaseValue: 3000
-      - Key: 2
-        Value:
-          BaseValue: 500
-      - Key: 3
-        Value:
-          BaseValue: 50
-      - Key: 4
+          BaseValue: 80
+      - Key: 1
         Value:
           BaseValue: 70
-      - Key: 5
+      - Key: 2
         Value:
-          BaseValue: 30
-      - Key: 6
+          BaseValue: 70
+      - Key: 3
         Value:
-          BaseValue: 1
-      - Key: 1
+          BaseValue: 10
+      - Key: 4
         Value:
           BaseValue: 1

@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: Joker
   m_EditorClassIdentifier: 
   Prefab: {fileID: 991949117548394843, guid: 7816f12861d33fc4fa86d1ecac210297, type: 3}
-  StatsPreset: {fileID: 11400000, guid: 1f528ea5d938f0949b28496f7f402dfe, type: 2}
+  StatsPreset: {fileID: 11400000, guid: 3db166a17191d0648856c3b4bbd940b0, type: 2}
   Stats:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 100
+      - Key: 1
+        Value:
+          BaseValue: 100
     StatList:
       _serializedList:
       - Key: 0

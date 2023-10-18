@@ -10,29 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22090c3525153a646b1d3ba0cedb9219, type: 3}
-  m_Name: Joker Enemy
+  m_Name: Companion Ranged Attacker
   m_EditorClassIdentifier: 
   Stats:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 3000
+      - Key: 1
+        Value:
+          BaseValue: 300
     StatList:
       _serializedList:
       - Key: 0
         Value:
-          BaseValue: 30000
+          BaseValue: 700
+      - Key: 1
+        Value:
+          BaseValue: 60
       - Key: 2
         Value:
-          BaseValue: 100
+          BaseValue: 50
       - Key: 3
         Value:
-          BaseValue: 80
+          BaseValue: 20
       - Key: 4
-        Value:
-          BaseValue: 65
-      - Key: 5
-        Value:
-          BaseValue: 15
-      - Key: 6
-        Value:
-          BaseValue: 1
-      - Key: 1
         Value:
           BaseValue: 1

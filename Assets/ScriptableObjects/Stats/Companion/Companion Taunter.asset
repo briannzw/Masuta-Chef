@@ -13,26 +13,28 @@ MonoBehaviour:
   m_Name: Companion Taunter
   m_EditorClassIdentifier: 
   Stats:
-    StatList:
+    DynamicStatList:
       _serializedList:
       - Key: 0
         Value:
           BaseValue: 2000
-      - Key: 2
+      - Key: 1
         Value:
           BaseValue: 100
+    StatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 200
+      - Key: 1
+        Value:
+          BaseValue: 80
+      - Key: 2
+        Value:
+          BaseValue: 50
       - Key: 3
         Value:
-          BaseValue: 50
+          BaseValue: 20
       - Key: 4
-        Value:
-          BaseValue: 70
-      - Key: 5
-        Value:
-          BaseValue: 50
-      - Key: 6
-        Value:
-          BaseValue: 1
-      - Key: 1
         Value:
           BaseValue: 1

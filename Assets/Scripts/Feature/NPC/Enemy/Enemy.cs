@@ -17,7 +17,7 @@ public class Enemy : NPC
         base.Awake();
         StateMachine.Initialize(NPCMoveState);
         currentTauntTimer = maxTauntTimer;
-        chara = GetComponentInChildren<Character.Character>();
+        chara = GetComponent<Character.Character>();
         chara.OnDie += EnemyDie;
     }
 

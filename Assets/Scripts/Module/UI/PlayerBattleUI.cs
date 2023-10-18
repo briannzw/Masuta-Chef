@@ -10,21 +10,16 @@ namespace Module.UI
 
     public class PlayerBattleUI : MonoBehaviour
     {
-        private Character chara;
-        private Slider slider;
-        private void Awake()
-        {
-            slider = GetComponentInChildren<Slider>();
-            chara = GetComponentInParent<Character>();
-        }
+        [SerializeField] private Character chara;
+        [SerializeField] private Slider slider;
 
         private void Start()
         {
-            slider.maxValue = (chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).Value;
+            slider.maxValue = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
         }
         private void Update()
         {
-            slider.value = (chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).CurrentValue;
+            slider.value = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue;
         }
     }
 }

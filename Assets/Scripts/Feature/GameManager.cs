@@ -1,5 +1,6 @@
 using Level;
 using UnityEngine;
+using Character.Stat;
 
 public class GameManager : MonoBehaviour
 {

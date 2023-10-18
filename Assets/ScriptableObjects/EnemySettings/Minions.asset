@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: Minions
   m_EditorClassIdentifier: 
   Prefab: {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65, type: 3}
-  StatsPreset: {fileID: 11400000, guid: 1f528ea5d938f0949b28496f7f402dfe, type: 2}
+  StatsPreset: {fileID: 11400000, guid: b192eaa1c88b7104fb97606f6b350aeb, type: 2}
   Stats:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 100
+      - Key: 1
+        Value:
+          BaseValue: 100
     StatList:
       _serializedList:
       - Key: 0

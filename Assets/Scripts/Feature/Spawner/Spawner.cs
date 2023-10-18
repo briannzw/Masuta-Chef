@@ -24,7 +24,7 @@ namespace Spawner
         public Action<SpawnObject> OnRelease;
 
         public int GetActiveSpawnObject() => poolManager.Pools[spawnPrefab].CountActive;
-
+        
         protected virtual void Start()
         {
             poolManager = PoolManager.Instance;
@@ -54,6 +54,7 @@ namespace Spawner
 
                 if(go.GetComponent<SpawnObject>() == null) go.AddComponent<SpawnObject>();
                 go.GetComponent<SpawnObject>().Spawner = this;
+                go.SetActive(true);
             }
             return spawnObjects;
         }
