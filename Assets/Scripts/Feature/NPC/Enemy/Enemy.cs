@@ -8,16 +8,14 @@ public class Enemy : NPC
 
     public bool IsTaunted = false;
     private float currentTauntTimer;
-    private Character.Character chara;
     [SerializeField] private float maxTauntTimer = 0.1f;
     [SerializeField] float rotationSpeed = 5.0f;
     
     private new void Awake()
     {
         base.Awake();
-        StateMachine.Initialize(NPCMoveState);
+        StateMachine.Initialize(new NPCMoveState(this, StateMachine));
         currentTauntTimer = maxTauntTimer;
-        chara = GetComponent<Character.Character>();
         chara.OnDie += EnemyDie;
     }
 
@@ -40,13 +38,13 @@ public class Enemy : NPC
         if (Agent.remainingDistance <= StopDistance)
         {
             Agent.isStopped = true;
-            StateMachine.ChangeState(NPCAttackState);
+            StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
             RotateToTarget(rotationSpeed);
         }
         else
         {
             Agent.isStopped = false;
-            StateMachine.ChangeState(NPCMoveState);
+            StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
         }
 
         if (IsTaunted && Agent.remainingDistance > 5f || IsTaunted && currentTauntTimer <= 0f)

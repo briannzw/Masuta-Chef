@@ -16,7 +16,7 @@ public class CompanionAttackerRanged : Companion
         
         if(followEnemy && Agent.remainingDistance <= StopDistance && DistanceFromPlayer < MaxDistanceFromPlayer)
         {
-            StateMachine.ChangeState(NPCAttackState);
+            StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
         }
 
         if (followEnemy)

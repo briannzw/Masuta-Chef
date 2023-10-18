@@ -21,13 +21,4 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            // Play Some Effect
-            Destroy(gameObject);
-        }
-    }
 }

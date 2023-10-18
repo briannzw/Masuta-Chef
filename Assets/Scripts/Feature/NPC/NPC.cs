@@ -13,9 +13,9 @@ public class NPC : MonoBehaviour
         Joker
     }
     public AttackType SelectedWeapon;
+    public Weapon.Weapon ActiveWeapon;
     public Animator Animator;
     public Transform TargetTransform;
-    public float MoveSpeed;
     public Vector3 TargetPosition { get; set; }
 
     private Vector3 targetPosition;
@@ -24,22 +24,23 @@ public class NPC : MonoBehaviour
     public NavMeshAgent Agent;
     //public Character Character;
     public NPCStateMachine StateMachine;
-    public NPCMoveState NPCMoveState { get; set; }
-    public NPCAttackState NPCAttackState { get; set; }
+    protected Character.Character chara;
 
     protected void Awake()
     {
         StateMachine = new NPCStateMachine();
-        NPCMoveState = new NPCMoveState(this, StateMachine);
-        NPCAttackState = new NPCAttackState(this, StateMachine);
+        chara = GetComponent<Character.Character>();
+
         Agent = GetComponent<NavMeshAgent>();
-        Agent.speed = MoveSpeed;
+        Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value/10;
         Agent.stoppingDistance = StopDistance;
+        
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
     }
 
     // Update is called once per frame

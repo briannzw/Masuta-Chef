@@ -21,14 +21,11 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
     [SerializeField] protected float minDistanceFromPlayer;
 
     [SerializeField] private float minDistanceSlotFromPlayer;
-
-    private Character.Character chara;
     private new void Awake()
     {
         base.Awake();
-        StateMachine.Initialize(NPCMoveState);
+        StateMachine.Initialize(new NPCMoveState (this, StateMachine));
         DetectionRadius = 8f;
-        chara = GetComponent<Character.Character>();
         chara.OnDie += CompanionDie;
     }
 
@@ -62,7 +59,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
             if (Agent.remainingDistance <= StopDistance)
             {
                 Agent.isStopped = true;
-                StateMachine.ChangeState(NPCAttackState);
+                StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
             }
             else
             {
@@ -114,7 +111,7 @@ public class Companion : NPC, IWanderNPC, IDetectionNPC
         if (DistanceFromPlayer > MaxDistanceFromPlayer)
         {
             TargetPosition = GameManager.Instance.PlayerTransform.position;
-            StateMachine.ChangeState(NPCMoveState);
+            StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
             followEnemy = false;
         }
     }
