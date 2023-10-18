@@ -23,7 +23,6 @@ namespace Character.Hit
     public class AOEController : HitController
     {
         [Header("AOE Settings")]
-        public bool ContinuousHitOnTrigger = false;
         public float AreaDuration = 5;
 
         [Header("AOE Behaviour")]
