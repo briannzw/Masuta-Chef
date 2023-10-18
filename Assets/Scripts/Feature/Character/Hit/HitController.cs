@@ -9,13 +9,19 @@ namespace Character.Hit
 
     public class HitController : MonoBehaviour, IApplyEffect
     {
-        public Weapon Source;
+        [Foldout("Deprecated")]
         [Tag, ConditionalField(nameof(Source), inverse: true)] public string TargetTag;
+        [Space]
+        [Header("Weapon")]
+        public Weapon Source;
+        // Change to ReadOnly on Future Versions
         [ConditionalField(nameof(Type), true, HitType.EffectOnly)] public HitValue Value;
 
+        [Header("Hit Type")]
         public HitType Type;
 
-        [ConditionalField(nameof(Type), true, HitType.EffectOnly)] public bool ApplyEffectFirst;
+        [Header("Apply Effects")]
+        [ConditionalField(nameof(Type), true, HitType.EffectOnly)] public bool ApplyEffectBeforeHit;
         [field:SerializeField] public List<Effect> Effects { get; set; }
 
         protected virtual void Start()
@@ -54,13 +60,13 @@ namespace Character.Hit
                 if (!character.CompareTag(TargetTag)) return;
             }
 
-            if(ApplyEffectFirst) ApplyEffect(character);
+            if(ApplyEffectBeforeHit) ApplyEffect(character);
 
             if (Type == HitType.Damage) character.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
             // Changeable
             if (Type == HitType.Heal) character.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
 
-            if(!ApplyEffectFirst) ApplyEffect(character);
+            if(!ApplyEffectBeforeHit) ApplyEffect(character);
         }
 
         public void ApplyEffect(Character character)
