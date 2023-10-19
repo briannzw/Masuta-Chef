@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 5276189822154755782}
   - component: {fileID: 239774819553659423}
   - component: {fileID: 9160906789117708468}
+  - component: {fileID: 1981898329146583947}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -466,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Holder: {fileID: -8786994105791154135}
+  rb: {fileID: 0}
   TargetTag: Player
   stats:
     _serializedList:
@@ -480,6 +482,25 @@ MonoBehaviour:
         BaseValue: 100
   fireObjectPrefab: {fileID: 4301465161760894196, guid: 58c92f2803a924a41b1cbf8515c074c9,
     type: 3}
+  spawner: {fileID: 1981898329146583947}
+--- !u!114 &1981898329146583947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624291619868189629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5253d860404de4f97d306d765ae45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 4301465161760894196, guid: 58c92f2803a924a41b1cbf8515c074c9,
+    type: 3}
+  spawnArea: {x: 0.1, y: 0.1, z: 0.1}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  randomizeRotation: 0
+  maxSpawnObjectInPool: 100
 --- !u!1 &3362469876523438622
 GameObject:
   m_ObjectHideFlags: 0

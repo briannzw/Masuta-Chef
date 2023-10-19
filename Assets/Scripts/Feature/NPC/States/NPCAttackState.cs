@@ -11,7 +11,7 @@ public class NPCAttackState : NPCState
     public override void EnterState()
     {
         base.EnterState();
-        if(npc.ActiveWeapon != null) npc.ActiveWeapon.StartAttack();
+        npc.ActiveWeapon.StartAttack();
     }
 
     public override void ExitState()
