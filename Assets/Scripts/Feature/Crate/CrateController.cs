@@ -19,15 +19,18 @@ namespace Crate
         public Rigidbody rb { get; set; }
         private new Renderer renderer;
 
+        // Tambahkan atribut untuk kecepatan jatuh lambat
+        public float slowFallSpeed = 1.0f;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            renderer = GetComponent<Renderer>();
+            renderer = GetComponent <Renderer>();
         }
 
         private void Start()
         {
-            if(RandomColorOnStart) crateColor = (CrateColor) Random.Range(0, Enum.GetNames(typeof(CrateColor)).Length);
+            if (RandomColorOnStart) crateColor = (CrateColor)Random.Range(0, Enum.GetNames(typeof(CrateColor)).Length);
             // Mengatur warna krate sesuai dengan enum CrateColor
             switch (crateColor)
             {
@@ -50,7 +53,7 @@ namespace Crate
         {
             if (IsHeld && !picker.CompareTag("Player")) return false;
 
-            if(Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
+            if (Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
 
             // Memindahkan objek ke pemegang (picker)
             Holder = picker.transform;
@@ -63,6 +66,9 @@ namespace Crate
         {
             Holder = null;
             rb.isKinematic = false;
+
+            // Setelah objek krate dilepaskan, atur kecepatan jatuh lambat
+            rb.velocity = new Vector3(rb.velocity.x, -slowFallSpeed, rb.velocity.z);
         }
     }
 }
