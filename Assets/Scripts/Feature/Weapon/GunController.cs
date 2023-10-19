@@ -25,12 +25,11 @@ public class GunController : Weapon.Weapon
         List<GameObject> bullets = spawner.Spawn();
         // var fireObject = spawner.Spawn(fireObjectPrefab, transform.position, transform.rotation);
         foreach (GameObject bullet in bullets)
-        {   
+        {
+            var controller = bullet.GetComponent<BulletHit>();
+            controller.Initialize(this);
             bullet.transform.forward = transform.forward;
         }
-        // var controller = fireObject.GetComponent<AOEController>();
-        // controller.Initialize(this);
-        // fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
     }
     #endregion
 }
