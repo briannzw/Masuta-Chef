@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 2609905847538178790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.75, y: 1.4, z: -17.23}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -499,7 +499,9 @@ MonoBehaviour:
     type: 3}
   spawnArea: {x: 0.1, y: 0.1, z: 0.1}
   spawnOffset: {x: 0, y: 0, z: 0}
+  isLocalOffset: 0
   randomizeRotation: 0
+  followSpawnerRotation: 0
   maxSpawnObjectInPool: 100
 --- !u!1 &3362469876523438622
 GameObject:

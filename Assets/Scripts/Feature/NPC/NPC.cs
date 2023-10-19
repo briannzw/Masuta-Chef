@@ -32,7 +32,7 @@ public class NPC : MonoBehaviour
         chara = GetComponent<Character.Character>();
 
         Agent = GetComponent<NavMeshAgent>();
-        Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value/10;
+        
         Agent.stoppingDistance = StopDistance;
         
         
@@ -41,6 +41,7 @@ public class NPC : MonoBehaviour
     void Start()
     {
         if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
+        Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
     }
 
     // Update is called once per frame
