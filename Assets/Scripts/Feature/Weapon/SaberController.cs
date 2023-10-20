@@ -12,6 +12,7 @@ namespace Weapon
 
         [SerializeField] HitController hitController;
         [SerializeField] Animator animator;
+        [SerializeField] SaberVFXController vfxController;
         #endregion
 
         #region Method
@@ -26,6 +27,12 @@ namespace Weapon
             base.StartAttack();
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
+        }
+
+        protected override void UltimateAttack()
+        {
+            base.UltimateAttack();
+            vfxController.StartVFX();
         }
         #endregion
     }
