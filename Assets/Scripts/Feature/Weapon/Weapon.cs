@@ -26,6 +26,7 @@ namespace Weapon
         [Header("Ultimate Properties")]
         [SerializeField] private float UltimateTimer = 1;
         [SerializeField] protected bool isCooldownUltimate = false;
+        [SerializeField] private bool isUltimateCancelable = false;
 
         private bool initialTrigger;
         #endregion
@@ -90,9 +91,20 @@ namespace Weapon
 
         public virtual void StartUltimateAttack()
         {
-            if (isCooldownUltimate) return;
+            if (isCooldownUltimate) 
+            {
+                if (isUltimateCancelable) StopUltimateAttack();
+                return;
+            }
+            
             StartCoroutine(UltimateCooldown());
-            StartUltimateAttack();
+            UltimateAttack();
+        }
+
+        public virtual void StopUltimateAttack()
+        {
+            isCooldownUltimate = false;
+            StopCoroutine(UltimateCooldown());
         }
 
         protected virtual void UltimateAttack()
