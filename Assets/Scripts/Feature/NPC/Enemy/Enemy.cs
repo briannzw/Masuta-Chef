@@ -3,71 +3,73 @@ using System.Collections.Generic;
 using UnityEngine;
 using Character;
 
-public class Enemy : NPC
+namespace NPC.Enemy
 {
-
-    public bool IsTaunted = false;
-    private float currentTauntTimer;
-    [SerializeField] private float maxTauntTimer = 0.1f;
-    [SerializeField] float rotationSpeed = 5.0f;
-    
-    private new void Awake()
+    public class Enemy : NPC
     {
-        base.Awake();
-        StateMachine.Initialize(new NPCMoveState(this, StateMachine));
-        currentTauntTimer = maxTauntTimer;
-        chara.OnDie += EnemyDie;
-    }
+        public bool IsTaunted = false;
+        private float currentTauntTimer;
+        [SerializeField] private float maxTauntTimer = 0.1f;
+        [SerializeField] float rotationSpeed = 5.0f;
 
-    private void EnemyDie()
-    {
-        Destroy(gameObject);
-    }
-
-    protected new void Update()
-    {
-        base.Update();
-        currentTauntTimer -= Time.deltaTime;
-        if (!IsTaunted)
+        private new void Awake()
         {
-            TargetPosition = GameManager.Instance.PlayerTransform.position;
+            base.Awake();
+            StateMachine.Initialize(new NPCMoveState(this, StateMachine));
+            currentTauntTimer = maxTauntTimer;
+            chara.OnDie += EnemyDie;
         }
 
-        if (Agent.remainingDistance <= StopDistance)
+        private void EnemyDie()
         {
-            Agent.isStopped = true;
-            StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
-            RotateToTarget(rotationSpeed);
+            Destroy(gameObject);
         }
-        else
+
+        protected new void Update()
         {
+            base.Update();
+            currentTauntTimer -= Time.deltaTime;
+            if (!IsTaunted)
+            {
+                TargetPosition = GameManager.Instance.PlayerTransform.position;
+            }
+
+            if (Agent.remainingDistance <= StopDistance)
+            {
+                Agent.isStopped = true;
+                StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
+                RotateToTarget(rotationSpeed);
+            }
+            else
+            {
+                Agent.isStopped = false;
+                StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
+            }
+
+            if (IsTaunted && Agent.remainingDistance > 5f || IsTaunted && currentTauntTimer <= 0f)
+            {
+                RemoveTauntEffect();
+            }
+        }
+
+        void RemoveTauntEffect()
+        {
+            IsTaunted = false;
             Agent.isStopped = false;
-            StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
+            currentTauntTimer = maxTauntTimer;
         }
 
-        if (IsTaunted && Agent.remainingDistance > 5f || IsTaunted && currentTauntTimer <= 0f)
+        protected void RotateToTarget(float rotationSpeed)
         {
-            RemoveTauntEffect();
+            // Calculate the direction from this GameObject to the target
+            Vector3 direction = TargetPosition - transform.position;
+            direction.y = 0;
+
+            // Create a rotation that looks in the calculated direction
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            // Rotate towards the target rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
-    }
-
-    void RemoveTauntEffect()
-    {
-        IsTaunted = false;
-        Agent.isStopped = false;
-        currentTauntTimer = maxTauntTimer;
-    }
-
-    protected void RotateToTarget(float rotationSpeed)
-    {
-        // Calculate the direction from this GameObject to the target
-        Vector3 direction = TargetPosition - transform.position;
-        direction.y = 0;
-
-        // Create a rotation that looks in the calculated direction
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-        // Rotate towards the target rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }

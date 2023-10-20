@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class NPCState
 {
-    protected NPC npc;
+    protected NPC.NPC npc;
     protected NPCStateMachine npcStateMachine;
 
-    public NPCState(NPC npc, NPCStateMachine npcStateMachine)
+    public NPCState(NPC.NPC npc, NPCStateMachine npcStateMachine)
     {
         this.npc = npc;
         this.npcStateMachine = npcStateMachine;

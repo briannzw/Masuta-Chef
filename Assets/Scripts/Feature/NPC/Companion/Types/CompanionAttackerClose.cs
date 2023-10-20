@@ -2,42 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompanionAttackerClose : Companion
+namespace NPC.Companion
 {
-    [SerializeField] float wanderRadius;
-    [SerializeField] float wanderInterval;
-    public override float WanderRadius => wanderRadius;
-    public override float WanderInterval => wanderInterval;
-    [SerializeField] float rotationSpeed = 5.0f;
-    private new void Update()
+    public class CompanionAttackerClose : Companion
     {
-        base.Update();
-        DetectTarget();
-
-        if (followEnemy)
+        [SerializeField] float wanderRadius;
+        [SerializeField] float wanderInterval;
+        public override float WanderRadius => wanderRadius;
+        public override float WanderInterval => wanderInterval;
+        [SerializeField] float rotationSpeed = 5.0f;
+        private new void Update()
         {
-            // Calculate the direction from this GameObject to the target
-            Vector3 direction = enemy.position - transform.position;
+            base.Update();
+            DetectTarget();
 
-            // Create a rotation that looks in the calculated direction
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            if (followEnemy)
+            {
+                // Calculate the direction from this GameObject to the target
+                Vector3 direction = enemy.position - transform.position;
 
-            // Rotate towards the target rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                // Create a rotation that looks in the calculated direction
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+                // Rotate towards the target rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+
+            if (followEnemy && Agent.remainingDistance <= StopDistance && DistanceFromPlayer < MaxDistanceFromPlayer)
+            {
+                StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
+            }
         }
 
-        if (followEnemy && Agent.remainingDistance <= StopDistance && DistanceFromPlayer < MaxDistanceFromPlayer)
+        private void OnDrawGizmos()
         {
-            StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if(GameManager.Instance.PlayerTransform.position != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(GameManager.Instance.PlayerTransform.position, DetectionRadius);
+            if (GameManager.Instance.PlayerTransform.position != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(GameManager.Instance.PlayerTransform.position, DetectionRadius);
+            }
         }
     }
 }

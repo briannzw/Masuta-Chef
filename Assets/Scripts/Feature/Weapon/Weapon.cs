@@ -19,7 +19,7 @@ namespace Weapon
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
         
         protected bool isFiring;
-        private float attackTimer;
+        protected float attackTimer;
 
         private bool initialTrigger;
         #endregion

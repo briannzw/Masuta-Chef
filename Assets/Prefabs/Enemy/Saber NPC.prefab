@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5604003198669207345}
   - component: {fileID: 1902049687339581202}
   m_Layer: 10
-  m_Name: Saber Enemy
+  m_Name: Saber NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 8575063945748467080}
   - component: {fileID: 6697228958516733775}
   - component: {fileID: 3076633160147285890}
-  - component: {fileID: 4638794585439699838}
+  - component: {fileID: 8271466441426000436}
   - component: {fileID: 7147700456617833944}
   - component: {fileID: 3677273409504601597}
   - component: {fileID: 6889578219797571870}
@@ -147,7 +147,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4638794585439699838
+--- !u!114 &8271466441426000436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,12 +156,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5702011689648153978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4fe8a3d2f313e84f896580f737db907, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c129d5fbe533c94ba1bc6a22c6025bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
   rb: {fileID: 0}
-  TargetTag: Player
+  TargetTag: 
   stats:
     _serializedList:
     - Key: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
         BaseValue: 100
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   hitController: {fileID: 6889578219797571870}
   animator: {fileID: 3677273409504601597}
 --- !u!65 &7147700456617833944
