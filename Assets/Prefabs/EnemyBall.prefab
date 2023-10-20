@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3062061103792591178}
   - component: {fileID: 5401472490245260708}
   - component: {fileID: 5385745735756142698}
-  - component: {fileID: -6097888871840002390}
   - component: {fileID: 6950476036472113881}
+  - component: {fileID: -1373049218489586875}
   m_Layer: 0
   m_Name: EnemyBall
   m_TagString: Untagged
@@ -135,28 +135,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-6097888871840002390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4301465161760894196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec640617b3957e54c9f937f783487b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetTag: Player
-  Source: {fileID: 0}
-  Value:
-    CharacterAttack: 0
-    WeaponAttack: 0
-    Multiplier: 1
-  Type: 0
-  ApplyEffectBeforeHit: 0
-  <Effects>k__BackingField: []
-  isPiercing: 0
 --- !u!114 &6950476036472113881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,3 +149,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TravelDistance: 10
   TravelSpeed: 20
+--- !u!114 &-1373049218489586875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301465161760894196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec640617b3957e54c9f937f783487b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTag: 
+  Source: {fileID: 0}
+  Value:
+    CharacterAttack: 0
+    WeaponAttack: 0
+    Multiplier: 1
+  Type: 0
+  ApplyEffectBeforeHit: 0
+  <Effects>k__BackingField: []
+  isPiercing: 0
