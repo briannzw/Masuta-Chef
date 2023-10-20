@@ -8,24 +8,22 @@ namespace Loot.Object
     public class RecipeLootObject : LootFollowObject
     {
         [Header("References")]
-        //[SerializeField] private SaveManager saveManager;
         public Recipe Recipe;
 
-       protected override void ReachedTarget()
+        protected override void ReachedTarget()
         {
-            // TODO: saveManager Handle Recipe Save Data
             Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(target != null) return;
+            if (target != null) return;
 
             if (other.CompareTag(Tag))
             {
                 target = other.transform;
-                // TODO: Add Blueprint AND Save
-                Recipe.AddBlueprint();
+                // Change amount(?)
+                if (!GameManager.Instance.SaveManager.SaveData.Add(Recipe, 1)) Debug.Log("Recipe " + Recipe.name +" is already unlocked!");
             }
         }
     }

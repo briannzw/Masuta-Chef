@@ -1,6 +1,7 @@
 using Level;
 using UnityEngine;
-using Character.Stat;
+using Save;
+using MyBox;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,4 +20,18 @@ public class GameManager : MonoBehaviour
     [Header("Static References")]
     public Transform PlayerTransform;
     public LevelManager LevelManager;
+    public SaveManager SaveManager;
+
+
+    [ButtonMethod]
+    public void SaveGame()
+    {
+        SaveManager.Save();
+    }
+
+    [ButtonMethod]
+    public void LoadGame()
+    {
+        SaveManager.Load();
+    }
 }
