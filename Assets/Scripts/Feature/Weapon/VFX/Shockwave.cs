@@ -17,7 +17,7 @@ public class Shockwave : MonoBehaviour
         lineRenderer.positionCount = pointsCount + 1;
     }
 
-    private void OnEnable() 
+    public void OnEnable()
     {
         StartCoroutine(Blast());
     }

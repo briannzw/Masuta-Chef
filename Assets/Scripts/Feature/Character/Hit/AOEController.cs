@@ -31,7 +31,7 @@ namespace Character.Hit
         // ApplyOnStay
         [HideInInspector] protected List<Character> characterInArea = new List<Character>();
         // Instant, Hit is only applied once to every Chara.
-        private HashSet<Character> characterAffected = new HashSet<Character>();
+        [SerializeField] private HashSet<Character> characterAffected = new HashSet<Character>();
 
         protected override void Start()
         {
@@ -56,7 +56,7 @@ namespace Character.Hit
 
             Character chara = other.GetComponent<Character>();
             if (chara == null) return;
-
+            Debug.Log(chara.name);
             HitChara(chara);
         }
 

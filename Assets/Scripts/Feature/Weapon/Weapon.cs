@@ -24,7 +24,7 @@ namespace Weapon
         private float attackTimer;
 
         [Header("Ultimate Properties")]
-        [SerializeField] private float UltimateTimer = 1;
+        [SerializeField] protected float UltimateTimer = 1;
         [SerializeField] protected bool isCooldownUltimate = false;
         [SerializeField] private bool isUltimateCancelable = false;
 

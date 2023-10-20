@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 6913090435883698909}
   - component: {fileID: 4473604326915842093}
   m_Layer: 10
-  m_Name: VFX
+  m_Name: UltimateVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eb08e6706c4964083001a9a36b40c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shockwave: {fileID: 8275861510265873961}
+  shockwave: {fileID: 4053699737774979706}
 --- !u!1 &8275861510265873961
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,9 +378,12 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  ultimateDuration: 1
   hitController: {fileID: 8524438321636933797}
   animator: {fileID: 819498392342047893}
   vfxController: {fileID: 4473604326915842093}
+  saberUltimateApplicator: {fileID: 8490458333203522262, guid: e262f3165bea2244790ebf01ba73c171,
+    type: 3}
 --- !u!65 &6586099308046957744
 BoxCollider:
   m_ObjectHideFlags: 0
