@@ -1,4 +1,5 @@
 using MyBox;
+using Newtonsoft.Json;
 using System;
 
 namespace Cooking.Recipe
@@ -8,6 +9,6 @@ namespace Cooking.Recipe
     {
         [ReadOnly] public int CurrentBlueprint;
         public int NeededBlueprint;
-        public bool IsUnlocked => CurrentBlueprint >= NeededBlueprint;
+        [JsonIgnore] public bool IsLocked => CurrentBlueprint < NeededBlueprint;
     }
 }

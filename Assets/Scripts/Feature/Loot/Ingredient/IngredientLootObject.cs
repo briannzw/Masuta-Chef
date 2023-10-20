@@ -8,12 +8,10 @@ namespace Loot.Object
     public class IngredientLootObject : LootFollowObject
     {
         [Header("References")]
-        //[SerializeField] private SaveManager saveManager;
         public Ingredient Ingredient;
 
         protected override void ReachedTarget()
         {
-            // TODO: saveManager Handle Ingredient Save Data
             Destroy(gameObject);
         }
 
@@ -24,8 +22,8 @@ namespace Loot.Object
             if (other.CompareTag(Tag))
             {
                 target = other.transform;
-                // TODO: Add Ingredient Count AND Save
-                Ingredient.Add();
+                // Change amount(?)
+                if (!GameManager.Instance.SaveManager.SaveData.Add(Ingredient, 1)) Debug.Log("Ingredient " + Ingredient.name + " reached max amount!");
             }
         }
     }

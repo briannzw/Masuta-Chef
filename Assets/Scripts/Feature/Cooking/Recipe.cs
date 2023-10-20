@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Cooking.Recipe
 {
     using AYellowpaper.SerializedCollections;
-    using Loot;
+    using Newtonsoft.Json;
 
     [CreateAssetMenu(menuName = "Cooking/Recipe", fileName = "New Recipe")]
     public class Recipe : ScriptableObject
@@ -15,11 +15,6 @@ namespace Cooking.Recipe
         public SerializedDictionary<Ingredient, int> Ingredients;
 
         [Header("Data")]
-        [SerializeField] private RecipeData data;
-
-        public void AddBlueprint(int amount = 1)
-        {
-            data.CurrentBlueprint += amount;
-        }
+        public RecipeData data;
     }
 }
