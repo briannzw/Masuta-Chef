@@ -13,9 +13,9 @@ namespace Character.Hit
         public bool ContinuousHitOnTrigger = false;
 
         // ApplyOnStay
-        [SerializeField] private List<Character> characterInArea = new List<Character>();
+        protected List<Character> characterInArea = new List<Character>();
         // Instant, Hit is only applied once to every Chara.
-        private HashSet<Character> characterAffected = new HashSet<Character>();
+        protected HashSet<Character> characterAffected = new HashSet<Character>();
 
         protected override void Start()
         {
@@ -63,6 +63,30 @@ namespace Character.Hit
             Hit(chara);
 
             //else if(other.CompareTag(Source.TargetTag)){ characterInArea.Add(chara); }
+        }
+
+        protected void HitChara(Character chara, bool continuous = false)
+        {
+            if (characterAffected.Contains(chara))
+            {
+                // Hit
+                if (continuous)
+                {
+                    if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
+                    if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
+                }
+
+                if (Behaviour == AOEBehaviour.ApplyOnStay)
+                {
+                    characterInArea.Add(chara);
+                    ApplyEffect(chara);
+                }
+                return;
+            }
+
+            // First Hit Register
+            characterAffected.Add(chara);
+            Hit(chara);
         }
 
         private void OnTriggerExit(Collider other)

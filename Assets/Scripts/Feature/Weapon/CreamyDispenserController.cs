@@ -13,13 +13,21 @@ public class CreamyDispenserController : Weapon.Weapon
     public LayerMask enemyLayer;
     public GameObject AttackArea;
 
-    private ParticleSystem vfx;
+    [SerializeField] private ParticleSystem vfx;
+
+    // Ultimate Attack
+    private bool isUltimateAttack = false;
+    private int ultimateBulletCount = 4;
+    private bool isUltimateCooldown = false;
+    [Header("Ultimate Attack Properties")]
+    public GameObject ultimateBulletObject;
+    [SerializeField] private float ultimateBulletInterval = 1;
     #endregion
 
     protected new void Start()
     {
         base.Start();
-        vfx = fireObjectPrefab.GetComponent<ParticleSystem>();
+        //vfx = fireObjectPrefab.GetComponent<ParticleSystem>();
         AOEController aoeController = AttackArea.GetComponent<AOEController>();
         aoeController.Initialize(this);
         // this.StopAttack();
@@ -29,24 +37,72 @@ public class CreamyDispenserController : Weapon.Weapon
         //base.Update();
     }
 
+
+    #region Method
+    public override void Attack()
+    {
+
+    }
     public override void StartAttack()
     {
         //base.StartAttack();
-        vfx.Play();
-        // AttackArea.SetActive(true);
+        if (!isUltimateAttack)
+        {
+            vfx.Play();
+            AttackArea.SetActive(true);
+        }
+        else if(!isUltimateCooldown)
+        {
+            ShootUltimate();
+        }
     }
 
     public override void StopAttack()
     {
         //base.StopAttack();
-        vfx.Stop();
-        // AttackArea.SetActive(false);
+        if (!isUltimateAttack)
+        {
+            vfx.Stop();
+            AttackArea.SetActive(false);
+        }
     }
 
-    #region Method
-    public override void Attack()
+    public override void UltimateAttack()
     {
-        
+        if (isUltimateAttack) return;
+        StartUltimate();
+    }
+
+    private void ShootUltimate()
+    {
+        GameObject bullet = Instantiate(ultimateBulletObject, fireObjectPrefab.transform.position, fireObjectPrefab.transform.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bullet.GetComponent<Bullet>().TravelSpeed; ;
+        // if bullet exhausted, stop ultimate attack
+        if(--ultimateBulletCount == 0)
+        {
+            StopUltimate();
+        }
+    }
+
+    private void StartUltimate()
+    {
+        isUltimateAttack = true;
+        ultimateBulletCount = 4;
+
+        AttackArea.SetActive(false);
+    }
+
+    private void StopUltimate()
+    {
+        isUltimateAttack = false;
+        AttackArea.SetActive(true);
+    }
+
+    private IEnumerator UltimateCooldown()
+    {
+        isUltimateCooldown = true;
+        yield return new WaitForSeconds(ultimateBulletInterval);
+        isUltimateCooldown = false;
     }
     #endregion
 }

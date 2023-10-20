@@ -12,6 +12,7 @@ namespace Weapon
 
         [SerializeField] HitController hitController;
         [SerializeField] Animator animator;
+        [SerializeField] GameObject saberUltimateAttack;
         #endregion
 
         #region Method
@@ -25,6 +26,19 @@ namespace Weapon
             base.StartAttack();
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
+        }
+
+        protected override void StartUltimateAttack()
+        {
+            animator.SetTrigger("Ultimate");
+            StartCoroutine(UltimateVFX(1));
+        }
+
+        private IEnumerator UltimateVFX(float duration)
+        {
+            saberUltimateAttack.SetActive(true);
+            yield return new WaitForSeconds(duration);
+            saberUltimateAttack.SetActive(false);
         }
         #endregion
     }

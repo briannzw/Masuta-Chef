@@ -30,6 +30,7 @@ namespace Player.Controller
         {
             base.Start();
             if(ActiveWeapon != null) ActiveWeapon.OnEquip(GetComponent<Character.Character>());
+            ActiveWeapon.StopAttack();
         }
 
         private void Update()
@@ -47,6 +48,9 @@ namespace Player.Controller
             playerControls.Gameplay.Fire.Enable();
             playerControls.Gameplay.Fire.started += OnInputActionStart;
             playerControls.Gameplay.Fire.canceled += OnInputActionEnd;
+            playerControls.Gameplay.Ultimate.Enable();
+            playerControls.Gameplay.Ultimate.started += OnUltimateInputActionStart;
+            playerControls.Gameplay.Ultimate.canceled += OnUltimateInputActionStart;
         }
 
         protected override void UnregisterInputCallbacks()
@@ -56,6 +60,9 @@ namespace Player.Controller
             playerControls.Gameplay.Fire.started -= OnInputActionStart;
             playerControls.Gameplay.Fire.canceled -= OnInputActionEnd;
             playerControls.Gameplay.Fire.Disable();
+            playerControls.Gameplay.Ultimate.started += OnUltimateInputActionStart;
+            playerControls.Gameplay.Ultimate.canceled += OnUltimateInputActionStart;
+            playerControls.Gameplay.Ultimate.Disable();
         }
         #endregion
 
@@ -70,6 +77,18 @@ namespace Player.Controller
         {
             if(ActiveWeapon == null) return;
             ActiveWeapon.StopAttack();
+        }
+
+        private void OnUltimateInputActionStart(InputAction.CallbackContext context)
+        {
+            if (ActiveWeapon == null) return;
+            ActiveWeapon.UltimateAttack();
+        }
+
+        private void OnUltimateInputActionEnd(InputAction.CallbackContext context)
+        {
+            if (ActiveWeapon == null) return;
+            //ActiveWeapon.UltimateAttack();
         }
 
         private void OnSwitchWeapon(InputAction.CallbackContext context)
