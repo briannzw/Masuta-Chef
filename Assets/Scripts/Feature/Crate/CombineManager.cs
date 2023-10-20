@@ -8,6 +8,7 @@ namespace Crate.Combine
     using Loot.Object;
     using Player.CompanionSlot;
     using UnityEngine.AI;
+    using NPC.Companion;
 
     public class CombineManager : MonoBehaviour
     {

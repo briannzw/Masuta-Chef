@@ -106,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 991949117548394843}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.5, y: 1.4, z: -20.670925}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -224,9 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedWeapon: 3
+  ActiveWeapon: {fileID: 0}
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
-  MoveSpeed: 5
   StopDistance: 2
   Agent: {fileID: 0}
   IsTaunted: 0

@@ -123,21 +123,25 @@ namespace Player.Controller
         {
             Vector2 inputMovement = context.ReadValue<Vector2>();
             rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
+            Animator.SetBool("IsWalking", true);
         }
 
         private void OnMoveCanceled(InputAction.CallbackContext context)
         {
             rawInputMovement = Vector3.zero;
+            Animator.SetBool("IsWalking", false);
         }
 
         private void OnSprint(InputAction.CallbackContext context)
         {
             speed = isSprintDefault ? moveSpeed : sprintSpeed;
+            Animator.SetBool("IsRunning", true);
         }
 
         private void OnSprintCanceled(InputAction.CallbackContext context)
         {
             speed = isSprintDefault ? sprintSpeed : moveSpeed;
+            Animator.SetBool("IsRunning", false);
         }
         #endregion
 

@@ -21,7 +21,7 @@ public class ShootBall : MonoBehaviour
         Rigidbody rb = ball.GetComponent<Rigidbody>();
 
         // Calculate the direction from this object to the target
-        Vector3 shootDirection = (GetComponent<NPC>().TargetPosition - transform.position).normalized;
+        Vector3 shootDirection = (GetComponent<NPC.NPC>().TargetPosition - transform.position).normalized;
 
         // Apply force to the ball in the calculated direction
         rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);

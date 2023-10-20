@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4235592659093435019}
   - component: {fileID: 584550117460917223}
   - component: {fileID: 2062866977680244707}
+  - component: {fileID: -7701736094595352685}
   - component: {fileID: 4763421311830256981}
   - component: {fileID: 4619014509475842891}
-  - component: {fileID: -7701736094595352685}
-  - component: {fileID: 826391462442934991}
+  - component: {fileID: -2747108581538651855}
   m_Layer: 0
   m_Name: Pasta
   m_TagString: Untagged
@@ -87,6 +87,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &-7701736094595352685
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087124419428249832}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
 --- !u!135 &4763421311830256981
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -121,35 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TravelDistance: 10
-  TravelSpeed: 100
---- !u!54 &-7701736094595352685
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6087124419428249832}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 4
-  m_CollisionDetection: 0
---- !u!114 &826391462442934991
+  TravelSpeed: 15
+--- !u!114 &-2747108581538651855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,16 +158,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6087124419428249832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
+  m_Script: {fileID: 11500000, guid: ec640617b3957e54c9f937f783487b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetTag: 
+  Source: {fileID: 0}
   Value:
     CharacterAttack: 0
     WeaponAttack: 0
     Multiplier: 1
-  TargetTag: 
   Type: 0
-  ApplyEffectFirst: 0
+  ApplyEffectBeforeHit: 0
   <Effects>k__BackingField: []
-  AreaDuration: 10
-  Behaviour: 0
+  isPiercing: 0
