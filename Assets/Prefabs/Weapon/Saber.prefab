@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eb08e6706c4964083001a9a36b40c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shockwave: {fileID: 4053699737774979706}
+  shockwave: {fileID: 8275861510265873961}
 --- !u!1 &8275861510265873961
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 8662518602482338326}
   - component: {fileID: 6586099308046957744}
   - component: {fileID: 819498392342047893}
-  - component: {fileID: 8524438321636933797}
+  - component: {fileID: 8798173013038672523}
   m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
@@ -378,8 +378,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  ultimateDuration: 1
-  hitController: {fileID: 8524438321636933797}
+  hitController: {fileID: 0}
   animator: {fileID: 819498392342047893}
   vfxController: {fileID: 4473604326915842093}
   saberUltimateApplicator: {fileID: 8490458333203522262, guid: e262f3165bea2244790ebf01ba73c171,
@@ -426,7 +425,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8524438321636933797
+--- !u!114 &8798173013038672523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,7 +434,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8608244446285638674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
+  m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTag: 
@@ -447,5 +446,3 @@ MonoBehaviour:
   Type: 0
   ApplyEffectBeforeHit: 0
   <Effects>k__BackingField: []
-  AreaDuration: 1e+11
-  Behaviour: 0
