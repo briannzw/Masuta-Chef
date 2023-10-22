@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Cooking
@@ -14,11 +13,6 @@ namespace Cooking
 
 
         [Header("Data")]
-        [SerializeField] private int count;
-
-        public void Add(int amount = 1)
-        {
-            count += amount;
-        }
+        public IngredientData data;
     }
 }

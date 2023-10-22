@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 8662518602482338326}
   - component: {fileID: 6586099308046957744}
   - component: {fileID: 819498392342047893}
-  - component: {fileID: 8524438321636933797}
+  - component: {fileID: 94700968718549188}
   m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
+  rb: {fileID: 0}
   TargetTag: Enemy
   stats:
     _serializedList:
@@ -175,7 +176,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  hitController: {fileID: 8524438321636933797}
+  hitController: {fileID: 94700968718549188}
   animator: {fileID: 819498392342047893}
 --- !u!65 &6586099308046957744
 BoxCollider:
@@ -219,7 +220,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8524438321636933797
+--- !u!114 &94700968718549188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,19 +229,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8608244446285638674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
+  m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Source: {fileID: 8662518602482338326}
   TargetTag: 
+  Source: {fileID: 0}
   Value:
     CharacterAttack: 0
-    WeaponAttack: 600
+    WeaponAttack: 0
     Multiplier: 1
   Type: 0
-  ApplyEffectFirst: 0
+  ApplyEffectBeforeHit: 0
   <Effects>k__BackingField: []
-  AreaDuration: 1e+11
-  Behaviour: 0
-  ContinuousHitOnTrigger: 1
-  characterInArea: []

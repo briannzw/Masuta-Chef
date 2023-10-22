@@ -2,44 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompanionAttackerRanged : Companion
+namespace NPC.Companion
 {
-    [SerializeField] float wanderRadius;
-    [SerializeField] float wanderInterval;
-    public override float WanderRadius => wanderRadius;
-    public override float WanderInterval => wanderInterval;
-    [SerializeField] float rotationSpeed = 5.0f;
-    private new void Update()
+    public class CompanionAttackerRanged : Companion
     {
-        base.Update();
-        DetectTarget();
-        
-        if(followEnemy && Agent.remainingDistance <= StopDistance && DistanceFromPlayer < MaxDistanceFromPlayer)
+        [SerializeField] float wanderRadius;
+        [SerializeField] float wanderInterval;
+        public override float WanderRadius => wanderRadius;
+        public override float WanderInterval => wanderInterval;
+        [SerializeField] float rotationSpeed = 5.0f;
+        private new void Update()
         {
-            StateMachine.ChangeState(NPCAttackState);
-        }
+            base.Update();
+            DetectTarget();
 
-        if (followEnemy)
-        {
-            Vector3 direction = enemy.position - transform.position;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-
-        if (!followEnemy && DistanceFromPlayer <= minDistanceFromPlayer)
-        {
-            Agent.isStopped = false;
-            shouldWander = true;
-            wanderTimer -= Time.deltaTime;
-            if (wanderTimer <= 0f)
+            if (followEnemy && Agent.remainingDistance <= StopDistance && DistanceFromPlayer < MaxDistanceFromPlayer)
             {
-                Wander();
-                wanderTimer = WanderInterval;
+                StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
             }
-        }
-        else
-        {
-            shouldWander = false;
+
+            if (followEnemy)
+            {
+                Vector3 direction = enemy.position - transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+
+            if (!followEnemy && DistanceFromPlayer <= minDistanceFromPlayer)
+            {
+                Agent.isStopped = false;
+                shouldWander = true;
+                wanderTimer -= Time.deltaTime;
+                if (wanderTimer <= 0f)
+                {
+                    Wander();
+                    wanderTimer = WanderInterval;
+                }
+            }
+            else
+            {
+                shouldWander = false;
+            }
         }
     }
 }

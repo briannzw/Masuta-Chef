@@ -412,13 +412,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662518602482338326, guid: f7e625e0551451a4f85455dea7599387,
         type: 3}
+      propertyPath: hitController
+      value: 
+      objectReference: {fileID: 1006933078}
+    - target: {fileID: 8662518602482338326, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8524438321636933797, guid: f7e625e0551451a4f85455dea7599387, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8608244446285638674, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1006933078}
   m_SourcePrefab: {fileID: 100100000, guid: f7e625e0551451a4f85455dea7599387, type: 3}
 --- !u!1 &410087039
 GameObject:
@@ -632,7 +642,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 390094851}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1006933071}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4fe8a3d2f313e84f896580f737db907, type: 3}
@@ -868,6 +878,33 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1553583827}
+--- !u!1 &1006933071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8608244446285638674, guid: f7e625e0551451a4f85455dea7599387,
+    type: 3}
+  m_PrefabInstance: {fileID: 390094851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1006933078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006933071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTag: 
+  Source: {fileID: 577698908}
+  Value:
+    CharacterAttack: 0
+    WeaponAttack: 0
+    Multiplier: 1
+  Type: 0
+  ApplyEffectBeforeHit: 0
+  <Effects>k__BackingField: []
 --- !u!1 &1386656612
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1410782207}
   - component: {fileID: 1410782208}
+  - component: {fileID: 1410782209}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -950,6 +988,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 5433891460832793436}
   LevelManager: {fileID: 666763695}
+  SaveManager: {fileID: 1410782209}
+--- !u!114 &1410782209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410782206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e303d381f1ff70048a49fad396c75d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsEncrypted: 1
+  SaveData:
+    RecipeData:
+      _serializedList:
+      - Key: Stuffed Bitter Gourdakin
+        Value:
+          CurrentBlueprint: 8
+          NeededBlueprint: 100
+      - Key: Cactyrn-filled Chutney Sandwich
+        Value:
+          CurrentBlueprint: 9
+          NeededBlueprint: 100
+    IngredientData:
+      _serializedList:
+      - Key: Chicken
+        Value:
+          Count: 2
+          MaxCount: 200
+  saveTime: 7
+  loadTime: 8
 --- !u!1 &1553583826
 GameObject:
   m_ObjectHideFlags: 3

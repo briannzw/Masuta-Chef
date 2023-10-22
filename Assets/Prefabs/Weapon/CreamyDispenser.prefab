@@ -4957,7 +4957,7 @@ MonoBehaviour:
         BaseValue: 50
     - Key: 1
       Value:
-        BaseValue: 1
+        BaseValue: 100
     - Key: 2
       Value:
         BaseValue: 100
@@ -4978,6 +4978,7 @@ GameObject:
   - component: {fileID: 5790247796566603152}
   - component: {fileID: 1188436053181327183}
   - component: {fileID: 8886566402260313542}
+  - component: {fileID: 5661090595000908252}
   m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
@@ -5035,7 +5036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Source: {fileID: 0}
+  Source: {fileID: 3513131130172153234}
   TargetTag: 
   Value:
     CharacterAttack: 0
@@ -5060,3 +5061,24 @@ MonoBehaviour:
   Behaviour: 1
   ContinuousHitOnTrigger: 0
   characterInArea: []
+--- !u!114 &5661090595000908252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920357698855249934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57aeb8f75d9b76e44bd171fe413b311c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Source: {fileID: 3513131130172153234}
+  TargetTag: Enemy
+  Value:
+    CharacterAttack: 0
+    WeaponAttack: 0
+    Multiplier: 1
+  Type: 0
+  ApplyEffectFirst: 0
+  <Effects>k__BackingField: []

@@ -12,21 +12,13 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         startPosition = transform.position;
+        this.GetComponent<Rigidbody>().velocity = transform.forward * TravelSpeed;
     }
 
     private void Update()
     {
         if (Vector3.Distance(startPosition, transform.position) >= Mathf.Abs(TravelDistance))
         {
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            // Play Some Effect
             Destroy(gameObject);
         }
     }

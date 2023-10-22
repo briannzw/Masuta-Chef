@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCWanderState : NPCState
 {
-    public NPCWanderState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+    public NPCWanderState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
     {
     }
 
