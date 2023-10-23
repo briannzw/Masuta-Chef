@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Character;
 
 namespace NPC.Enemy
 {
@@ -17,12 +16,6 @@ namespace NPC.Enemy
             base.Awake();
             StateMachine.Initialize(new NPCMoveState(this, StateMachine));
             currentTauntTimer = maxTauntTimer;
-            chara.OnDie += EnemyDie;
-        }
-
-        private void EnemyDie()
-        {
-            Destroy(gameObject);
         }
 
         protected new void Update()

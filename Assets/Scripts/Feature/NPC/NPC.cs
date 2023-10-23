@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 namespace NPC
 {
+    using Character;
     public class NPC : MonoBehaviour
     {
         public enum AttackType
@@ -26,12 +27,12 @@ namespace NPC
         public NavMeshAgent Agent;
         //public Character Character;
         public NPCStateMachine StateMachine;
-        protected Character.Character chara;
+        protected Character chara;
 
         protected void Awake()
         {
             StateMachine = new NPCStateMachine();
-            chara = GetComponent<Character.Character>();
+            chara = GetComponent<Character>();
 
             Agent = GetComponent<NavMeshAgent>();
 
@@ -44,6 +45,7 @@ namespace NPC
         {
             if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
+            chara.OnDie += NPCDie;
         }
 
         // Update is called once per frame
@@ -52,9 +54,9 @@ namespace NPC
             StateMachine.CurrentState.FrameUpdate();
         }
 
-        public void Attack()
+        private void NPCDie()
         {
-
+            Destroy(gameObject);
         }
     }
 }

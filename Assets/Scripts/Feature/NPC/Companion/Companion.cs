@@ -28,12 +28,6 @@ namespace NPC.Companion
             base.Awake();
             StateMachine.Initialize(new NPCMoveState(this, StateMachine));
             DetectionRadius = 8f;
-            chara.OnDie += CompanionDie;
-        }
-
-        private void CompanionDie()
-        {
-            Destroy(gameObject);
         }
 
         public void DetectTarget()
