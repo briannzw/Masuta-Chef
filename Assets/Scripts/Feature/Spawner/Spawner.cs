@@ -41,6 +41,7 @@ namespace Spawner
             List<GameObject> spawnObjects = new List<GameObject>();
             for (int i = 0; i < amount; i++)
             {
+                Debug.Log(poolManager.Pools[spawnPrefab]);
                 if (poolManager.Pools[spawnPrefab].CountActive >= maxSpawnObjectInPool)
                 {
                     Debug.LogWarning("Max Object in Pool has reached its limit, " + spawnPrefab.name + " can't be spawned.");

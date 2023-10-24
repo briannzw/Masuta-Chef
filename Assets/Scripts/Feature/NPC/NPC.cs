@@ -6,6 +6,8 @@ using UnityEngine.AI;
 namespace NPC
 {
     using Character;
+    using Spawner;
+    using Enemy;
     public class NPC : MonoBehaviour
     {
         public enum AttackType
@@ -56,7 +58,13 @@ namespace NPC
 
         private void NPCDie()
         {
-            Destroy(gameObject);
+            if(SelectedWeapon == AttackType.Joker)
+            {
+                GetComponent<JokerEnemy>().OnPickUpCancel();
+            }
+
+            GetComponentInChildren<SpawnObject>().Release();
+
         }
     }
 }

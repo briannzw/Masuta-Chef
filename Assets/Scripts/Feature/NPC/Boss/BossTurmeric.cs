@@ -99,7 +99,7 @@ namespace NPC.Boss
 
         void SwampSkill2()
         {
-            if (!isEnraged) return;
+            //if (!isEnraged) return;
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, swampRadius);
 
