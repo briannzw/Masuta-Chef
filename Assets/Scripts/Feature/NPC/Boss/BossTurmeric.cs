@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 namespace NPC.Boss
 {
+    using Character.Hit;
     public class BossTurmeric : NPC
     {
         #region Flag Condition
@@ -23,6 +24,7 @@ namespace NPC.Boss
         [SerializeField] GameObject vortexPrefab;
         [SerializeField] float vortexRadius = 5f;
         [SerializeField] float vortexSpeed = 4.5f;
+        [SerializeField] float spawnAreaVortex = 20f;
 
         private float vortexDuration = 15f; 
         private int minVortex = 7;         // Minimum number of vortex
@@ -40,6 +42,7 @@ namespace NPC.Boss
         private int maxExplosions = 10;         // Maximum number of explosions
 
         private float nextExplosionTime = 0f;
+        private float nextVortexSpawnTime = 0f;
 
         
 
@@ -56,6 +59,14 @@ namespace NPC.Boss
         
         protected new void Update()
         {
+            if(Time.time > nextVortexSpawnTime)
+            {
+                VortexSkill1();
+                nextVortexSpawnTime = Time.time + vortexDuration;
+            }
+
+            SwampSkill2();
+
             skillCastInterval -= Time.deltaTime;
 
             if(skillCastInterval <= 0)
@@ -115,6 +126,7 @@ namespace NPC.Boss
                     randomExplosionPosition.y = 0.5f;
                     randomExplosionPosition = hit.position;
                     GameObject explosion = Instantiate(explosionPrefab, randomExplosionPosition, Quaternion.identity);
+                    explosion.GetComponent<HitController>().Initialize(ActiveWeapon);
                     Destroy(explosion, explosionLifetime);
                 }
 
@@ -122,10 +134,29 @@ namespace NPC.Boss
             }
         }
 
+        void VortexSkill1()
+        {
+            int numberOfExplosions = Random.Range(minVortex, maxVortex);
+
+            for (int i = 0; i < numberOfExplosions; i++)
+            {
+                Vector3 randomVortexPosition = Random.insideUnitSphere * spawnAreaVortex;
+
+                NavMeshHit hit;
+                NavMesh.SamplePosition(transform.position + randomVortexPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
+                randomVortexPosition.y = 0.5f;
+                randomVortexPosition = hit.position;
+                GameObject vortex = Instantiate(vortexPrefab, randomVortexPosition, Quaternion.identity);
+                vortex.GetComponent<HitController>().Initialize(ActiveWeapon);
+                Destroy(vortex, vortexDuration);
+            }
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, swampRadius);
+            Gizmos.DrawWireSphere(transform.position, swampRadius); 
+            Gizmos.DrawWireSphere(transform.position, spawnAreaVortex);
         }
     }
 }
