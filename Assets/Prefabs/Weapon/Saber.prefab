@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
-  rb: {fileID: 0}
+  rb: {fileID: 2464117433372997242}
   TargetTag: Enemy
   stats:
     _serializedList:
@@ -379,7 +379,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  hitController: {fileID: 0}
+  hitController: {fileID: 8798173013038672523}
   animator: {fileID: 819498392342047893}
   vfxController: {fileID: 4473604326915842093}
   saberUltimateApplicator: {fileID: 8490458333203522262, guid: e262f3165bea2244790ebf01ba73c171,
@@ -436,7 +436,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
-  m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTag: 
@@ -446,6 +445,5 @@ MonoBehaviour:
     WeaponAttack: 0
     Multiplier: 1
   Type: 0
-  ApplyEffectBeforeHit: 0
   ApplyEffectBeforeHit: 0
   <Effects>k__BackingField: []
