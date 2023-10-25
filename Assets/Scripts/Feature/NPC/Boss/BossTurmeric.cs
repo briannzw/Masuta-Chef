@@ -19,6 +19,7 @@ namespace NPC.Boss
 
         private float currentTauntTimer;
         [SerializeField] float skillCastingDuration = 5f;
+        [SerializeField] float rotationSpeed = 5.0f;
 
         [Header("Skill 1 Properties")]
         [SerializeField] GameObject vortexPrefab;
@@ -59,7 +60,21 @@ namespace NPC.Boss
         
         protected new void Update()
         {
-            if(Time.time > nextVortexSpawnTime)
+            base.Update();
+            TargetPosition = GameManager.Instance.PlayerTransform.position;
+            if (Agent.remainingDistance <= StopDistance)
+            {
+                Agent.isStopped = true;
+                StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
+                RotateToTarget(rotationSpeed);
+            }
+            else
+            {
+                Agent.isStopped = false;
+                StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
+            }
+
+            if (Time.time > nextVortexSpawnTime)
             {
                 VortexSkill1();
                 nextVortexSpawnTime = Time.time + vortexDuration;
@@ -152,11 +167,17 @@ namespace NPC.Boss
             }
         }
 
-        private void OnDrawGizmos()
+        protected void RotateToTarget(float rotationSpeed)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, swampRadius); 
-            Gizmos.DrawWireSphere(transform.position, spawnAreaVortex);
+            // Calculate the direction from this GameObject to the target
+            Vector3 direction = TargetPosition - transform.position;
+            direction.y = 0;
+
+            // Create a rotation that looks in the calculated direction
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            // Rotate towards the target rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }
