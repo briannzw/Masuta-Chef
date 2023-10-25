@@ -56,7 +56,7 @@ namespace Character.Hit
 
             Character chara = other.GetComponent<Character>();
             if (chara == null) return;
-            
+
             HitChara(chara);
         }
 
