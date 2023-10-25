@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Character.Hit;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -7,8 +8,9 @@ public class Bullet : MonoBehaviour
     public float TravelDistance;
     public float TravelSpeed;
 
-    private Vector3 startPosition;
+    protected Vector3 startPosition;
     
+    public Weapon.Weapon weapon;
     private void Start()
     {
         startPosition = transform.position;

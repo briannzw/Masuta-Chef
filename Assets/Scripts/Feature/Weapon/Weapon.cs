@@ -8,6 +8,8 @@ namespace Weapon
     using MyBox;
     using Character;
     using Player.Controller;
+    using System.Collections;
+
     public class Weapon : MonoBehaviour, IInteractable
     {
         #region Properties
@@ -20,6 +22,11 @@ namespace Weapon
         
         protected bool isFiring;
         protected float attackTimer;
+
+        [Header("Ultimate Properties")]
+        [SerializeField] protected float UltimateTimer = 1;
+        [SerializeField] protected bool isCooldownUltimate = false;
+        [SerializeField] private bool isUltimateCancelable = false;
 
         private bool initialTrigger;
         #endregion
@@ -93,9 +100,27 @@ namespace Weapon
             isFiring = false;
         }
 
-        public void UltimateAttack()
+        public virtual void StartUltimateAttack()
         {
+            if (isCooldownUltimate) 
+            {
+                if (isUltimateCancelable) StopUltimateAttack();
+                return;
+            }
             
+            StartCoroutine(UltimateCooldown());
+            UltimateAttack();
+        }
+
+        public virtual void StopUltimateAttack()
+        {
+            isCooldownUltimate = false;
+            StopCoroutine(UltimateCooldown());
+        }
+
+        protected virtual void UltimateAttack()
+        {
+            // Implement the Ultimate Attack Logic Here;
         }
 
         public void OnEquip(Character holder)
@@ -123,6 +148,13 @@ namespace Weapon
 
             other.GetComponent<PlayerWeaponController>().Equip(this);
             OnEquip(other.GetComponent<Character>());
+        }
+
+        private IEnumerator UltimateCooldown()
+        {
+            isCooldownUltimate = true;
+            yield return new WaitForSeconds(UltimateTimer);
+            isCooldownUltimate = false;
         }
         #endregion
     }
