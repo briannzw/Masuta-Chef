@@ -31,7 +31,7 @@ public class GunController : Weapon.Weapon
     public override void Attack()
     {
         var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
-        var controller = fireObject.GetComponent<AOEController>();
+        var controller = fireObject.GetComponent<BulletHit>();
         controller.Initialize(this);
         fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
     }

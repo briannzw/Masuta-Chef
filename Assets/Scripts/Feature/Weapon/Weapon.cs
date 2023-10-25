@@ -21,7 +21,7 @@ namespace Weapon
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
         
         protected bool isFiring;
-        private float attackTimer;
+        protected float attackTimer;
 
         [Header("Ultimate Properties")]
         [SerializeField] protected float UltimateTimer = 1;
