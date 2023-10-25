@@ -8,10 +8,8 @@ public class Bullet : MonoBehaviour
     public float TravelDistance;
     public float TravelSpeed;
 
-    private Vector3 startPosition;
-    [SerializeField] private LayerMask layerMask;
+    protected Vector3 startPosition;
     
-    private bool alreadyHit = false;
     public Weapon.Weapon weapon;
     private void Start()
     {
@@ -21,27 +19,9 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        if (alreadyHit) return;
         if (Vector3.Distance(startPosition, transform.position) >= Mathf.Abs(TravelDistance))
         {
-            OnHit();
             Destroy(gameObject);
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & layerMask.value) > 0)
-        {
-            // Play Some Effect
-            alreadyHit = true;
-            OnHit();
-            Destroy(gameObject);
-        }
-    }
-
-    protected virtual void OnHit()
-    {
-        // Do Something
     }
 }

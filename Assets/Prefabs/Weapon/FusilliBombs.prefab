@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4519468883129272896}
   - component: {fileID: 5640775712790794720}
   - component: {fileID: 1677051934329406843}
+  - component: {fileID: -111793970554400585}
   m_Layer: 0
   m_Name: FusilliBombs
   m_TagString: Untagged
@@ -123,7 +124,7 @@ MonoBehaviour:
   TravelSpeed: 10
   layerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 136
   weapon: {fileID: 0}
   explosionApplicator: {fileID: 5932148092711293870, guid: 61ad26a6b9fbc8841aa471f790702e6b,
     type: 3}
@@ -154,3 +155,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-111793970554400585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3044687245213835418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec640617b3957e54c9f937f783487b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTag: 
+  Source: {fileID: 0}
+  Value:
+    CharacterAttack: 0
+    WeaponAttack: 0
+    Multiplier: 1
+  Type: 0
+  ApplyEffectBeforeHit: 0
+  <Effects>k__BackingField: []
+  isPiercing: 0
