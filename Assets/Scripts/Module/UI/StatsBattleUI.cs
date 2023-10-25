@@ -8,7 +8,7 @@ namespace Module.UI
     using Character;
     using Character.Stat;
 
-    public class PlayerBattleUI : MonoBehaviour
+    public class StatsBattleUI : MonoBehaviour
     {
         [SerializeField] private Character chara;
         [SerializeField] private Slider slider;
