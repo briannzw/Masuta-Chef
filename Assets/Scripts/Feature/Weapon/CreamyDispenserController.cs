@@ -29,7 +29,7 @@ public class CreamyDispenserController : Weapon.Weapon
         vfx = fireObjectPrefab.GetComponent<ParticleSystem>();
         AOEController aoeController = AttackArea.GetComponent<AOEController>();
         aoeController.Initialize(this);
-        vfx.Stop();
+        // this.StopAttack();
     }
     protected new void Update()
     {

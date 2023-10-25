@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         startPosition = transform.position;
+        this.GetComponent<Rigidbody>().velocity = transform.forward * TravelSpeed;
     }
 
     private void Update()

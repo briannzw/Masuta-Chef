@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
+  rb: {fileID: 0}
   TargetTag: Enemy
   stats:
     _serializedList:
@@ -435,14 +436,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
+  m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTag: 
   Source: {fileID: 8662518602482338326}
   Value:
     CharacterAttack: 0
-    WeaponAttack: 600
+    WeaponAttack: 0
     Multiplier: 1
   Type: 0
+  ApplyEffectBeforeHit: 0
   ApplyEffectBeforeHit: 0
   <Effects>k__BackingField: []

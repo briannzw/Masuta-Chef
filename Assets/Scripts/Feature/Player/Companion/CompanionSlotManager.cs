@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Player.CompanionSlot
 {
+    using NPC.Companion;
     public class CompanionSlotManager : MonoBehaviour
     {
         [Header("References")]

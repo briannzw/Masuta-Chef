@@ -18,7 +18,6 @@ namespace Weapon
         #endregion
 
         #region Method
-
         public override void Attack()
         {
 

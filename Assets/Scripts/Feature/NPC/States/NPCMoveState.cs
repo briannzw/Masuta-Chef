@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCMoveState : NPCState
 {
-    public NPCMoveState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+    public NPCMoveState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
     {
     }
 

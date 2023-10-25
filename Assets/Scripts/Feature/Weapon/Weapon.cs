@@ -15,7 +15,7 @@ namespace Weapon
         #region Properties
         [Header("References")]
         public Character Holder;
-        private Rigidbody rb;
+        [SerializeField] private Rigidbody rb;
         private new Collider collider;
         [Tag] public string TargetTag;
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
@@ -45,6 +45,17 @@ namespace Weapon
             if(rb == null) rb = GetComponentInParent<Rigidbody>();
             collider = GetComponent<Collider>();
             initialTrigger = collider.isTrigger;
+
+            // For Debuging
+            if(Holder == null)
+            {
+                GameObject parent = transform.parent.transform.parent.gameObject;
+                
+                if(parent.tag == "Player")
+                {
+                    Holder = parent.GetComponent<Character>();
+                }
+            }
         }
 
         // Start is called before the first frame update

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8233849171143517420}
   - component: {fileID: 1377915462053637230}
   - component: {fileID: 8469763974586944811}
+  - component: {fileID: -2806892211682789830}
   m_Layer: 10
   m_Name: PastaGun
   m_TagString: Untagged
@@ -121,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
+  rb: {fileID: 0}
   TargetTag: Enemy
   stats:
     _serializedList:
