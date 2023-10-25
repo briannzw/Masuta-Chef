@@ -10,8 +10,11 @@ namespace Weapon
         #region Properties
         public LayerMask enemyLayer;
 
+        [Header("References")]
         [SerializeField] HitController hitController;
         [SerializeField] Animator animator;
+        [SerializeField] SaberVFXController vfxController;
+        [SerializeField] GameObject saberUltimateApplicator;
         #endregion
 
         #region Method
@@ -25,6 +28,19 @@ namespace Weapon
             base.StartAttack();
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
+        }
+
+        protected override void UltimateAttack()
+        {
+            base.UltimateAttack();
+            
+            // Start Damage
+            GameObject ultimate = Instantiate(saberUltimateApplicator, transform.position, transform.rotation);
+            ultimate.GetComponent<AOEController>().Source = this;
+            ultimate.GetComponent<AOEController>().AreaDuration = UltimateTimer;
+            
+            // Start VFX
+            vfxController.StartVFX();
         }
         #endregion
     }
