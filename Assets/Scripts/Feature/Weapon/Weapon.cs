@@ -16,7 +16,7 @@ namespace Weapon
         [Header("References")]
         public Character Holder;
         [SerializeField] private Rigidbody rb;
-        private new Collider collider;
+        protected new Collider collider;
         [Tag] public string TargetTag;
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
         
@@ -39,7 +39,7 @@ namespace Weapon
         }
 
         #region Lifecycle
-        private void Awake()
+        protected void Awake()
         {
             rb = GetComponent<Rigidbody>();
             if(rb == null) rb = GetComponentInParent<Rigidbody>();
@@ -136,6 +136,7 @@ namespace Weapon
         public void OnUnequip()
         {
             Holder = null;
+            collider.enabled = true;
             rb.isKinematic = false;
             collider.isTrigger = false;
             gameObject.layer = LayerMask.NameToLayer("Interactable");

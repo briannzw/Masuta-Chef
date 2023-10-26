@@ -15,11 +15,16 @@ namespace Weapon
         [SerializeField] Animator animator;
         [SerializeField] SaberVFXController vfxController;
         [SerializeField] GameObject saberUltimateApplicator;
-        [SerializeField] Collider collider;
         #endregion
 
         #region Method
-        private void Awake() {
+        private new void Awake() {
+            base.Awake();
+        }
+
+        private new void Start()
+        {
+            base.Start();
             collider.enabled = false;
         }
 

@@ -15,6 +15,7 @@ namespace NPC.Boss
         private float skillCastMinInterval = 20f;
         private float skillCastMaxInterval = 26f;
         private float skillCastInterval;
+        private bool isCastingSkill = false;
         #endregion
 
         private float currentTauntTimer;
@@ -43,7 +44,7 @@ namespace NPC.Boss
         private int maxExplosions = 10;         // Maximum number of explosions
 
         private float nextExplosionTime = 0f;
-        private float nextVortexSpawnTime = 0f;
+        private float nextVortexSpawnTime = 15f;
 
         
 
@@ -62,22 +63,24 @@ namespace NPC.Boss
         {
             base.Update();
             TargetPosition = GameManager.Instance.PlayerTransform.position;
-            if (Agent.remainingDistance <= StopDistance)
+            if (Agent.remainingDistance <= StopDistance && !isCastingSkill)
             {
-                Agent.isStopped = true;
                 StateMachine.ChangeState(new NPCAttackState(this, StateMachine));
                 RotateToTarget(rotationSpeed);
             }
-            else
+            else if(!isCastingSkill)
             {
-                Agent.isStopped = false;
                 StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
             }
 
+            InvokeRepeating("PrintDebugMessage", 1f, 2f);
+
+            //When to cast skill 1:
+
             if (Time.time > nextVortexSpawnTime)
             {
-                VortexSkill1();
-                nextVortexSpawnTime = Time.time + vortexDuration;
+                CastSkill1();
+                nextVortexSpawnTime += Time.time + Random.Range(15, 20);
             }
 
             SwampSkill2();
@@ -165,6 +168,18 @@ namespace NPC.Boss
                 vortex.GetComponent<HitController>().Initialize(ActiveWeapon);
                 Destroy(vortex, vortexDuration);
             }
+            Agent.isStopped = false;
+            isCastingSkill = false;
+        }
+
+        void CastSkill1()
+        {
+            isCastingSkill = true;
+            StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
+            //Animator.SetTrigger("CastSkill");
+            Agent.isStopped = true;
+            Invoke("VortexSkill1", 3f);
+            Debug.Log("Vortex is being cast!");
         }
 
         protected void RotateToTarget(float rotationSpeed)
@@ -178,6 +193,11 @@ namespace NPC.Boss
 
             // Rotate towards the target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        void PrintDebugMessage()
+        {
+            Debug.Log("Next vortex spawn in: " + (nextVortexSpawnTime - Time.time).ToString());
         }
     }
 }

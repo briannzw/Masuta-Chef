@@ -2,31 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMoveState : NPCState
+public class BossCastSkillState : NPCState
 {
-    public NPCMoveState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+    public BossCastSkillState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        npc.Agent.isStopped = false;
+        npc.Agent.isStopped = true;
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        npc.Agent.isStopped = false;
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        npc.Agent.SetDestination(npc.TargetPosition);
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
     }
+
 }
