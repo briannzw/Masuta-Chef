@@ -2,11 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Character.Stat;
+using System;
 
 public class HUDController : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private ManaBar manaBar;
+    public Stats playerStats;
+    [SerializeField] private string playerTagToFind = "Player";
+
+    private void Start()
+    {
+        GameObject player = GameObject.FindWithTag(playerTagToFind);
+        if (player == null) 
+        {
+            Debug.LogWarning("Player are not found. HUD display will be inaccurate!");
+            return;
+        }
+
+        playerStats = player.GetComponent<Character.Character>().Stats;
+        if (playerStats == null)
+        {
+            Debug.LogWarning("Player Stats not found. HUD display will be inaccurate!");
+            return;
+        }
+
+        Initialize(
+            playerStats.DynamicStatList[DynamicStatsEnum.Health].Value,
+            playerStats.DynamicStatList[DynamicStatsEnum.Mana].Value
+        );
+    }
+
+    // This is a workaround. not an optimal solution
+    private void FixedUpdate()
+    {
+        SetHealth(playerStats.DynamicStatList[DynamicStatsEnum.Health].Value);
+        SetMana(playerStats.DynamicStatList[DynamicStatsEnum.Mana].Value);
+    }
 
     public void Initialize(
         float maxHealth,
