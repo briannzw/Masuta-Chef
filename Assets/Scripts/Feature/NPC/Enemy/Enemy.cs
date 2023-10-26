@@ -12,6 +12,8 @@ namespace NPC.Enemy
         [SerializeField] private float maxTauntTimer = 0.1f;
         [SerializeField] float rotationSpeed = 5.0f;
 
+        private static int killCount = 0;
+
         private new void Awake()
         {
             base.Awake();
@@ -22,6 +24,8 @@ namespace NPC.Enemy
 
         private void EnemyDie()
         {
+            killCount++;
+            Debug.Log("Jumlah musuh yang sudah dibunuh: " + killCount);
             Destroy(gameObject);
         }
 
@@ -70,6 +74,11 @@ namespace NPC.Enemy
 
             // Rotate towards the target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        public static int GetKillCount()
+        {
+            return killCount;
         }
     }
 }

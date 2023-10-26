@@ -20,6 +20,7 @@ namespace Wave
 
         private float gameTime = 0f;
         private int currentWaveIndex = 0;
+        private bool isWaveManagerActive = true;
 
         private void Awake()
         {
@@ -28,7 +29,7 @@ namespace Wave
 
         private void Update()
         {
-            if (currentWaveIndex >= LevelData.Waves.Count) return;
+            if (!isWaveManagerActive || currentWaveIndex >= LevelData.Waves.Count) return;
 
             gameTime += Time.deltaTime;
 
@@ -58,20 +59,20 @@ namespace Wave
             while (total > 0)
             {
                 timer += Time.deltaTime;
-                if(timer >= interval)
+                if (timer >= interval)
                 {
-                    if(total < spawnCount)
+                    if (total < spawnCount)
                     {
                         spawner.Spawn(total);
                         break;
                     }
 
                     List<GameObject> enemies = spawner.Spawn(spawnCount);
-                    foreach(var enemy in enemies)
+                    foreach (var enemy in enemies)
                     {
-                        if(enemy.GetComponent<Character>() == null) enemy.AddComponent<Character>();
+                        if (enemy.GetComponent<Character>() == null) enemy.AddComponent<Character>();
                         enemy.GetComponent<Character>().StatsPreset = enemyPreset;
-                        if(enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
+                        if (enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
                         enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
                     }
                     total -= spawnCount;
@@ -81,5 +82,9 @@ namespace Wave
             }
         }
 
+        public void SetWaveManagerActive(bool active)
+        {
+            isWaveManagerActive = active;
+        }
     }
 }

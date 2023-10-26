@@ -18,6 +18,7 @@ namespace Player.Controller
         public float sprintSpeed = 8f;
         public float gravity = -9.8f;
         public float turnSmoothTime = 0.1f;
+        private bool canMove = true; // Boleh bergerak secara default
 
         private Vector3 rawInputMovement = Vector3.zero;
         private Vector3 velocity;
@@ -51,20 +52,29 @@ namespace Player.Controller
 
         private void Update()
         {
-            moveDirection = GetMovementInputDirection();
-            velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
-
-            // Gravity
-            if (controller.isGrounded)
+            if (canMove)
             {
-                if (velocity.y < 0f)
-                    velocity.y = -2f;
+                moveDirection = GetMovementInputDirection();
+                velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
+
+                // Gravity
+                if (controller.isGrounded)
+                {
+                    if (velocity.y < 0f)
+                        velocity.y = -2f;
+                }
+
+                velocity.y += gravity * Time.deltaTime;
+                controller.Move(velocity * Time.deltaTime);
+
+                CheckOutOfBound();
             }
+        }
 
-            velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
-
-            CheckOutOfBound();
+        // Method untuk mengatur apakah pemain boleh bergerak atau tidak
+        public void SetCanMove(bool value)
+        {
+            canMove = value;
         }
 
         #region Callbacks
@@ -123,25 +133,25 @@ namespace Player.Controller
         {
             Vector2 inputMovement = context.ReadValue<Vector2>();
             rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
-            Animator.SetBool("IsWalking", true);
+            //Animator.SetBool("IsWalking", true);
         }
 
         private void OnMoveCanceled(InputAction.CallbackContext context)
         {
             rawInputMovement = Vector3.zero;
-            Animator.SetBool("IsWalking", false);
+           // Animator.SetBool("IsWalking", false);
         }
 
         private void OnSprint(InputAction.CallbackContext context)
         {
             speed = isSprintDefault ? moveSpeed : sprintSpeed;
-            Animator.SetBool("IsRunning", true);
+            //Animator.SetBool("IsRunning", true);
         }
 
         private void OnSprintCanceled(InputAction.CallbackContext context)
         {
             speed = isSprintDefault ? sprintSpeed : moveSpeed;
-            Animator.SetBool("IsRunning", false);
+           // Animator.SetBool("IsRunning", false);
         }
         #endregion
 

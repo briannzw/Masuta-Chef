@@ -129,6 +129,12 @@ namespace Player.Controller
                 return (success: false, position: Vector3.zero); 
             }
         }
+
+        public void SetWeapon(bool value)
+        {
+            WeaponTransform.gameObject.SetActive(value);
+        }
+
         #endregion
     }
 }

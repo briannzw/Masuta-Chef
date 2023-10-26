@@ -14,9 +14,11 @@ namespace Crate.Area
         [SerializeField] private CombineManager combineManager;
         [SerializeField] private int maxCrate = 4;
         [SerializeField] private List<Transform> GridTransform = new();
+
         private List<CrateController> CrateGrid;
 
         private int currentCrateCount = 0;
+
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace Crate.Area
 
         public void Interact(GameObject other = null)
         {
+
             // DO Combine
             List<CrateColor> colors = new List<CrateColor>();
             foreach(var crate in CrateGrid)
@@ -59,6 +62,8 @@ namespace Crate.Area
 
             if (other.CompareTag("Crate"))
             {
+                Debug.Log("Interaction occurred."); // This will print to the console
+
                 CrateController crate = other.GetComponent<CrateController>();
                 if (crate.IsHeld) return;
 
