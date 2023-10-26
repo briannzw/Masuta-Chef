@@ -49,21 +49,23 @@ public class PauseManager : PlayerInputControl
     #region Method
     private void OnInputActionStart(InputAction.CallbackContext context)
     {
-        if (isPaused)
-        {
-            playerControls.Panel.Disable();
-            playerControls.Gameplay.Enable();
-            Resume();
-        }
-        else
-        {
-            playerControls.Gameplay.Disable();
-            playerControls.Panel.Enable();
-            Pause();
-        }
+        SwitchState();
+    }
 
-        pauseUI.SetActive(!isPaused);
-        isPaused = !isPaused;
+    // This method should be called whenever we want to perform
+    // a pause action without using playerinput
+    public void ForcePause()
+    {
+        isPaused = false;
+        SwitchState();
+    }
+
+    // This method should be called whenever we want to perform
+    // a resume action without using playerinput
+    public void ForceResume()
+    {
+        isPaused = true;
+        SwitchState();
     }
 
     private void Pause()
@@ -85,6 +87,25 @@ public class PauseManager : PlayerInputControl
         {
             OnResumeAction();
         }
+    }
+
+    private void SwitchState()
+    {
+        if (isPaused)
+        {
+            playerControls.Panel.Disable();
+            playerControls.Gameplay.Enable();
+            Resume();
+        }
+        else
+        {
+            playerControls.Gameplay.Disable();
+            playerControls.Panel.Enable();
+            Pause();
+        }
+
+        pauseUI.SetActive(!isPaused);
+        isPaused = !isPaused;
     }
     #endregion
 }
