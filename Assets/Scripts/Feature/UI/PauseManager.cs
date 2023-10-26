@@ -23,6 +23,7 @@ public class PauseManager : PlayerInputControl
     protected override void Start() {
         base.Start();
         isPaused = pauseUI.activeSelf;
+        Resume();
     }
 
     #region Callbacks

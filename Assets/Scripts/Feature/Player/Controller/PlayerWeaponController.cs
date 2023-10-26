@@ -23,6 +23,9 @@ namespace Player.Controller
 
         [Header("Settings")]
         [SerializeField] private LayerMask groundMask;
+
+        // Workaround for disabling aim when pausing
+        private bool isPaused;
         #endregion
 
         #region Lifecycle
@@ -34,9 +37,22 @@ namespace Player.Controller
 
         private void Update()
         {
-            Aim();
+            if (!isPaused) Aim();
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PauseManager.OnPauseAction += DisablingAim;
+            PauseManager.OnResumeAction += EnablingAim;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PauseManager.OnPauseAction -= DisablingAim;
+            PauseManager.OnResumeAction -= EnablingAim;
+        }
         #endregion
 
         #region Callbacks
@@ -145,6 +161,16 @@ namespace Player.Controller
             { 
                 return (success: false, position: Vector3.zero); 
             }
+        }
+
+        private void DisablingAim()
+        {
+            isPaused = true;
+        }
+
+        private void EnablingAim()
+        {
+            isPaused = false;
         }
         #endregion
     }
