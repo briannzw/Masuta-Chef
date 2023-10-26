@@ -7,19 +7,13 @@ namespace DialogueEditor
 {
     public class Tutorial2Conversation : MonoBehaviour
     {
-        public Button interactButton;
+        public Button interactButton1;
 
         // Start is called before the first frame update
         void Start()
         {
-            interactButton.onClick.Invoke();
-            interactButton.gameObject.SetActive(false);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            interactButton1.onClick.Invoke();
+            interactButton1.gameObject.SetActive(false);
         }
     }
 }

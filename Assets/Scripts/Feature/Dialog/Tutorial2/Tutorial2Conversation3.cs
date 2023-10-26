@@ -1,0 +1,105 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Crate.Area;
+
+namespace DialogueEditor
+{
+    public class Tutorial2Conversation3 : MonoBehaviour
+    {
+        public Button interactButton2;
+        public Button interactButton3;
+        public Button interactButton4;
+        public Button interactButton5;
+        public Button interactButton6;
+        public CrateArea crateArea;
+        private bool updateActive = true;
+        private bool interactButton4Activated = false;
+        private bool interactButton5Activated = false;
+        private bool interactButton6Activated = false;
+
+        public InputFieldGrabber inputFieldGrabber;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            crateArea = FindObjectOfType<CrateArea>();
+            inputFieldGrabber = FindObjectOfType<InputFieldGrabber>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if(!updateActive)
+            return;
+
+            EnableCon();
+        }
+
+        public void EnableCon()
+        {
+            int crateCount = crateArea.GetCurrentCrateCount();
+            if (crateCount == 1)
+            {
+                if (interactButton2.gameObject.activeSelf)
+                {
+                    interactButton2.onClick.Invoke();
+                    interactButton2.gameObject.SetActive(false);
+                    updateActive = false;
+
+                }
+            }
+            else if (crateCount == 4 && !interactButton6Activated)
+            {
+                interactButton6.gameObject.SetActive(true);
+                interactButton6Activated = true;
+            }
+            else if (crateCount == 3 && !interactButton5Activated)
+            {
+                interactButton5.gameObject.SetActive(true);
+                interactButton5Activated = true;
+            }
+            else if (crateCount == 2 && !interactButton4Activated)
+            {
+                interactButton4.gameObject.SetActive(true);
+                interactButton4Activated = true;
+            }
+            else if (crateCount == 0)
+            {
+                if (interactButton3.gameObject.activeSelf)
+                {
+                    interactButton3.onClick.Invoke();
+                    interactButton3.gameObject.SetActive(false);
+                    updateActive = false;
+                }
+                else if (interactButton4.gameObject.activeSelf)
+                {
+                    interactButton4.onClick.Invoke();
+                    interactButton4.gameObject.SetActive(false);
+                    updateActive = false;
+                }
+                else if (interactButton5.gameObject.activeSelf)
+                {
+                    interactButton5.onClick.Invoke();
+                    interactButton5.gameObject.SetActive(false);
+                    updateActive = false;
+                }
+                else if (interactButton6.gameObject.activeSelf)
+                {
+                    interactButton6.onClick.Invoke();
+                    interactButton6.gameObject.SetActive(false);
+                    updateActive = false;
+                }
+            }
+        }
+
+        public void SetInputFieldNull()
+        {
+            inputFieldGrabber = null;
+        }
+
+        public void ResumeUpdate()
+        { updateActive = true; }
+    }
+}

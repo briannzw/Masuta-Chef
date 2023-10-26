@@ -46,8 +46,12 @@ namespace DialogueEditor
         public UnityEngine.Events.UnityEvent Event;
         public List<EditableParameter> ParameterList; // Serialized into the json string
 
-        
+        public InputFieldGrabber inputFieldGrabber;
 
+        void Start ()
+        {
+            inputFieldGrabber = FindObjectOfType<InputFieldGrabber>();
+        }
 
         //--------------------------------------
         // Util
@@ -385,7 +389,16 @@ namespace DialogueEditor
         {
             SpeechNode speech = new SpeechNode();
             speech.Name = editableNode.Name;
-            speech.Text = editableNode.Text;
+            if (inputFieldGrabber != null)
+            {
+                speech.Text = editableNode.Text + " " + inputFieldGrabber.GetInputText() +".";
+                inputFieldGrabber = null;
+            }
+            else
+            {
+                speech.Text = editableNode.Text;
+
+            }
             speech.AutomaticallyAdvance = editableNode.AdvanceDialogueAutomatically;
             speech.AutoAdvanceShouldDisplayOption = editableNode.AutoAdvanceShouldDisplayOption;
             speech.TimeUntilAdvance = editableNode.TimeUntilAdvance;

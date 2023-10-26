@@ -22,6 +22,7 @@ namespace DialogueEditor
         SerializedProperty ScrollTextProperty;
         SerializedProperty ScrollTextSpeedProperty;
         SerializedProperty AllowMouseInteractionProperty;
+        SerializedProperty SubmitButtonProperty;
 
         private void OnEnable()
         {

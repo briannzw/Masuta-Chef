@@ -14,6 +14,7 @@ namespace Crate.Area
         [SerializeField] private CombineManager combineManager;
         [SerializeField] private int maxCrate = 4;
         [SerializeField] private List<Transform> GridTransform = new();
+        private bool isInteract = false;
 
         private List<CrateController> CrateGrid;
 
@@ -34,7 +35,9 @@ namespace Crate.Area
 
             // DO Combine
             List<CrateColor> colors = new List<CrateColor>();
-            foreach(var crate in CrateGrid)
+            isInteract = true;
+
+            foreach (var crate in CrateGrid)
             {
                 if (crate != null) colors.Add(crate.crateColor);
             }
@@ -93,6 +96,15 @@ namespace Crate.Area
         {
             currentCrateCount--;
             CrateGrid[CrateGrid.IndexOf(pickable as CrateController)] = null;
+        }
+
+        public int GetCurrentCrateCount()
+        {
+            return currentCrateCount;
+        }
+        public bool IsInteract()
+        {
+            return isInteract;
         }
     }
 }

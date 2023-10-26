@@ -191,13 +191,6 @@ namespace DialogueEditor
                         TextMesh.font = continueFont;
                     }
                     break;
-
-                case eButtonType.End:
-                    {
-                        TextMesh.text = "End.";
-                        TextMesh.font = endFont;
-                    }
-                    break;
             }
         }
 
@@ -218,10 +211,6 @@ namespace DialogueEditor
 
                 case eButtonType.Option:
                     ConversationManager.Instance.OptionSelected(m_node as OptionNode);
-                    break;
-
-                case eButtonType.End:
-                    ConversationManager.Instance.EndButtonSelected();
                     break;
             }
         }
