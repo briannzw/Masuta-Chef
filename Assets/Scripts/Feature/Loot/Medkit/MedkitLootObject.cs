@@ -14,7 +14,8 @@ namespace Loot.Interactable
         {
             foreach (Effect effect in Effects)
             {
-                character.TakeEffect(effect);
+                effect.Initialize();
+                character.AddEffect(effect);
             }
         }
 

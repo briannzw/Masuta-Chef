@@ -39,7 +39,7 @@ namespace Character.Dummy
             InvokeRepeating("SetLabel", 0, StatsUpdateInterval);
         }
 
-        public override void TakeDamage(float totalAttack, DynamicStatsEnum dynamicEnum, float multiplier = 1)
+        public override void TakeDamage(float totalAttack, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)
         {
             base.TakeDamage(totalAttack, dynamicEnum, multiplier);
             if (dynamicEnum != DynamicStatsEnum.Health) return;

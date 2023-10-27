@@ -36,9 +36,9 @@ namespace Character.Stat
             {
                 finalValue += mod.Value;
             }
-            else if (mod.Type == StatModType.PercentAdd ||mod.Type == StatModType.PercentMult)
+            else if (mod.Type == StatModType.PercentAdd || mod.Type == StatModType.PercentMult)
             {
-                finalValue *= 1 + mod.Value;
+                finalValue += mod.Value * Value;
             }
 
             CurrentValue = (float)Math.Round(finalValue, 4);
