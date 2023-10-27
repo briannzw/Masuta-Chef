@@ -16,7 +16,7 @@ namespace Weapon
         [Header("References")]
         public Character Holder;
         [SerializeField] private Rigidbody rb;
-        private new Collider collider;
+        protected Collider weaponCollider;
         [Tag] public string TargetTag;
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
         
@@ -39,12 +39,12 @@ namespace Weapon
         }
 
         #region Lifecycle
-        private void Awake()
+        protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
             if(rb == null) rb = GetComponentInParent<Rigidbody>();
-            collider = GetComponent<Collider>();
-            initialTrigger = collider.isTrigger;
+            weaponCollider = GetComponent<Collider>();
+            initialTrigger = weaponCollider.isTrigger;
 
             // For Debuging
             if(Holder == null)
@@ -67,7 +67,7 @@ namespace Weapon
             if (Holder == null)
             {
                 rb.isKinematic = false;
-                collider.isTrigger = false;
+                weaponCollider.isTrigger = false;
             }
         }
 
@@ -129,7 +129,7 @@ namespace Weapon
 
             Holder = holder;
             rb.isKinematic = true;
-            collider.isTrigger = initialTrigger;
+            weaponCollider.isTrigger = initialTrigger;
             gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
@@ -137,7 +137,7 @@ namespace Weapon
         {
             Holder = null;
             rb.isKinematic = false;
-            collider.isTrigger = false;
+            weaponCollider.isTrigger = false;
             gameObject.layer = LayerMask.NameToLayer("Interactable");
             StopAttack();
         }

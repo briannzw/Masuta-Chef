@@ -15,12 +15,13 @@ namespace Weapon
         [SerializeField] Animator animator;
         [SerializeField] SaberVFXController vfxController;
         [SerializeField] GameObject saberUltimateApplicator;
-        [SerializeField] Collider collider;
         #endregion
 
         #region Method
-        private void Awake() {
-            collider.enabled = false;
+        protected override void Awake()
+        {
+            base.Awake();
+            weaponCollider.isTrigger = false;
         }
 
         public override void Attack()
@@ -31,7 +32,7 @@ namespace Weapon
         public override void StartAttack()
         {
             base.StartAttack();
-            collider.enabled = true;
+            weaponCollider.isTrigger = true;
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
         }
@@ -39,7 +40,7 @@ namespace Weapon
         public override void StopAttack()
         {
             base.StopAttack();
-            collider.enabled = false;
+            weaponCollider.isTrigger = false;
         }
 
         protected override void UltimateAttack()
