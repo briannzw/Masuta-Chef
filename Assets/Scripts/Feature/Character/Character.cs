@@ -143,8 +143,16 @@ namespace Character
 
         public void TakeEffect(Effect effect)
         {
-            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(effect.Modifier.Value, effect.DynamicStatsAffected, 1);
-            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, effect.DynamicStatsAffected, 1);
+            if (effect.StatusEffect == StatusEffects.Burn)
+            {
+                // If Flat -> Reduce directly, else reduce by value * Dynamic Max Valuue
+                TakeDamage((effect.Modifier.Type == StatModType.Flat) ? effect.Modifier.Value : effect.Modifier.Value * Stats.DynamicStatList[effect.DynamicStatsAffected].Value, effect.DynamicStatsAffected, 1);
+            }
+            else if (effect.StatusEffect == StatusEffects.Heal)
+            {
+                // If Flat -> Adds directly, else adds value * Dynamic Max Value
+                TakeHeal((effect.Modifier.Type == StatModType.Flat) ? effect.Modifier.Value : effect.Modifier.Value * Stats.DynamicStatList[effect.DynamicStatsAffected].Value, effect.DynamicStatsAffected, 1);
+            }
             else if (effect.AffectDynamicStat)
                 Stats.DynamicStatList[effect.DynamicStatsAffected].AddModifier(effect.Modifier);
             else

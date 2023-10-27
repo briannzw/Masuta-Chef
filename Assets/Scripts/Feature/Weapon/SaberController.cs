@@ -18,14 +18,10 @@ namespace Weapon
         #endregion
 
         #region Method
-        private new void Awake() {
-            base.Awake();
-        }
-
-        private new void Start()
+        protected override void Awake()
         {
-            base.Start();
-            collider.enabled = false;
+            base.Awake();
+            weaponCollider.isTrigger = false;
         }
 
         public override void Attack()
@@ -36,7 +32,7 @@ namespace Weapon
         public override void StartAttack()
         {
             base.StartAttack();
-            collider.enabled = true;
+            weaponCollider.isTrigger = true;
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
         }
@@ -44,7 +40,7 @@ namespace Weapon
         public override void StopAttack()
         {
             base.StopAttack();
-            collider.enabled = false;
+            weaponCollider.isTrigger = false;
         }
 
         protected override void UltimateAttack()
