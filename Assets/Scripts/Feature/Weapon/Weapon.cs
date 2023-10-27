@@ -136,7 +136,7 @@ namespace Weapon
         public void OnUnequip()
         {
             Holder = null;
-            collider.enabled = true;
+            GetComponent<Collider>().enabled = true;
             rb.isKinematic = false;
             weaponCollider.isTrigger = false;
             gameObject.layer = LayerMask.NameToLayer("Interactable");

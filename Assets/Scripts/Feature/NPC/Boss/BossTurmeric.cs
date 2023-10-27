@@ -63,6 +63,7 @@ namespace NPC.Boss
         
         protected new void Update()
         {
+            Debug.Log(chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue);
             base.Update();
             TargetPosition = GameManager.Instance.PlayerTransform.position;
             if (Agent.remainingDistance <= StopDistance && !isCastingSkill)
