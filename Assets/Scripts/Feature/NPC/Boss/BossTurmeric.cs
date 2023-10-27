@@ -6,6 +6,7 @@ using UnityEngine.AI;
 namespace NPC.Boss
 {
     using Character.Hit;
+    using Character.StatEffect;
     public class BossTurmeric : NPC
     {
         #region Flag Condition
@@ -45,8 +46,9 @@ namespace NPC.Boss
 
         private float nextExplosionTime = 0f;
         private float nextVortexSpawnTime = 15f;
+        [field: SerializeField] public List<Effect> RageEffects { get; set; }
 
-        
+
 
         private new void Awake()
         {
@@ -73,7 +75,6 @@ namespace NPC.Boss
                 StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
             }
 
-            InvokeRepeating("PrintDebugMessage", 1f, 2f);
 
             //When to cast skill 1:
 
@@ -83,18 +84,14 @@ namespace NPC.Boss
                 nextVortexSpawnTime += Time.time + Random.Range(15, 20);
             }
 
-            SwampSkill2();
-
-            skillCastInterval -= Time.deltaTime;
-
-            if(skillCastInterval <= 0)
+            if (isEnraged)
             {
-                //cast skill;
+                SwampSkill2();
             }
 
-            if (chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue <= healthCriticalPercent * chara.Stats.DynamicStatList[DynamicStatsEnum.Health].Value)
+            if (chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue <= 0 && !isEnraged)
             {
-                isEnraged = true;
+                CastRage();
             }
 
             /* TO DO: (if isEnraged)
@@ -115,9 +112,62 @@ namespace NPC.Boss
              */
         }
 
+
+
+        void VortexSkill1()
+        {
+            int numberOfExplosions = Random.Range(minVortex, maxVortex);
+
+            for (int i = 0; i < numberOfExplosions; i++)
+            {
+                Vector3 randomVortexPosition = Random.insideUnitSphere * spawnAreaVortex;
+
+                NavMeshHit hit;
+                NavMesh.SamplePosition(transform.position + randomVortexPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
+                randomVortexPosition.y = 0.5f;
+                randomVortexPosition = hit.position;
+                GameObject vortex = Instantiate(vortexPrefab, randomVortexPosition, Quaternion.identity);
+                vortex.GetComponent<HitController>().Initialize(ActiveWeapon);
+                Destroy(vortex, vortexDuration);
+            }
+            Agent.isStopped = false;
+            isCastingSkill = false;
+        }
+
+        void CastSkill1()
+        {
+            isCastingSkill = true;
+            StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
+            //Animator.SetTrigger("CastSkill");
+            Agent.isStopped = true;
+            Invoke("VortexSkill1", 3f);
+        }
+
+        void CastRage()
+        {
+            Debug.Log("Is Enraged");
+            isCastingSkill = true;
+            isEnraged = true;
+            StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
+            //Animator.SetTrigger("CastRage");
+            Agent.isStopped = true;
+            Invoke("CastingDuration", 2f);
+
+            foreach (Effect effect in RageEffects)
+            {
+                Debug.Log("Take Effect");
+                chara.TakeEffect(effect);
+            }
+        }
+
+        void CastingDuration()
+        {
+            isCastingSkill = false;
+            Agent.isStopped = false;
+        }
+
         void SwampSkill2()
         {
-            //if (!isEnraged) return;
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, swampRadius);
 
@@ -152,36 +202,6 @@ namespace NPC.Boss
             }
         }
 
-        void VortexSkill1()
-        {
-            int numberOfExplosions = Random.Range(minVortex, maxVortex);
-
-            for (int i = 0; i < numberOfExplosions; i++)
-            {
-                Vector3 randomVortexPosition = Random.insideUnitSphere * spawnAreaVortex;
-
-                NavMeshHit hit;
-                NavMesh.SamplePosition(transform.position + randomVortexPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
-                randomVortexPosition.y = 0.5f;
-                randomVortexPosition = hit.position;
-                GameObject vortex = Instantiate(vortexPrefab, randomVortexPosition, Quaternion.identity);
-                vortex.GetComponent<HitController>().Initialize(ActiveWeapon);
-                Destroy(vortex, vortexDuration);
-            }
-            Agent.isStopped = false;
-            isCastingSkill = false;
-        }
-
-        void CastSkill1()
-        {
-            isCastingSkill = true;
-            StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
-            //Animator.SetTrigger("CastSkill");
-            Agent.isStopped = true;
-            Invoke("VortexSkill1", 3f);
-            Debug.Log("Vortex is being cast!");
-        }
-
         protected void RotateToTarget(float rotationSpeed)
         {
             // Calculate the direction from this GameObject to the target
@@ -193,11 +213,6 @@ namespace NPC.Boss
 
             // Rotate towards the target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-
-        void PrintDebugMessage()
-        {
-            Debug.Log("Next vortex spawn in: " + (nextVortexSpawnTime - Time.time).ToString());
         }
     }
 }
