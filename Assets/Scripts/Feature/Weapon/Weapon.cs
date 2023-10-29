@@ -9,6 +9,8 @@ namespace Weapon
     using Character;
     using Player.Controller;
     using System.Collections;
+    using Character.Stat;
+    using System.Collections.Generic;
 
     public class Weapon : MonoBehaviour, IInteractable
     {
@@ -29,6 +31,8 @@ namespace Weapon
         [SerializeField] private bool isUltimateCancelable = false;
 
         private bool initialTrigger;
+
+        private Dictionary<WeaponStatsEnum, float> previousFlatModValue = new();
         #endregion
 
         public enum WeaponStatsEnum 
@@ -131,10 +135,16 @@ namespace Weapon
             rb.isKinematic = true;
             weaponCollider.isTrigger = initialTrigger;
             gameObject.layer = LayerMask.NameToLayer("Default");
+
+            // Add Mods based on Holder tag
+            FetchModFromHolder();
         }
 
         public void OnUnequip()
         {
+            // Remove Mods from previous Holder
+            RemovePreviousHolderMod();
+
             Holder = null;
             rb.isKinematic = false;
             weaponCollider.isTrigger = false;
@@ -148,6 +158,62 @@ namespace Weapon
 
             other.GetComponent<PlayerWeaponController>().Equip(this);
             OnEquip(other.GetComponent<Character>());
+        }
+
+        private void FetchModFromHolder()
+        {
+            if (Holder == null) return;
+
+            // Fetch Stat Mods from Recipe Book
+            if (GameManager.Instance.StatsManager != null)
+            {
+                if (GameManager.Instance.StatsManager.WeaponStatMods.ContainsKey(Holder.tag))
+                {
+                    foreach (var modList in GameManager.Instance.StatsManager.WeaponStatMods[Holder.tag])
+                    {
+                        foreach (var mod in modList.Value)
+                        {
+                            // Add Flat Mod to Base Value
+                            if (mod.Type == StatModType.Flat)
+                            {
+                                stats[modList.Key].BaseValue += mod.Value;
+
+                                if (!previousFlatModValue.ContainsKey(modList.Key))
+                                    previousFlatModValue.Add(modList.Key, 0);
+
+                                previousFlatModValue[modList.Key] += mod.Value;
+                            }
+                            // Add Percent Mod to Total Value
+                            else
+                            {
+                                // Change to percent
+                                mod.Value /= 100;
+                                stats[modList.Key].AddModifier(mod);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RemovePreviousHolderMod()
+        {
+            // Remove Flat Mods that already applied
+            foreach(var flatMod in previousFlatModValue)
+            {
+                stats[flatMod.Key].BaseValue -= flatMod.Value;
+            }
+            // Reset Flat Mods dictionary
+            previousFlatModValue.Clear();
+
+            // Remove Percentage Mods from source
+            if (GameManager.Instance.StatsManager != null)
+            {
+                foreach (var stat in stats)
+                    stat.Value.RemoveAllModifiersFromSource(GameManager.Instance.StatsManager);
+            }
+            else
+                Debug.LogWarning("No StatsManager detected in GameManager!");
         }
 
         private IEnumerator UltimateCooldown()

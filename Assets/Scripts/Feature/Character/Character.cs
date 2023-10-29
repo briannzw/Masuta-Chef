@@ -16,10 +16,6 @@ namespace Character
         public StatsPreset StatsPreset;
         [ConditionalField(nameof(StatsPreset), inverse:true)] public Stats Stats;
 
-        [Header("Weapon")]
-        //public Weapon Weapon;
-        //public Dicitonary<IAbilityWeapon, float> WeaponAbilityCooldowns;
-
         [Header("Effect")]
         protected List<Effect> CurrentStatusEffects;
         protected Dictionary<Effect, Coroutine> StatusEffectCoroutines;
@@ -36,6 +32,54 @@ namespace Character
             if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
+        }
+
+        protected virtual void Start()
+        {
+            // Fetch Stat Mods from Recipe Book
+            if (GameManager.Instance.StatsManager != null)
+            {
+                if (GameManager.Instance.StatsManager.CharacterStatMods.ContainsKey(tag))
+                {
+                    foreach (var modList in GameManager.Instance.StatsManager.CharacterStatMods[tag])
+                    {
+                        foreach (var mod in modList.Value)
+                        {
+                            // Add Flat Mod to Base Value
+                            if (mod.Type == StatModType.Flat) Stats.StatList[modList.Key].BaseValue += mod.Value;
+                            // Add Percent Mod to Total Value
+                            else
+                            {
+                                // Change to percent
+                                mod.Value /= 100;
+                                Stats.StatList[modList.Key].AddModifier(mod);
+                            }
+                        }
+                    }
+                }
+
+                if (GameManager.Instance.StatsManager.CharacterDynamicStatMods.ContainsKey(tag))
+                {
+                    foreach (var modList in GameManager.Instance.StatsManager.CharacterDynamicStatMods[tag])
+                    {
+                        foreach (var mod in modList.Value)
+                        {
+                            // Add Flat Mod to Base Value
+                            if (mod.Type == StatModType.Flat) Stats.DynamicStatList[modList.Key].BaseValue += mod.Value;
+                            // Add Percent Mod to Total Value
+                            else
+                            {
+                                // Change to percent
+                                mod.Value /= 100;
+                                Stats.DynamicStatList[modList.Key].AddModifier(mod);
+                            }
+
+                            // Reset Current Value
+                            Stats.DynamicStatList[modList.Key].ResetCurrentValue();
+                        }
+                    }
+                }
+            }
         }
 
         public virtual void TakeDamage(float damageAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)

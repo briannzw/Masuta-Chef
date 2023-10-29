@@ -4,7 +4,6 @@ using UnityEngine;
 namespace Character.Stat
 {
     using Kryz.CharacterStats;
-    using static UnityEngine.Rendering.DebugUI;
 
     [Serializable]
     public class CharacterDynamicStat : CharacterStat
@@ -25,6 +24,11 @@ namespace Character.Stat
         public CharacterDynamicStat(float baseValue) : this()
         {
             BaseValue = baseValue;
+            _currentValue = BaseValue;
+        }
+
+        public void ResetCurrentValue()
+        {
             _currentValue = BaseValue;
         }
 

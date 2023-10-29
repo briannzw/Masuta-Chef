@@ -2,6 +2,8 @@ using Level;
 using UnityEngine;
 using Save;
 using MyBox;
+using Character;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,14 +16,19 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
         else Instance = this;
+
+        if(LoadOnAwake) LoadGame();
     }
     #endregion
+
+    [Header("Settings")]
+    public bool LoadOnAwake;
 
     [Header("Static References")]
     public Transform PlayerTransform;
     public LevelManager LevelManager;
     public SaveManager SaveManager;
-
+    public StatsManager StatsManager;
 
     [ButtonMethod]
     public void SaveGame()
@@ -33,5 +40,7 @@ public class GameManager : MonoBehaviour
     public void LoadGame()
     {
         SaveManager.Load();
+        // Load Recipe Book Stat Mods
+        if(Application.isPlaying) StatsManager.Load();
     }
 }

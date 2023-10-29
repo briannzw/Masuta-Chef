@@ -32,8 +32,9 @@ namespace Character.Dummy
 
         public DummyController(StatsPreset preset) : base(preset) { Stats = preset.Stats; }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             SetLabel();
             SetDPSLabel();
             InvokeRepeating("SetLabel", 0, StatsUpdateInterval);
