@@ -12,8 +12,13 @@ namespace Module.UI
     {
         [SerializeField] private Character chara;
         [SerializeField] private Slider slider;
+        private void Awake()
+        {
+            chara = GetComponentInParent<Character>();
+            slider = GetComponentInChildren<Slider>();
+        }
 
-        private void Start()
+        private void OnEnable()
         {
             slider.maxValue = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
         }
@@ -25,5 +30,7 @@ namespace Module.UI
         {
             slider.value = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue;
         }
+
+
     }
 }

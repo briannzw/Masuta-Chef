@@ -63,7 +63,6 @@ namespace NPC.Boss
         
         protected new void Update()
         {
-            Debug.Log(chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue);
             base.Update();
             TargetPosition = GameManager.Instance.PlayerTransform.position;
             if (Agent.remainingDistance <= StopDistance && !isCastingSkill)
@@ -156,8 +155,9 @@ namespace NPC.Boss
 
             foreach (Effect effect in RageEffects)
             {
+                effect.Initialize();
                 Debug.Log("Take Effect");
-                chara.TakeEffect(effect);
+                chara.AddEffect(effect);
             }
         }
 
