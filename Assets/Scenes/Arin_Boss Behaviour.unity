@@ -1398,7 +1398,7 @@ PrefabInstance:
     - target: {fileID: 2109311274484977024, guid: b5ccd6c2eb0d20244b6bd37c67bfced1,
         type: 3}
       propertyPath: <RageEffects>k__BackingField.Array.data[0].StatValue
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2109311274484977024, guid: b5ccd6c2eb0d20244b6bd37c67bfced1,
         type: 3}
@@ -1433,7 +1433,7 @@ PrefabInstance:
     - target: {fileID: 2109311274484977024, guid: b5ccd6c2eb0d20244b6bd37c67bfced1,
         type: 3}
       propertyPath: <RageEffects>k__BackingField.Array.data[0].StatModifierType
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2109311274484977024, guid: b5ccd6c2eb0d20244b6bd37c67bfced1,
         type: 3}
@@ -1793,6 +1793,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 857913589571785701, guid: 3357df7fd92a92344896b259dbc655eb,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2506332646586243792, guid: 3357df7fd92a92344896b259dbc655eb,
         type: 3}
       propertyPath: m_LocalPosition.x

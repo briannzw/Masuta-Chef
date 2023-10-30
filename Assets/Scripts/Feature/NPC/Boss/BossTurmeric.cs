@@ -145,7 +145,7 @@ namespace NPC.Boss
 
         void CastRage()
         {
-            Debug.Log("Is Enraged");
+            chara.isInvincible = true;
             isCastingSkill = true;
             isEnraged = true;
             StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
@@ -163,6 +163,7 @@ namespace NPC.Boss
 
         void CastingDuration()
         {
+            chara.isInvincible = false;
             isCastingSkill = false;
             Agent.isStopped = false;
         }
