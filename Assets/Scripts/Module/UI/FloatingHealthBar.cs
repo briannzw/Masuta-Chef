@@ -6,7 +6,6 @@ using UnityEngine.UI;
 namespace Module.UI
 {
     using Character;
-    using Character.Stat;
 
     public class FloatingHealthBar : MonoBehaviour
     {
@@ -20,7 +19,7 @@ namespace Module.UI
 
         private void Start()
         {
-            slider.maxValue = (chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).Value;
+            slider.maxValue = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
         }
         private void LateUpdate()
         {
@@ -28,7 +27,7 @@ namespace Module.UI
         }
         private void Update()
         {
-            slider.value = (chara.Stats.StatList[StatsEnum.Health] as CharacterDynamicStat).CurrentValue;
+            slider.value = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue;
         }
     }
 }

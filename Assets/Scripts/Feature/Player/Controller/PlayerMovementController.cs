@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Player.Controller
 {
+    using System;
     using Input;
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovementController : PlayerInputControl
@@ -10,6 +11,8 @@ namespace Player.Controller
         [Header("References")]
         public Animator Animator;
         private CharacterController controller;
+
+        public static event Action OnPlayerMove;
 
         [Header("Movement")]
         public bool isSprintDefault = false;
@@ -65,6 +68,15 @@ namespace Player.Controller
             controller.Move(velocity * Time.deltaTime);
 
             CheckOutOfBound();
+
+            // call event if player moves
+            if (rawInputMovement.magnitude > 0.1f)
+            {
+                if (OnPlayerMove != null)
+                {
+                    OnPlayerMove.Invoke();
+                }
+            }
         }
 
         #region Callbacks
@@ -123,25 +135,25 @@ namespace Player.Controller
         {
             Vector2 inputMovement = context.ReadValue<Vector2>();
             rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
-            if(Animator) Animator.SetBool("IsWalking", true);
+            Animator.SetBool("IsWalking", true);
         }
 
         private void OnMoveCanceled(InputAction.CallbackContext context)
         {
             rawInputMovement = Vector3.zero;
-            if (Animator) Animator.SetBool("IsWalking", false);
+            Animator.SetBool("IsWalking", false);
         }
 
         private void OnSprint(InputAction.CallbackContext context)
         {
             speed = isSprintDefault ? moveSpeed : sprintSpeed;
-            if (Animator) Animator.SetBool("IsRunning", true);
+            Animator.SetBool("IsRunning", true);
         }
 
         private void OnSprintCanceled(InputAction.CallbackContext context)
         {
             speed = isSprintDefault ? sprintSpeed : moveSpeed;
-            if (Animator) Animator.SetBool("IsRunning", false);
+            Animator.SetBool("IsRunning", false);
         }
         #endregion
 

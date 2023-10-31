@@ -4961,18 +4961,12 @@ MonoBehaviour:
     - Key: 2
       Value:
         BaseValue: 100
-  UltimateTimer: 1
-  isCooldownUltimate: 0
-  isUltimateCancelable: 0
   fireObjectPrefab: {fileID: 4347595558218858802}
   maxRange: 10
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
   AttackArea: {fileID: 8920357698855249934}
-  ultimateBulletObject: {fileID: 7769012843354398645, guid: f07dda005ab44a345a76e0d336782f4c,
-    type: 3}
-  ultimateBulletInterval: 1
 --- !u!1 &8920357698855249934
 GameObject:
   m_ObjectHideFlags: 0
@@ -4982,7 +4976,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5790247796566603152}
-  - component: {fileID: 3157213307360475589}
+  - component: {fileID: 1188436053181327183}
+  - component: {fileID: 8886566402260313542}
+  - component: {fileID: 5661090595000908252}
   m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
@@ -4998,14 +4994,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8920357698855249934}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: 6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1101335560348634686}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3157213307360475589
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!136 &1188436053181327183
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920357698855249934}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Height: 13
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.00000011920929, z: 0}
+--- !u!114 &8886566402260313542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5014,25 +5033,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 8920357698855249934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee96eb3b01afd446b4a30d4cfc5c9d2, type: 3}
+  m_Script: {fileID: 11500000, guid: e40bc36f072ffe540a59df77b446b16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTag: 
   Source: {fileID: 3513131130172153234}
+  TargetTag: 
   Value:
-    CharacterAttack: 100
-    WeaponAttack: 50
+    CharacterAttack: 0
+    WeaponAttack: 0
     Multiplier: 1
   Type: 0
-  ApplyEffectBeforeHit: 0
+  ApplyEffectFirst: 0
+  <Effects>k__BackingField:
+  - StatsAffected: 0
+    StatValue: 100
+    StatModifierType: 100
+    overwriteOrder: 0
+    priorityOrder: 0
+    Behaviour: 0
+    StatusEffect: 3
+    Timer: 0
+    Duration: 0
+    UseInterval: 0
+    IntervalTimer: 0
+    Interval: 0
+  AreaDuration: 1e+10
+  Behaviour: 1
+  ContinuousHitOnTrigger: 0
+  characterInArea: []
+--- !u!114 &5661090595000908252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920357698855249934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57aeb8f75d9b76e44bd171fe413b311c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Source: {fileID: 3513131130172153234}
+  TargetTag: Enemy
+  Value:
+    CharacterAttack: 0
+    WeaponAttack: 0
+    Multiplier: 1
+  Type: 0
+  ApplyEffectFirst: 0
   <Effects>k__BackingField: []
-  AreaDuration: 5
-  Behaviour: 0
-  areaRadius: 5
-  areaOffset: {x: 0, y: 0, z: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
-  areaAngle: 40
-  Delay: 0
-  Interval: 0.5

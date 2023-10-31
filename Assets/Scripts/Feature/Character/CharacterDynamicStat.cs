@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Character.Stat
 {
     using Kryz.CharacterStats;
+    using static UnityEngine.Rendering.DebugUI;
 
     [Serializable]
     public class CharacterDynamicStat : CharacterStat
@@ -27,11 +28,6 @@ namespace Character.Stat
             _currentValue = BaseValue;
         }
 
-        public void ResetCurrentValue()
-        {
-            _currentValue = BaseValue;
-        }
-
         public void ChangeCurrentValue(StatModifier mod)
         {
             float finalValue = CurrentValue;
@@ -40,9 +36,9 @@ namespace Character.Stat
             {
                 finalValue += mod.Value;
             }
-            else if (mod.Type == StatModType.PercentAdd || mod.Type == StatModType.PercentMult)
+            else if (mod.Type == StatModType.PercentAdd ||mod.Type == StatModType.PercentMult)
             {
-                finalValue += mod.Value * Value;
+                finalValue *= 1 + mod.Value;
             }
 
             CurrentValue = (float)Math.Round(finalValue, 4);

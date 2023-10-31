@@ -15,7 +15,7 @@ namespace Player.CompanionSlot
         {
             if (companions.Count >= maxSlot)
             {
-                Destroy(companion.gameObject);
+                Destroy(companions[0].gameObject);
                 companions.RemoveAt(0);
             }
 

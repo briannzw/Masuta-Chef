@@ -87,7 +87,6 @@ namespace Crate.Area
         public void OnStealed(IPickable pickable, GameObject stealer = null)
         {
             currentCrateCount--;
-            if (!CrateGrid.Contains(pickable as CrateController)) return;
             CrateGrid[CrateGrid.IndexOf(pickable as CrateController)] = null;
         }
     }

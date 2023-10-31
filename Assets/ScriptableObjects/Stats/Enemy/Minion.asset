@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22090c3525153a646b1d3ba0cedb9219, type: 3}
+  m_Name: Minion
+  m_EditorClassIdentifier: 
+  Stats:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 6000
+      - Key: 1
+        Value:
+          BaseValue: 300
+    StatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 250
+      - Key: 1
+        Value:
+          BaseValue: 70
+      - Key: 2
+        Value:
+          BaseValue: 60
+      - Key: 3
+        Value:
+          BaseValue: 10
+      - Key: 4
+        Value:
+          BaseValue: 1

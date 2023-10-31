@@ -16,7 +16,11 @@ namespace Spawner
         [Header("Parameters")]
         [SerializeField] private Vector3 spawnArea = Vector3.one;
         [SerializeField] protected Vector3 spawnOffset;
+        [SerializeField] protected bool isLocalOffset = false;
+
+        [Header("Rotations")]
         [SerializeField] private bool randomizeRotation;
+        [SerializeField] private bool followSpawnerRotation;
 
         [Header("Object Pool")]
         [SerializeField] protected int maxSpawnObjectInPool = 100;
@@ -24,7 +28,7 @@ namespace Spawner
         public Action<SpawnObject> OnRelease;
 
         public int GetActiveSpawnObject() => poolManager.Pools[spawnPrefab].CountActive;
-
+        
         protected virtual void Start()
         {
             poolManager = PoolManager.Instance;
@@ -43,8 +47,10 @@ namespace Spawner
                     break;
                 }
 
-                Vector3 position = RandomSpawnPosition(transform, spawnOffset, spawnArea);
-                Quaternion rotation = (randomizeRotation) ? Random.rotation : Quaternion.identity;
+                Vector3 position = RandomSpawnPosition(transform, spawnOffset, spawnArea, isLocalOffset);
+                Quaternion rotation = (followSpawnerRotation) ? transform.rotation : Quaternion.identity;
+                rotation = (randomizeRotation) ? Random.rotation : rotation;
+                
                 rotation.x = 0f; rotation.z = 0f;
 
                 GameObject go = poolManager.Pools[spawnPrefab].Get();
@@ -54,12 +60,19 @@ namespace Spawner
 
                 if(go.GetComponent<SpawnObject>() == null) go.AddComponent<SpawnObject>();
                 go.GetComponent<SpawnObject>().Spawner = this;
+                go.SetActive(true);
             }
             return spawnObjects;
         }
 
-        protected virtual Vector3 RandomSpawnPosition(Transform center, Vector3 offset, Vector3 areaSize)
+        protected virtual Vector3 RandomSpawnPosition(Transform center, Vector3 offset, Vector3 areaSize, bool local = false)
         {
+            if(local)
+                return center.TransformPoint(offset + new Vector3(
+                    Random.Range(-areaSize.x / 2, areaSize.x / 2),
+                    Random.Range(-areaSize.y / 2, areaSize.y / 2),
+                    Random.Range(-areaSize.z / 2, areaSize.z / 2)));
+
             return center.position + offset + new Vector3(
                     Random.Range(-areaSize.x / 2, areaSize.x / 2),
                     Random.Range(-areaSize.y / 2, areaSize.y / 2),
@@ -84,8 +97,12 @@ namespace Spawner
         #region GUI
         private void OnDrawGizmos()
         {
+            if (isLocalOffset) Gizmos.matrix = Matrix4x4.TRS(transform.TransformPoint(spawnOffset), transform.rotation, transform.lossyScale);
+            else Gizmos.matrix = Matrix4x4.TRS(transform.position + spawnOffset, (followSpawnerRotation) ? transform.rotation : Quaternion.identity, transform.lossyScale);
+            Gizmos.color = new Color(1, 0, 0, 0.2f);
+            Gizmos.DrawCube(Vector3.zero, spawnArea);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position + spawnOffset, spawnArea);
+            Gizmos.DrawWireCube(Vector3.zero, spawnArea);
         }
         #endregion
     }

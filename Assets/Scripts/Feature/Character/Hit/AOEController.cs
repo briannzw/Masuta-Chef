@@ -5,17 +5,33 @@ using UnityEngine;
 namespace Character.Hit
 {
     using StatEffect;
+
+    // AOEController only register one Hit for every Character.
+    // Preferred to used in area buffs, area debuffs, any that didn't need CONTINUOUS DAMAGES.
+    // Refer to ContinuousAOEHit for Continuous Damages.
+
+    // HOW TO USE : 
+    // AOEController (Instant) with Effect (Instant) is best for INSTANT HEAL/BURN (ex. One-time Heal 10% Max health) [NON-REMOVEABLE]
+    // AOEController (Instant) with Effect (Duration, UseInterval false) is best for APPLYING DURATIONAL BUFF/DEBUFF/HEAL/BURN (ex. Debuff 20 ATK for 10 sec) [NON-REMOVEABLE]
+    // AOEController (Instant) with Effect (Duration, UseInterval true) is best for APPLYING INTERVAL BUFF/DEBUFF/HEAL/BURN (ex. Burn 10 HP per 3 sec for 10 sec) [NON-REMOVEABLE]
+
+    // AOEController (ApplyOnStay) with Effect (Instant) is best for IN-AREA Instant BUFF/DEBUFF (ex. Buff 50 DEF for every character within the AOE area) [REMOVED when exiting area]
+    // AOEController (ApplyOnStay) with Effect (Duration, UseInterval false) doesn't have any useful case. (not recommended to be used)
+    // AOEController (ApplyOnStay) with Effect (Duration, UseInterval true) is best described as a burn that attached to the Character (entering area will run the interval timer)
+    // (ex: Entering area BURN 10 HP, for every 3 seconds in the area with max duration of 10 sec) [Interval timer will not reset after exiting area]
+
     public class AOEController : HitController
     {
-        public float AreaDuration;
+        [Header("AOE Settings")]
+        public float AreaDuration = 5;
+
+        [Header("AOE Behaviour")]
         public AOEBehaviour Behaviour;
-        [Header("Settings")]
-        public bool ContinuousHitOnTrigger = false;
 
         // ApplyOnStay
-        [SerializeField] private List<Character> characterInArea = new List<Character>();
+        [HideInInspector] protected List<Character> characterInArea = new List<Character>();
         // Instant, Hit is only applied once to every Chara.
-        [SerializeField] private HashSet<Character> characterAffected = new HashSet<Character>();
+        private HashSet<Character> characterAffected = new HashSet<Character>();
 
         protected override void Start()
         {
@@ -23,7 +39,7 @@ namespace Character.Hit
             StartCoroutine(RemoveAllEffect(AreaDuration));
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected void OnTriggerEnter(Collider other)
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
             if (Source != null)
@@ -41,13 +57,18 @@ namespace Character.Hit
             Character chara = other.GetComponent<Character>();
             if (chara == null) return;
 
+            HitChara(chara);
+        }
+
+        protected void HitChara(Character chara, bool continuous = false)
+        {
             if (characterAffected.Contains(chara))
             {
-                if (ContinuousHitOnTrigger)
+                // Hit
+                if (continuous)
                 {
-                    if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
-                    // Changeable
-                    if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, StatsEnum.Health, Value.Multiplier);
+                    if (Type == HitType.Damage) chara.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
+                    if (Type == HitType.Heal) chara.TakeHeal(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
                 }
 
                 if (Behaviour == AOEBehaviour.ApplyOnStay)
@@ -61,11 +82,9 @@ namespace Character.Hit
             // First Hit Register
             characterAffected.Add(chara);
             Hit(chara);
-
-            //else if(other.CompareTag(Source.TargetTag)){ characterInArea.Add(chara); }
         }
 
-        private void OnTriggerExit(Collider other)
+        protected void OnTriggerExit(Collider other)
         {
             // ONLY APPLIED FOR PLAYABLE BUILD
             if (Source != null)

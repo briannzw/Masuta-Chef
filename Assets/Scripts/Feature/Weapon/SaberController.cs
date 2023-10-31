@@ -10,53 +10,28 @@ namespace Weapon
         #region Properties
         public LayerMask enemyLayer;
 
-        [Header("References")]
         [SerializeField] HitController hitController;
         [SerializeField] Animator animator;
-        [SerializeField] SaberVFXController vfxController;
-        [SerializeField] GameObject saberUltimateApplicator;
+        [SerializeField] AudioSource weaponSound; 
         #endregion
 
         #region Method
-        protected override void Awake()
-        {
-            base.Awake();
-            weaponCollider.isTrigger = false;
-        }
-
         public override void Attack()
         {
-
+           
         }
 
         public override void StartAttack()
         {
             base.StartAttack();
-            weaponCollider.isTrigger = true;
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
+
+            if (weaponSound != null)
+            {
+                weaponSound.Play();
+            }
         }
-
-        public override void StopAttack()
-        {
-            base.StopAttack();
-            weaponCollider.isTrigger = false;
-        }
-
-        protected override void UltimateAttack()
-        {
-            base.UltimateAttack();
-            
-            // Start Damage
-            GameObject ultimate = Instantiate(saberUltimateApplicator, transform.position, transform.rotation);
-            ultimate.GetComponent<AOEController>().Source = this;
-            ultimate.GetComponent<AOEController>().AreaDuration = UltimateTimer;
-            
-            // Start VFX
-            vfxController.StartVFX();
-        }
-
-
         #endregion
     }
 }

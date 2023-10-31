@@ -125,15 +125,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Ultimate"",
-                    ""type"": ""Button"",
-                    ""id"": ""5a2ae009-61f5-4a30-bcaf-85cd9a680567"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -431,17 +422,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Throw_High"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe364a84-71df-49b5-ac9f-430b281adc9b"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Ultimate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -836,7 +816,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_Throw = m_Gameplay.FindAction("Throw", throwIfNotFound: true);
         m_Gameplay_Throw_High = m_Gameplay.FindAction("Throw_High", throwIfNotFound: true);
-        m_Gameplay_Ultimate = m_Gameplay.FindAction("Ultimate", throwIfNotFound: true);
         // Panel
         m_Panel = asset.FindActionMap("Panel", throwIfNotFound: true);
         m_Panel_Navigate = m_Panel.FindAction("Navigate", throwIfNotFound: true);
@@ -919,7 +898,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_Throw;
     private readonly InputAction m_Gameplay_Throw_High;
-    private readonly InputAction m_Gameplay_Ultimate;
     public struct GameplayActions
     {
         private @PlayerAction m_Wrapper;
@@ -935,7 +913,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @Throw => m_Wrapper.m_Gameplay_Throw;
         public InputAction @Throw_High => m_Wrapper.m_Gameplay_Throw_High;
-        public InputAction @Ultimate => m_Wrapper.m_Gameplay_Ultimate;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -978,9 +955,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Throw_High.started += instance.OnThrow_High;
             @Throw_High.performed += instance.OnThrow_High;
             @Throw_High.canceled += instance.OnThrow_High;
-            @Ultimate.started += instance.OnUltimate;
-            @Ultimate.performed += instance.OnUltimate;
-            @Ultimate.canceled += instance.OnUltimate;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1018,9 +992,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Throw_High.started -= instance.OnThrow_High;
             @Throw_High.performed -= instance.OnThrow_High;
             @Throw_High.canceled -= instance.OnThrow_High;
-            @Ultimate.started -= instance.OnUltimate;
-            @Ultimate.performed -= instance.OnUltimate;
-            @Ultimate.canceled -= instance.OnUltimate;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1193,7 +1164,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnThrow_High(InputAction.CallbackContext context);
-        void OnUltimate(InputAction.CallbackContext context);
     }
     public interface IPanelActions
     {

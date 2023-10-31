@@ -12,6 +12,7 @@ namespace Crate
     {
         public Transform Holder { get; set; }
         public bool IsHeld => Holder != null;
+        public GameObject CurrentPicker;
 
         public bool RandomColorOnStart = false;
         public CrateColor crateColor;
@@ -19,13 +20,16 @@ namespace Crate
         public Rigidbody rb { get; set; }
         private new Renderer renderer;
 
-        // Tambahkan atribut untuk kecepatan jatuh lambat
-        public float slowFallSpeed = 1.0f;
+        // Tambahkan properti untuk kecepatan jatuh
+        public float fallSpeed = 9.8f;
+
+        // Tambahkan properti untuk ketinggian awal jatuh
+        public float initialFallHeight = 20.0f; 
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            renderer = GetComponent <Renderer>();
+            renderer = GetComponent < Renderer>();
         }
 
         private void Start()
@@ -47,12 +51,19 @@ namespace Crate
                     renderer.material.color = Color.white; // Warna default jika enum tidak sesuai
                     break;
             }
+
+            Vector3 initialPosition = transform.position;
+            initialPosition.y = initialFallHeight;
+            transform.position = initialPosition;
+
+            // Berikan kecepatan awal ke bawah
+            rb.velocity = new Vector3(0, -fallSpeed, 0);
         }
 
         public bool StartPickup(GameObject picker)
         {
-            if (IsHeld && !picker.CompareTag("Player")) return false;
-
+            CurrentPicker = picker;
+            if (IsHeld && !picker.CompareTag("Player") && !picker.CompareTag("Enemy")) return false;
             if (Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
 
             // Memindahkan objek ke pemegang (picker)
@@ -66,9 +77,15 @@ namespace Crate
         {
             Holder = null;
             rb.isKinematic = false;
+        }
 
-            // Setelah objek krate dilepaskan, atur kecepatan jatuh lambat
-            rb.velocity = new Vector3(rb.velocity.x, -slowFallSpeed, rb.velocity.z);
+        public void FixedUpdate()
+        {
+            // Mengatur kecepatan jatuh saat krate tidak dipegang
+            if (!IsHeld)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, -fallSpeed, rb.velocity.z);
+            }
         }
     }
 }

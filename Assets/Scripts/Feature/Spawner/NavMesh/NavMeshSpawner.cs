@@ -19,7 +19,7 @@ namespace Spawner
             }
         }
 
-        protected override Vector3 RandomSpawnPosition(Transform center, Vector3 offset, Vector3 areaSize)
+        protected override Vector3 RandomSpawnPosition(Transform center, Vector3 offset, Vector3 areaSize, bool local = false)
         {
             NavMeshHit hit;
             Vector3 randomPos = base.RandomSpawnPosition(center, offset, areaSize);
