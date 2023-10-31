@@ -21,6 +21,12 @@ namespace NPC.Enemy
         private bool hasCrate = false;
         [SerializeField] private float safeDistance = 10f;
 
+        private new void Awake()
+        {
+            base.Awake();
+            IsThisJoker = true;
+        }
+
         private new void Update()
         {
             StateMachine.CurrentState.FrameUpdate();

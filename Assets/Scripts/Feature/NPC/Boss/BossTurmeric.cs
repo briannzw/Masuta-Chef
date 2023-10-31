@@ -53,7 +53,7 @@ namespace NPC.Boss
         private new void Awake()
         {
             base.Awake();
-            StateMachine.Initialize(new NPCMoveState(this, StateMachine));
+            StateMachine.Initialize(new EnemyMoveState(this, StateMachine));
         }
 
         void Start()
@@ -72,7 +72,7 @@ namespace NPC.Boss
             }
             else if(!isCastingSkill)
             {
-                StateMachine.ChangeState(new NPCMoveState(this, StateMachine));
+                StateMachine.ChangeState(new EnemyMoveState(this, StateMachine));
             }
 
 

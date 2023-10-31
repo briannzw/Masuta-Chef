@@ -197,9 +197,16 @@ MonoBehaviour:
     - Key: 2
       Value:
         BaseValue: 100
+  UltimateTimer: 1
+  isCooldownUltimate: 0
+  isUltimateCancelable: 0
   fireObjectPrefab: {fileID: 4301465161760894196, guid: d6d693124bfe95f4eb26415b131129b9,
     type: 3}
-  spawner: {fileID: 5984140530078476641}
+  ultimateDuration: 0
+  ultimateBulletObject: {fileID: 0}
+  ultimateBulletInterval: 1
+  bulletAmount: 3
+  bulletSpawnPoint: {fileID: 0}
 --- !u!114 &5984140530078476641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,10 +381,12 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 7
   Agent: {fileID: 347959739561581255}
+  IsThisJoker: 0
   MaxDistanceFromPlayer: 3
+  IsFollowingEnemy: 0
   DistanceFromPlayer: 0
   companionSlotPosition: {fileID: 0}
-  minDistanceFromPlayer: 2
+  minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   wanderRadius: 2
   wanderInterval: 4
@@ -427,6 +436,7 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
+  isInvincible: 0
 --- !u!1 &4851675593540383649
 GameObject:
   m_ObjectHideFlags: 0
