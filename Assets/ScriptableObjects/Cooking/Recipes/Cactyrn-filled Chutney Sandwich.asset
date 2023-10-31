@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   name: Cactyrn-filled Chutney Sandwich
-  Description: This is a Cactyrn-filled Chutney Sandwich Recipe.
+  Description: Popular and delectable snack or light meal that features a delightful
+    combination of flavors and textures. This sandwich is a true representation of
+    Praksha culinary creativity, where a vibrant chutney is used to elevate the taste
+    of cactyrn ingredients.
   Ingredients:
     _serializedList:
     - Key: {fileID: 11400000, guid: 43b2583e4b1c2ef4caecff3843064e74, type: 2}
@@ -22,3 +25,83 @@ MonoBehaviour:
   data:
     CurrentBlueprint: 0
     NeededBlueprint: 100
+    CookingDone: 0
+    PerfectCookingDone: 0
+    ConsecutivePerfectCookingDone: 0
+    UniqueValueUnlocked: 0
+  Stats1:
+    AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 2
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  Stats2:
+    AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 1
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  Stats3:
+    AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  Stats3Unique:
+    AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 20
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0

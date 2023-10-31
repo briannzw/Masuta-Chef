@@ -14,11 +14,95 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   name: Orant and Chickpea Curry
-  Description: This is a Orant and Chickpea Curry Recipe.
+  Description: A flavorful and aromatic vegetarian dish that combines the natural
+    sweetness of orants with the nutty richness of chickpeas, all enveloped in a
+    harmonious blend of spices and herbs. This curry is a delightful representation
+    of the vibrant and diverse world of Praksha cuisine, showcasing the art of creating
+    a comforting and satisfying meal from plant-based.
   Ingredients:
     _serializedList:
     - Key: {fileID: 11400000, guid: 07478163e41e7e74cb5b6934beded27e, type: 2}
-      Value: 5
+      Value: 7
   data:
     CurrentBlueprint: 0
     NeededBlueprint: 100
+    CookingDone: 0
+    PerfectCookingDone: 0
+    ConsecutivePerfectCookingDone: 0
+    UniqueValueUnlocked: 0
+  Stats1:
+    AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  Stats2:
+    AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 10
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  Stats3:
+    AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  Stats3Unique:
+    AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 15
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
