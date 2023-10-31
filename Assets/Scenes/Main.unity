@@ -671,6 +671,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 64046733}
   surfaces:
   - {fileID: 1959936578}
+  characterDied:
+    _serializedList: []
 --- !u!114 &666763696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,11 +927,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1410782207}
   - {fileID: 460606338}
   - {fileID: 666763694}
   - {fileID: 1959936577}
   - {fileID: 879986609}
-  - {fileID: 1410782207}
   - {fileID: 1264775655}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -979,6 +981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoadOnAwake: 1
+  SaveOnGameOver: 1
   PlayerTransform: {fileID: 64046733}
   LevelManager: {fileID: 666763695}
   SaveManager: {fileID: 1410782209}

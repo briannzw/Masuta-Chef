@@ -54,9 +54,16 @@ namespace Character
             if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
+
+            isInvincible = false;
         }
 
         protected virtual void Start()
+        {
+            FetchStatMods();
+        }
+
+        protected void FetchStatMods()
         {
             // Fetch Stat Mods from Recipe Book
             if (GameManager.Instance.StatsManager != null)
@@ -126,7 +133,15 @@ namespace Character
             Stat.ChangeCurrentValue(statMod);
             OnDamaged?.Invoke();
 
-            if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health) OnDie?.Invoke();
+            if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health)
+            {
+                OnDie?.Invoke();
+
+                // Send Die data to Level Manager
+                GameManager.Instance.LevelManager.CharacterDied(this);
+                // Make sure only called once
+                isInvincible = true;
+            }
         }
 
         public void TakeHeal(float healAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)

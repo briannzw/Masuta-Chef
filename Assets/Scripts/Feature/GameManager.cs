@@ -23,12 +23,22 @@ public class GameManager : MonoBehaviour
 
     [Header("Settings")]
     public bool LoadOnAwake;
+    public bool SaveOnGameOver;
 
     [Header("Static References")]
     public Transform PlayerTransform;
     public LevelManager LevelManager;
     public SaveManager SaveManager;
     public StatsManager StatsManager;
+
+    private void Start()
+    {
+        if (SaveOnGameOver)
+        {
+            LevelManager.OnLevelLose += SaveGame;
+            LevelManager.OnLevelWin += SaveGame;
+        }
+    }
 
     [ButtonMethod]
     public void SaveGame()
