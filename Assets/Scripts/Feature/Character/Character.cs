@@ -20,7 +20,17 @@ namespace Character
         protected List<Effect> CurrentStatusEffects;
         protected Dictionary<Effect, Coroutine> StatusEffectCoroutines;
 
+#if UNITY_EDITOR
+        // EDITOR ONLY
+        [ReadOnly, SerializeField] protected string HealthDisplay = "";
+#endif
+
+        #region C# Events
         public Action OnDie;
+        public Action OnDamaged;
+        public Action OnHealed;
+        #endregion
+
         public bool isInvincible = false;
         public Character(StatsPreset preset)
         {
@@ -28,6 +38,18 @@ namespace Character
         }
 
         private void Awake()
+        {
+            InitializeStats();
+
+#if UNITY_EDITOR
+            // EDITOR ONLY
+            HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+            OnDamaged += () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+            OnHealed += () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+#endif
+        }
+
+        public void InitializeStats()
         {
             if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
@@ -102,6 +124,7 @@ namespace Character
             if (statMod.Value > 0) statMod.Value = 0;
 
             Stat.ChangeCurrentValue(statMod);
+            OnDamaged?.Invoke();
 
             if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health) OnDie?.Invoke();
         }
@@ -114,6 +137,7 @@ namespace Character
             if(statMod.Value < 0) statMod.Value = 0;
 
             Stat.ChangeCurrentValue(statMod);
+            OnHealed?.Invoke();
         }
 
         public void AddEffect(Effect effect)
