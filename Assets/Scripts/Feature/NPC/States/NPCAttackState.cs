@@ -10,6 +10,7 @@ public class NPCAttackState : NPCState
     public override void EnterState()
     {
         base.EnterState();
+        npc.Agent.isStopped = true;
         npc.ActiveWeapon.StartAttack();
     }
 

@@ -129,7 +129,7 @@ namespace NPC.Enemy
             }
         }
 
-        private void OnPickUpCancel()
+        public void OnPickUpCancel()
         {
             if (hasCrate)
             {

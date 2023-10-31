@@ -146,6 +146,7 @@ namespace Weapon
             RemovePreviousHolderMod();
 
             Holder = null;
+            GetComponent<Collider>().enabled = true;
             rb.isKinematic = false;
             weaponCollider.isTrigger = false;
             gameObject.layer = LayerMask.NameToLayer("Interactable");

@@ -21,7 +21,7 @@ namespace Character
         protected Dictionary<Effect, Coroutine> StatusEffectCoroutines;
 
         public Action OnDie;
-
+        public bool isInvincible = false;
         public Character(StatsPreset preset)
         {
             Stats = new Stats(preset.Stats);
@@ -84,6 +84,11 @@ namespace Character
 
         public virtual void TakeDamage(float damageAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)
         {
+            if (isInvincible)
+            {
+                return;
+            }
+                
             CharacterDynamicStat Stat = Stats.DynamicStatList[dynamicEnum];
 
             // Total Damage Received = (Base Attack + Weapon Attack - Defense) * Final Damage Multiplier

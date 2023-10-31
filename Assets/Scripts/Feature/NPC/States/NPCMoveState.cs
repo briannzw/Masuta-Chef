@@ -11,6 +11,7 @@ public class NPCMoveState : NPCState
     public override void EnterState()
     {
         base.EnterState();
+        npc.Agent.isStopped = false;
     }
 
     public override void ExitState()
