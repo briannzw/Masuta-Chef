@@ -26,15 +26,14 @@ namespace Weapon
 
         public override void Attack()
         {
-
+            hitController.Initialize(this);
+            animator.SetTrigger("Attack");
         }
 
         public override void StartAttack()
         {
             base.StartAttack();
             weaponCollider.isTrigger = true;
-            hitController.Initialize(this);
-            animator.SetTrigger("Attack");
         }
 
         public override void StopAttack()
