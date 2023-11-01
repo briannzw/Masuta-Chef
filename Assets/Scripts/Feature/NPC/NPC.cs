@@ -29,6 +29,9 @@ namespace NPC
         public NavMeshAgent Agent;
         //public Character Character;
         public NPCStateMachine StateMachine;
+
+        [HideInInspector]
+        public bool IsThisJoker = false;
         protected Character chara;
 
         protected void Awake()

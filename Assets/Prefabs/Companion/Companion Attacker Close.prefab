@@ -649,10 +649,12 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 2.4
   Agent: {fileID: 0}
+  IsThisJoker: 0
   MaxDistanceFromPlayer: 3
+  IsFollowingEnemy: 0
   DistanceFromPlayer: 0
   companionSlotPosition: {fileID: 0}
-  minDistanceFromPlayer: 2
+  minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   wanderRadius: 2
   wanderInterval: 4
@@ -702,6 +704,7 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
+  isInvincible: 0
 --- !u!1 &8247714680664146726
 GameObject:
   m_ObjectHideFlags: 0

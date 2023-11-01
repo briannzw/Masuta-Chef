@@ -1,35 +1,37 @@
+using NPC.Companion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class NPCAttackState : NPCState
+
+public class CompanionAttackState : CompanionState
 {
     private float RotationSpeed = 5f;
-    public NPCAttackState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+
+    public CompanionAttackState(Companion companion, CompanionStateMachine companionStateMachine) : base(companion, companionStateMachine)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        npc.Agent.isStopped = true;
-        npc.ActiveWeapon.StartAttack();
+        companion.Agent.isStopped = true;
+        companion.ActiveWeapon.StartAttack();
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        npc.ActiveWeapon.StopAttack();
+        companion.ActiveWeapon.StopAttack();
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        npc.Agent.SetDestination(npc.TargetPosition);
+        companion.Agent.SetDestination(companion.TargetPosition);
         RotateToTarget(RotationSpeed);
-        if (npc.Agent.remainingDistance > npc.StopDistance)
+        if (companion.DistanceFromPlayer > companion.MaxDistanceFromPlayer)
         {
-            npc.Agent.isStopped = false;
-            npc.StateMachine.ChangeState(new EnemyMoveState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
+            companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
         }
     }
 
@@ -41,13 +43,13 @@ public class NPCAttackState : NPCState
     private void RotateToTarget(float rotationSpeed)
     {
         // Calculate the direction from this GameObject to the target
-        Vector3 direction = npc.TargetPosition - npc.transform.position;
+        Vector3 direction = companion.TargetPosition - companion.transform.position;
         direction.y = 0;
 
         // Create a rotation that looks in the calculated direction
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         // Rotate towards the target rotation
-        npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        companion.transform.rotation = Quaternion.Slerp(companion.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }

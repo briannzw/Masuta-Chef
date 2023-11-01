@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class NPCMoveState : NPCState
+using NPC;
+public class EnemyMoveState : NPCState
 {
-    public NPCMoveState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+    public EnemyMoveState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
     {
     }
 
@@ -23,6 +23,12 @@ public class NPCMoveState : NPCState
     {
         base.FrameUpdate();
         npc.Agent.SetDestination(npc.TargetPosition);
+
+        if (npc.Agent.remainingDistance <= npc.StopDistance && !npc.IsThisJoker)
+        {
+            npc.Agent.isStopped = true;
+            npc.StateMachine.ChangeState(new NPCAttackState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
+        }
     }
 
     public override void PhysicsUpdate()
