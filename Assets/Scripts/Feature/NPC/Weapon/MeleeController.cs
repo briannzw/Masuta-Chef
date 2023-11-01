@@ -19,16 +19,22 @@ namespace NPC.NPCWeapon
             base.Update();
         }
 
+        public override void Attack()
+        {
+            hitController.Initialize(this);
+            animator.SetTrigger("Attack");
+        }
+
         public override void StartAttack()
         {
-            if(attackTimer > stats[WeaponStatsEnum.Speed].Value / 100)
-            {
-                base.StartAttack();
-                hitController.Initialize(this);
-                animator.SetTrigger("Attack");
-                attackTimer = 0;
-            }
+            base.StartAttack();
+            weaponCollider.isTrigger = true;
+        }
 
+        public override void StopAttack()
+        {
+            base.StopAttack();
+            weaponCollider.isTrigger = false;
         }
     }
 }

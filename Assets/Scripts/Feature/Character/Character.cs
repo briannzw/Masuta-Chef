@@ -29,6 +29,7 @@ namespace Character
         public Action OnDie;
         public Action OnDamaged;
         public Action OnHealed;
+        public Action OnSpeedChanged;
         #endregion
 
         public bool isInvincible = false;
@@ -83,6 +84,9 @@ namespace Character
                                 mod.Value /= 100;
                                 Stats.StatList[modList.Key].AddModifier(mod);
                             }
+
+                            // Events
+                            if (modList.Key == StatsEnum.Speed) OnSpeedChanged?.Invoke();
                         }
                     }
                 }
@@ -255,6 +259,9 @@ namespace Character
                 Stats.DynamicStatList[effect.DynamicStatsAffected].AddModifier(effect.Modifier);
             else
                 Stats.StatList[effect.StatsAffected].AddModifier(effect.Modifier);
+
+            // Events
+            if(effect.StatsAffected == StatsEnum.Speed) OnSpeedChanged?.Invoke();
         }
     }
 }

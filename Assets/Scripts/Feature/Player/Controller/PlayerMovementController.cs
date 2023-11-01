@@ -12,10 +12,6 @@ namespace Player.Controller
         private CharacterController controller;
 
         [Header("Movement")]
-        public bool isSprintDefault = false;
-
-        public float moveSpeed = 5f;
-        public float sprintSpeed = 8f;
         public float gravity = -9.8f;
         public float turnSmoothTime = 0.1f;
 
@@ -28,14 +24,13 @@ namespace Player.Controller
         private float speed;
         private float turnSmoothVelocity = 0;
 
-        public float Speed => speed;
-        public float SpeedMultiplier => speedMultiplier;
-
         [Header("Environment")]
         public float PushForce;
 
         [Header("Modifiers")]
-        [Range(.1f, 10), SerializeField] private float speedMultiplier = 1;
+        public float speedMultiplier = 1;
+
+        private Character.Character character;
 
         private void Awake()
         {
@@ -45,7 +40,12 @@ namespace Player.Controller
         protected override void Start()
         {
             initialPosition = transform.position;
-            speed = isSprintDefault ? sprintSpeed : moveSpeed;
+            character = GetComponent<Character.Character>();
+            if (character != null)
+            {
+                speed = character.Stats.StatList[StatsEnum.Speed].Value / 10;
+                character.OnSpeedChanged += () => speed = character.Stats.StatList[StatsEnum.Speed].Value / 10;
+            }
             base.Start();
         }
 
@@ -74,8 +74,6 @@ namespace Player.Controller
 
             playerControls.Gameplay.Move.performed += OnMove;
             playerControls.Gameplay.Move.canceled += OnMoveCanceled;
-            playerControls.Gameplay.Sprint.performed += OnSprint;
-            playerControls.Gameplay.Sprint.canceled += OnSprintCanceled;
         }
         protected override void UnregisterInputCallbacks()
         {
@@ -83,8 +81,6 @@ namespace Player.Controller
 
             playerControls.Gameplay.Move.performed -= OnMove;
             playerControls.Gameplay.Move.canceled -= OnMoveCanceled;
-            playerControls.Gameplay.Sprint.performed -= OnSprint;
-            playerControls.Gameplay.Sprint.canceled -= OnSprintCanceled;
         }
         #endregion
 
@@ -130,18 +126,6 @@ namespace Player.Controller
         {
             rawInputMovement = Vector3.zero;
             if (Animator) Animator.SetBool("IsWalking", false);
-        }
-
-        private void OnSprint(InputAction.CallbackContext context)
-        {
-            speed = isSprintDefault ? moveSpeed : sprintSpeed;
-            if (Animator) Animator.SetBool("IsRunning", true);
-        }
-
-        private void OnSprintCanceled(InputAction.CallbackContext context)
-        {
-            speed = isSprintDefault ? sprintSpeed : moveSpeed;
-            if (Animator) Animator.SetBool("IsRunning", false);
         }
         #endregion
 
