@@ -390,7 +390,7 @@ MonoBehaviour:
   minDistanceSlotFromPlayer: 5
   wanderRadius: 2
   wanderInterval: 4
-  rotationSpeed: 5
+  rotationSpeed: 12
 --- !u!114 &6165715537076772562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +436,7 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
+  HealthDisplay: 
   isInvincible: 0
 --- !u!1 &4851675593540383649
 GameObject:
