@@ -18,6 +18,12 @@ namespace NPC.Enemy
             currentTauntTimer = maxTauntTimer;
         }
 
+        protected new void Start()
+        {
+            base.Start();
+            chara.OnDie += EnemyDie;
+        }
+
         protected new void Update()
         {
             base.Update();
@@ -31,6 +37,11 @@ namespace NPC.Enemy
             {
                 RemoveTauntEffect();
             }
+        }
+
+        void EnemyDie()
+        {
+            GameManager.Instance.OnEnemiesKilled?.Invoke();
         }
 
         void RemoveTauntEffect()
