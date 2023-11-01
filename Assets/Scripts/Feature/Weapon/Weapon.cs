@@ -49,17 +49,7 @@ namespace Weapon
             if(rb == null) rb = GetComponentInParent<Rigidbody>();
             weaponCollider = GetComponent<Collider>();
             initialTrigger = weaponCollider.isTrigger;
-
-            // For Debuging
-            if(Holder == null)
-            {
-                GameObject parent = transform.parent.transform.parent.gameObject;
-                
-                if(parent.tag == "Player")
-                {
-                    Holder = parent.GetComponent<Character>();
-                }
-            }
+            Holder = null;
         }
 
         // Start is called before the first frame update
