@@ -1,5 +1,133 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &319604410474927976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2709610716109162610}
+  - component: {fileID: 6889502841205436792}
+  m_Layer: 0
+  m_Name: GunAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2709610716109162610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319604410474927976}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7852301884205206862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &6889502841205436792
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319604410474927976}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ae2ed0044fdd18e4a9096d5b8c266e65, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1347575102940736519
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +426,8 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
+  HealthDisplay: 
+  isInvincible: 0
 --- !u!114 &-3339235332238347523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +446,7 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 7
   Agent: {fileID: 0}
+  IsThisJoker: 0
   IsTaunted: 0
   maxTauntTimer: 0.1
   rotationSpeed: 5
@@ -353,7 +484,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.259, z: 0.557}
   m_LocalScale: {x: 0.18683, y: 0.18683, z: 0.18683}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2709610716109162610}
   m_Father: {fileID: 4320396771837087539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2549578842331117928
@@ -468,7 +600,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: -8786994105791154135}
   rb: {fileID: 239774819553659423}
-  TargetTag: Player
+  TargetTags:
+  - Player
+  - Companion
   stats:
     _serializedList:
     - Key: 0
@@ -480,9 +614,16 @@ MonoBehaviour:
     - Key: 2
       Value:
         BaseValue: 100
+  UltimateTimer: 1
+  isCooldownUltimate: 0
+  isUltimateCancelable: 0
   fireObjectPrefab: {fileID: 4301465161760894196, guid: 58c92f2803a924a41b1cbf8515c074c9,
     type: 3}
-  spawner: {fileID: 1981898329146583947}
+  ultimateDuration: 0
+  ultimateBulletObject: {fileID: 0}
+  ultimateBulletInterval: 1
+  bulletAmount: 3
+  bulletSpawnPoint: {fileID: 0}
 --- !u!114 &1981898329146583947
 MonoBehaviour:
   m_ObjectHideFlags: 0

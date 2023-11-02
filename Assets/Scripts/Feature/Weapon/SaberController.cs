@@ -26,6 +26,7 @@ namespace Weapon
 
         public override void Attack()
         {
+            base.Attack();
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
         }

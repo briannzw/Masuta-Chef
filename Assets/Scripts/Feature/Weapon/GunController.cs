@@ -30,6 +30,7 @@ public class GunController : Weapon.Weapon
     #region Method
     public override void Attack()
     {
+        base.Attack();
         var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
         var controller = fireObject.GetComponent<BulletHit>();
         controller.Initialize(this);

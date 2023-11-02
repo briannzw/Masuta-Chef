@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Weapon
@@ -9,8 +11,6 @@ namespace Weapon
     using Character;
     using Player.Controller;
     using System.Collections;
-    using Character.Stat;
-    using System.Collections.Generic;
 
     public class Weapon : MonoBehaviour, IInteractable
     {
@@ -19,7 +19,7 @@ namespace Weapon
         public Character Holder;
         [SerializeField] private Rigidbody rb;
         protected Collider weaponCollider;
-        [Tag] public string TargetTag;
+        [Tag] public List<string> TargetTags = new();
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
         
         protected bool isFiring;
@@ -33,6 +33,14 @@ namespace Weapon
         private bool initialTrigger;
 
         private Dictionary<WeaponStatsEnum, float> previousFlatModValue = new();
+        #endregion
+
+        #region C# Events
+        // Currently for Weapon SFXs
+        public Action OnStartAttack;
+        public Action OnAttack;
+        public Action OnStopAttack;
+        public Action OnUltimateAttack;
         #endregion
 
         public enum WeaponStatsEnum 
@@ -81,17 +89,21 @@ namespace Weapon
         #region Method
         public virtual void Attack() 
         {
-            Debug.Log("Attack Method of Weapon Not Implemented!");
+            OnAttack?.Invoke();
         }
 
         public virtual void StartAttack()
         {
             isFiring = true;
+
+            OnStartAttack?.Invoke();
         }
 
         public virtual void StopAttack()
         {
             isFiring = false;
+
+            OnStopAttack?.Invoke();
         }
 
         public virtual void StartUltimateAttack()
@@ -115,6 +127,9 @@ namespace Weapon
         protected virtual void UltimateAttack()
         {
             // Implement the Ultimate Attack Logic Here;
+            
+            // SFX
+            OnUltimateAttack?.Invoke();
         }
 
         public void OnEquip(Character holder)

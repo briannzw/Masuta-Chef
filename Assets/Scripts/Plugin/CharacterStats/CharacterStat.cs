@@ -66,7 +66,7 @@ namespace Kryz.CharacterStats
 			return false;
 		}
 
-		public virtual int CompareModifierOrder(StatModifier a, StatModifier b)
+		protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
 		{
 			if (a.Order < b.Order)
 				return -1;

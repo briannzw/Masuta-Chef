@@ -161,7 +161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
   rb: {fileID: 0}
-  TargetTag: 
+  TargetTags:
+  - Player
+  - Companion
   stats:
     _serializedList:
     - Key: 0
@@ -173,6 +175,9 @@ MonoBehaviour:
     - Key: 2
       Value:
         BaseValue: 100
+  UltimateTimer: 1
+  isCooldownUltimate: 0
+  isUltimateCancelable: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -232,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTag: 
   Source: {fileID: 0}
   Value:
     CharacterAttack: 0

@@ -22,7 +22,7 @@ namespace Character.Hit
         {
             if (canFire)
             {
-                if (!other.CompareTag(TargetTag)) return;
+                if (!Source.TargetTags.Contains(other.tag)) return;
 
                 Character character = other.GetComponent<Character>();
                 if(character == null) return;

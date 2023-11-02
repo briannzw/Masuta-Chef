@@ -146,5 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09ac02bc8c4c824cad79bf0ff383ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentPicker: {fileID: 0}
   RandomColorOnStart: 1
   crateColor: 0
+  fallSpeed: 9.8
+  initialFallHeight: 20
