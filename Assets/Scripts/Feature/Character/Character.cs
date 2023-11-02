@@ -25,7 +25,6 @@ namespace Character
         protected List<Effect> CurrentStatusEffects;
         protected Dictionary<Effect, Coroutine> StatusEffectCoroutines;
 
-        public PlayerAudioController playerAudioController;
         public event Action OnDie;
 
         public Character(StatsPreset preset)
@@ -34,9 +33,7 @@ namespace Character
         }
 
         private void Awake()
-        {   //Refrence to PlayerAudioController
-            playerAudioController = GetComponent<PlayerAudioController>();
-
+        {   
             if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
@@ -54,11 +51,9 @@ namespace Character
 
             if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health)
             {
-                OnDie?.Invoke();
-
-                if (playerAudioController != null)
+                if (OnDie != null)
                 {
-                    playerAudioController.PlayDeathSound();
+                    OnDie?.Invoke();
                 }
             }
         }

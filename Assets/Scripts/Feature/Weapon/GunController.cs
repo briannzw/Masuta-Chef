@@ -12,6 +12,7 @@ public class GunController : Weapon.Weapon
     #region Properties
     public GameObject fireObjectPrefab;
     public Spawner.Spawner spawner;
+    [SerializeField] AudioSource weaponSound; 
     #endregion
 
     protected new void Update()
@@ -23,7 +24,13 @@ public class GunController : Weapon.Weapon
     public override void Attack()
     {
         List<GameObject> bullets = spawner.Spawn();
-        // var fireObject = spawner.Spawn(fireObjectPrefab, transform.position, transform.rotation);
+
+        // Memainkan efek suara senjata saat serangan dimulai
+        if (weaponSound != null)
+        {
+            weaponSound.Play();
+        }
+
         foreach (GameObject bullet in bullets)
         {
             var controller = bullet.GetComponent<BulletHit>();
