@@ -11,11 +11,6 @@ namespace NPC.Companion
         [SerializeField] int maxTauntedEnemies = 5;
         [SerializeField] float tauntRadius;
         private bool isAlive = true;
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         private new void Update()
         {

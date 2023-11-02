@@ -5,6 +5,7 @@ using UnityEngine;
 namespace NPC.NPCWeapon
 {
     using Weapon;
+    using Character;
     using Character.Hit;
     public class MeleeController : Weapon
     {
@@ -13,6 +14,15 @@ namespace NPC.NPCWeapon
         [SerializeField] HitController hitController;
         [SerializeField] Animator animator;
         #endregion
+
+        private new void Awake()
+        {
+            base.Awake();
+            rb = GetComponent<Rigidbody>();
+            if (rb == null) rb = GetComponentInParent<Rigidbody>();
+            weaponCollider = GetComponent<Collider>();
+            Holder = GetComponentInParent<Character>();
+        }
 
         protected new void Update()
         {
