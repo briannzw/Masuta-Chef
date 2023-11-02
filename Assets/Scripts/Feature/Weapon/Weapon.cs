@@ -19,7 +19,7 @@ namespace Weapon
         public Character Holder;
         [SerializeField] private Rigidbody rb;
         protected Collider weaponCollider;
-        [Tag] public string TargetTag;
+        [Tag] public List<string> TargetTags = new();
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
         
         protected bool isFiring;
