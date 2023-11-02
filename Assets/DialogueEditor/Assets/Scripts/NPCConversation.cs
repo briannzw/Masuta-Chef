@@ -391,14 +391,23 @@ namespace DialogueEditor
             speech.Name = editableNode.Name;
             if (inputFieldGrabber != null)
             {
-                speech.Text = editableNode.Text + " " + inputFieldGrabber.GetInputText() +".";
+                string inputText = inputFieldGrabber.GetInputText();
+                string originalText = editableNode.Text;
+
+                if (originalText.Contains("Chef"))
+                {
+                    // Ganti kata "Chef" dengan inputText
+                    originalText = originalText.Replace("Chef", inputText);
+                }
+
+                speech.Text = originalText;
                 inputFieldGrabber = null;
             }
             else
             {
                 speech.Text = editableNode.Text;
-
             }
+
             speech.AutomaticallyAdvance = editableNode.AdvanceDialogueAutomatically;
             speech.AutoAdvanceShouldDisplayOption = editableNode.AutoAdvanceShouldDisplayOption;
             speech.TimeUntilAdvance = editableNode.TimeUntilAdvance;
