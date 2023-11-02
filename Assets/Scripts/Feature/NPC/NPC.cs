@@ -46,7 +46,7 @@ namespace NPC
 
         }
         // Start is called before the first frame update
-        void Start()
+        protected void Start()
         {
             if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;

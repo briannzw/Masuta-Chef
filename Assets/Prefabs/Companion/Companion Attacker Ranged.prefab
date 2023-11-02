@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 2267895689421782167}
   - component: {fileID: 1249614277476891951}
   - component: {fileID: 6165715537076772562}
+  - component: {fileID: -778370667173244660}
   m_Layer: 6
   m_Name: Companion Attacker Ranged
   m_TagString: Companion
@@ -438,6 +439,20 @@ MonoBehaviour:
           BaseValue: 1
   HealthDisplay: 
   isInvincible: 0
+--- !u!114 &-778370667173244660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3577502455029801522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5372bb9ede6ac2d42847d63b05353e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLevel: 30
+  expPerEnemyKill: 2
 --- !u!1 &4851675593540383649
 GameObject:
   m_ObjectHideFlags: 0

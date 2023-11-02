@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     public SaveManager SaveManager;
     public StatsManager StatsManager;
 
+    [Header("Static Value")]
+    public Action OnEnemiesKilled;
+
     private void Start()
     {
         if (SaveOnGameOver)
