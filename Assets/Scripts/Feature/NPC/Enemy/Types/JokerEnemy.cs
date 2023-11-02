@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 namespace NPC.Enemy
 {
+    using Spawner;
     public class JokerEnemy : Enemy, IDetectionNPC, IWanderNPC
     {
         [SerializeField] private float pickCrateRadius = 2f;
@@ -19,6 +20,7 @@ namespace NPC.Enemy
         private Pickup.IPickable nearestPickable;
         [SerializeField] private Transform pickupPos;
         private bool hasCrate = false;
+        private bool CanPickUp = true;
         [SerializeField] private float safeDistance = 10f;
 
         private new void Awake()
@@ -27,9 +29,25 @@ namespace NPC.Enemy
             IsThisJoker = true;
         }
 
+        private new void Start()
+        {
+            base.Start();
+            chara.OnDie += OnJokerDie;
+        }
+
         private new void Update()
         {
             StateMachine.CurrentState.FrameUpdate();
+
+            // Testing Drop Crate
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                if(hasCrate) OnPickUpCancel();
+
+            }
+
+            Animator.SetBool("IsRunning", !Agent.isStopped);
+            Animator.SetBool("IsCrateRunning", hasCrate);
             if (Agent.remainingDistance <= StopDistance)
             {
                 Agent.isStopped = true;
@@ -98,6 +116,7 @@ namespace NPC.Enemy
 
         private void PickUpCrate()
         {
+            if (CanPickUp == false) return;
             if (!hasCrate)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, pickCrateRadius);
@@ -197,9 +216,17 @@ namespace NPC.Enemy
             Gizmos.DrawSphere(transform.position, pickCrateRadius);
             Gizmos.DrawWireSphere(transform.position, DetectionRadius);
         }
-        private void OnDestroy()
+        private void OnJokerDie()
         {
+            CanPickUp = false;
             OnPickUpCancel();
+            Animator.SetTrigger("Dead");
+            Invoke("ReleaseObject", 1f);
+        }
+
+        private void ReleaseObject()
+        {
+            GetComponentInChildren<SpawnObject>().Release();
         }
     }
 }
