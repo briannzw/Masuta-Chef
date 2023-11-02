@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player.Controller;
 
 namespace Character
 {
@@ -17,65 +16,155 @@ namespace Character
         public StatsPreset StatsPreset;
         [ConditionalField(nameof(StatsPreset), inverse:true)] public Stats Stats;
 
-        [Header("Weapon")]
-        //public Weapon Weapon;
-        //public Dicitonary<IAbilityWeapon, float> WeaponAbilityCooldowns;
-
         [Header("Effect")]
         protected List<Effect> CurrentStatusEffects;
         protected Dictionary<Effect, Coroutine> StatusEffectCoroutines;
 
-        public PlayerAudioController playerAudioController;
-        public event Action OnDie;
+#if UNITY_EDITOR
+        // EDITOR ONLY
+        [ReadOnly, SerializeField] protected string HealthDisplay = "";
+#endif
 
+        #region C# Events
+        public Action OnDie;
+        public Action OnDamaged;
+        public Action OnHealed;
+        public Action OnSpeedChanged;
+        #endregion
+
+        public bool isInvincible = false;
         public Character(StatsPreset preset)
         {
             Stats = new Stats(preset.Stats);
         }
 
         private void Awake()
-        {   //Refrence to PlayerAudioController
-            playerAudioController = GetComponent<PlayerAudioController>();
+        {
+            InitializeStats();
 
+#if UNITY_EDITOR
+            // EDITOR ONLY
+            HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+            OnDamaged += () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+            OnHealed += () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+#endif
+        }
+
+        public void InitializeStats()
+        {
             if (StatsPreset != null) Stats = new Stats(StatsPreset.Stats);
             CurrentStatusEffects = new List<Effect>();
             StatusEffectCoroutines = new Dictionary<Effect, Coroutine>();
+
+            isInvincible = false;
         }
 
-        public virtual void TakeDamage(float damageAmount, DynamicStatsEnum dynamicEnum,float multiplier = 1)
+        protected virtual void Start()
         {
+            FetchStatMods();
+        }
+
+        protected void FetchStatMods()
+        {
+            // Fetch Stat Mods from Recipe Book
+            if (GameManager.Instance.StatsManager != null)
+            {
+                if (GameManager.Instance.StatsManager.CharacterStatMods.ContainsKey(tag))
+                {
+                    foreach (var modList in GameManager.Instance.StatsManager.CharacterStatMods[tag])
+                    {
+                        foreach (var mod in modList.Value)
+                        {
+                            // Add Flat Mod to Base Value
+                            if (mod.Type == StatModType.Flat) Stats.StatList[modList.Key].BaseValue += mod.Value;
+                            // Add Percent Mod to Total Value
+                            else
+                            {
+                                // Change to percent
+                                mod.Value /= 100;
+                                Stats.StatList[modList.Key].AddModifier(mod);
+                            }
+
+                            // Events
+                            if (modList.Key == StatsEnum.Speed) OnSpeedChanged?.Invoke();
+                        }
+                    }
+                }
+
+                if (GameManager.Instance.StatsManager.CharacterDynamicStatMods.ContainsKey(tag))
+                {
+                    foreach (var modList in GameManager.Instance.StatsManager.CharacterDynamicStatMods[tag])
+                    {
+                        foreach (var mod in modList.Value)
+                        {
+                            // Add Flat Mod to Base Value
+                            if (mod.Type == StatModType.Flat) Stats.DynamicStatList[modList.Key].BaseValue += mod.Value;
+                            // Add Percent Mod to Total Value
+                            else
+                            {
+                                // Change to percent
+                                mod.Value /= 100;
+                                Stats.DynamicStatList[modList.Key].AddModifier(mod);
+                            }
+
+                            // Reset Current Value
+                            Stats.DynamicStatList[modList.Key].ResetCurrentValue();
+                        }
+                    }
+                }
+            }
+        }
+
+        public virtual void TakeDamage(float damageAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)
+        {
+            if (isInvincible)
+            {
+                return;
+            }
+                
             CharacterDynamicStat Stat = Stats.DynamicStatList[dynamicEnum];
 
             // Total Damage Received = (Base Attack + Weapon Attack - Defense) * Final Damage Multiplier
-            StatModifier statMod = new StatModifier(-(damageAmount - (dynamicEnum == DynamicStatsEnum.Health ? Stats.StatList[StatsEnum.Defense].Value : 0)) * multiplier, StatModType.Flat);
+            StatModifier statMod;
+            if (modType == StatModType.Flat)
+                statMod = new StatModifier(-(damageAmount - (dynamicEnum == DynamicStatsEnum.Health ? Stats.StatList[StatsEnum.Defense].Value : 0)) * multiplier, modType);
+            else
+                statMod = new StatModifier(-damageAmount * multiplier, modType);
+                
+
             if (statMod.Value > 0) statMod.Value = 0;
 
             Stat.ChangeCurrentValue(statMod);
+            OnDamaged?.Invoke();
 
             if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health)
             {
                 OnDie?.Invoke();
 
-                if (playerAudioController != null)
-                {
-                    playerAudioController.PlayDeathSound();
-                }
+                // Send Die data to Level Manager
+                GameManager.Instance.LevelManager.CharacterDied(this);
+                // Make sure only called once
+                isInvincible = true;
             }
         }
 
-        public void TakeHeal(float healAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1)
+        public void TakeHeal(float healAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)
         {
             CharacterDynamicStat Stat = Stats.DynamicStatList[dynamicEnum];
 
-            StatModifier statMod = new StatModifier(healAmount * multiplier, StatModType.Flat);
+            StatModifier statMod = new StatModifier(healAmount * multiplier, modType);
             if(statMod.Value < 0) statMod.Value = 0;
 
             Stat.ChangeCurrentValue(statMod);
+            OnHealed?.Invoke();
         }
 
         public void AddEffect(Effect effect)
         {
-            CurrentStatusEffects.Add(effect);
+            // Save References to all modifiers except changes for dynamic currentValue
+            if(effect.StatusEffect == StatusEffects.Buff || effect.StatusEffect == StatusEffects.Debuff)
+                CurrentStatusEffects.Add(effect);
+
             if(effect.Behaviour == EffectBehaviour.Duration)
             {
                 if (effect.DurationEnds) return;
@@ -83,7 +172,7 @@ namespace Character
                 StatusEffectCoroutines.Add(effect, StartCoroutine(ApplyEffect(effect)));
                 return;
             }
-            Stats.StatList[effect.StatsAffected].AddModifier(effect.Modifier);
+            TakeEffect(effect);
         }
 
         public void PauseEffect(Effect effect)
@@ -105,7 +194,7 @@ namespace Character
                 Stats.StatList[effect.StatsAffected].RemoveAllModifiersFromSource(effect);
                 return;
             }
-            Debug.LogError("Effect not found on Character: " + name);
+            Debug.LogWarning("Effect not found on Character: " + name);
         }
 
         // Ex-case: Remove All Debuffs, All Interval Healings, etc.
@@ -153,14 +242,26 @@ namespace Character
             RemoveEffect(effect);
         }
 
-        public void TakeEffect(Effect effect)
+        private void TakeEffect(Effect effect)
         {
-            if (effect.StatusEffect == StatusEffects.Burn) TakeDamage(effect.Modifier.Value, effect.DynamicStatsAffected, 1);
-            else if (effect.StatusEffect == StatusEffects.Heal) TakeHeal(effect.Modifier.Value, effect.DynamicStatsAffected, 1);
+            if (effect.Modifier == null) Debug.LogError("Effect must be Initialized first to create Modifier!");
+            if (effect.StatusEffect == StatusEffects.Burn)
+            {
+                // If Flat -> Reduce directly, else reduce by value * Dynamic Max Value
+                TakeDamage(effect.Modifier.Value / (effect.Modifier.Type == StatModType.Flat ? 1 : 100), effect.DynamicStatsAffected, 1, effect.Modifier.Type);
+            }
+            else if (effect.StatusEffect == StatusEffects.Heal)
+            {
+                // If Flat -> Adds directly, else adds value * Dynamic Max Value
+                TakeHeal(effect.Modifier.Value / (effect.Modifier.Type == StatModType.Flat ? 1 : 100), effect.DynamicStatsAffected, 1, effect.Modifier.Type);
+            }
             else if (effect.AffectDynamicStat)
                 Stats.DynamicStatList[effect.DynamicStatsAffected].AddModifier(effect.Modifier);
             else
                 Stats.StatList[effect.StatsAffected].AddModifier(effect.Modifier);
+
+            // Events
+            if(effect.StatsAffected == StatsEnum.Speed) OnSpeedChanged?.Invoke();
         }
     }
 }

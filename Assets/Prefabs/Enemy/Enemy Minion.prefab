@@ -850,6 +850,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saber
       objectReference: {fileID: 0}
+    - target: {fileID: 4179241332209929997, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5604003198669207345, guid: 103055a6839e9794ca3f64d07afd4284,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -900,11 +905,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5702011689648153978, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
         type: 3}
       propertyPath: rb
       value: 
-      objectReference: {fileID: 707080704459491412}
+      objectReference: {fileID: 0}
     - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
         type: 3}
       propertyPath: Holder
@@ -925,12 +935,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 103055a6839e9794ca3f64d07afd4284, type: 3}
---- !u!54 &707080704459491412 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1902049687339581202, guid: 103055a6839e9794ca3f64d07afd4284,
-    type: 3}
-  m_PrefabInstance: {fileID: 1420180051518027590}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6804962181311316087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5604003198669207345, guid: 103055a6839e9794ca3f64d07afd4284,

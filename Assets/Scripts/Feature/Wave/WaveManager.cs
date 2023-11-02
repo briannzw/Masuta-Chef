@@ -21,6 +21,19 @@ namespace Wave
         private float gameTime = 0f;
         private int currentWaveIndex = 0;
 
+        public int TotalEnemies
+        {
+            get
+            {
+                int total = 0;
+                foreach (var wave in LevelData.Waves)
+                {
+                    total += wave.TotalEnemies;
+                }
+                return total;
+            }
+        }
+
         private void Awake()
         {
             LevelData = levelManager.CurrentLevel;
@@ -60,17 +73,12 @@ namespace Wave
                 timer += Time.deltaTime;
                 if(timer >= interval)
                 {
-                    if(total < spawnCount)
-                    {
-                        spawner.Spawn(total);
-                        break;
-                    }
-
-                    List<GameObject> enemies = spawner.Spawn(spawnCount);
+                    List<GameObject> enemies = spawner.Spawn(total < spawnCount ? total : spawnCount);
                     foreach(var enemy in enemies)
                     {
                         if(enemy.GetComponent<Character>() == null) enemy.AddComponent<Character>();
                         enemy.GetComponent<Character>().StatsPreset = enemyPreset;
+                        enemy.GetComponent<Character>().InitializeStats();
                         if(enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
                         enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
                     }

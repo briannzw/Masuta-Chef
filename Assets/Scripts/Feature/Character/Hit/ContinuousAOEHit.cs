@@ -29,7 +29,7 @@ namespace Character.Hit
         private void DoHit()
         {
             characterInArea = ColliderDetector.Find<Character>(transform.position + areaOffset, areaRadius, targetMask, transform.forward, areaAngle);
-            foreach(Character character in characterInArea)
+            foreach(Character character in characterInArea.ToArray())
             {
                 // Use AOEController HitChara
                 HitChara(character);

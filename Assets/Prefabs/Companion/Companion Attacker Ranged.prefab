@@ -197,9 +197,16 @@ MonoBehaviour:
     - Key: 2
       Value:
         BaseValue: 100
+  UltimateTimer: 1
+  isCooldownUltimate: 0
+  isUltimateCancelable: 0
   fireObjectPrefab: {fileID: 4301465161760894196, guid: d6d693124bfe95f4eb26415b131129b9,
     type: 3}
-  spawner: {fileID: 5984140530078476641}
+  ultimateDuration: 0
+  ultimateBulletObject: {fileID: 0}
+  ultimateBulletInterval: 1
+  bulletAmount: 3
+  bulletSpawnPoint: {fileID: 0}
 --- !u!114 &5984140530078476641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +242,7 @@ GameObject:
   - component: {fileID: 2267895689421782167}
   - component: {fileID: 1249614277476891951}
   - component: {fileID: 6165715537076772562}
+  - component: {fileID: -778370667173244660}
   m_Layer: 6
   m_Name: Companion Attacker Ranged
   m_TagString: Companion
@@ -374,14 +382,16 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 7
   Agent: {fileID: 347959739561581255}
+  IsThisJoker: 0
   MaxDistanceFromPlayer: 3
+  IsFollowingEnemy: 0
   DistanceFromPlayer: 0
   companionSlotPosition: {fileID: 0}
-  minDistanceFromPlayer: 2
+  minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   wanderRadius: 2
   wanderInterval: 4
-  rotationSpeed: 5
+  rotationSpeed: 12
 --- !u!114 &6165715537076772562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +437,22 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
+  HealthDisplay: 
+  isInvincible: 0
+--- !u!114 &-778370667173244660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3577502455029801522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5372bb9ede6ac2d42847d63b05353e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLevel: 30
+  expPerEnemyKill: 2
 --- !u!1 &4851675593540383649
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.123221196, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.67058825, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
