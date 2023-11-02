@@ -37,7 +37,7 @@ namespace Player.Controller
             if (playerControls == null) return;
 
             playerControls.Gameplay.PickUp.performed += OnPickUp;
-            playerControls.Gameplay.PickUp.canceled += OnPickUpCancel;
+            //playerControls.Gameplay.PickUp.canceled += OnPickUpCancel;
             playerControls.Gameplay.Throw.performed += OnThrow;
             playerControls.Gameplay.Throw_High.performed += OnThrow;
         }
@@ -46,7 +46,7 @@ namespace Player.Controller
             if (playerControls == null) return;
 
             playerControls.Gameplay.PickUp.performed -= OnPickUp;
-            playerControls.Gameplay.PickUp.canceled -= OnPickUpCancel;
+            //playerControls.Gameplay.PickUp.canceled -= OnPickUpCancel;
             playerControls.Gameplay.Throw.performed -= OnThrow;
             playerControls.Gameplay.Throw_High.performed -= OnThrow;
         }
@@ -56,6 +56,12 @@ namespace Player.Controller
         private void OnPickUp(InputAction.CallbackContext context)
         {
             if (!playerControls.Gameplay.PickUp.enabled) return;
+
+            if (nearestPickable != null)
+            {
+                OnPickUpCancel(context);
+                return;
+            }
 
             GameObject go = ColliderDetector.FindNearest<GameObject>(transform.position - transform.forward, PickupRadius + 1f, TargetMask, transform.forward, PickupAngle);
             

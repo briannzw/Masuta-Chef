@@ -56,8 +56,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6913090435883698909}
   - component: {fileID: 4473604326915842093}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: UltimateVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 2367247601449369405}
   - component: {fileID: 3064858205839643219}
   - component: {fileID: 4053699737774979706}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 6586099308046957744}
   - component: {fileID: 819498392342047893}
   - component: {fileID: 8798173013038672523}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
