@@ -17,7 +17,7 @@ namespace Weapon
         #region Properties
         [Header("References")]
         public Character Holder;
-        [SerializeField] private Rigidbody rb;
+        [SerializeField] protected Rigidbody rb;
         protected Collider weaponCollider;
         [Tag] public List<string> TargetTags = new();
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;

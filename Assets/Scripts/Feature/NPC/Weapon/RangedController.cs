@@ -1,18 +1,20 @@
+using Character;
+using Character.Hit;
+using Spawner;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace NPC.NPCWeapon
 {
     using Weapon;
     using Character;
     using Character.Hit;
-    public class MeleeController : Weapon
+    public class RangedController : Weapon
     {
         #region Properties
-        public LayerMask enemyLayer;      
-        [SerializeField] HitController hitController;
-        [SerializeField] Animator animator;
+        public GameObject fireObjectPrefab;
         #endregion
 
         private new void Awake()
@@ -20,7 +22,6 @@ namespace NPC.NPCWeapon
             base.Awake();
             rb = GetComponent<Rigidbody>();
             if (rb == null) rb = GetComponentInParent<Rigidbody>();
-            weaponCollider = GetComponent<Collider>();
             Holder = GetComponentInParent<Character>();
         }
 
@@ -29,24 +30,20 @@ namespace NPC.NPCWeapon
             base.Update();
         }
 
+        #region Method
         public override void Attack()
         {
             base.Attack();
-            hitController.Initialize(this);
-            animator.SetTrigger("Attack");
+            var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
+            var controller = fireObject.GetComponent<BulletHit>();
+            controller.Initialize(this);
+            fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
         }
 
         public override void StartAttack()
         {
             base.StartAttack();
-            weaponCollider.isTrigger = true;
         }
-
-        public override void StopAttack()
-        {
-            base.StopAttack();
-            weaponCollider.isTrigger = false;
-        }
+        #endregion
     }
 }
-

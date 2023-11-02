@@ -924,6 +924,11 @@ PrefabInstance:
       propertyPath: TargetTag
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6889578219797571870, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: Source
+      value: 
+      objectReference: {fileID: 173457577965014887}
     - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
         type: 3}
       propertyPath: rb
@@ -943,6 +948,21 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: TargetTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: TargetTags.Array.data[0]
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: TargetTags.Array.data[1]
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

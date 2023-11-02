@@ -34,6 +34,12 @@ namespace NPC.Companion
             DetectionRadius = 8f;
         }
 
+        private new void Start()
+        {
+            chara.OnDie += OnCompanionDie;
+            Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
+        }
+
         protected new void Update()
         {
             CompanionStateMachine.CurrentState.FrameUpdate();
@@ -92,6 +98,11 @@ namespace NPC.Companion
                 IsFollowingEnemy = true;
                 TargetPosition = closestEnemy.position;
             }
+        }
+
+        private void OnCompanionDie()
+        {
+            Destroy(gameObject);
         }
     }
 }

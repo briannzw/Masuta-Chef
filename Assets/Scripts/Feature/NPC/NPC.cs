@@ -61,13 +61,11 @@ namespace NPC
 
         private void NPCDie()
         {
-            if(SelectedWeapon == AttackType.Joker)
+            // Temporary Fix
+            if(SelectedWeapon != AttackType.Joker)
             {
-                GetComponent<JokerEnemy>().OnPickUpCancel();
+                GetComponentInChildren<SpawnObject>().Release();
             }
-
-            GetComponentInChildren<SpawnObject>().Release();
-
         }
     }
 }
