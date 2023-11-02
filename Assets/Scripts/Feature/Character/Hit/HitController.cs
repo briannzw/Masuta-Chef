@@ -9,9 +9,6 @@ namespace Character.Hit
 
     public class HitController : MonoBehaviour, IApplyEffect
     {
-        [Foldout("Deprecated")]
-        [Tag, ConditionalField(nameof(Source), inverse: true)] public string TargetTag;
-        [Space]
         [Header("Weapon")]
         public Weapon Source;
         // Change to ReadOnly on Future Versions

@@ -478,7 +478,8 @@ MonoBehaviour:
       - Key: 6
         Value:
           BaseValue: 1
-  playerAudioController: {fileID: 0}
+  HealthDisplay: 
+  isInvincible: 0
 --- !u!114 &287297031067894320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +498,7 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 3
   Agent: {fileID: 0}
+  IsThisJoker: 0
   IsTaunted: 0
   maxTauntTimer: 0.1
   rotationSpeed: 5
@@ -1063,6 +1065,21 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: TargetTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: TargetTags.Array.data[0]
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
+        type: 3}
+      propertyPath: TargetTags.Array.data[1]
+      value: Companion
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

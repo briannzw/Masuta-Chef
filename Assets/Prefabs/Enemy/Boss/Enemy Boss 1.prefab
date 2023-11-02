@@ -143,7 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: 2475073932561233355}
   rb: {fileID: 4650276764733639763}
-  TargetTag: Player
+  TargetTags:
+  - Player
+  - Companion
   stats:
     _serializedList:
     - Key: 0
@@ -175,7 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTag: 
   Source: {fileID: 0}
   Value:
     CharacterAttack: 0
@@ -612,6 +613,7 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 4
   Agent: {fileID: 0}
+  IsThisJoker: 0
   skillCastingDuration: 5
   rotationSpeed: 5
   vortexPrefab: {fileID: 7936079460588203582, guid: 9b34189b7a8d25045afc1e4d3150ebde,
@@ -624,6 +626,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 3822720404550242872, guid: f92863516c13fa34386f2c9d406ffd88,
     type: 3}
   explosionLifetime: 2
+  <RageEffects>k__BackingField: []
 --- !u!114 &2475073932561233355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,6 +666,8 @@ MonoBehaviour:
       - Key: 4
         Value:
           BaseValue: 1
+  HealthDisplay: 
+  isInvincible: 0
 --- !u!54 &4650276764733639763
 Rigidbody:
   m_ObjectHideFlags: 0
