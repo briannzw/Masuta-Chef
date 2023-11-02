@@ -6,6 +6,7 @@ namespace Player.Controller
     using Input;
     using Pickup;
     using Module.Detector;
+    using System;
 
     public class PlayerPickupController : PlayerInputControl
     {
@@ -25,6 +26,11 @@ namespace Player.Controller
         public float ThrowHighAngle = 300f;
 
         private IPickable nearestPickable;
+
+        #region C# Events
+        public Action OnDoPickup;
+        public Action OnDoThrow;
+        #endregion
 
         protected override void Start()
         {
@@ -74,6 +80,8 @@ namespace Player.Controller
                 go.transform.parent = pickupPos;
                 go.transform.localPosition = Vector3.zero;
                 go.transform.localRotation = Quaternion.identity;
+
+                OnDoPickup?.Invoke();
             }
             else nearestPickable = null;
         }
@@ -101,6 +109,8 @@ namespace Player.Controller
             nearestPickable.ExitPickup();
             (nearestPickable as IThrowable).rb.AddRelativeForce(throwDirection * ThrowForce, ForceMode.Impulse);
             nearestPickable = null;
+
+            OnDoThrow?.Invoke();
         }
         #endregion
 
