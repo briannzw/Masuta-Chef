@@ -90,5 +90,10 @@ namespace Crate.Area
             if (!CrateGrid.Contains(pickable as CrateController)) return;
             CrateGrid[CrateGrid.IndexOf(pickable as CrateController)] = null;
         }
+
+        public int GetCurrentCrateCount()
+        {
+            return currentCrateCount;
+        }
     }
 }

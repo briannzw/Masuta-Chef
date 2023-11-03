@@ -10,6 +10,7 @@ namespace NPC.Enemy
         private float currentTauntTimer;
         [SerializeField] private float maxTauntTimer = 0.1f;
         public float rotationSpeed = 5.0f;
+        private static int killCount = 0;
 
         protected new void Awake()
         {
@@ -41,6 +42,8 @@ namespace NPC.Enemy
 
         void EnemyDie()
         {
+            killCount++;
+            Debug.Log("Jumlah musuh yang sudah dibunuh: " + killCount);
             GameManager.Instance.OnEnemiesKilled?.Invoke();
         }
 
@@ -49,6 +52,11 @@ namespace NPC.Enemy
             IsTaunted = false;
             Agent.isStopped = false;
             currentTauntTimer = maxTauntTimer;
+        }
+
+         public static int GetKillCount()
+        {
+            return killCount;
         }
     }
 }
