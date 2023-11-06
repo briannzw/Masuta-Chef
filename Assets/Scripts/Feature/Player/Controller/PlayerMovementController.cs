@@ -28,6 +28,7 @@ namespace Player.Controller
         public float PushForce;
 
         [Header("Modifiers")]
+        public bool CanMove = true;
         public float speedMultiplier = 1;
 
         private Character.Character character;
@@ -51,7 +52,7 @@ namespace Player.Controller
 
         private void Update()
         {
-            moveDirection = GetMovementInputDirection();
+            moveDirection = CanMove ? GetMovementInputDirection() : Vector3.zero;
             velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
 
             // Gravity
