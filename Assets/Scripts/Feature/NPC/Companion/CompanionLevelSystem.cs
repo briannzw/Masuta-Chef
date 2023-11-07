@@ -11,9 +11,7 @@ public class CompanionLevelSystem : MonoBehaviour
     [SerializeField] private int expPerEnemyKill;
 
     [Header("Level Stats")]
-    public StatsPreset Stage1;
-    public StatsPreset Stage2;
-    public StatsPreset Stage3;
+    public Stats StatsPerLevel;
 
     private int currentLevel;
     private int currentExp;
@@ -47,13 +45,22 @@ public class CompanionLevelSystem : MonoBehaviour
             currentLevel++;           // Increase the level
             currentExp = excessExp;   // Carry over excess experience points to the next level
 
-            // Character from Stage (each 10 level)
+            // Add Stats per level
+            foreach(var stat in StatsPerLevel.StatList)
+            {
+                character.Stats.StatList[stat.Key].AddModifier(new Kryz.CharacterStats.StatModifier(stat.Value.Value, Kryz.CharacterStats.StatModType.Flat));
+                if (stat.Key == StatsEnum.Speed) character.OnSpeedChanged?.Invoke();
+            }
+
+            foreach(var dynamicStat in StatsPerLevel.DynamicStatList)
+            {
+                character.Stats.DynamicStatList[dynamicStat.Key].AddModifier(new Kryz.CharacterStats.StatModifier(dynamicStat.Value.Value, Kryz.CharacterStats.StatModType.Flat));
+            }
+
+            // Stages (each 10 level)
             if (currentLevel % 10 == 0)
             {
-                character.StatsPreset = Mathf.RoundToInt(currentLevel / 10) == 1 ? Stage1 : Mathf.RoundToInt(currentLevel / 10) == 2 ? Stage2 : Stage3;
-                character.Reset();
-
-                // TODO: Add VFXs after leveling up
+                // TODO: Add VFXs after stage up
             }
         }
         else if (currentLevel >= maxLevel)
@@ -66,7 +73,7 @@ public class CompanionLevelSystem : MonoBehaviour
     // Method to add experience points to the companion per second passed
     private void ExpGainedPerSecond()
     {
-        AddExperience(1);
+        AddExperience(10);
     }
 
     // Method to add experience points to the companion per enemy killed
