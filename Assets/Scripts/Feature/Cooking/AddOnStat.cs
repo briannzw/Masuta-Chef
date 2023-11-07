@@ -1,9 +1,8 @@
-namespace Cooking.Recipe.Stat
+namespace Character.StatEffect
 {
-    using Character.StatEffect;
     using MyBox;
     [System.Serializable]
-    public class RecipeStat
+    public class AddOnStat
     {
         [Tag]
         public string AffectedCharacter;
