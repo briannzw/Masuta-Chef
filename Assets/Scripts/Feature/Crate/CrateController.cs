@@ -29,7 +29,7 @@ namespace Crate
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            renderer = GetComponent < Renderer>();
+            renderer = GetComponent<Renderer>();
         }
 
         private void Start()
@@ -70,6 +70,9 @@ namespace Crate
             Holder = picker.transform;
             rb.isKinematic = true;
 
+            // Play SFX (Pickup)
+            // AudioController.Play(pickupClip);
+
             return true;
         }
 
@@ -77,6 +80,9 @@ namespace Crate
         {
             Holder = null;
             rb.isKinematic = false;
+
+            // Play SFX (Dropped)
+            // AudioController.Play(droppedClip);
         }
     }
 }
