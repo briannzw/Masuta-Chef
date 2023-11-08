@@ -38,6 +38,12 @@ namespace Character
             Stats = new Stats(preset.Stats);
         }
 
+        public void Reset()
+        {
+            InitializeStats();
+            FetchStatMods();
+        }
+
         private void Awake()
         {
             InitializeStats();
@@ -64,7 +70,7 @@ namespace Character
             FetchStatMods();
         }
 
-        protected void FetchStatMods()
+        public void FetchStatMods()
         {
             // Fetch Stat Mods from Recipe Book
             if (GameManager.Instance.StatsManager != null)

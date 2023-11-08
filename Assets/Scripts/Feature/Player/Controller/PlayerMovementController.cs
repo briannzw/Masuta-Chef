@@ -15,7 +15,6 @@ namespace Player.Controller
         public float gravity = -9.8f;
         public float turnSmoothTime = 0.1f;
 
-        private bool canMove = true;
         private Vector3 rawInputMovement = Vector3.zero;
         private Vector3 velocity;
         private Vector3 moveDirection;
@@ -52,29 +51,20 @@ namespace Player.Controller
 
         private void Update()
         {
-            if (canMove)
+            moveDirection = GetMovementInputDirection();
+            velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
+
+            // Gravity
+            if (controller.isGrounded)
             {
-                moveDirection = GetMovementInputDirection();
-                velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
-
-                // Gravity
-                if (controller.isGrounded)
-                {
-                    if (velocity.y < 0f)
-                        velocity.y = -2f;
-                }
-
-                velocity.y += gravity * Time.deltaTime;
-                controller.Move(velocity * Time.deltaTime);
-
-                CheckOutOfBound();
+                if (velocity.y < 0f)
+                     velocity.y = -2f;
             }
-        }
 
-        // Method untuk mengatur apakah pemain boleh bergerak atau tidak
-        public void SetCanMove(bool value)
-        {
-            canMove = value;
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+
+            CheckOutOfBound();
         }
 
         #region Callbacks

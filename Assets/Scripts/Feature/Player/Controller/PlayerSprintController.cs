@@ -38,6 +38,8 @@ namespace Player.Controller
         #region Callback Functions
         private void OnSprint(InputAction.CallbackContext context)
         {
+            if (!playerMovementController.enabled) return;
+
             if (sprintCoroutine != null) return;
 
             sprintCoroutine = StartCoroutine(DoSprint());
