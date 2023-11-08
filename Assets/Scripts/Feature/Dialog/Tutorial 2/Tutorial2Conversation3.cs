@@ -13,6 +13,7 @@ namespace DialogueEditor
         public Button interactButton4;
         public Button interactButton5;
         public Button interactButton6;
+        public Button interactButton7;
         public CrateArea crateArea;
         private bool updateActive = true;
         private bool interactButton4Activated = false;
@@ -52,16 +53,19 @@ namespace DialogueEditor
             }
             else if (crateCount == 4 && !interactButton6Activated)
             {
+                interactButton7.onClick.Invoke();
                 interactButton6.gameObject.SetActive(true);
                 interactButton6Activated = true;
             }
             else if (crateCount == 3 && !interactButton5Activated)
             {
+                interactButton7.onClick.Invoke();
                 interactButton5.gameObject.SetActive(true);
                 interactButton5Activated = true;
             }
             else if (crateCount == 2 && !interactButton4Activated)
             {
+                interactButton7.onClick.Invoke();
                 interactButton4.gameObject.SetActive(true);
                 interactButton4Activated = true;
             }
