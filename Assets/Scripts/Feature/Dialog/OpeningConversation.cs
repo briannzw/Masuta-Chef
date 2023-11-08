@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace DialogueEditor
 {
-    public class Tutorial2Conversation : MonoBehaviour
+    public class OpeningConversation : MonoBehaviour
     {
         public Button interactButton1;
 
