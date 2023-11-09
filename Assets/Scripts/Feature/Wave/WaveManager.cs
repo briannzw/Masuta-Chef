@@ -21,6 +21,8 @@ namespace Wave
         private float gameTime = 0f;
         private int currentWaveIndex = 0;
 
+        private List<GameObject> spawnedEnemies = new List<GameObject>();
+
         public int TotalEnemies
         {
             get
@@ -74,7 +76,9 @@ namespace Wave
                 if(timer >= interval)
                 {
                     List<GameObject> enemies = spawner.Spawn(total < spawnCount ? total : spawnCount);
-                    foreach(var enemy in enemies)
+                    spawnedEnemies.AddRange(enemies);
+
+                    foreach (var enemy in enemies)
                     {
                         if(enemy.GetComponent<Character>() == null) enemy.AddComponent<Character>();
                         enemy.GetComponent<Character>().StatsPreset = enemyPreset;
@@ -89,5 +93,35 @@ namespace Wave
             }
         }
 
+        #region NavMeshAgent
+        public void DisableNavMeshAgents()
+        {
+            foreach (var enemy in spawnedEnemies)
+            {
+                if (enemy != null && enemy.CompareTag("Enemy"))
+                {
+                    UnityEngine.AI.NavMeshAgent navMeshAgent = enemy.GetComponent<UnityEngine.AI.NavMeshAgent>();
+                    if (navMeshAgent != null)
+                    {
+                        navMeshAgent.enabled = false;
+                    }
+                }
+            }
+        }
+        public void EnableNavMeshAgents()
+        {
+            foreach (var enemy in spawnedEnemies)
+            {
+                if (enemy != null && enemy.CompareTag("Enemy"))
+                {
+                    UnityEngine.AI.NavMeshAgent navMeshAgent = enemy.GetComponent<UnityEngine.AI.NavMeshAgent>();
+                    if (navMeshAgent != null)
+                    {
+                        navMeshAgent.enabled = true;
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }
