@@ -89,6 +89,7 @@ namespace Wave
                     total -= spawnCount;
                     timer = 0f;
                 }
+
                 yield return null;
             }
         }
