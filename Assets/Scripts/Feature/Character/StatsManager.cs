@@ -6,7 +6,6 @@ namespace Character
     using Cooking.Recipe;
     using Kryz.CharacterStats;
     using Save.Data;
-    using UnityEditor;
     using Weapon;
 
     public class StatsManager : MonoBehaviour
@@ -16,33 +15,27 @@ namespace Character
         public Dictionary<string, Dictionary<DynamicStatsEnum, List<StatModifier>>> CharacterDynamicStatMods = new();
         public Dictionary<string, Dictionary<Weapon.WeaponStatsEnum, List<StatModifier>>> WeaponStatMods = new();
 
-        public List<Recipe> Recipes = new();
+        public RecipeListSO RecipeSO;
         private SaveData saveData;
 
         public void Load()
         {
             saveData = GameManager.Instance.SaveManager.SaveData;
-            PopulateList();
-            PopulateMods();
-        }
 
-        private void PopulateList()
-        {
-            string[] assetNames = AssetDatabase.FindAssets("t:Recipe", new[] { "Assets/ScriptableObjects/Cooking/Recipes" });
-            Recipes.Clear();
-            foreach (var SOasset in assetNames)
+            if(RecipeSO == null)
             {
-                var SOPath = AssetDatabase.GUIDToAssetPath(SOasset);
-                var recipe = AssetDatabase.LoadAssetAtPath<Recipe>(SOPath);
-                Recipes.Add(recipe);
+                Debug.LogError("Assign RecipeSO field in inspector before loading stats!");
+                return;
             }
 
             // Update SO Data
-            foreach (var recipe in Recipes)
+            foreach (var recipe in RecipeSO.Recipes)
             {
                 if (saveData.RecipeData.ContainsKey(recipe.name))
                     recipe.data = saveData.RecipeData[recipe.name];
             }
+
+            PopulateMods();
         }
 
         private void PopulateMods()
@@ -51,7 +44,7 @@ namespace Character
             CharacterDynamicStatMods.Clear();
             WeaponStatMods.Clear();
 
-            foreach (var recipe in Recipes)
+            foreach (var recipe in RecipeSO.Recipes)
             {
                 if (recipe.CurrentStats == null) continue;
 
