@@ -22,16 +22,11 @@ namespace NPC
         public Animator Animator;
         public Transform TargetTransform;
         public Vector3 TargetPosition { get; set; }
-
-        private Vector3 targetPosition;
         public float StopDistance;
         [HideInInspector]
         public NavMeshAgent Agent;
         //public Character Character;
         public NPCStateMachine StateMachine;
-
-        [HideInInspector]
-        public bool IsThisJoker = false;
         protected Character chara;
 
         protected void Awake()
