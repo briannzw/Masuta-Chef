@@ -883,6 +883,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1288244780879403296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7910778524448778769}
+  - component: {fileID: 3596031557991738595}
+  m_Layer: 0
+  m_Name: Minion Attacker Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7910778524448778769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288244780879403296}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.477257, y: 2.0705795, z: 48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 151492023272662485}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3596031557991738595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288244780879403296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216a265b6f752d94bbfc22fbb91d7684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65,
+    type: 3}
+  spawnArea: {x: 10, y: 1, z: 10}
+  spawnOffset: {x: 0, y: 1, z: 0}
+  isLocalOffset: 0
+  randomizeRotation: 0
+  followSpawnerRotation: 0
+  maxSpawnObjectInPool: 200
+  maxRandomPosIteration: 1000
 --- !u!1 &1553814593408114049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,59 +1297,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.28235513, y: 0.5862751, z: 0.19108889}
   m_Center: {x: 0.002050601, y: -0.025263617, z: -0.022616187}
---- !u!1 &1993739502428039047
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2132027892478520553}
-  - component: {fileID: 4394883836867708055}
-  m_Layer: 0
-  m_Name: Minion Attacker Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2132027892478520553
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993739502428039047}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47725868, y: 1.0705795, z: -30.974426}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8115701637304887153}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4394883836867708055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993739502428039047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 216a265b6f752d94bbfc22fbb91d7684, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPrefab: {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65,
-    type: 3}
-  spawnArea: {x: 10, y: 1, z: 10}
-  spawnOffset: {x: 0, y: 1, z: 0}
-  isLocalOffset: 0
-  randomizeRotation: 0
-  followSpawnerRotation: 0
-  maxSpawnObjectInPool: 200
-  maxRandomPosIteration: 1000
 --- !u!1 &2008636914492205197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4506,7 +4506,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2132027892478520553}
   - {fileID: 3420276057828568137}
   - {fileID: 544974906723745729}
   - {fileID: 4851710536964344526}
@@ -4595,6 +4594,7 @@ Transform:
   - {fileID: 9006527585012288075}
   - {fileID: 6547137598655918036}
   - {fileID: 8753540396346515142}
+  - {fileID: 151492023272662485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8074855744227220161
@@ -4613,7 +4613,13 @@ MonoBehaviour:
     _serializedList:
     - Key: {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65, type: 3}
       Value:
-      - {fileID: 4394883836867708055}
+      - {fileID: 3596031557991738595}
+    - Key: {fileID: 991949117548394843, guid: 7816f12861d33fc4fa86d1ecac210297, type: 3}
+      Value:
+      - {fileID: 0}
+    - Key: {fileID: 2609905847538178790, guid: ddf4fe37e33f98c4fb2af302797decee, type: 3}
+      Value:
+      - {fileID: 0}
 --- !u!1 &5967425901979277211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4910,6 +4916,38 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6466682017014435133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 151492023272662485}
+  m_Layer: 0
+  m_Name: Spawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &151492023272662485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6466682017014435133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7910778524448778769}
+  m_Father: {fileID: 8115701637304887153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6654456246596744264
 GameObject:
   m_ObjectHideFlags: 0
