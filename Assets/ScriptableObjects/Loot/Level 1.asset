@@ -23,6 +23,7 @@ MonoBehaviour:
   - rid: 409706919606353959
   - rid: 409706919606353960
   - rid: 409706919606353961
+  - rid: 6460550238254137364
   references:
     version: 2
     RefIds:
@@ -61,3 +62,10 @@ MonoBehaviour:
         Chance: 1
         Weapons:
         - {fileID: 3889096519632603906, guid: 0e473d8eba594374097f47f38a2181dd, type: 3}
+    - rid: 6460550238254137364
+      type: {class: WeaponLoot, ns: Loot, asm: Assembly-CSharp}
+      data:
+        Type: 1
+        Chance: 1
+        Weapons:
+        - {fileID: 7105915525453807589, guid: ca50ba2b1c2bf814d94aec86fbbcabee, type: 3}
