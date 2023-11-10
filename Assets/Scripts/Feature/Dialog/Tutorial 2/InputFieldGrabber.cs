@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class InputFieldGrabber : MonoBehaviour
 {
     [Header("From input field")]
-    [SerializeField] private string inputText;
+    [SerializeField] private InputData inputData;
 
     [Header("GameObject")]
     [SerializeField] private GameObject warning;
@@ -27,12 +27,12 @@ public class InputFieldGrabber : MonoBehaviour
 
     public void GrabInput(string input)
     {
-        inputText = input;
+        inputData.savedInputText = input;
     }
 
     public void CheckInputText()
     {
-        if (string.IsNullOrEmpty(inputText) && submitButton.gameObject.activeSelf)
+        if (string.IsNullOrEmpty(inputData.savedInputText) && submitButton.gameObject.activeSelf)
         {
             warning.SetActive(true);
         }
@@ -45,13 +45,13 @@ public class InputFieldGrabber : MonoBehaviour
 
     public void OnSubmitButtonClick()
     {
-        if (Input.GetKey(KeyCode.Return) && submitButton.gameObject.activeSelf && !string.IsNullOrEmpty(inputText))
+        if (Input.GetKey(KeyCode.Return) && submitButton.gameObject.activeSelf && !string.IsNullOrEmpty(inputData.savedInputText))
         {
             submitButton.onClick.Invoke();
         }
     }
 
     public string GetInputText()
-    { return inputText; }
+    { return inputData.savedInputText; }
 
 }

@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NPC.Enemy;
+using Player.Controller;
 
-public class LastConversation : MonoBehaviour
+public class CheckEnemyInArea : MonoBehaviour
 {
-
-    private bool updateActive = true;
     public Button interactButton;
+    private bool updateActive = true;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        interactButton.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!updateActive)
@@ -24,14 +22,14 @@ public class LastConversation : MonoBehaviour
 
         int killCount = Enemy.GetKillCount();
 
-        if (killCount == 10)
+        if (killCount == 20)
         {
             ActivateDialogue();
             updateActive = false;
         }
     }
 
-     public void ActivateDialogue()
+    public void ActivateDialogue()
     {
         interactButton.onClick.Invoke();
         interactButton.gameObject.SetActive(false);

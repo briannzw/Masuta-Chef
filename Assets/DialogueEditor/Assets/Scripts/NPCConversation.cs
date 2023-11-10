@@ -388,23 +388,29 @@ namespace DialogueEditor
         private SpeechNode CreateSpeechNode(EditableSpeechNode editableNode)
         {
             SpeechNode speech = new SpeechNode();
-            speech.Name = editableNode.Name;
+
             if (inputFieldGrabber != null)
             {
                 string inputText = inputFieldGrabber.GetInputText();
                 string originalText = editableNode.Text;
+                string originalName = editableNode.Name;
 
-                if (inputText != "" && originalText.Contains("Chef"))
+                if (inputText != "" && originalText.Contains("Chef") )
                 {
-                    // Ganti kata "Chef" dengan inputText
                     originalText = originalText.Replace("Chef", inputText);
                 }
 
+                if (inputText != "" && originalName.Contains("Chef"))
+                {
+                    originalName = originalName.Replace("Chef", inputText);
+                }
+
                 speech.Text = originalText;
-                inputFieldGrabber = null;
+                speech.Name = originalName;
             }
             else
             {
+                speech.Name = editableNode.Name;
                 speech.Text = editableNode.Text;
             }
 

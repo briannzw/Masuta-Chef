@@ -7,6 +7,8 @@ namespace DialogueEditor
 {
     public class Tutorial1Conversation : MonoBehaviour
     {
+        [SerializeField] private InputData inputData;
+
         public Button interactButton;
         public Image quest;
         public GameObject arrow;
@@ -30,6 +32,8 @@ namespace DialogueEditor
                     component.enabled = false;
                 }
             }
+
+            inputData.savedInputText = "";
         }
 
         // Update is called once per frame
