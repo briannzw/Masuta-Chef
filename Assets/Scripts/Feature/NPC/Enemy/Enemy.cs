@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace NPC.Enemy
 {
+    using Spawner;
     public class Enemy : NPC
     {
         public bool IsTaunted = false;
@@ -43,8 +44,11 @@ namespace NPC.Enemy
         void EnemyDie()
         {
             killCount++;
-            Debug.Log("Jumlah musuh yang sudah dibunuh: " + killCount);
             GameManager.Instance.OnEnemiesKilled?.Invoke();
+            if (SelectedWeapon != AttackType.Joker)
+            {
+                GetComponent<SpawnObject>().Release();
+            }
         }
 
         void RemoveTauntEffect()

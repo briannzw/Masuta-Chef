@@ -29,6 +29,11 @@ namespace NPC
         public NPCStateMachine StateMachine;
         protected Character chara;
 
+        #region Joker Properties
+        [HideInInspector]
+        public bool IsThisJoker = false;
+        #endregion
+
         protected void Awake()
         {
             StateMachine = new NPCStateMachine();
@@ -46,22 +51,12 @@ namespace NPC
             if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
             chara.OnSpeedChanged += () => Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
-            chara.OnDie += NPCDie;
         }
 
         // Update is called once per frame
         protected void Update()
         {
             StateMachine.CurrentState.FrameUpdate();
-        }
-
-        private void NPCDie()
-        {
-            // Temporary Fix
-            if(SelectedWeapon != AttackType.Joker)
-            {
-                GetComponentInChildren<SpawnObject>().Release();
-            }
         }
     }
 }

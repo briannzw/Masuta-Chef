@@ -26,6 +26,7 @@ namespace NPC.Enemy
         private new void Awake()
         {
             base.Awake();
+            IsThisJoker = true;
         }
 
         private new void Start()

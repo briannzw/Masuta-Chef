@@ -2202,7 +2202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967f3ed1916bc7c40be93452a229c05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevel: {fileID: 11400000, guid: 39eb6f94bc549f84cb8d3b7243bcbe20, type: 2}
+  CurrentLevel: {fileID: 11400000, guid: ecf2ed9ab52dfb541970e57e6a4405fd, type: 2}
   waveManager: {fileID: 666763696}
   PlayerTransform: {fileID: 64046733}
   surfaces:
@@ -2216,7 +2216,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666763693}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bac1da1dd841afd41a8253b11f78e38f, type: 3}
   m_Name: 
@@ -2560,7 +2560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1140168318
 Transform:
   m_ObjectHideFlags: 0
@@ -3009,7 +3009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1624390054
 MonoBehaviour:
   m_ObjectHideFlags: 0

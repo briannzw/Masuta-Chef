@@ -6,6 +6,7 @@ using UnityEngine.AI;
 namespace NPC.Companion
 {
     using Character;
+    using Player.CompanionSlot;
     public class Companion : NPC, IDetectionNPC
     {
         public float MaxDistanceFromPlayer;
@@ -19,6 +20,8 @@ namespace NPC.Companion
         public float DistanceFromPlayer;
         protected Transform enemy;
         public Transform companionSlotPosition;
+        public int companionSpawnOrder;
+
         [SerializeField] protected float minDistanceFromPlayer;
 
         [SerializeField] private float minDistanceSlotFromPlayer;
@@ -58,6 +61,8 @@ namespace NPC.Companion
 
             if (DistanceFromPlayer < 4f && !IsFollowingEnemy) Agent.stoppingDistance = 4f;
             else Agent.stoppingDistance = 2f;
+
+            //Debug AI
         }
 
         private void SetTarget(Vector3 targetPos)
@@ -102,7 +107,7 @@ namespace NPC.Companion
 
         private void OnCompanionDie()
         {
-            Destroy(gameObject);
+            GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().DeleteCompanion(this);
         }
     }
 }
