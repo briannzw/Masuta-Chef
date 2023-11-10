@@ -23,6 +23,13 @@ namespace Player.CompanionSlot
             UpdateSlotFormation();
         }
 
+        public void DeleteCompanion(Companion companion)
+        {
+            companions.RemoveAt(companion.GetComponent<Companion>().companionSpawnOrder);
+            Destroy(companion.gameObject);
+            UpdateSlotFormation();
+        }
+
         private void UpdateSlotFormation()
         {
             for (int i = 0; i < companions.Count; i++)
@@ -30,6 +37,7 @@ namespace Player.CompanionSlot
                 if (i < slots.Count)
                 {
                     companions[i].companionSlotPosition = slots[i];
+                    companions[i].GetComponent<Companion>().companionSpawnOrder = i;
                 }
             }
         }

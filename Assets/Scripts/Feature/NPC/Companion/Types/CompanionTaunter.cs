@@ -26,7 +26,7 @@ namespace NPC.Companion
 
             foreach (Collider collider in colliders)
             {
-                if (collider.CompareTag("Enemy"))
+                if (collider.CompareTag("Enemy") && collider.GetComponent<NPC>().SelectedWeapon != AttackType.Joker)
                 {
                     Transform enemyTransform = collider.transform;
                     float distanceToEnemy = Vector3.Distance(transform.position, enemyTransform.position);
