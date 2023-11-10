@@ -43,6 +43,10 @@ namespace NPC.Companion
         protected new void Update()
         {
             CompanionStateMachine.CurrentState.FrameUpdate();
+            if(Animator != null) Animator.SetBool("IsRunning", Agent.remainingDistance > 2.5);
+
+
+
             DistanceFromPlayer = Vector3.Distance(transform.position, GameManager.Instance.PlayerTransform.position);
 
             NavMeshHit hit;
