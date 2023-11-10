@@ -1,35 +1,38 @@
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
 namespace Crate
 {
     using Pickup;
-
     public enum CrateColor { Red, Blue, Green };
-
     public class CrateController : MonoBehaviour, IThrowable
     {
         public Transform Holder { get; set; }
         public bool IsHeld => Holder != null;
         public GameObject CurrentPicker;
-
         public bool RandomColorOnStart = false;
         public CrateColor crateColor;
-
         public Rigidbody rb { get; set; }
         private new Renderer renderer;
-
         // Tambahkan properti untuk kecepatan jatuh
         public float fallSpeed = 9.8f;
-
         // Tambahkan properti untuk ketinggian awal jatuh
-        public float initialFallHeight = 20.0f; 
-
+        public float initialFallHeight = 20.0f;
+        //Tambahkan audioclip 
+        public AudioClip pickupClip;
+        public AudioClip droppedClip;
+        //tambahkan audiosource
+        public AudioSource audioSource;
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            renderer = GetComponent < Renderer>();
+            renderer = GetComponent<Renderer>();
+
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
         }
 
         private void Start()
@@ -51,24 +54,23 @@ namespace Crate
                     renderer.material.color = Color.white; // Warna default jika enum tidak sesuai
                     break;
             }
-
             Vector3 initialPosition = transform.position;
             initialPosition.y = initialFallHeight;
             transform.position = initialPosition;
-
             // Berikan kecepatan awal ke bawah
             rb.velocity = new Vector3(0, -fallSpeed, 0);
         }
-
         public bool StartPickup(GameObject picker)
         {
             CurrentPicker = picker;
             if (IsHeld && !picker.CompareTag("Player") && !picker.CompareTag("Enemy")) return false;
             if (Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
-
             // Memindahkan objek ke pemegang (picker)
             Holder = picker.transform;
             rb.isKinematic = true;
+
+            // Play SFX (Pickup)
+            PlaySFX(pickupClip);
 
             return true;
         }
@@ -77,14 +79,17 @@ namespace Crate
         {
             Holder = null;
             rb.isKinematic = false;
+
+            // Play SFX (Dropped)
+            PlaySFX(droppedClip);
         }
 
-        public void FixedUpdate()
+        private void PlaySFX(AudioClip clip)
         {
-            // Mengatur kecepatan jatuh saat krate tidak dipegang
-            if (!IsHeld)
+            if (clip != null && audioSource != null)
             {
-                rb.velocity = new Vector3(rb.velocity.x, -fallSpeed, rb.velocity.z);
+                audioSource.clip = clip;
+                audioSource.Play();
             }
         }
     }

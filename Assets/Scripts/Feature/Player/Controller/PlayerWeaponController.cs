@@ -47,6 +47,9 @@ namespace Player.Controller
             playerControls.Gameplay.Fire.Enable();
             playerControls.Gameplay.Fire.started += OnInputActionStart;
             playerControls.Gameplay.Fire.canceled += OnInputActionEnd;
+            playerControls.Gameplay.Ultimate.Enable();
+            playerControls.Gameplay.Ultimate.started += OnUltimateInputActionStart;
+            playerControls.Gameplay.Ultimate.canceled += OnUltimateInputActionEnd;
         }
 
         protected override void UnregisterInputCallbacks()
@@ -56,6 +59,9 @@ namespace Player.Controller
             playerControls.Gameplay.Fire.started -= OnInputActionStart;
             playerControls.Gameplay.Fire.canceled -= OnInputActionEnd;
             playerControls.Gameplay.Fire.Disable();
+            playerControls.Gameplay.Ultimate.started -= OnUltimateInputActionStart;
+            playerControls.Gameplay.Ultimate.canceled -= OnUltimateInputActionEnd;
+            playerControls.Gameplay.Ultimate.Disable();
         }
         #endregion
 
@@ -77,6 +83,17 @@ namespace Player.Controller
             //Check num pressed
         }
 
+        private void OnUltimateInputActionStart(InputAction.CallbackContext context)
+        {
+            if (ActiveWeapon == null) return;
+            ActiveWeapon.StartUltimateAttack();
+        }
+
+        private void OnUltimateInputActionEnd(InputAction.CallbackContext context)
+        {
+            if (ActiveWeapon == null) return;
+            // ActiveWeapon.StopUltimateAttack();
+        }
         private void Aim()
         {
             var (success, position) = GetMousePosition();

@@ -32,14 +32,15 @@ namespace Character.Dummy
 
         public DummyController(StatsPreset preset) : base(preset) { Stats = preset.Stats; }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             SetLabel();
             SetDPSLabel();
             InvokeRepeating("SetLabel", 0, StatsUpdateInterval);
         }
 
-        public override void TakeDamage(float totalAttack, DynamicStatsEnum dynamicEnum, float multiplier = 1)
+        public override void TakeDamage(float totalAttack, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)
         {
             base.TakeDamage(totalAttack, dynamicEnum, multiplier);
             if (dynamicEnum != DynamicStatsEnum.Health) return;

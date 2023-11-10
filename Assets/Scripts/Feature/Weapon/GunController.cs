@@ -11,8 +11,15 @@ public class GunController : Weapon.Weapon
 {
     #region Properties
     public GameObject fireObjectPrefab;
-    public Spawner.Spawner spawner;
-    [SerializeField] AudioSource weaponSound; 
+
+    private bool isFiringUltimate = false;
+    [SerializeField] private float ultimateDuration;
+
+    [Header("Ultimate Attack Properties")]
+    public GameObject ultimateBulletObject;
+    [SerializeField] private float ultimateBulletInterval = 1;
+    [SerializeField] private float bulletAmount = 3;
+    [SerializeField] private GameObject bulletSpawnPoint;
     #endregion
 
     protected new void Update()
@@ -23,20 +30,35 @@ public class GunController : Weapon.Weapon
     #region Method
     public override void Attack()
     {
-        List<GameObject> bullets = spawner.Spawn();
+        base.Attack();
+        var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
+        var controller = fireObject.GetComponent<BulletHit>();
+        controller.Initialize(this);
+        fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
+    }
 
-        // Memainkan efek suara senjata saat serangan dimulai
-        if (weaponSound != null)
-        {
-            weaponSound.Play();
-        }
+    public override void StartAttack()
+    {
+        if(isFiringUltimate) return;
+        base.StartAttack();
+    }
 
-        foreach (GameObject bullet in bullets)
+    protected override void UltimateAttack()
+    {
+        StartCoroutine(ShootFussiliBombs());
+    }
+
+    private IEnumerator ShootFussiliBombs()
+    {
+        isFiringUltimate = true;
+        for (int i = 0; i < bulletAmount; i++)
         {
-            var controller = bullet.GetComponent<BulletHit>();
-            controller.Initialize(this);
-            bullet.transform.forward = transform.forward;
+            GameObject gameObject = Instantiate(ultimateBulletObject, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+            gameObject.GetComponent<Bullet>().weapon = this;
+            gameObject.GetComponent<Rigidbody>().velocity = transform.forward * gameObject.GetComponent<Bullet>().TravelSpeed;
+            yield return new WaitForSeconds(ultimateDuration / bulletAmount);
         }
+        isFiringUltimate = false;
     }
     #endregion
 }

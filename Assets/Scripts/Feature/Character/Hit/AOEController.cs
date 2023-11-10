@@ -31,7 +31,7 @@ namespace Character.Hit
         // ApplyOnStay
         [HideInInspector] protected List<Character> characterInArea = new List<Character>();
         // Instant, Hit is only applied once to every Chara.
-        private HashSet<Character> characterAffected = new HashSet<Character>();
+        [SerializeField] private HashSet<Character> characterAffected = new HashSet<Character>();
 
         protected override void Start()
         {
@@ -41,17 +41,12 @@ namespace Character.Hit
 
         protected void OnTriggerEnter(Collider other)
         {
-            // ONLY APPLIED FOR PLAYABLE BUILD
+            // Check which object tag to be affected
             if (Source != null)
             {
-                if (Source.Holder == null || string.IsNullOrEmpty(Source.TargetTag)) return;
+                if (Source.Holder == null || Source.TargetTags.Count == 0) return;
 
-                if (!other.CompareTag(Source.TargetTag)) return;
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(TargetTag)) return;
-                if (!other.CompareTag(TargetTag)) return;
+                if (!Source.TargetTags.Contains(other.tag)) return;
             }
 
             Character chara = other.GetComponent<Character>();
@@ -86,36 +81,21 @@ namespace Character.Hit
 
         protected void OnTriggerExit(Collider other)
         {
-            // ONLY APPLIED FOR PLAYABLE BUILD
+            // Check which object tag to be affected
             if (Source != null)
             {
-                if (Source.Holder == null) return;
-                if (other.CompareTag(Source.TargetTag))
-                {
-                    Character chara = other.GetComponent<Character>();
-                    if (chara == null) return;
+                if (Source.Holder == null || Source.TargetTags.Count == 0) return;
 
-                    if (Behaviour == AOEBehaviour.ApplyOnStay)
-                    {
-                        characterInArea.Remove(chara);
-                        PauseEffect(chara);
-                    }
-                }
+                if (!Source.TargetTags.Contains(other.tag)) return;
             }
-            else
-            {
-                if (TargetTag == null || TargetTag == string.Empty) return;
-                if (other.CompareTag(TargetTag))
-                {
-                    Character chara = other.GetComponent<Character>();
-                    if (chara == null) return;
 
-                    if (Behaviour == AOEBehaviour.ApplyOnStay)
-                    {
-                        characterInArea.Remove(chara);
-                        PauseEffect(chara);
-                    }
-                }
+            Character chara = other.GetComponent<Character>();
+            if (chara == null) return;
+
+            if (Behaviour == AOEBehaviour.ApplyOnStay)
+            {
+                characterInArea.Remove(chara);
+                PauseEffect(chara);
             }
         }
 

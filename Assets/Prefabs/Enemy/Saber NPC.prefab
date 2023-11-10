@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5604003198669207345}
   - component: {fileID: 1902049687339581202}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Saber NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 7147700456617833944}
   - component: {fileID: 3677273409504601597}
   - component: {fileID: 6889578219797571870}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
   rb: {fileID: 0}
-  TargetTag: 
+  TargetTags:
+  - Player
+  - Companion
   stats:
     _serializedList:
     - Key: 0
@@ -173,9 +175,12 @@ MonoBehaviour:
     - Key: 2
       Value:
         BaseValue: 100
+  UltimateTimer: 1
+  isCooldownUltimate: 0
+  isUltimateCancelable: 0
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   hitController: {fileID: 6889578219797571870}
   animator: {fileID: 3677273409504601597}
 --- !u!65 &7147700456617833944
@@ -232,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba43ac30029fc44b8e586fbee152f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTag: 
   Source: {fileID: 0}
   Value:
     CharacterAttack: 0

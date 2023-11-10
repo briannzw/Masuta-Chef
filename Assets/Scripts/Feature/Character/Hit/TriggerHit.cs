@@ -9,15 +9,9 @@ namespace Character.Hit
             // Check which object tag to be affected
             if (Source != null)
             {
-                if (Source.Holder == null || string.IsNullOrEmpty(Source.TargetTag)) return;
+                if (Source.Holder == null || Source.TargetTags.Count == 0) return;
 
-                if (!other.CompareTag(Source.TargetTag)) return;
-            }
-            // This line will be deleted in future versions (every hit MUST have Source Weapon).
-            else
-            {
-                if (string.IsNullOrEmpty(TargetTag)) return;
-                if (!other.CompareTag(TargetTag)) return;
+                if (!Source.TargetTags.Contains(other.tag)) return;
             }
 
             Character chara = other.GetComponent<Character>();

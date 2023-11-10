@@ -32,7 +32,7 @@ namespace Character.Hit
             foreach(Character character in characterInArea.ToArray())
             {
                 // Use AOEController HitChara
-                HitChara(character);
+                HitChara(character, true);
             }
         }
 

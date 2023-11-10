@@ -9,9 +9,6 @@ namespace Character.Hit
 
     public class HitController : MonoBehaviour, IApplyEffect
     {
-        [Foldout("Deprecated")]
-        [Tag, ConditionalField(nameof(Source), inverse: true)] public string TargetTag;
-        [Space]
         [Header("Weapon")]
         public Weapon Source;
         // Change to ReadOnly on Future Versions
@@ -47,20 +44,15 @@ namespace Character.Hit
 
         public void Hit(Character character)
         {
-            // ONLY APPLIED FOR PLAYABLE BUILD
-            if(Source != null)
+            // Check which object tag to be affected
+            if (Source != null)
             {
-                if (Source.Holder == null) return;
-                if (string.IsNullOrEmpty(Source.TargetTag)) return;
-                if (!character.CompareTag(Source.TargetTag)) return;
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(TargetTag)) return;
-                if (!character.CompareTag(TargetTag)) return;
+                if (Source.Holder == null || Source.TargetTags.Count == 0) return;
+
+                if (!Source.TargetTags.Contains(character.tag)) return;
             }
 
-            if(ApplyEffectBeforeHit) ApplyEffect(character);
+            if (ApplyEffectBeforeHit) ApplyEffect(character);
 
             if (Type == HitType.Damage) character.TakeDamage(Value.CharacterAttack + Value.WeaponAttack, DynamicStatsEnum.Health, Value.Multiplier);
             // Changeable
