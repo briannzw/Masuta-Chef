@@ -27,7 +27,7 @@ public class EnableTutorial1con3 : MonoBehaviour
 
         int killCount = Enemy.GetKillCount();
 
-        if (killCount == 5)
+        if (killCount == 7)
         {
             ActivateDialogue();
             updateActive = false;

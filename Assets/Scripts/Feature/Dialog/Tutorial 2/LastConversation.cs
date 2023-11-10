@@ -24,7 +24,7 @@ public class LastConversation : MonoBehaviour
 
         int killCount = Enemy.GetKillCount();
 
-        if (killCount == 15)
+        if (killCount == 10)
         {
             ActivateDialogue();
             updateActive = false;
