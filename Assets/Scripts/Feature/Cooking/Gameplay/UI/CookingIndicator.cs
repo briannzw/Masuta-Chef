@@ -4,9 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Cooking.Gameplay.UI
+namespace Cooking
 {
     public enum CookingResult { Bad, Good, Perfect }
+}
+
+namespace Cooking.Gameplay.UI
+{
 
     public class CookingIndicator : MonoBehaviour
     {

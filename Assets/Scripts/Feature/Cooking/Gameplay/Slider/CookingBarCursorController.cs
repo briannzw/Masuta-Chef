@@ -107,6 +107,9 @@ namespace Cooking.Gameplay.Slider
             // Show Result
             // Toggle to Panel Input (?)
             Debug.Log(CookingIndicator.FinalResult.ToString());
+
+            // Save to Recipe
+            CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
         }
 
         #region Callbacks

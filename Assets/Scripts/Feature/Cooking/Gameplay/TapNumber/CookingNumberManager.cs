@@ -49,6 +49,9 @@ namespace Cooking.Gameplay.TapNumber
             GameEnded = true;
             // Show Result
             Debug.Log(CookingIndicator.FinalResult.ToString());
+
+            // Save to Recipe
+            CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
         }
 
         public void TapSuccess(int num)

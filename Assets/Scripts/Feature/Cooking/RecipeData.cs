@@ -10,10 +10,11 @@ namespace Cooking.Recipe
     {
         [Header("Blueprint")]
         [ReadOnly] public int CurrentBlueprint;
-        public int NeededBlueprint;
+        [JsonIgnore] public int NeededBlueprint;
 
         [Header("Cooking")]
-         public int CookingDone;
+        [JsonIgnore] public CookingType CookingType;
+        [ReadOnly] public int CookingDone;
         [ReadOnly] public int PerfectCookingDone;
         [ReadOnly] public int ConsecutivePerfectCookingDone;
         public bool UniqueValueUnlocked = false;
