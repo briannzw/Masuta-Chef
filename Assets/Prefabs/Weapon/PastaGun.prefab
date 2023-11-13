@@ -122,7 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
   rb: {fileID: 0}
-  TargetTag: Enemy
+  TargetTags:
+  - Enemy
   stats:
     _serializedList:
     - Key: 0
@@ -144,7 +145,7 @@ MonoBehaviour:
     type: 3}
   ultimateBulletInterval: 1
   bulletAmount: 3
-  bulletSpawnPoint: {fileID: 8107436102380745956}
+  bulletSpawner: {fileID: 766313169062855170}
 --- !u!54 &8469763974586944811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -181,6 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2225683659961566031}
+  - component: {fileID: 766313169062855170}
   m_Layer: 10
   m_Name: BulletSpawnPoint
   m_TagString: Untagged
@@ -197,9 +199,29 @@ Transform:
   m_GameObject: {fileID: 8107436102380745956}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.736}
+  m_LocalPosition: {x: 0, y: 0, z: 0.722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6344312249660022038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &766313169062855170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107436102380745956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5253d860404de4f97d306d765ae45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 2116179339103635329, guid: ca94971d54d6a674f97e78b7adb7e63f,
+    type: 3}
+  spawnArea: {x: 0.1, y: 0.1, z: 0.1}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  isLocalOffset: 1
+  randomizeRotation: 0
+  followSpawnerRotation: 1
+  maxSpawnObjectInPool: 100

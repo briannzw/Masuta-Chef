@@ -174,7 +174,7 @@ MonoBehaviour:
   ultimateBulletObject: {fileID: 0}
   ultimateBulletInterval: 1
   bulletAmount: 3
-  bulletSpawnPoint: {fileID: 0}
+  bulletSpawner: {fileID: 4223014152505166794}
 --- !u!114 &4223014152505166794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,11 +189,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 4301465161760894196, guid: 58c92f2803a924a41b1cbf8515c074c9,
     type: 3}
-  spawnArea: {x: 0.1, y: 0.1, z: 0.1}
+  spawnArea: {x: 0, y: 0, z: 0}
   spawnOffset: {x: 0, y: 0, z: 0}
-  isLocalOffset: 0
+  isLocalOffset: 1
   randomizeRotation: 0
-  followSpawnerRotation: 0
+  followSpawnerRotation: 1
   maxSpawnObjectInPool: 100
 --- !u!114 &-4846039439887501701
 MonoBehaviour:
