@@ -6,6 +6,7 @@ namespace Save.Data
     [System.Serializable]
     public class SaveData
     {
+        public int CookingPoints;
         public SerializedDictionary<string, RecipeData> RecipeData;
         public SerializedDictionary<string, IngredientData> IngredientData;
 

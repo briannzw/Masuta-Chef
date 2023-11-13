@@ -10,6 +10,7 @@ namespace Save
     {
         public bool IsEncrypted;
         public SaveData SaveData;
+        [Header("Statistics")]
         [ReadOnly, SerializeField] private float saveTime;
         [ReadOnly, SerializeField] private float loadTime;
         private IDataPersistence dataPersistence = new DataPersistenceManager();
