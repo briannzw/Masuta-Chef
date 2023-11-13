@@ -5,6 +5,8 @@ namespace Cooking.Gameplay.Slider
 {
     using AYellowpaper.SerializedCollections;
     using MyBox;
+    using System.Collections.Generic;
+    using UnityEngine.UI;
 
     public class CookingBarController : MonoBehaviour
     {
@@ -21,6 +23,9 @@ namespace Cooking.Gameplay.Slider
         [SerializeField] private bool directionChange;
         [SerializeField] private SerializedDictionary<CookingDifficulty, CookingDifficultyFrequency> dirChangeFrequency;
 
+        [Header("Ingredients")]
+        [SerializeField] private List<Image> ingredientIcons = new();
+
         private float dirTimer;
         private float dirRandomTime;
 
@@ -28,6 +33,24 @@ namespace Cooking.Gameplay.Slider
         private float barHalf;
 
         private float currentOffset = 0f;
+
+        private void Awake()
+        {
+            // Disable All Images
+            foreach(var icon in ingredientIcons)
+            {
+                icon.enabled = false;
+            }
+
+            int index = 0;
+            var ingredients = CookingManager.Instance.CurrentRecipe.Ingredients;
+            foreach(var ingredient in ingredients)
+            {
+                ingredientIcons[index].sprite = ingredient.Key.CookingIcon;
+                ingredientIcons[index].enabled = true;
+                index++;
+            }
+        }
 
         private void Start()
         {

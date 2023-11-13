@@ -8,6 +8,7 @@ namespace Cooking
     public class Ingredient : ScriptableObject
     {
         public Sprite Icon;
+        public Sprite CookingIcon;
         public new string name;
         [TextArea] public string Description;
 

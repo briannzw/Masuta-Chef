@@ -1,6 +1,5 @@
 using AYellowpaper.SerializedCollections;
 using MyBox;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,15 +14,17 @@ namespace Cooking.Gameplay.UI
     public class CookingIndicator : MonoBehaviour
     {
         [Header("References")]
-        public Image IndicatorBackground;
-        public TMP_Text IndicatorText;
+        public Image IndicatorImage;
 
         [Header("Accuracy Values")]
         [ReadOnly] public SerializedDictionary<CookingResult, float> AccuracyPercentages = new();
 
         [Header("Parameter")]
-        public SerializedDictionary<CookingResult, Color> AccuracyColors = new();
+        public SerializedDictionary<CookingResult, Sprite> AccuracySprites = new();
         [ReadOnly] public CookingResult FinalResult;
+
+        // Optimization
+        private CookingResult prevResult;
 
         private void Start()
         {
@@ -45,8 +46,10 @@ namespace Cooking.Gameplay.UI
                 FinalResult = CookingResult.Perfect;
             }
 
-            IndicatorBackground.color = AccuracyColors[FinalResult];
-            IndicatorText.text = FinalResult.ToString().ToUpper();
+            // Optimization for UI drawcall
+            if (FinalResult == prevResult) return;
+
+            IndicatorImage.sprite = AccuracySprites[FinalResult];
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Cooking.Gameplay.TapNumber
     {
         [Header("References")]
         public CookingNumberManager Manager;
+        public Image IngredientIcon;
         public TMP_Text NumberText;
         public Image TimingCircle;
         public Image AccuracyCircle;
@@ -21,6 +22,8 @@ namespace Cooking.Gameplay.TapNumber
         private void Awake()
         {
             TimingCircle.rectTransform.localScale = Vector3.one * TimingCircleScale;
+
+            // Random Icon based on CurrentRecipe on Awake
         }
 
         private void Start()
