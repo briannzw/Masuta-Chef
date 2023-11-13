@@ -196,6 +196,7 @@ MonoBehaviour:
   IsFollowingEnemy: 0
   DistanceFromPlayer: 0
   companionSlotPosition: {fileID: 0}
+  companionSpawnOrder: 0
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   wanderRadius: 2
@@ -260,8 +261,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372bb9ede6ac2d42847d63b05353e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   maxLevel: 30
   expPerEnemyKill: 2
+  StatsPerLevel:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 2
+      - Key: 1
+        Value:
+          BaseValue: 0
+    StatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 5
+      - Key: 1
+        Value:
+          BaseValue: 0
+      - Key: 2
+        Value:
+          BaseValue: 0
+      - Key: 3
+        Value:
+          BaseValue: 0
+      - Key: 4
+        Value:
+          BaseValue: 0
 --- !u!1 &4851675593540383649
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +985,11 @@ PrefabInstance:
       objectReference: {fileID: 6165715537076772562}
     - target: {fileID: 6789214683903502581, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
         type: 3}
+      propertyPath: bulletSpawner
+      value: 
+      objectReference: {fileID: 5870651534604449403}
+    - target: {fileID: 6789214683903502581, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
       propertyPath: TargetTags.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -965,8 +998,7 @@ PrefabInstance:
       propertyPath: TargetTags.Array.data[0]
       value: Enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6789214683903502581, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -983,6 +1015,18 @@ Rigidbody:
     type: 3}
   m_PrefabInstance: {fileID: 7774222893465451953}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5870651534604449403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4223014152505166794, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+    type: 3}
+  m_PrefabInstance: {fileID: 7774222893465451953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5253d860404de4f97d306d765ae45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6295185956702997450 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -4846039439887501701, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,

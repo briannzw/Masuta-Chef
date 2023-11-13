@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -131,6 +131,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1079237927158394645, guid: 3357df7fd92a92344896b259dbc655eb,
+        type: 3}
+      propertyPath: sprintDuration
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079237927158394645, guid: 3357df7fd92a92344896b259dbc655eb,
+        type: 3}
+      propertyPath: sprintMultiplier
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2506332646586243792, guid: 3357df7fd92a92344896b259dbc655eb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,6 +201,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4741457136705717365, guid: 3357df7fd92a92344896b259dbc655eb,
+        type: 3}
+      propertyPath: ActiveWeapon
+      value: 
+      objectReference: {fileID: 513188927}
     - target: {fileID: 7015340368926785847, guid: 3357df7fd92a92344896b259dbc655eb,
         type: 3}
       propertyPath: m_Name
@@ -199,7 +214,7 @@ PrefabInstance:
     - target: {fileID: 7487281331979223930, guid: 3357df7fd92a92344896b259dbc655eb,
         type: 3}
       propertyPath: companions.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7487281331979223930, guid: 3357df7fd92a92344896b259dbc655eb,
         type: 3}
@@ -207,8 +222,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3040906192472252005, guid: 3357df7fd92a92344896b259dbc655eb, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6218754531190197656, guid: 3357df7fd92a92344896b259dbc655eb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1883589994}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3357df7fd92a92344896b259dbc655eb, type: 3}
 --- !u!4 &64046733 stripped
@@ -905,9 +925,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 666763696}
-        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
-        m_MethodName: EnableNavMeshAgents
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1818,6 +1838,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a554aff2a96d1a343ade371a496b7699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &513188927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8662518602482338326, guid: f7e625e0551451a4f85455dea7599387,
+    type: 3}
+  m_PrefabInstance: {fileID: 1367865158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fe8a3d2f313e84f896580f737db907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &544080320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,6 +2654,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 666763696}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &704147323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2660,6 +2704,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704147320}
   m_CullTransparentMesh: 0
+--- !u!4 &818376108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6218754531190197656, guid: 3357df7fd92a92344896b259dbc655eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 64046732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2998,7 +3048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aff22cf8325253479750601d3520a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RecipeSO: {fileID: 0}
+  RecipeSO: {fileID: 11400000, guid: 96b68158337f07946a4fc85b83d6986d, type: 2}
 --- !u!1 &1272544219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3722,6 +3772,74 @@ MonoBehaviour:
   TMPFont: {fileID: 0}
   Icon: {fileID: 0}
   Audio: {fileID: 0}
+--- !u!1001 &1367865158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 818376108}
+    m_Modifications:
+    - target: {fileID: 119512540170356325, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_Name
+      value: Saber
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f7e625e0551451a4f85455dea7599387, type: 3}
 --- !u!1 &1386656612
 GameObject:
   m_ObjectHideFlags: 0
@@ -3827,7 +3945,7 @@ MonoBehaviour:
   PlayerTransform: {fileID: 64046733}
   LevelManager: {fileID: 666763695}
   SaveManager: {fileID: 1410782209}
-  StatsManager: {fileID: 0}
+  StatsManager: {fileID: 1264775656}
 --- !u!114 &1410782209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4208,10 +4326,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 34
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":642,"yPos":404.8},"ID":33,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[32],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":31}],"EditorInfo":{"isRoot":true,"xPos":543,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"You
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":213,"yPos":414.8},"ID":33,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[32],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":31}],"EditorInfo":{"isRoot":true,"xPos":114,"yPos":32},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"You
     find yourself in the Praksha Open Market, where high-quality food ingredients
-    are often found. ","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Chef","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":32}],"EditorInfo":{"isRoot":false,"xPos":564,"yPos":159.8},"ID":31,"ParamActions":[],"TMPFontGUID":null,"Text":"However,
-    you must exercise caution because this open market is patrolled by monsters.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":33}],"EditorInfo":{"isRoot":false,"xPos":586,"yPos":286.8},"ID":32,"ParamActions":[],"TMPFontGUID":null,"Text":"Beware,
+    are often found. ","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Chef","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":32}],"EditorInfo":{"isRoot":false,"xPos":135,"yPos":169.8},"ID":31,"ParamActions":[],"TMPFontGUID":null,"Text":"However,
+    you must exercise caution because this open market is patrolled by monsters.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":33}],"EditorInfo":{"isRoot":false,"xPos":157,"yPos":296.8},"ID":32,"ParamActions":[],"TMPFontGUID":null,"Text":"Beware,
     Chef You must shield yourself from the \"Minions\" drawing near while confronting
     long-range assaults from the \"Ranged Attacker\" adversaries!","parentUIDs":[31],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
@@ -4229,21 +4347,33 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 666763696}
-        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
-        m_MethodName: DisableNavMeshAgents
-        m_Mode: 1
+      - m_Target: {fileID: 64046734}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1272544219}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 64046735}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 666763696}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4641,6 +4771,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850308429}
   m_CullTransparentMesh: 0
+--- !u!4 &1883589994 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
+    type: 3}
+  m_PrefabInstance: {fileID: 1367865158}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1959936576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4691,7 +4827,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4079
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
