@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,14 @@ namespace Cooking.Gameplay.TapNumber
         {
             TimingCircle.rectTransform.localScale = Vector3.one * TimingCircleScale;
 
+            IngredientIcon.enabled = false;
+
+            if (CookingManager.Instance == null) return;
+
             // Random Icon based on CurrentRecipe on Awake
+            var ingredients = new List<Ingredient>(CookingManager.Instance.CurrentRecipe.Ingredients.Keys);
+            IngredientIcon.sprite = ingredients[Random.Range(0, ingredients.Count)].CookingIcon;
+            IngredientIcon.enabled = true;
         }
 
         private void Start()

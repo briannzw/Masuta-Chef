@@ -42,6 +42,8 @@ namespace Cooking.Gameplay.Slider
                 icon.enabled = false;
             }
 
+            if (CookingManager.Instance == null) return;
+
             int index = 0;
             var ingredients = CookingManager.Instance.CurrentRecipe.Ingredients;
             foreach(var ingredient in ingredients)
