@@ -19,14 +19,23 @@ MonoBehaviour:
   Waves:
   - EnemyList:
       _serializedList:
-      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
-        Value: 5
       - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
         Value: 5
       - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
         Value: 5
     Time: 1
     SpawnInterval: 1
+    SpawnPerInterval: 7
+  - EnemyList:
+      _serializedList:
+      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
+        Value: 5
+      - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
+        Value: 5
+      - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
+        Value: 5
+    Time: 40
+    SpawnInterval: 2
     SpawnPerInterval: 7
   EnemyLootDrop: {fileID: 11400000, guid: d326e2c1223c9504bba257c2e03eb5d7, type: 2}
   CrateSpawnMinInterval: 1
