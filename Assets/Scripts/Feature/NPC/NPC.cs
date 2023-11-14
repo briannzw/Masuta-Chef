@@ -42,8 +42,6 @@ namespace NPC
             Agent = GetComponent<NavMeshAgent>();
 
             Agent.stoppingDistance = StopDistance;
-
-
         }
         // Start is called before the first frame update
         protected void Start()

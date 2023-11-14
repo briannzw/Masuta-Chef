@@ -5,6 +5,7 @@ using UnityEngine;
 namespace NPC.Enemy
 {
     using Spawner;
+
     public class Enemy : NPC
     {
         public bool IsTaunted = false;

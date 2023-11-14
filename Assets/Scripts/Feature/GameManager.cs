@@ -4,7 +4,7 @@ using Save;
 using MyBox;
 using Character;
 using System;
-
+using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -30,12 +30,15 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager;
     public SaveManager SaveManager;
     public StatsManager StatsManager;
+    public float AIAvoidancePredictionTime = 0.7f; //Default value is 2.0, Describes how far in the future the agents predict collisions for avoidance.
 
     [Header("Static Value")]
     public Action OnEnemiesKilled;
 
+
     private void Start()
     {
+        NavMesh.avoidancePredictionTime = AIAvoidancePredictionTime;
         if (SaveOnGameOver)
         {
             LevelManager.OnLevelLose += SaveGame;
