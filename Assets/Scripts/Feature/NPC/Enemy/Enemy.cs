@@ -13,25 +13,31 @@ namespace NPC.Enemy
         [SerializeField] private float maxTauntTimer = 0.1f;
         public float rotationSpeed = 5.0f;
         private static int killCount = 0;
+        
+
+        [SerializeField] GameObject engageText;
 
         protected new void Awake()
         {
             base.Awake();
             StateMachine.Initialize(new EnemyMoveState(this, StateMachine));
             currentTauntTimer = maxTauntTimer;
+            CurrentEnemies = GameManager.Instance.PlayerTransform.gameObject;
         }
 
         protected new void Start()
         {
             base.Start();
             chara.OnDie += EnemyDie;
+            Agent.speed += Random.Range(-0.05f, -0.3f);
         }
 
         protected new void Update()
         {
             base.Update();
+            engageText.SetActive(IsEngaging);
             currentTauntTimer -= Time.deltaTime;
-            if (!IsTaunted)
+            if (!IsTaunted && !IsEngaging)
             {
                 TargetPosition = GameManager.Instance.PlayerTransform.position;
             }
@@ -62,6 +68,12 @@ namespace NPC.Enemy
          public static int GetKillCount()
         {
             return killCount;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(Agent.destination, 2f);
         }
     }
 }

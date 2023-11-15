@@ -4,8 +4,12 @@ using UnityEngine;
 using NPC;
 public class EnemyMoveState : NPCState
 {
+    Vector3 playerPos;
+    Vector3 npcPos;
+    float stopDistanceSquared;
     public EnemyMoveState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
     {
+        stopDistanceSquared = npc.StopDistance * npc.StopDistance;
     }
 
     public override void EnterState()
@@ -22,12 +26,18 @@ public class EnemyMoveState : NPCState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+        playerPos = GameManager.Instance.PlayerTransform.position;
+        npcPos = npc.transform.position;
         npc.Agent.SetDestination(npc.TargetPosition);
 
-        if (npc.Agent.remainingDistance <= npc.StopDistance && !npc.IsThisJoker)
+        //if (Vector3.SqrMagnitude(playerPos - npcPos) <= stopDistanceSquared && !npc.IsThisJoker)
+        //{
+        //    npc.Agent.isStopped = true;
+        //    npc.StateMachine.ChangeState(new NPCAttackState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
+        //}
+        if (Vector3.SqrMagnitude(playerPos - npcPos) <= npc.CombatEngageDistance && !npc.IsThisJoker)
         {
-            npc.Agent.isStopped = true;
-            npc.StateMachine.ChangeState(new NPCAttackState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
+            npc.StateMachine.ChangeState(new EnemyEngageState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
         }
     }
 

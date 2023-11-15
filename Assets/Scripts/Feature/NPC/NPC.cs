@@ -29,6 +29,11 @@ namespace NPC
         public NPCStateMachine StateMachine;
         protected Character chara;
 
+        [Header("Combat Properties")]
+        public float CombatEngageDistance = 7f;
+        public bool IsEngaging = false;
+        public GameObject CurrentEnemies;
+
         #region Joker Properties
         [HideInInspector]
         public bool IsThisJoker = false;
@@ -46,7 +51,7 @@ namespace NPC
         // Start is called before the first frame update
         protected void Start()
         {
-            if (ActiveWeapon != null){ Debug.Log("Cek Weapon"); ActiveWeapon.OnEquip(chara); }
+            if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
             chara.OnSpeedChanged += () => Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
         }

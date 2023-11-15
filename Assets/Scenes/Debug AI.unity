@@ -191,6 +191,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6218754531190197656, guid: 3357df7fd92a92344896b259dbc655eb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.748
+      objectReference: {fileID: 0}
     - target: {fileID: 7015340368926785847, guid: 3357df7fd92a92344896b259dbc655eb,
         type: 3}
       propertyPath: m_Name
@@ -2622,7 +2627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aff22cf8325253479750601d3520a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Recipes: []
+  RecipeSO: {fileID: 0}
 --- !u!1 &1386656612
 GameObject:
   m_ObjectHideFlags: 0
@@ -2729,6 +2734,7 @@ MonoBehaviour:
   LevelManager: {fileID: 666763695}
   SaveManager: {fileID: 1410782209}
   StatsManager: {fileID: 0}
+  AIAvoidancePredictionTime: 0.7
 --- !u!114 &1410782209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2743,12 +2749,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEncrypted: 1
   SaveData:
+    CookingPoints: 0
     RecipeData:
       _serializedList:
       - Key: Stuffed Bitter Gourdakin
         Value:
           CurrentBlueprint: 8
           NeededBlueprint: 100
+          CookingType: 0
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
@@ -2757,6 +2765,7 @@ MonoBehaviour:
         Value:
           CurrentBlueprint: 9
           NeededBlueprint: 100
+          CookingType: 0
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
@@ -2765,6 +2774,7 @@ MonoBehaviour:
         Value:
           CurrentBlueprint: 8
           NeededBlueprint: 100
+          CookingType: 0
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
@@ -3024,7 +3034,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactButton: {fileID: 248993774}
   interactionDistance: 3
-  componentsToPause: []
 --- !u!136 &1624390055
 CapsuleCollider:
   m_ObjectHideFlags: 0
