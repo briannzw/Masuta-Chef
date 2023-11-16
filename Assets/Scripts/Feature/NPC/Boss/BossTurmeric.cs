@@ -53,14 +53,14 @@ namespace NPC.Boss
         private new void Awake()
         {
             base.Awake();
-            StateMachine.Initialize(new EnemyMoveState(this, StateMachine));
+            //StateMachine.Initialize(new EnemyMoveState(this, StateMachine));
         }
 
         void Start()
         {
             skillCastInterval = Random.Range(skillCastMinInterval, skillCastMaxInterval);
         }
-        
+       /* 
         protected new void Update()
         {
             base.Update();
@@ -114,107 +114,108 @@ namespace NPC.Boss
 
 
 
-        void VortexSkill1()
-        {
-            int numberOfExplosions = Random.Range(minVortex, maxVortex);
+    //    void VortexSkill1()
+    //    {
+    //        int numberOfExplosions = Random.Range(minVortex, maxVortex);
 
-            for (int i = 0; i < numberOfExplosions; i++)
-            {
-                Vector3 randomVortexPosition = Random.insideUnitSphere * spawnAreaVortex;
+    //        for (int i = 0; i < numberOfExplosions; i++)
+    //        {
+    //            Vector3 randomVortexPosition = Random.insideUnitSphere * spawnAreaVortex;
 
-                NavMeshHit hit;
-                NavMesh.SamplePosition(transform.position + randomVortexPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
-                randomVortexPosition.y = 0.5f;
-                randomVortexPosition = hit.position;
-                GameObject vortex = Instantiate(vortexPrefab, randomVortexPosition, Quaternion.identity);
-                vortex.GetComponent<HitController>().Initialize(ActiveWeapon);
-                Destroy(vortex, vortexDuration);
-            }
-            Agent.isStopped = false;
-            isCastingSkill = false;
-        }
+    //            NavMeshHit hit;
+    //            NavMesh.SamplePosition(transform.position + randomVortexPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
+    //            randomVortexPosition.y = 0.5f;
+    //            randomVortexPosition = hit.position;
+    //            GameObject vortex = Instantiate(vortexPrefab, randomVortexPosition, Quaternion.identity);
+    //            vortex.GetComponent<HitController>().Initialize(ActiveWeapon);
+    //            Destroy(vortex, vortexDuration);
+    //        }
+    //        Agent.isStopped = false;
+    //        isCastingSkill = false;
+    //    }
 
-        void CastSkill1()
-        {
-            isCastingSkill = true;
-            StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
-            //Animator.SetTrigger("CastSkill");
-            Agent.isStopped = true;
-            Invoke("VortexSkill1", 3f);
-        }
+    //    void CastSkill1()
+    //    {
+    //        isCastingSkill = true;
+    //        StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
+    //        //Animator.SetTrigger("CastSkill");
+    //        Agent.isStopped = true;
+    //        Invoke("VortexSkill1", 3f);
+    //    }
 
-        void CastRage()
-        {
-            chara.isInvincible = true;
-            isCastingSkill = true;
-            isEnraged = true;
-            StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
-            //Animator.SetTrigger("CastRage");
-            Agent.isStopped = true;
-            Invoke("CastingDuration", 2f);
+    //    void CastRage()
+    //    {
+    //        chara.isInvincible = true;
+    //        isCastingSkill = true;
+    //        isEnraged = true;
+    //        StateMachine.ChangeState(new BossCastSkillState(this, StateMachine));
+    //        //Animator.SetTrigger("CastRage");
+    //        Agent.isStopped = true;
+    //        Invoke("CastingDuration", 2f);
 
-            foreach (Effect effect in RageEffects)
-            {
-                effect.Initialize();
-                Debug.Log("Take Effect");
-                chara.AddEffect(effect);
-            }
-        }
+    //        foreach (Effect effect in RageEffects)
+    //        {
+    //            effect.Initialize();
+    //            Debug.Log("Take Effect");
+    //            chara.AddEffect(effect);
+    //        }
+    //    }
 
-        void CastingDuration()
-        {
-            chara.isInvincible = false;
-            isCastingSkill = false;
-            Agent.isStopped = false;
-        }
+    //    void CastingDuration()
+    //    {
+    //        chara.isInvincible = false;
+    //        isCastingSkill = false;
+    //        Agent.isStopped = false;
+    //    }
 
-        void SwampSkill2()
-        {
+    //    void SwampSkill2()
+    //    {
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, swampRadius);
+    //        Collider[] colliders = Physics.OverlapSphere(transform.position, swampRadius);
 
-            foreach (Collider collider in colliders)
-            {
-                if (collider.CompareTag("Player"))
-                {
+    //        foreach (Collider collider in colliders)
+    //        {
+    //            if (collider.CompareTag("Player"))
+    //            {
 
 
-                    // Do DOT and apply slow debuff to Player
-                }
-            }
+    //                // Do DOT and apply slow debuff to Player
+    //            }
+    //        }
 
-            if (Time.time > nextExplosionTime)
-            {
-                int numberOfExplosions = Random.Range(minExplosions, maxExplosions + 1);
+    //        if (Time.time > nextExplosionTime)
+    //        {
+    //            int numberOfExplosions = Random.Range(minExplosions, maxExplosions + 1);
 
-                for (int i = 0; i < numberOfExplosions; i++)
-                {
-                    Vector3 randomExplosionPosition = Random.insideUnitSphere * swampRadius;
+    //            for (int i = 0; i < numberOfExplosions; i++)
+    //            {
+    //                Vector3 randomExplosionPosition = Random.insideUnitSphere * swampRadius;
 
-                    NavMeshHit hit;
-                    NavMesh.SamplePosition(transform.position + randomExplosionPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
-                    randomExplosionPosition.y = 0.5f;
-                    randomExplosionPosition = hit.position;
-                    GameObject explosion = Instantiate(explosionPrefab, randomExplosionPosition, Quaternion.identity);
-                    explosion.GetComponent<HitController>().Initialize(ActiveWeapon);
-                    Destroy(explosion, explosionLifetime);
-                }
+    //                NavMeshHit hit;
+    //                NavMesh.SamplePosition(transform.position + randomExplosionPosition, out hit, Mathf.Infinity, NavMesh.AllAreas);
+    //                randomExplosionPosition.y = 0.5f;
+    //                randomExplosionPosition = hit.position;
+    //                GameObject explosion = Instantiate(explosionPrefab, randomExplosionPosition, Quaternion.identity);
+    //                explosion.GetComponent<HitController>().Initialize(ActiveWeapon);
+    //                Destroy(explosion, explosionLifetime);
+    //            }
 
-                nextExplosionTime = Time.time + explosionInterval;
-            }
-        }
+    //            nextExplosionTime = Time.time + explosionInterval;
+    //        }
+    //    }
 
-        protected void RotateToTarget(float rotationSpeed)
-        {
-            // Calculate the direction from this GameObject to the target
-            Vector3 direction = TargetPosition - transform.position;
-            direction.y = 0;
+    //    protected void RotateToTarget(float rotationSpeed)
+    //    {
+    //        // Calculate the direction from this GameObject to the target
+    //        Vector3 direction = TargetPosition - transform.position;
+    //        direction.y = 0;
 
-            // Create a rotation that looks in the calculated direction
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+    //        // Create a rotation that looks in the calculated direction
+    //        Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-            // Rotate towards the target rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-    }
+    //        // Rotate towards the target rotation
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    //    }
+    //}
+     
 }

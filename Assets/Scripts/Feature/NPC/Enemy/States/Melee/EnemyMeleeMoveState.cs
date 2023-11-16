@@ -1,15 +1,14 @@
+using NPC.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NPC;
-using NPC.Enemy;
 
-public class EnemyMoveState : EnemyState
+public class EnemyMeleeMoveState : EnemyState
 {
     Vector3 playerPos;
     Vector3 enemyPos;
 
-    public EnemyMoveState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
+    public EnemyMeleeMoveState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
     }
 

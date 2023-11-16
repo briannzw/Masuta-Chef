@@ -1,43 +1,45 @@
+using NPC.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyEngageState : NPCState
+public class EnemyEngageState : EnemyState
 {
 
     private Transform centerObject; // The object to circle around
     private float radius = 6f; // The radius of the circle
-    Vector3 npcPos;
+    Vector3 enemyPos;
 
     private float angle; // Current angle of rotation
     private float randomSpeed;
     private bool isClockwise; // Variable to determine the rotation direction
-    public EnemyEngageState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+
+    public EnemyEngageState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        npc.IsEngaging = true;
+        enemy.IsEngaging = true;
         isClockwise = Random.Range(0, 2) == 0;
-        randomSpeed = Random.Range(0.4f, 1.3f) * (isClockwise ? 1 : -1); ;
+        randomSpeed = Random.Range(0.4f, 0.7f) * (isClockwise ? 1 : -1); ;
         angle = Random.Range(0f, 360f);
-        radius = Random.Range(6f, 8f);
+        radius = Random.Range(4f, 8.5f);
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        npc.IsEngaging = false;
+        enemy.IsEngaging = false;
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
         centerObject = GameManager.Instance.PlayerTransform;
-        npcPos = npc.transform.position;
+        enemyPos = enemy.transform.position;
         angle += randomSpeed * Time.deltaTime;
 
         // Update the angle based on a random speed
@@ -48,13 +50,13 @@ public class EnemyEngageState : NPCState
         float z = centerObject.position.z + Mathf.Sin(angle) * radius;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(new Vector3(x, npc.transform.position.y, z), out hit, Mathf.Infinity, NavMesh.AllAreas);
+        NavMesh.SamplePosition(new Vector3(x, enemy.transform.position.y, z), out hit, Mathf.Infinity, NavMesh.AllAreas);
 
-        npc.Agent.SetDestination(hit.position);
+        enemy.Agent.SetDestination(hit.position);
 
-        if (Vector3.SqrMagnitude(centerObject.position - npcPos) > npc.CombatEngageDistance)
+        if (Vector3.SqrMagnitude(centerObject.position - enemyPos) > enemy.CombatEngageDistance)
         {
-            npc.StateMachine.ChangeState(new EnemyMoveState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
+            enemy.StateMachine.ChangeState(new EnemyMoveState(enemy.GetComponent<NPC.Enemy.Enemy>(), enemy.StateMachine));
         }
 
         RotateToTarget(15f);
@@ -68,13 +70,13 @@ public class EnemyEngageState : NPCState
     private void RotateToTarget(float rotationSpeed)
     {
         // Calculate the direction from this GameObject to the target
-        Vector3 direction = npc.CurrentEnemies.transform.position - npcPos;
+        Vector3 direction = enemy.CurrentEnemies.transform.position - enemyPos;
         direction.y = 0;
 
         // Create a rotation that looks in the calculated direction
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         // Rotate towards the target rotation
-        npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }

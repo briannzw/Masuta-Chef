@@ -25,8 +25,7 @@ namespace NPC
         public float StopDistance;
         [HideInInspector]
         public NavMeshAgent Agent;
-        //public Character Character;
-        public NPCStateMachine StateMachine;
+
         protected Character chara;
 
         [Header("Combat Properties")]
@@ -41,7 +40,6 @@ namespace NPC
 
         protected void Awake()
         {
-            StateMachine = new NPCStateMachine();
             chara = GetComponent<Character>();
 
             Agent = GetComponent<NavMeshAgent>();
@@ -54,12 +52,6 @@ namespace NPC
             if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
             chara.OnSpeedChanged += () => Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
-        }
-
-        // Update is called once per frame
-        protected void Update()
-        {
-            StateMachine.CurrentState.FrameUpdate();
         }
     }
 }

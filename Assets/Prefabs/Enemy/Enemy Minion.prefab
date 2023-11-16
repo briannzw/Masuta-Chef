@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 5759611414837021232}
   - component: {fileID: 6116312503081518343}
   - component: {fileID: 4768947446379554580}
-  - component: {fileID: 287297031067894320}
+  - component: {fileID: 1756001019041995699}
   m_Layer: 7
   m_Name: Enemy Minion
   m_TagString: Enemy
@@ -480,7 +480,7 @@ MonoBehaviour:
           BaseValue: 1
   HealthDisplay: 
   isInvincible: 0
---- !u!114 &287297031067894320
+--- !u!114 &1756001019041995699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -489,14 +489,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2660703370237670014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f37aba595f9bab4e98badda74e82175, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b0984b4c01d6f24b970970edb985bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedWeapon: 0
-  ActiveWeapon: {fileID: 7025431649849519474}
+  ActiveWeapon: {fileID: 0}
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
-  StopDistance: 2
+  StopDistance: 0
   Agent: {fileID: 0}
   CombatEngageDistance: 75
   IsEngaging: 0
@@ -1053,15 +1053,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1420180051518027590}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7025431649849519474 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
-    type: 3}
-  m_PrefabInstance: {fileID: 1420180051518027590}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c129d5fbe533c94ba1bc6a22c6025bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

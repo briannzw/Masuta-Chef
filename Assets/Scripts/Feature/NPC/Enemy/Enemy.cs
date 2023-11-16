@@ -13,14 +13,14 @@ namespace NPC.Enemy
         [SerializeField] private float maxTauntTimer = 0.1f;
         public float rotationSpeed = 5.0f;
         private static int killCount = 0;
-        
+        public EnemyStateMachine StateMachine;
 
         [SerializeField] GameObject engageText;
 
         protected new void Awake()
         {
             base.Awake();
-            StateMachine.Initialize(new EnemyMoveState(this, StateMachine));
+            StateMachine = new EnemyStateMachine();
             currentTauntTimer = maxTauntTimer;
             CurrentEnemies = GameManager.Instance.PlayerTransform.gameObject;
         }
@@ -32,9 +32,9 @@ namespace NPC.Enemy
             Agent.speed += Random.Range(-0.05f, -0.3f);
         }
 
-        protected new void Update()
+        protected void Update()
         {
-            base.Update();
+            StateMachine.CurrentState.FrameUpdate();
             engageText.SetActive(IsEngaging);
             currentTauntTimer -= Time.deltaTime;
             if (!IsTaunted && !IsEngaging)
