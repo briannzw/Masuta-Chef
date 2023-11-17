@@ -102,6 +102,9 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 1.8
   Agent: {fileID: 0}
+  CombatEngageDistance: 7
+  IsEngaging: 0
+  CurrentEnemies: {fileID: 0}
   IsThisJoker: 0
   MaxDistanceFromPlayer: 3
   IsFollowingEnemy: 0
@@ -838,7 +841,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1d37389252a72b64d91963eb7ef4d3d9, type: 2}
+      objectReference: {fileID: 2100000, guid: fefdab3a0c16fdf448d44fbf7059afed, type: 2}
     - target: {fileID: 6441879172479965239, guid: f5e260df35fe5494d984b4ab1ed86074,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

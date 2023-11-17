@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2323804213126964297}
   - component: {fileID: 9146126078078587039}
   - component: {fileID: -8786994105791154135}
-  - component: {fileID: -3339235332238347523}
+  - component: {fileID: 4206961038759805393}
   m_Layer: 7
   m_Name: Enemy Ranged
   m_TagString: Enemy
@@ -229,7 +229,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &9146126078078587039
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
           BaseValue: 1
   HealthDisplay: 
   isInvincible: 0
---- !u!114 &-3339235332238347523
+--- !u!114 &4206961038759805393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,22 +309,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2609905847538178790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f37aba595f9bab4e98badda74e82175, type: 3}
+  m_Script: {fileID: 11500000, guid: 6970c21ff7cb9dd4c82609a59bea8e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedWeapon: 1
-  ActiveWeapon: {fileID: 2136217188066170426}
+  ActiveWeapon: {fileID: 9160906789117708468}
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   StopDistance: 7
   Agent: {fileID: 0}
-  CombatEngageDistance: 7.1
+  CombatEngageDistance: 80
+  IsEngaging: 0
+  CurrentEnemies: {fileID: 0}
   IsThisJoker: 0
   IsTaunted: 0
   maxTauntTimer: 0.1
   rotationSpeed: 5
-  IsEngaging: 0
   engageText: {fileID: 2625521884948085699}
+  attackText: {fileID: 2625521884948085699}
+  AttackDistance: 6
+  AttackTimer: 4
+  DefaultAttackTimer: 0
+  AttackDuration: 0.3
+  DefaultAttackDuration: 0
 --- !u!1 &2625521884948085699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,21 +1142,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5253d860404de4f97d306d765ae45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2136217188066170426 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4846039439887501701, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
-    type: 3}
-  m_PrefabInstance: {fileID: 2385279395322159169}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b924a09be39c1499a3edbd0a18ee77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7852301884205206862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5612272442754133263, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
     type: 3}
   m_PrefabInstance: {fileID: 2385279395322159169}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9160906789117708468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6789214683903502581, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+    type: 3}
+  m_PrefabInstance: {fileID: 2385279395322159169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7326dbd1d7e62534ba66a0e759ccb629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
