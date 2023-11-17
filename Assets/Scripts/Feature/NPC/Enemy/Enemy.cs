@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace NPC.Enemy
 {
@@ -15,7 +16,17 @@ namespace NPC.Enemy
         private static int killCount = 0;
         public EnemyStateMachine StateMachine;
 
-        [SerializeField] GameObject engageText;
+        [Header("Combat Properties")]
+        [SerializeField] GameObject engageText; //debug
+        public GameObject attackText; //debug
+
+        public float AttackDistance;
+        public float AttackTimer;
+        [HideInInspector]
+        public float DefaultAttackTimer;
+        public float AttackDuration;
+        [HideInInspector]
+        public float DefaultAttackDuration;
 
         protected new void Awake()
         {
@@ -23,6 +34,8 @@ namespace NPC.Enemy
             StateMachine = new EnemyStateMachine();
             currentTauntTimer = maxTauntTimer;
             CurrentEnemies = GameManager.Instance.PlayerTransform.gameObject;
+            DefaultAttackTimer = AttackTimer;
+            DefaultAttackDuration = AttackDuration;
         }
 
         protected new void Start()
@@ -68,12 +81,6 @@ namespace NPC.Enemy
          public static int GetKillCount()
         {
             return killCount;
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(Agent.destination, 2f);
         }
     }
 }

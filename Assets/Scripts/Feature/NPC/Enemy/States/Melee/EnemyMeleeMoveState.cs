@@ -30,14 +30,9 @@ public class EnemyMeleeMoveState : EnemyState
         enemyPos = enemy.transform.position;
         enemy.Agent.SetDestination(enemy.TargetPosition);
 
-        //if (Vector3.SqrMagnitude(playerPos - enemyPos) <= stopDistanceSquared && !enemy.IsThisJoker)
-        //{
-        //    enemy.Agent.isStopped = true;
-        //    enemy.StateMachine.ChangeState(new NPCAttackState(enemy.GetComponent<NPC.NPC>(), enemy.StateMachine));
-        //}
         if (Vector3.SqrMagnitude(playerPos - enemyPos) <= enemy.CombatEngageDistance && !enemy.IsThisJoker)
         {
-            enemy.StateMachine.ChangeState(new EnemyEngageState(enemy.GetComponent<NPC.Enemy.Enemy>(), enemy.StateMachine));
+            enemy.StateMachine.ChangeState(new EnemyMeleeEngageState(enemy, enemy.StateMachine));
         }
     }
 

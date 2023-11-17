@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyEngageState : EnemyState
+public class EnemyMeleeEngageState : EnemyState
 {
 
     private Transform centerObject; // The object to circle around
@@ -15,13 +15,14 @@ public class EnemyEngageState : EnemyState
     private float randomSpeed;
     private bool isClockwise; // Variable to determine the rotation direction
 
-    public EnemyEngageState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
+    public EnemyMeleeEngageState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
+        enemy.Agent.stoppingDistance = 0;
         enemy.IsEngaging = true;
         isClockwise = Random.Range(0, 2) == 0;
         randomSpeed = Random.Range(0.4f, 0.7f) * (isClockwise ? 1 : -1); ;
@@ -33,11 +34,13 @@ public class EnemyEngageState : EnemyState
     {
         base.ExitState();
         enemy.IsEngaging = false;
+        enemy.AttackTimer = enemy.DefaultAttackTimer;
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+        enemy.AttackTimer -= Time.deltaTime;
         centerObject = GameManager.Instance.PlayerTransform;
         enemyPos = enemy.transform.position;
         angle += randomSpeed * Time.deltaTime;
@@ -56,10 +59,15 @@ public class EnemyEngageState : EnemyState
 
         if (Vector3.SqrMagnitude(centerObject.position - enemyPos) > enemy.CombatEngageDistance)
         {
-            enemy.StateMachine.ChangeState(new EnemyMoveState(enemy.GetComponent<NPC.Enemy.Enemy>(), enemy.StateMachine));
+            enemy.StateMachine.ChangeState(new EnemyMoveState(enemy, enemy.StateMachine));
         }
 
         RotateToTarget(15f);
+
+        if(enemy.AttackTimer <= 0)
+        {
+            enemy.StateMachine.ChangeState(new EnemyMeleeChargeState(enemy, enemy.StateMachine));
+        }
     }
 
     public override void PhysicsUpdate()
