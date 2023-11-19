@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnemyMeleeMoveState : EnemyState
 {
-    Vector3 playerPos;
-    Vector3 enemyPos;
+    Vector3 currentEnemyPos;
+    Vector3 agentPos;
 
     public EnemyMeleeMoveState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
@@ -26,11 +26,11 @@ public class EnemyMeleeMoveState : EnemyState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        playerPos = GameManager.Instance.PlayerTransform.position;
-        enemyPos = enemy.transform.position;
-        enemy.Agent.SetDestination(enemy.TargetPosition);
+        currentEnemyPos = enemy.CurrentEnemies.transform.position;
+        agentPos = enemy.transform.position;
+        enemy.Agent.SetDestination(currentEnemyPos);
 
-        if (Vector3.SqrMagnitude(playerPos - enemyPos) <= enemy.CombatEngageDistance && !enemy.IsThisJoker)
+        if (Vector3.SqrMagnitude(currentEnemyPos - agentPos) <= enemy.CombatEngageDistance && !enemy.IsThisJoker)
         {
             enemy.StateMachine.ChangeState(new EnemyMeleeEngageState(enemy, enemy.StateMachine));
         }

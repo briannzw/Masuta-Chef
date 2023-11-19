@@ -27,6 +27,10 @@ namespace NPC.Enemy
         public float AttackDuration;
         [HideInInspector]
         public float DefaultAttackDuration;
+        [HideInInspector]
+        public float MaxTauntedDistance;
+        [HideInInspector]
+        private GameObject defaultEnemyTarget;
 
         protected new void Awake()
         {
@@ -36,6 +40,7 @@ namespace NPC.Enemy
             CurrentEnemies = GameManager.Instance.PlayerTransform.gameObject;
             DefaultAttackTimer = AttackTimer;
             DefaultAttackDuration = AttackDuration;
+            defaultEnemyTarget = GameManager.Instance.PlayerTransform.gameObject;
         }
 
         protected new void Start()
@@ -55,7 +60,7 @@ namespace NPC.Enemy
                 TargetPosition = GameManager.Instance.PlayerTransform.position;
             }
 
-            if (IsTaunted && Agent.remainingDistance > 5f || IsTaunted && currentTauntTimer <= 0f)
+            if (IsTaunted && currentTauntTimer <= 0f)
             {
                 RemoveTauntEffect();
             }
@@ -73,9 +78,15 @@ namespace NPC.Enemy
 
         void RemoveTauntEffect()
         {
+            if (Vector3.Distance(CurrentEnemies.transform.position, transform.position) < MaxTauntedDistance)
+            {
+                return;
+            }
+
             IsTaunted = false;
             Agent.isStopped = false;
             currentTauntTimer = maxTauntTimer;
+            CurrentEnemies = defaultEnemyTarget;
         }
 
          public static int GetKillCount()

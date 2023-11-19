@@ -9,7 +9,7 @@ public class EnemyMeleeEngageState : EnemyState
 
     private Transform centerObject; // The object to circle around
     private float radius = 6f; // The radius of the circle
-    Vector3 enemyPos;
+    Vector3 agentPos;
 
     private float angle; // Current angle of rotation
     private float randomSpeed;
@@ -41,8 +41,8 @@ public class EnemyMeleeEngageState : EnemyState
     {
         base.FrameUpdate();
         enemy.AttackTimer -= Time.deltaTime;
-        centerObject = GameManager.Instance.PlayerTransform;
-        enemyPos = enemy.transform.position;
+        centerObject = enemy.CurrentEnemies.transform;
+        agentPos = enemy.transform.position;
         angle += randomSpeed * Time.deltaTime;
 
         // Update the angle based on a random speed
@@ -57,7 +57,7 @@ public class EnemyMeleeEngageState : EnemyState
 
         enemy.Agent.SetDestination(hit.position);
 
-        if (Vector3.SqrMagnitude(centerObject.position - enemyPos) > enemy.CombatEngageDistance)
+        if (Vector3.SqrMagnitude(centerObject.position - agentPos) > enemy.CombatEngageDistance)
         {
             enemy.StateMachine.ChangeState(new EnemyMoveState(enemy, enemy.StateMachine));
         }
@@ -78,7 +78,7 @@ public class EnemyMeleeEngageState : EnemyState
     private void RotateToTarget(float rotationSpeed)
     {
         // Calculate the direction from this GameObject to the target
-        Vector3 direction = enemy.CurrentEnemies.transform.position - enemyPos;
+        Vector3 direction = enemy.CurrentEnemies.transform.position - agentPos;
         direction.y = 0;
 
         // Create a rotation that looks in the calculated direction
