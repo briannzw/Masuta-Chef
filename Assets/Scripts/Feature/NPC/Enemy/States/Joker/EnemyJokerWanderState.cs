@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class EnemyJokerWanderState : EnemyState
 {
-    private Vector3 randomDirection;
-    private float wanderRadius;
     public EnemyJokerWanderState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
     }
@@ -15,7 +13,6 @@ public class EnemyJokerWanderState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
-        wanderRadius = enemy.GetComponent<JokerEnemy>().WanderRadius;
     }
 
     public override void ExitState()
@@ -26,11 +23,10 @@ public class EnemyJokerWanderState : EnemyState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        randomDirection = Random.insideUnitSphere * wanderRadius;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(transform.position + randomDirection, out hit, wanderRadius, NavMesh.AllAreas);
 
-        enemy.CurrentEnemies.transform.position = hit.position;
+        enemy.Agent.SetDestination(enemy.TargetPosition);
+
+
     }
 
     public override void PhysicsUpdate()
