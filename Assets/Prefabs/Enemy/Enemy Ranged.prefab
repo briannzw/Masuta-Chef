@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedWeapon: 1
   ActiveWeapon: {fileID: 9160906789117708468}
-  Animator: {fileID: 0}
+  Animator: {fileID: 7362357953008424077}
   TargetTransform: {fileID: 0}
   StopDistance: 7
   Agent: {fileID: 0}
@@ -277,7 +277,7 @@ MonoBehaviour:
   AttackDistance: 6
   AttackTimer: 4
   DefaultAttackTimer: 0
-  AttackDuration: 0.3
+  AttackDuration: 5
   DefaultAttackDuration: 0
   MaxTauntedDistance: 0
 --- !u!1 &2625521884948085699
@@ -1152,6 +1152,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1526964690268444965, guid: a33408fdcca9ce44d9918fe972b2a4b1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c6486373b6d25d45a24a93ceff7a060, type: 2}
     - target: {fileID: 919132149155446097, guid: a33408fdcca9ce44d9918fe972b2a4b1,
         type: 3}
       propertyPath: m_Name

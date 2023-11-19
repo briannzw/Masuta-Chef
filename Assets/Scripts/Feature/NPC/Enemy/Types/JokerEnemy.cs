@@ -75,7 +75,7 @@ namespace NPC.Enemy
 
             if (hasCrate)
             {
-                NewFleeAI();
+                RunAwayFromPlayer();
             }
 
             if (pickupPos.childCount < 1)
@@ -202,64 +202,6 @@ namespace NPC.Enemy
                     wanderTimer = WanderInterval;
                 }
             }
-        }
-
-        private void NewFleeAI()
-        {
-            if(Vector3.Distance(transform.position, GameManager.Instance.PlayerTransform.position) < safeDistance)
-            {
-                //We will check if enemy can flee to the direction opposite from the player, we will check if there are obstacles
-                bool isDirSafe = false;
-
-                //We will need to rotate the direction away from the player if straight to the opposite of the player is a wall
-                float vRotation = 0;
-
-                while (!isDirSafe)
-                {
-                    //Calculate the vector pointing from Player to the Enemy
-                    Vector3 dirToPlayer = transform.position - GameManager.Instance.PlayerTransform.position;
-
-                    //Calculate the vector from the Enemy to the direction away from the Player the new point
-                    Vector3 newPos = transform.position + dirToPlayer;
-
-                    //Rotate the direction of the Enemy to move
-                    newPos = Quaternion.Euler(0, vRotation, 0) * newPos;
-
-                    //Shoot a Raycast out to the new direction with 5f length (as example raycast length) and see if it hits an obstacle
-                    bool isHit = Physics.Raycast(transform.position, newPos, out RaycastHit hit, 3f, layerMask);
-
-                    if (hit.transform == null)
-                    {
-                        //If the Raycast to the flee direction doesn't hit a wall then the Enemy is good to go to this direction
-                        Agent.SetDestination(newPos);
-                        isDirSafe = true;
-                    }
-
-                    //Change the direction of fleeing is it hits a wall by 20 degrees
-                    if (isHit && hit.transform.CompareTag("Wall"))
-                    {
-                        vRotation += 20;
-                        isDirSafe = false;
-                    }
-                    else
-                    {
-                        //If the Raycast to the flee direction doesn't hit a wall then the Enemy is good to go to this direction
-                        Agent.SetDestination(newPos);
-                        isDirSafe = true;
-                    }
-                }
-            }
-            else
-            {
-                wanderTimer -= Time.deltaTime;
-                if (wanderTimer <= 0f)
-                {
-                    // Time to choose a new random destination.
-                    Wander();
-                    wanderTimer = WanderInterval;
-                }
-            }
-
         }
 
         public void Wander()

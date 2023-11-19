@@ -14,6 +14,7 @@ public class EnemyRangedAttackState : EnemyState
     {
         base.EnterState();
         enemy.ActiveWeapon.StartAttack();
+        enemy.Animator.SetBool("IsAttacking", true);
     }
 
     public override void ExitState()
@@ -21,6 +22,7 @@ public class EnemyRangedAttackState : EnemyState
         base.ExitState();
         enemy.ActiveWeapon.StopAttack();
         enemy.AttackDuration = enemy.DefaultAttackDuration;
+        enemy.Animator.SetBool("IsAttacking", false);
     }
 
     public override void FrameUpdate()
@@ -28,6 +30,8 @@ public class EnemyRangedAttackState : EnemyState
         base.FrameUpdate();
         enemyPos = enemy.transform.position;
         enemy.AttackDuration -= Time.deltaTime;
+        RotateToTarget(20f);
+
         if(enemy.AttackDuration <= 0f)
         {
             enemy.StateMachine.ChangeState(new EnemyRangedEngageState(enemy, enemy.StateMachine));
@@ -37,5 +41,18 @@ public class EnemyRangedAttackState : EnemyState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+
+    private void RotateToTarget(float rotationSpeed)
+    {
+        // Calculate the direction from this GameObject to the target
+        Vector3 direction = enemy.CurrentEnemies.transform.position - enemyPos;
+        direction.y = 0;
+
+        // Create a rotation that looks in the calculated direction
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        // Rotate towards the target rotation
+        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }

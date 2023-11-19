@@ -66,7 +66,7 @@ public class EnemyRangedEngageState : EnemyState
 
         if (enemy.AttackTimer <= 0)
         {
-            enemy.StateMachine.ChangeState(new EnemyRangedAimState(enemy, enemy.StateMachine));
+            enemy.StateMachine.ChangeState(new EnemyRangedAttackState(enemy, enemy.StateMachine));
         }
     }
 
