@@ -559,7 +559,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -646,6 +646,7 @@ MonoBehaviour:
   DefaultAttackTimer: 0
   AttackDuration: 0.3
   DefaultAttackDuration: 0
+  MaxTauntedDistance: 0
 --- !u!1 &2796628013302725631
 GameObject:
   m_ObjectHideFlags: 0
