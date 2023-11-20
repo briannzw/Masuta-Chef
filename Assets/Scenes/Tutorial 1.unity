@@ -742,8 +742,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1725,7 +1725,8 @@ MonoBehaviour:
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          UniqueStatIndex: -1
+          CookingPoint: 0
       - Key: Cactyrn-filled Chutney Sandwich
         Value:
           CurrentBlueprint: 9
@@ -1733,7 +1734,8 @@ MonoBehaviour:
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          UniqueStatIndex: -1
+          CookingPoint: 0
       - Key: Orant and Chickpea Curry
         Value:
           CurrentBlueprint: 8
@@ -1741,7 +1743,8 @@ MonoBehaviour:
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          UniqueStatIndex: -1
+          CookingPoint: 0
     IngredientData:
       _serializedList:
       - Key: Chicken
@@ -1768,6 +1771,7 @@ MonoBehaviour:
   LevelManager: {fileID: 540866563}
   SaveManager: {fileID: 652335939}
   StatsManager: {fileID: 0}
+  AIAvoidancePredictionTime: 0.7
 --- !u!1 &654917524
 GameObject:
   m_ObjectHideFlags: 0
