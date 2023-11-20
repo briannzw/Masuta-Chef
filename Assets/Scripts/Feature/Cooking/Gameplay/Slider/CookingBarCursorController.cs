@@ -136,7 +136,7 @@ namespace Cooking.Gameplay.Slider
             GUI.color = Color.black;
             GUI.Label(new Rect(10, 10, 400, 50), "Game Timer : " + gameTimer);
             GUI.Label(new Rect(10, 60, 400, 50), "Timeout Timer : " + timeoutTimer);
-            GUI.Label(new Rect(10, 110, 400, 50), "Stay Percentage : " + stayTime / GameTime * 100 + "%");
+            GUI.Label(new Rect(10, 110, 400, 50), "Stay Percentage : " + stayTime / gameTimer * 100 + "%");
         }
         #endregion
     }

@@ -75,6 +75,7 @@ namespace Player.Controller
                 go.transform.parent = pickupPos;
                 go.transform.localPosition = Vector3.zero;
                 go.transform.localRotation = Quaternion.identity;
+             
             }
             else nearestPickable = null;
         }
@@ -101,7 +102,7 @@ namespace Player.Controller
             pickupPos.DetachChildren();
             nearestPickable.ExitPickup();
             (nearestPickable as IThrowable).rb.AddRelativeForce(throwDirection * ThrowForce, ForceMode.Impulse);
-            nearestPickable = null;
+            nearestPickable = null;          
         }
         #endregion
 

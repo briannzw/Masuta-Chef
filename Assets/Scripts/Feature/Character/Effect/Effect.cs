@@ -36,7 +36,7 @@ namespace Character.StatEffect
 #if UNITY_EDITOR
         [ConditionalField(nameof(StatType), false, StatsType.Weapon)]
 #endif
-        public Weapon.WeaponStatsEnum WeaponStatsAffected;
+        public WeaponStatsEnum WeaponStatsAffected;
 
         [SerializeField] protected float StatValue;
         [SerializeField] protected StatModType StatModifierType;

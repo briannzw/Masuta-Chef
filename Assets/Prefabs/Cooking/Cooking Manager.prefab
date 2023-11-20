@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 995777474427789225}
   - component: {fileID: 6927440500426656073}
+  - component: {fileID: 1199205535711005434}
   m_Layer: 0
   m_Name: Cooking Manager
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
       Value: TapNumber
     - Key: 2
       Value: Circular
+  SaveManager: {fileID: 1199205535711005434}
   CookingPoints:
     _serializedList:
     - Key: 0
@@ -60,11 +62,24 @@ MonoBehaviour:
       Value: 5
     - Key: 2
       Value: 10
-  CurrentRecipe:
-    CurrentBlueprint: 0
-    NeededBlueprint: 0
-    CookingType: 0
-    CookingDone: 0
-    PerfectCookingDone: 0
-    ConsecutivePerfectCookingDone: 0
-    UniqueValueUnlocked: 0
+  CurrentRecipe: {fileID: 0}
+--- !u!114 &1199205535711005434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893113531895390976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e303d381f1ff70048a49fad396c75d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsEncrypted: 1
+  SaveData:
+    RecipeData:
+      _serializedList: []
+    IngredientData:
+      _serializedList: []
+  saveTime: 0
+  loadTime: 0

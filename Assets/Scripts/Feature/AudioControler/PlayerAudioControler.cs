@@ -1,58 +1,35 @@
 using UnityEngine;
-using Player.Controller;
+using System;
 
-namespace Character
+namespace Player.Controller
 {
     public class PlayerAudioController : MonoBehaviour
     {
-        public AudioSource movementSound;
-        public AudioSource jumpSound;
-        public AudioSource deathSound;
-
-        private Character character;
-        private PlayerMovementController playerMovementController;
+        public AudioSource movementSound; 
+        public AudioSource jumpSound; 
 
         private void Start()
         {
-            character = GetComponent<Character>();
-            playerMovementController = GetComponent<PlayerMovementController>();
-
-            if (character != null)
-            {
-                character.OnDie += PlayDeathSound;
-            }
-            else
-            {
-                Debug.LogError("Komponen Character tidak ditemukan pada objek ini.");
-            }
+            PlayerMovementController.OnPlayerMove += PlayMovementSound;
         }
 
         private void OnDestroy()
         {
-            if (character != null)
-            {
-                character.OnDie -= PlayDeathSound;
-            }
+            PlayerMovementController.OnPlayerMove -= PlayMovementSound;
         }
 
-        public void PlayMovementSound()
+        private void PlayMovementSound()
         {
+            // Memainkan suara pergerakan
             if (movementSound != null)
             {
                 movementSound.Play();
             }
         }
 
-        public void PlayDeathSound()
-        {
-            if (deathSound != null)
-            {
-                deathSound.Play();
-            }
-        }
-
         public void PlayJumpSound()
         {
+            // Memainkan suara lompat
             if (jumpSound != null)
             {
                 jumpSound.Play();
@@ -60,7 +37,4 @@ namespace Character
         }
     }
 }
-    
-
-
 

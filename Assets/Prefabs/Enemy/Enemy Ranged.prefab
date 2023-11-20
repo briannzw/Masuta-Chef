@@ -881,10 +881,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
-    - target: {fileID: 2470768746103843422, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+    - target: {fileID: 3675480168419219147, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
         type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035803345487209335, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4223014152505166794, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
         type: 3}
@@ -961,7 +966,15 @@ PrefabInstance:
     - {fileID: 178976896716052777, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 392215219830211580, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1704568912848275449}
+    - targetCorrespondingSourceObject: {fileID: 392215219830211580, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8514705639147337970}
   m_SourcePrefab: {fileID: 100100000, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
 --- !u!54 &239774819553659423 stripped
 Rigidbody:

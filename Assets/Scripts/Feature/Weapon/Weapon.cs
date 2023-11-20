@@ -12,6 +12,13 @@ namespace Weapon
     using Player.Controller;
     using System.Collections;
 
+    public enum WeaponStatsEnum
+    {
+        Power,
+        Speed,
+        Accuracy
+    }
+
     public class Weapon : MonoBehaviour, IInteractable
     {
         #region Properties
@@ -42,13 +49,6 @@ namespace Weapon
         public Action OnStopAttack;
         public Action OnUltimateAttack;
         #endregion
-
-        public enum WeaponStatsEnum 
-        {
-            Power,
-            Speed,
-            Accuraccy
-        }
 
         #region Lifecycle
         protected virtual void Awake()

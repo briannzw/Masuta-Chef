@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ec4de95465ea54b96ee6629be9e46f, type: 3}
   m_Name: Gourda
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: aef9f28d2cc0a1c45af6ea3fc3616e85, type: 3}
+  CookingIcon: {fileID: 21300000, guid: aef9f28d2cc0a1c45af6ea3fc3616e85, type: 3}
   name: Gourda
   Description: This is a Stuffed Bitter Gourdakin material.
-  count: 0
+  data:
+    Count: 0
+    MaxCount: 200

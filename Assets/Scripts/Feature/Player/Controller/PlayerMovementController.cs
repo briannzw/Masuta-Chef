@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Player.Controller
 {
+    using System;
     using Input;
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovementController : PlayerInputControl
@@ -15,7 +16,8 @@ namespace Player.Controller
         public float gravity = -9.8f;
         public float turnSmoothTime = 0.1f;
 
-        private bool canMove = true;
+        public static event Action OnPlayerMove;
+
         private Vector3 rawInputMovement = Vector3.zero;
         private Vector3 velocity;
         private Vector3 moveDirection;
@@ -29,7 +31,6 @@ namespace Player.Controller
         public float PushForce;
 
         [Header("Modifiers")]
-        public bool CanMove = true;
         public float speedMultiplier = 1;
 
         private Character.Character character;
@@ -53,30 +54,28 @@ namespace Player.Controller
 
         private void Update()
         {
-            if (canMove)
+            moveDirection = GetMovementInputDirection();
+            velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
+
+            // Gravity
+            if (controller.isGrounded)
             {
-                moveDirection = CanMove ? GetMovementInputDirection() : Vector3.zero;
-                velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
-
-                // Gravity
-                if (controller.isGrounded)
-                {
-                    if (velocity.y < 0f)
-                        velocity.y = -2f;
-                }
-
-                velocity.y += gravity * Time.deltaTime;
-                controller.Move(velocity * Time.deltaTime);
-
-                CheckOutOfBound();
+                if (velocity.y < 0f)
+                    velocity.y = -2f;
             }
-        }
 
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
 
-        // Method untuk mengatur apakah pemain boleh bergerak atau tidak
-        public void SetCanMove(bool value)
-        {
-            canMove = value;
+            CheckOutOfBound();
+
+            if (rawInputMovement.magnitude > 0.1f)
+            {
+                if (OnPlayerMove != null)
+                {
+                    OnPlayerMove.Invoke();
+                }
+            }
         }
 
         #region Callbacks

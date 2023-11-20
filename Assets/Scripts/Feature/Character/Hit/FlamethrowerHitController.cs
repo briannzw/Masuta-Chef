@@ -38,7 +38,7 @@ namespace Character.Hit
         private IEnumerator Cooldown()
         {
             canFire = false;
-            yield return new WaitForSeconds(Source.stats[Weapon.Weapon.WeaponStatsEnum.Speed].Value / 100);
+            yield return new WaitForSeconds(Source.stats[Weapon.WeaponStatsEnum.Speed].Value / 100);
             canFire = true;
         }   
         #endregion
