@@ -8,7 +8,7 @@ namespace Cooking.Gameplay.Circular
 {
     using UI;
 
-    public class CookingCircularManager : MonoBehaviour
+    public class CookingCircularManager : CookingGameplay
     {
         [Header("References")]
         [SerializeField] private CookingCircularController controller;
@@ -22,6 +22,11 @@ namespace Cooking.Gameplay.Circular
         [SerializeField] private RectTransform indicatorBarImage;
         [SerializeField] private RectTransform indicatorBarCursor;
         [SerializeField] private float indicatorBarOffset = 10f;
+
+        [Header("Game")]
+        [SerializeField] private float gameTime = 60f;
+        private float gameTimer = 0f;
+        private bool gameEnded = false;
 
         [Header("Parameters")]
         [Range(0f, 1f), SerializeField] private float stirValue = 0.5f;
@@ -45,6 +50,8 @@ namespace Cooking.Gameplay.Circular
         private int currentDir = 0;
         private Vector3 currentAngle;
 
+        private int prevState;
+
         private void Awake()
         {
             CookingIndicator.AccuracyPercentages = AccuracyPercentages;
@@ -59,6 +66,8 @@ namespace Cooking.Gameplay.Circular
 
         private void Update()
         {
+            if (gameEnded) return;
+
             // Constant Decrease
             if (stirValue > 0f) stirValue -= decreaseSpeed[currentDifficulty] * Time.deltaTime;
             else stirValue = 0f;
@@ -68,10 +77,34 @@ namespace Cooking.Gameplay.Circular
             {
                 stirValue += stirPower * Time.deltaTime;
                 stirValue = Mathf.Clamp(stirValue, 0f, 1f);
+
+                if (prevState != 1)
+                {
+                    OnCookingHit?.Invoke();
+                    prevState = 1;
+                }
+            }
+            else
+            {
+                if(prevState != 0)
+                {
+                    OnCookingMissed?.Invoke();
+                    prevState = 0;
+                }
             }
 
             UpdateIndicatorBar();
             CookingIndicator.SetIndicatorUI(stirValue);
+
+            // Game
+            gameTimer += Time.deltaTime;
+
+            // Game Time Ends
+            if (gameTimer > gameTime)
+            {
+                gameEnded = true;
+                GameOver();
+            }
         }
 
         private IEnumerator SetDirection(int dir)
@@ -89,6 +122,17 @@ namespace Cooking.Gameplay.Circular
                 
                 if (Random.Range(0, 100) < dirChangeChance[currentDifficulty] * 100) dir *= -1;
             }
+        }
+
+        private void GameOver()
+        {
+            controller.enabled = false;
+            StopAllCoroutines();
+
+            if (stirValue <= 0) OnCookingFailed?.Invoke();
+            else OnCookingSuccess?.Invoke();
+
+            CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
         }
 
         private IEnumerator AnimateArrow(float zEndValue)
@@ -142,8 +186,7 @@ namespace Cooking.Gameplay.Circular
         {
             GUI.color = Color.black;
             GUI.Label(new Rect(10, 10, 400, 50), "Stir Velocity: " + controller.CurrentVelocity);
-            //GUI.Label(new Rect(10, 60, 400, 50), "Timeout Timer : " + timeoutTimer);
-            //GUI.Label(new Rect(10, 110, 400, 50), "Stay Percentage : " + stayTime / gameTimer * 100 + "%");
+            GUI.Label(new Rect(10, 60, 400, 50), "Game Timer : " + gameTimer);
         }
     }
 }

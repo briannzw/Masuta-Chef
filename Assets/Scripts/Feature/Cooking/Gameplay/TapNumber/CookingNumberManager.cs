@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Cooking.Gameplay.TapNumber
@@ -5,7 +6,7 @@ namespace Cooking.Gameplay.TapNumber
     using AYellowpaper.SerializedCollections;
     using Cooking.Gameplay.UI;
 
-    public class CookingNumberManager : MonoBehaviour
+    public class CookingNumberManager : CookingGameplay
     {
         [Header("Indicator UI")]
         public CookingIndicator CookingIndicator;
@@ -52,16 +53,25 @@ namespace Cooking.Gameplay.TapNumber
 
             // Save to Recipe
             CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
+
+            if (successTap == 0) OnCookingFailed?.Invoke();
+            else OnCookingSuccess?.Invoke();
         }
 
         public void TapSuccess(int num)
         {
             if (num == lastTapNum + 1)
+            {
                 successTap++;
+
+                OnCookingHit?.Invoke();
+            }
             else
             {
                 Debug.Log("Number not ascending : " + lastTapNum);
                 missedTap++;
+
+                OnCookingMissed?.Invoke();
             }
             lastTapNum = num;
 
@@ -76,6 +86,8 @@ namespace Cooking.Gameplay.TapNumber
 
             // Update according current total Target executed (Start: Perfect > Good > Bad)
             CookingIndicator.SetIndicatorUI((float) successTap / (successTap + missedTap));
+
+            OnCookingMissed?.Invoke();
         }
 
         #region GUI

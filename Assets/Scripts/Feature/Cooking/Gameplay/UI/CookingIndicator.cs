@@ -48,6 +48,7 @@ namespace Cooking.Gameplay.UI
 
             // Optimization for UI drawcall
             if (FinalResult == prevResult) return;
+            prevResult = FinalResult;
 
             IndicatorImage.sprite = AccuracySprites[FinalResult];
         }

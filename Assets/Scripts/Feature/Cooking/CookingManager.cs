@@ -60,6 +60,15 @@ namespace Cooking
 
             // Save RecipeData
             SaveManager.Save();
+
+            // TEMP
+            BackToRecipeBook();
+        }
+
+        //Temp
+        public void BackToRecipeBook()
+        {
+            SceneManager.LoadScene("RecipeBook");
         }
 
         public void LoadGame(Scene scene, LoadSceneMode mode)

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,7 @@ namespace Cooking.Gameplay.Slider
     using AYellowpaper.SerializedCollections;
     using Gameplay.UI;
 
-    public class CookingBarCursorController : MonoBehaviour
+    public class CookingBarCursorController : CookingGameplay
     {
         [Header("References")]
         public CookingBarController CookingBarController;
@@ -32,6 +33,11 @@ namespace Cooking.Gameplay.Slider
         private float timeoutTimer = 0f;
         private float stayTime = 0f;
         private float gameTimer = 0f;
+
+
+        #region Actions
+        private int prevState;
+        #endregion
 
         private void Awake()
         {
@@ -82,21 +88,43 @@ namespace Cooking.Gameplay.Slider
             if (timeoutTimer >= TimeoutTime)
             {
                 Debug.Log("Timeout!");
+                OnCookingFailed?.Invoke();
                 GameOver();
                 return;
             }
 
             // Game Time Ends
-            if (gameTimer > GameTime) GameOver();
+            if (gameTimer > GameTime)
+            {
+                OnCookingSuccess?.Invoke();
+                GameOver();
+            }
 
             xPos = Mathf.Clamp(CursorTransform.anchoredPosition.x + direction * SpeedScale * CookingBarController.MainSize * Time.deltaTime, 0f, CookingBarController.MainSize);
             CursorTransform.anchoredPosition = new Vector2(xPos, CursorTransform.anchoredPosition.y);
 
-            if (!CookingBarController.IsInsideBar(xPos - CookingBarController.MainSize / 2)) timeoutTimer += Time.deltaTime;
+            if (!CookingBarController.IsInsideBar(xPos - CookingBarController.MainSize / 2))
+            {
+                timeoutTimer += Time.deltaTime;
+
+                // To ensure only called once
+                if (prevState != 0)
+                {
+                    prevState = 0;
+                    OnCookingMissed?.Invoke();
+                }
+            }
             else
             {
                 stayTime += Time.deltaTime;
                 timeoutTimer = 0f;
+
+                // To ensure only called once
+                if(prevState != 1)
+                {
+                    prevState = 1;
+                    OnCookingHit?.Invoke();
+                }
             }
         }
 
