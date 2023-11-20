@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedWeapon: 1
-  ActiveWeapon: {fileID: 2136217188066170426}
+  ActiveWeapon: {fileID: 1841896619066884326}
   Animator: {fileID: 7362357953008424077}
   TargetTransform: {fileID: 0}
   StopDistance: 7
@@ -391,10 +391,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8eea819b0b19c469ce4134ac32e688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioSource: {fileID: 0}
+  AudioSource: {fileID: -5201471026571070349}
   DeadClip: {fileID: 8300000, guid: 3525cea12118fda42aad1961176013a5, type: 3}
   DamagedClip: {fileID: 8300000, guid: 820650511a9ea754b858eeff00e196e9, type: 3}
-  character: {fileID: 0}
+  character: {fileID: -8786994105791154135}
 --- !u!1 &2625521884948085699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,8 +1008,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4223014152505166794, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
         type: 3}
+      propertyPath: spawnArea.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223014152505166794, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      propertyPath: spawnArea.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223014152505166794, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      propertyPath: spawnArea.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223014152505166794, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
       propertyPath: maxSpawnObjectInPool
       value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223014152505166794, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      propertyPath: followSpawnerRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5612272442754133263, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
         type: 3}
@@ -1084,9 +1104,14 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7917661058790774877, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
     - {fileID: 178976896716052777, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
+    - {fileID: -4846039439887501701, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 392215219830211580, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1841896619066884326}
   m_SourcePrefab: {fileID: 100100000, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
 --- !u!54 &239774819553659423 stripped
 Rigidbody:
@@ -1100,24 +1125,56 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2385279395322159169}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2624291619868189629}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db5253d860404de4f97d306d765ae45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2136217188066170426 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4846039439887501701, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+--- !u!1 &2624291619868189629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392215219830211580, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
     type: 3}
   m_PrefabInstance: {fileID: 2385279395322159169}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &1841896619066884326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624291619868189629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b924a09be39c1499a3edbd0a18ee77, type: 3}
+  m_Script: {fileID: 11500000, guid: 7326dbd1d7e62534ba66a0e759ccb629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Holder: {fileID: -8786994105791154135}
+  rb: {fileID: 239774819553659423}
+  TargetTags:
+  - Player
+  - Companion
+  stats:
+    _serializedList:
+    - Key: 0
+      Value:
+        BaseValue: 400
+    - Key: 1
+      Value:
+        BaseValue: 100
+    - Key: 2
+      Value:
+        BaseValue: 100
+  UltimateTimer: 1
+  isCooldownUltimate: 0
+  isUltimateCancelable: 0
+  fireObjectPrefab: {fileID: 0}
+  WeaponAnimator: {fileID: 7362357953008424077}
+  ultimateDuration: 0
+  ultimateBulletObject: {fileID: 0}
+  ultimateBulletInterval: 1
+  bulletAmount: 3
+  bulletSpawner: {fileID: 1981898329146583947}
 --- !u!4 &7852301884205206862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5612272442754133263, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
@@ -1450,4 +1507,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3220b3039f51dfb48af05dfe5eb6d74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveWeapon: {fileID: 2136217188066170426}
+  ActiveWeapon: {fileID: 1841896619066884326}

@@ -11,6 +11,7 @@ public class GunController : Weapon.Weapon
 {
     #region Properties
     public GameObject fireObjectPrefab;
+    public Animator WeaponAnimator;
 
     private bool isFiringUltimate = false;
     [SerializeField] private float ultimateDuration;
@@ -19,7 +20,7 @@ public class GunController : Weapon.Weapon
     public GameObject ultimateBulletObject;
     [SerializeField] private float ultimateBulletInterval = 1;
     [SerializeField] private float bulletAmount = 3;
-    [SerializeField] private GameObject bulletSpawnPoint;
+    [SerializeField] private Spawner.Spawner bulletSpawner;
     #endregion
 
     protected new void Update()
@@ -31,16 +32,41 @@ public class GunController : Weapon.Weapon
     public override void Attack()
     {
         base.Attack();
-        var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
-        var controller = fireObject.GetComponent<BulletHit>();
-        controller.Initialize(this);
-        fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
+        var bullets = bulletSpawner.Spawn();
+        foreach (var bullet in bullets)
+        {
+            var controller = bullet.GetComponent<BulletHit>();
+            controller.Initialize(this);
+        }
+
     }
 
     public override void StartAttack()
     {
-        if(isFiringUltimate) return;
-        base.StartAttack();
+        if (isFiringUltimate) return;
+        if (WeaponAnimator == null) base.StartAttack();
+        else
+        {
+            float animationLength = 0;
+            foreach (AnimationClip clip in WeaponAnimator.runtimeAnimatorController.animationClips)
+            {
+                if (clip.name == "attack")
+                {
+                    animationLength = clip.length;
+                }
+            }
+
+            WeaponAnimator.SetFloat("AttackSpeed", stats[WeaponStatsEnum.Speed].Value/100 * animationLength);
+            WeaponAnimator.SetBool("IsAttacking", true);
+        }
+
+    }
+
+    public override void StopAttack()
+    {
+        if (WeaponAnimator == null) base.StopAttack();
+        else WeaponAnimator.SetBool("IsAttacking", false);
+
     }
 
     protected override void UltimateAttack()
@@ -53,7 +79,7 @@ public class GunController : Weapon.Weapon
         isFiringUltimate = true;
         for (int i = 0; i < bulletAmount; i++)
         {
-            GameObject gameObject = Instantiate(ultimateBulletObject, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+            GameObject gameObject = Instantiate(ultimateBulletObject, bulletSpawner.transform.position, bulletSpawner.transform.rotation);
             gameObject.GetComponent<Bullet>().weapon = this;
             gameObject.GetComponent<Rigidbody>().velocity = transform.forward * gameObject.GetComponent<Bullet>().TravelSpeed;
             yield return new WaitForSeconds(ultimateDuration / bulletAmount);
