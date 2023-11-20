@@ -13,7 +13,7 @@ namespace Character
         // Could be not the best practice.
         public Dictionary<string, Dictionary<StatsEnum, List<StatModifier>>> CharacterStatMods = new();
         public Dictionary<string, Dictionary<DynamicStatsEnum, List<StatModifier>>> CharacterDynamicStatMods = new();
-        public Dictionary<string, Dictionary<Weapon.WeaponStatsEnum, List<StatModifier>>> WeaponStatMods = new();
+        public Dictionary<string, Dictionary<WeaponStatsEnum, List<StatModifier>>> WeaponStatMods = new();
 
         public RecipeListSO RecipeSO;
         private SaveData saveData;
@@ -46,66 +46,77 @@ namespace Character
 
             foreach (var recipe in RecipeSO.Recipes)
             {
-                if (recipe.CurrentStats == null) continue;
-
-                var recipeStat = recipe.CurrentStats;
-                // Initialize Modifier with StatsManager as Source
-                recipeStat.Stat.Initialize(this);
-                if (recipeStat.Stat.StatType == StatEffect.StatsType.Character)
+                for (int i = 0; i < recipe.Stats.Length; i++)
                 {
-                    if (recipeStat.Stat.AffectDynamicStat)
-                    {
-                        if(!CharacterDynamicStatMods.ContainsKey(recipeStat.AffectedCharacter))
-                            // Initialize new Dictionary of Stats
-                            CharacterDynamicStatMods.Add(recipeStat.AffectedCharacter, new Dictionary<DynamicStatsEnum, List<StatModifier>>());
+                    if (recipe.data.CookingDone < RecipeSO.UnlockSettings[i]) continue;
 
-                        if (!CharacterDynamicStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.DynamicStatsAffected)) {
-                            // Initialize new List of Mods on that Stats
-                            CharacterDynamicStatMods[recipeStat.AffectedCharacter] = new()
+                    var recipeStat = recipe.Stats[i];
+
+                    // Replace Stat 3 with Unique Stat
+                    if(i >= 2 && recipe.data.UniqueStatIndex != -1)
+                    {
+                        recipeStat = RecipeSO.UniqueStatList[recipe.data.UniqueStatIndex];
+                    }
+
+                    // Initialize Modifier with StatsManager as Source
+                    recipeStat.Stat.Initialize(this);
+                    if (recipeStat.Stat.StatType == StatEffect.StatsType.Character)
+                    {
+                        if (recipeStat.Stat.AffectDynamicStat)
+                        {
+                            if (!CharacterDynamicStatMods.ContainsKey(recipeStat.AffectedCharacter))
+                                // Initialize new Dictionary of Stats
+                                CharacterDynamicStatMods.Add(recipeStat.AffectedCharacter, new Dictionary<DynamicStatsEnum, List<StatModifier>>());
+
+                            if (!CharacterDynamicStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.DynamicStatsAffected))
+                            {
+                                // Initialize new List of Mods on that Stats
+                                CharacterDynamicStatMods[recipeStat.AffectedCharacter] = new()
                             {
                                 { recipeStat.Stat.DynamicStatsAffected, new List<StatModifier>() }
                             };
+                            }
+
+                            // And finally add the modifier.
+                            CharacterDynamicStatMods[recipeStat.AffectedCharacter][recipeStat.Stat.DynamicStatsAffected].Add(recipeStat.Stat.Modifier);
                         }
-
-                        // And finally add the modifier.
-                        CharacterDynamicStatMods[recipeStat.AffectedCharacter][recipeStat.Stat.DynamicStatsAffected].Add(recipeStat.Stat.Modifier);
-                    }
-                    else
-                    {
-                        if (!CharacterStatMods.ContainsKey(recipeStat.AffectedCharacter))
-                            // Initialize new Dictionary of Stats
-                            CharacterStatMods.Add(recipeStat.AffectedCharacter, new Dictionary<StatsEnum, List<StatModifier>>());
-
-                        if (!CharacterStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.StatsAffected))
+                        else
                         {
-                            // Initialize new List of Mods on that Stats
-                            CharacterStatMods[recipeStat.AffectedCharacter] = new()
+                            if (!CharacterStatMods.ContainsKey(recipeStat.AffectedCharacter))
+                                // Initialize new Dictionary of Stats
+                                CharacterStatMods.Add(recipeStat.AffectedCharacter, new Dictionary<StatsEnum, List<StatModifier>>());
+
+                            if (!CharacterStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.StatsAffected))
+                            {
+                                // Initialize new List of Mods on that Stats
+                                CharacterStatMods[recipeStat.AffectedCharacter] = new()
                             {
                                 { recipeStat.Stat.StatsAffected, new List<StatModifier>() }
                             };
+                            }
+
+                            // And finally add the modifier.
+                            CharacterStatMods[recipeStat.AffectedCharacter][recipeStat.Stat.StatsAffected].Add(recipeStat.Stat.Modifier);
                         }
-
-                        // And finally add the modifier.
-                        CharacterStatMods[recipeStat.AffectedCharacter][recipeStat.Stat.StatsAffected].Add(recipeStat.Stat.Modifier);
                     }
-                }
-                else if (recipeStat.Stat.StatType == StatEffect.StatsType.Weapon)
-                {
-                    if (!WeaponStatMods.ContainsKey(recipeStat.AffectedCharacter))
-                        // Initialize new Dictionary of Stats
-                        WeaponStatMods.Add(recipeStat.AffectedCharacter, new Dictionary<Weapon.WeaponStatsEnum, List<StatModifier>>());
-
-                    if (!WeaponStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.WeaponStatsAffected))
+                    else if (recipeStat.Stat.StatType == StatEffect.StatsType.Weapon)
                     {
-                        // Initialize new List of Mods on that Stats
-                        WeaponStatMods[recipeStat.AffectedCharacter] = new()
+                        if (!WeaponStatMods.ContainsKey(recipeStat.AffectedCharacter))
+                            // Initialize new Dictionary of Stats
+                            WeaponStatMods.Add(recipeStat.AffectedCharacter, new Dictionary<WeaponStatsEnum, List<StatModifier>>());
+
+                        if (!WeaponStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.WeaponStatsAffected))
+                        {
+                            // Initialize new List of Mods on that Stats
+                            WeaponStatMods[recipeStat.AffectedCharacter] = new()
                         {
                             { recipeStat.Stat.WeaponStatsAffected, new List<StatModifier>() }
                         };
-                    }
+                        }
 
-                    // And finally add the modifier.
-                    WeaponStatMods[recipeStat.AffectedCharacter][recipeStat.Stat.WeaponStatsAffected].Add(recipeStat.Stat.Modifier);
+                        // And finally add the modifier.
+                        WeaponStatMods[recipeStat.AffectedCharacter][recipeStat.Stat.WeaponStatsAffected].Add(recipeStat.Stat.Modifier);
+                    }
                 }
             }
         }

@@ -16,3 +16,72 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cafa5b7c85a9683478ab8fac5106a1da, type: 2}
   - {fileID: 11400000, guid: f136afa23cd7cab47866b6e17df8a3db, type: 2}
   - {fileID: 11400000, guid: da0e9f42a41aff6428ef169eb9da5f5c, type: 2}
+  Ingredients:
+  - {fileID: 11400000, guid: 43b2583e4b1c2ef4caecff3843064e74, type: 2}
+  - {fileID: 11400000, guid: 2a816c1ac26ce34478d35f62976e99ae, type: 2}
+  - {fileID: 11400000, guid: 07478163e41e7e74cb5b6934beded27e, type: 2}
+  UnlockSettings: 00000000050000000f000000
+  AutoCookUnlockSettings: 15
+  DefaultUniqueStat:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: da0e9f42a41aff6428ef169eb9da5f5c, type: 2}
+      Value: 0
+    - Key: {fileID: 11400000, guid: f136afa23cd7cab47866b6e17df8a3db, type: 2}
+      Value: 1
+    - Key: {fileID: 11400000, guid: cafa5b7c85a9683478ab8fac5106a1da, type: 2}
+      Value: 2
+  UniqueStatList:
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 2
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 10
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 2
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 15
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 20
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0

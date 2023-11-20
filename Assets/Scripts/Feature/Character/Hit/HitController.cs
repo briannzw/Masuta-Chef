@@ -32,7 +32,7 @@ namespace Character.Hit
         public void Initialize(Weapon source)
         {
             Source = source;
-            Value.WeaponAttack = Source.stats[Weapon.WeaponStatsEnum.Power].Value;
+            Value.WeaponAttack = Source.stats[WeaponStatsEnum.Power].Value;
             if(source.Holder == null)
             {
                 Debug.LogWarning("There is no Holder detected in Weapon: " + source.name + " this HitController should be deleted or not instantiated!");

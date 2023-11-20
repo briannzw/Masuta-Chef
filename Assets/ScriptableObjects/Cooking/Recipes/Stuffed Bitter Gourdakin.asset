@@ -12,25 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4b0ec188903b447ae4ec95cf512eb4, type: 3}
   m_Name: Stuffed Bitter Gourdakin
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 37ffff6c2c0b4ce4a9e21fbcb713d988, type: 3}
   name: Stuffed Bitter Gourdakin
   Description: Known for its unique balance of bitter, savory, and slightly tangy
     flavors, making it a beloved part of Praksha cuisine. It is often served with
     roti or rice and enjoyed during special occasions and family gatherings.
+  CookingType: 0
   Ingredients:
     _serializedList:
     - Key: {fileID: 11400000, guid: 2a816c1ac26ce34478d35f62976e99ae, type: 2}
       Value: 5
   data:
     CurrentBlueprint: 8
-    NeededBlueprint: 100
-    CookingType: 0
+    NeededBlueprint: 1
     CookingDone: 0
     PerfectCookingDone: 0
     ConsecutivePerfectCookingDone: 0
-    UniqueValueUnlocked: 0
-  Stats1:
-    AffectedCharacter: Player
+    UniqueStatIndex: -1
+    CookingPoint: 0
+  Stats:
+  - AffectedCharacter: Player
     Stat:
       StatType: 0
       AffectDynamicStat: 0
@@ -38,7 +39,7 @@ MonoBehaviour:
       DynamicStatsAffected: 0
       WeaponStatsAffected: 0
       StatValue: 2
-      StatModifierType: 200
+      StatModifierType: 100
       overwriteOrder: 0
       priorityOrder: 0
       Behaviour: 0
@@ -48,8 +49,7 @@ MonoBehaviour:
       UseInterval: 0
       IntervalTimer: 0
       Interval: 0
-  Stats2:
-    AffectedCharacter: Player
+  - AffectedCharacter: Player
     Stat:
       StatType: 0
       AffectDynamicStat: 0
@@ -67,8 +67,7 @@ MonoBehaviour:
       UseInterval: 0
       IntervalTimer: 0
       Interval: 0
-  Stats3:
-    AffectedCharacter: Player
+  - AffectedCharacter: Player
     Stat:
       StatType: 0
       AffectDynamicStat: 0
@@ -76,25 +75,6 @@ MonoBehaviour:
       DynamicStatsAffected: 0
       WeaponStatsAffected: 0
       StatValue: 2
-      StatModifierType: 100
-      overwriteOrder: 0
-      priorityOrder: 0
-      Behaviour: 0
-      StatusEffect: 0
-      Timer: 0
-      Duration: 0
-      UseInterval: 0
-      IntervalTimer: 0
-      Interval: 0
-  Stats3Unique:
-    AffectedCharacter: Player
-    Stat:
-      StatType: 0
-      AffectDynamicStat: 0
-      StatsAffected: 2
-      DynamicStatsAffected: 0
-      WeaponStatsAffected: 0
-      StatValue: 10
       StatModifierType: 100
       overwriteOrder: 0
       priorityOrder: 0

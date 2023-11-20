@@ -8,7 +8,7 @@ namespace Save
 
     public class SaveManager : MonoBehaviour
     {
-        public bool IsEncrypted;
+        public bool IsEncrypted = true;
         public SaveData SaveData;
         [Header("Statistics")]
         [ReadOnly, SerializeField] private float saveTime;
