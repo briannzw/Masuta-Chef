@@ -6,6 +6,7 @@ namespace Cooking.Gameplay.Slider
     using AYellowpaper.SerializedCollections;
     using MyBox;
     using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine.UI;
 
     public class CookingBarController : MonoBehaviour
@@ -44,13 +45,27 @@ namespace Cooking.Gameplay.Slider
 
             if (CookingManager.Instance == null) return;
 
-            int index = 0;
+            int index = 0, topIndex = 0;
             var ingredients = CookingManager.Instance.CurrentRecipe.Ingredients;
             foreach(var ingredient in ingredients)
             {
                 ingredientIcons[index].sprite = ingredient.Key.CookingIcon;
                 ingredientIcons[index].enabled = true;
                 index++;
+            }
+
+            int prevCount = 0;
+            var topIngredients = ingredients.OrderBy(pair => pair.Value).Take(ingredientIcons.Count - index).ToArray();
+            for (int i = index; i < ingredientIcons.Count; i++)
+            {
+                ingredientIcons[i].sprite = topIngredients[topIndex].Key.CookingIcon;
+                if (topIngredients.Length < ingredientIcons.Count - index)
+                {
+                    prevCount++;
+                    if (prevCount > Mathf.CeilToInt((ingredientIcons.Count - index) / topIngredients.Count())) topIndex++;
+                }
+                else topIndex++;
+                ingredientIcons[i].enabled = true;
             }
         }
 
