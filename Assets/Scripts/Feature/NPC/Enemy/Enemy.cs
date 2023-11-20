@@ -32,6 +32,11 @@ namespace NPC.Enemy
         [HideInInspector]
         private GameObject defaultEnemyTarget;
 
+        private void OnEnable()
+        {
+            Agent.isStopped = false;
+        }
+
         protected new void Awake()
         {
             base.Awake();
@@ -69,11 +74,19 @@ namespace NPC.Enemy
         void EnemyDie()
         {
             killCount++;
-            GameManager.Instance.OnEnemiesKilled?.Invoke();
-            if (SelectedWeapon != AttackType.Joker)
+            Agent.isStopped = true;
+            //to do change to dead state
+
+            if(Animator != null) Animator.SetTrigger("Dead");
+            else
             {
-                GetComponent<SpawnObject>().Release();
+                if (SelectedWeapon != AttackType.Joker)
+                {
+                    GetComponent<SpawnObject>().Release();
+                }
             }
+            GameManager.Instance.OnEnemiesKilled?.Invoke();
+
         }
 
         void RemoveTauntEffect()

@@ -13,12 +13,14 @@ public class EnemyRangedAttackState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
+        enemy.Agent.isStopped = true;
         enemy.ActiveWeapon.StartAttack();
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        enemy.Agent.isStopped = false;
         enemy.AttackDuration = enemy.DefaultAttackDuration;
         enemy.ActiveWeapon.StopAttack();
     }

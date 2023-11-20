@@ -188,16 +188,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedWeapon: 1
-  ActiveWeapon: {fileID: 6295185956702997450}
+  ActiveWeapon: {fileID: 0}
   Animator: {fileID: 0}
   TargetTransform: {fileID: 0}
   StopDistance: 7
   Agent: {fileID: 347959739561581255}
+  CombatEngageDistance: 7
+  IsEngaging: 0
+  CurrentEnemies: {fileID: 0}
   IsThisJoker: 0
   MaxDistanceFromPlayer: 3
   IsFollowingEnemy: 0
   DistanceFromPlayer: 0
   companionSlotPosition: {fileID: 0}
+  companionSpawnOrder: 0
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   wanderRadius: 2
@@ -262,8 +266,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372bb9ede6ac2d42847d63b05353e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   maxLevel: 30
   expPerEnemyKill: 2
+  StatsPerLevel:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 100
+      - Key: 1
+        Value:
+          BaseValue: 100
+    StatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 0
+      - Key: 1
+        Value:
+          BaseValue: 0
+      - Key: 2
+        Value:
+          BaseValue: 50
+      - Key: 3
+        Value:
+          BaseValue: 0
+      - Key: 4
+        Value:
+          BaseValue: 0
 --- !u!114 &568359642643547007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6789214683903502581, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
+    - {fileID: -4846039439887501701, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2699134454932043561, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
     m_AddedGameObjects: []
@@ -1104,6 +1136,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1034013250116836909}
+    - targetCorrespondingSourceObject: {fileID: 392215219830211580, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5273810803544124738}
   m_SourcePrefab: {fileID: 100100000, guid: 6aa6882eb2fcef64c92ed1b7e9b90939, type: 3}
 --- !u!4 &2738569575773065406 stripped
 Transform:
@@ -1117,18 +1153,6 @@ Rigidbody:
     type: 3}
   m_PrefabInstance: {fileID: 7774222893465451953}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6295185956702997450 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4846039439887501701, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
-    type: 3}
-  m_PrefabInstance: {fileID: 7774222893465451953}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7967706814836702797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b924a09be39c1499a3edbd0a18ee77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7967706814836702797 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 392215219830211580, guid: 6aa6882eb2fcef64c92ed1b7e9b90939,
@@ -1246,4 +1270,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 2636685448636268019}
   AttackClip: {fileID: 8300000, guid: ae2ed0044fdd18e4a9096d5b8c266e65, type: 3}
-  weapon: {fileID: 6295185956702997450}
+  weapon: {fileID: 0}
+--- !u!114 &5273810803544124738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7967706814836702797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7326dbd1d7e62534ba66a0e759ccb629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Holder: {fileID: 6165715537076772562}
+  rb: {fileID: 5308188827236407279}
+  TargetTags:
+  - Enemy
+  stats:
+    _serializedList:
+    - Key: 0
+      Value:
+        BaseValue: 100
+    - Key: 1
+      Value:
+        BaseValue: 100
+    - Key: 2
+      Value:
+        BaseValue: 100
+  UltimateTimer: 1
+  isCooldownUltimate: 0
+  isUltimateCancelable: 0
+  fireObjectPrefab: {fileID: 0}
+  WeaponAnimator: {fileID: 0}
+  ultimateDuration: 0
+  ultimateBulletObject: {fileID: 0}
+  ultimateBulletInterval: 1
+  bulletAmount: 3
+  bulletSpawner: {fileID: 0}
