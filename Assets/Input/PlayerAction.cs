@@ -134,6 +134,15 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rollback"",
+                    ""type"": ""Button"",
+                    ""id"": ""fdcb04f9-2347-4a5f-bf64-dcf7ea6d3ce8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -442,6 +451,39 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Ultimate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3eb2f9e2-42bb-4322-bab4-10150cf33b34"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Ultimate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d77e8acf-9268-45d5-bf93-228e47f18710"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Rollback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a91c4cf-cc6b-496a-b53e-aa735584b9e8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Rollback"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -837,6 +879,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Gameplay_Throw = m_Gameplay.FindAction("Throw", throwIfNotFound: true);
         m_Gameplay_Throw_High = m_Gameplay.FindAction("Throw_High", throwIfNotFound: true);
         m_Gameplay_Ultimate = m_Gameplay.FindAction("Ultimate", throwIfNotFound: true);
+        m_Gameplay_Rollback = m_Gameplay.FindAction("Rollback", throwIfNotFound: true);
         // Panel
         m_Panel = asset.FindActionMap("Panel", throwIfNotFound: true);
         m_Panel_Navigate = m_Panel.FindAction("Navigate", throwIfNotFound: true);
@@ -920,6 +963,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Throw;
     private readonly InputAction m_Gameplay_Throw_High;
     private readonly InputAction m_Gameplay_Ultimate;
+    private readonly InputAction m_Gameplay_Rollback;
     public struct GameplayActions
     {
         private @PlayerAction m_Wrapper;
@@ -936,6 +980,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         public InputAction @Throw => m_Wrapper.m_Gameplay_Throw;
         public InputAction @Throw_High => m_Wrapper.m_Gameplay_Throw_High;
         public InputAction @Ultimate => m_Wrapper.m_Gameplay_Ultimate;
+        public InputAction @Rollback => m_Wrapper.m_Gameplay_Rollback;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -981,6 +1026,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Ultimate.started += instance.OnUltimate;
             @Ultimate.performed += instance.OnUltimate;
             @Ultimate.canceled += instance.OnUltimate;
+            @Rollback.started += instance.OnRollback;
+            @Rollback.performed += instance.OnRollback;
+            @Rollback.canceled += instance.OnRollback;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1021,6 +1069,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Ultimate.started -= instance.OnUltimate;
             @Ultimate.performed -= instance.OnUltimate;
             @Ultimate.canceled -= instance.OnUltimate;
+            @Rollback.started -= instance.OnRollback;
+            @Rollback.performed -= instance.OnRollback;
+            @Rollback.canceled -= instance.OnRollback;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1194,6 +1245,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         void OnThrow(InputAction.CallbackContext context);
         void OnThrow_High(InputAction.CallbackContext context);
         void OnUltimate(InputAction.CallbackContext context);
+        void OnRollback(InputAction.CallbackContext context);
     }
     public interface IPanelActions
     {

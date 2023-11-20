@@ -6,13 +6,8 @@ public class EventAnimationAttack : MonoBehaviour
 {
     public Weapon.Weapon ActiveWeapon;
 
-    public void StartAttack()
+    public void Attack()
     {
-        ActiveWeapon.StartAttack();
-    }
-
-    public void StopAttack()
-    {
-        ActiveWeapon.StopAttack();
+        ActiveWeapon.Attack();
     }
 }
