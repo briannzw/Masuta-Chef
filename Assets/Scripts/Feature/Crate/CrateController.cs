@@ -27,7 +27,7 @@ namespace Crate
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            renderer = GetComponent<Renderer>();
+            renderer = GetComponentInChildren<Renderer>();
 
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null)
