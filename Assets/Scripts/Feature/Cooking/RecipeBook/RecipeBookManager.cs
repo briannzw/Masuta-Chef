@@ -154,6 +154,8 @@ namespace Cooking.RecipeBook
         public void Back()
         {
             Destroy(CookingManager.gameObject);
+
+            SceneManager.LoadScene("MainMenu");
         }
 
         private void FetchData()

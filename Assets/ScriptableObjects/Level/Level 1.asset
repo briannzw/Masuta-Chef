@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Level 1
   LevelAreaPrefab: {fileID: 6615127187657421027, guid: 71ad26f3cc10e434d921deddee2d609a,
     type: 3}
-  PlayerSpawnPoint: {x: 0, y: 2, z: 0}
+  PlayerSpawnPoint: {x: 0, y: 0.681971, z: 0}
   Waves:
   - EnemyList:
       _serializedList:
@@ -23,8 +23,8 @@ MonoBehaviour:
         Value: 10
       - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
         Value: 5
-    Time: 6
-    SpawnInterval: 1
+    Time: 0
+    SpawnInterval: 0
     SpawnPerInterval: 3
   - EnemyList:
       _serializedList:

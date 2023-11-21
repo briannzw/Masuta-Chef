@@ -136,11 +136,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Indicator
       objectReference: {fileID: 0}
-    - target: {fileID: 5274143373423465764, guid: 1fdb5dc2183df574f9f8ec4f1787b440,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5516013801092946006, guid: 1fdb5dc2183df574f9f8ec4f1787b440,
         type: 3}
       propertyPath: m_Pivot.x
@@ -465,6 +460,8 @@ MonoBehaviour:
       Value: 0.75
   indicatorBarImage: {fileID: 1128648699}
   indicatorBarCursor: {fileID: 1966325359}
+  indicatorBarOffset: 10
+  gameTime: 60
   stirValue: 0.5
   stirNormal:
     Min: 70

@@ -925,9 +925,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 666763696}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: EnableNavMeshAgents
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2490,7 +2490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967f3ed1916bc7c40be93452a229c05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevel: {fileID: 11400000, guid: 39eb6f94bc549f84cb8d3b7243bcbe20, type: 2}
+  CurrentLevel: {fileID: 11400000, guid: 4225426808cd7274795241e216deef45, type: 2}
   waveManager: {fileID: 666763696}
   PlayerTransform: {fileID: 64046733}
   surfaces:
@@ -2645,18 +2645,6 @@ MonoBehaviour:
       - m_Target: {fileID: 248993773}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 666763696}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3946,6 +3934,7 @@ MonoBehaviour:
   LevelManager: {fileID: 666763695}
   SaveManager: {fileID: 1410782209}
   StatsManager: {fileID: 1264775656}
+  AIAvoidancePredictionTime: 0.7
 --- !u!114 &1410782209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3960,36 +3949,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEncrypted: 1
   SaveData:
-    CookingPoints: 0
     RecipeData:
       _serializedList:
       - Key: Stuffed Bitter Gourdakin
         Value:
           CurrentBlueprint: 8
           NeededBlueprint: 100
-          CookingType: 0
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          UniqueStatIndex: -1
+          CookingPoint: 0
       - Key: Cactyrn-filled Chutney Sandwich
         Value:
           CurrentBlueprint: 9
           NeededBlueprint: 100
-          CookingType: 0
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          UniqueStatIndex: -1
+          CookingPoint: 0
       - Key: Orant and Chickpea Curry
         Value:
           CurrentBlueprint: 8
           NeededBlueprint: 100
-          CookingType: 0
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          UniqueStatIndex: -1
+          CookingPoint: 0
     IngredientData:
       _serializedList:
       - Key: Chicken
@@ -4330,10 +4318,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 34
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":213,"yPos":414.8},"ID":33,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[32],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":31}],"EditorInfo":{"isRoot":true,"xPos":114,"yPos":32},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"You
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":483,"yPos":260.8},"ID":33,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[32],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":31}],"EditorInfo":{"isRoot":true,"xPos":384,"yPos":-121.000031},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"You
     find yourself in the Praksha Open Market, where high-quality food ingredients
-    are often found. ","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Chef","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":32}],"EditorInfo":{"isRoot":false,"xPos":135,"yPos":169.8},"ID":31,"ParamActions":[],"TMPFontGUID":null,"Text":"However,
-    you must exercise caution because this open market is patrolled by monsters.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":33}],"EditorInfo":{"isRoot":false,"xPos":157,"yPos":296.8},"ID":32,"ParamActions":[],"TMPFontGUID":null,"Text":"Beware,
+    are often found. ","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Chef","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":32}],"EditorInfo":{"isRoot":false,"xPos":405,"yPos":15.7999725},"ID":31,"ParamActions":[],"TMPFontGUID":null,"Text":"However,
+    you must exercise caution because this open market is patrolled by monsters.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":33}],"EditorInfo":{"isRoot":false,"xPos":427,"yPos":142.799988},"ID":32,"ParamActions":[],"TMPFontGUID":null,"Text":"Beware,
     Chef You must shield yourself from the \"Minions\" drawing near while confronting
     long-range assaults from the \"Ranged Attacker\" adversaries!","parentUIDs":[31],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
@@ -4376,9 +4364,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 666763696}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: EnableNavMeshAgents
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -45,6 +45,7 @@ namespace DialogueEditor
             {
                 if (interactButton2.gameObject.activeSelf)
                 {
+                    interactButton7.onClick.Invoke();
                     interactButton2.onClick.Invoke();
                     interactButton2.gameObject.SetActive(false);
                     updateActive = false;

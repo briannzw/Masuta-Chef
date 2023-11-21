@@ -36,7 +36,7 @@ namespace DialogueEditor
         private float m_hoverT = 0.0f;
         private eHoverState m_hoverState;
         private bool Hovering { get { return (m_hoverState == eHoverState.animatingOn || m_hoverState == eHoverState.animatingOff); } }
-        private Vector3 BigSize { get { return Vector3.one * 1.2f; } }
+        private Vector3 BigSize { get { return Vector3.one * 1.05f; } }
 
 
         //--------------------------------------
