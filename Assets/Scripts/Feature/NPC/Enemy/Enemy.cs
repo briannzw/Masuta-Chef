@@ -17,8 +17,6 @@ namespace NPC.Enemy
         public EnemyStateMachine StateMachine;
 
         [Header("Combat Properties")]
-        [SerializeField] GameObject engageText; //debug
-        public GameObject attackText; //debug
 
         public float AttackDistance;
         public float AttackTimer;
@@ -58,7 +56,6 @@ namespace NPC.Enemy
         protected void Update()
         {
             StateMachine.CurrentState.FrameUpdate();
-            engageText.SetActive(IsEngaging);
             currentTauntTimer -= Time.deltaTime;
             if (!IsTaunted && !IsEngaging)
             {

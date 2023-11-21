@@ -23,6 +23,7 @@ namespace Crate
         public AudioClip droppedClip;
         //tambahkan audiosource
         public AudioSource audioSource;
+        [SerializeField] private ParticleSystem particleDropCrate;
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -71,6 +72,7 @@ namespace Crate
 
             // Play SFX (Pickup)
             PlaySFX(pickupClip);
+            particleDropCrate.Clear();
 
             return true;
         }
@@ -80,8 +82,7 @@ namespace Crate
             Holder = null;
             rb.isKinematic = false;
 
-            // Play SFX (Dropped)
-            PlaySFX(droppedClip);
+            
         }
 
         private void PlaySFX(AudioClip clip)
@@ -90,6 +91,16 @@ namespace Crate
             {
                 audioSource.clip = clip;
                 audioSource.Play();
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Floor"))
+            {
+                particleDropCrate.Play();
+                // Play SFX (Dropped)
+                PlaySFX(droppedClip);
             }
         }
     }
