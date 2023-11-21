@@ -652,11 +652,15 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 1.8
   Agent: {fileID: 0}
+  CombatEngageDistance: 7
+  IsEngaging: 0
+  CurrentEnemies: {fileID: 0}
   IsThisJoker: 0
   MaxDistanceFromPlayer: 3
   IsFollowingEnemy: 0
   DistanceFromPlayer: 0
   companionSlotPosition: {fileID: 0}
+  companionSpawnOrder: 0
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   wanderRadius: 2
@@ -721,8 +725,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372bb9ede6ac2d42847d63b05353e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: -4670273841599568030}
   maxLevel: 30
   expPerEnemyKill: 2
+  StatsPerLevel:
+    DynamicStatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 100
+      - Key: 1
+        Value:
+          BaseValue: 100
+    StatList:
+      _serializedList:
+      - Key: 0
+        Value:
+          BaseValue: 1
+      - Key: 1
+        Value:
+          BaseValue: 1
+      - Key: 2
+        Value:
+          BaseValue: 1
+      - Key: 3
+        Value:
+          BaseValue: 1
+      - Key: 4
+        Value:
+          BaseValue: 0
 --- !u!114 &6871964901301136818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,7 +1069,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rb
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3670681870901917347}
     - target: {fileID: 8271466441426000436, guid: 103055a6839e9794ca3f64d07afd4284,
         type: 3}
       propertyPath: Holder

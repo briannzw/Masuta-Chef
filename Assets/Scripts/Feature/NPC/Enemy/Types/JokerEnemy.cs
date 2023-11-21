@@ -23,10 +23,14 @@ namespace NPC.Enemy
         private bool CanPickUp = true;
         [SerializeField] private float safeDistance = 10f;
 
+        [SerializeField]
+        private LayerMask layerMask;
+
         private new void Awake()
         {
             base.Awake();
             IsThisJoker = true;
+            StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
         }
 
         private new void Start()
@@ -213,8 +217,7 @@ namespace NPC.Enemy
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawSphere(transform.position, pickCrateRadius);
-            Gizmos.DrawWireSphere(transform.position, DetectionRadius);
+            Gizmos.DrawWireSphere(Agent.destination, DetectionRadius);
         }
         private void OnJokerDie()
         {

@@ -3,6 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 namespace Crate
 {
+    using AYellowpaper.SerializedCollections;
     using Pickup;
     public enum CrateColor { Red, Blue, Green };
     public class CrateController : MonoBehaviour, IThrowable
@@ -13,7 +14,7 @@ namespace Crate
         public bool RandomColorOnStart = false;
         public CrateColor crateColor;
         public Rigidbody rb { get; set; }
-        private new Renderer renderer;
+        [SerializeField] private Renderer renderer;
         // Tambahkan properti untuk kecepatan jatuh
         public float fallSpeed = 9.8f;
         // Tambahkan properti untuk ketinggian awal jatuh
@@ -23,10 +24,14 @@ namespace Crate
         public AudioClip droppedClip;
         //tambahkan audiosource
         public AudioSource audioSource;
+        [SerializeField] private ParticleSystem particleDropCrate;
+        [SerializeField] private TrailRenderer trailEffect;
+        [SerializeField] private Renderer parachuteRender;
+        public SerializedDictionary<CrateColor,Material> parachuteColors = new();
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            renderer = GetComponent<Renderer>();
 
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null)
@@ -35,10 +40,11 @@ namespace Crate
             }
         }
 
-        private void Start()
+        private void OnEnable()
         {
             if (RandomColorOnStart) crateColor = (CrateColor)Random.Range(0, Enum.GetNames(typeof(CrateColor)).Length);
             // Mengatur warna krate sesuai dengan enum CrateColor
+            parachuteRender.material = parachuteColors[crateColor];
             switch (crateColor)
             {
                 case CrateColor.Red:
@@ -59,9 +65,12 @@ namespace Crate
             transform.position = initialPosition;
             // Berikan kecepatan awal ke bawah
             rb.velocity = new Vector3(0, -fallSpeed, 0);
+            parachuteRender.gameObject.SetActive(true);
         }
+
         public bool StartPickup(GameObject picker)
         {
+            trailEffect.gameObject.SetActive(false);
             CurrentPicker = picker;
             if (IsHeld && !picker.CompareTag("Player") && !picker.CompareTag("Enemy")) return false;
             if (Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
@@ -71,6 +80,8 @@ namespace Crate
 
             // Play SFX (Pickup)
             PlaySFX(pickupClip);
+            particleDropCrate.Clear();
+            parachuteRender.gameObject.SetActive(false);
 
             return true;
         }
@@ -79,9 +90,7 @@ namespace Crate
         {
             Holder = null;
             rb.isKinematic = false;
-
-            // Play SFX (Dropped)
-            PlaySFX(droppedClip);
+            trailEffect.gameObject.SetActive(true);
         }
 
         private void PlaySFX(AudioClip clip)
@@ -91,6 +100,18 @@ namespace Crate
                 audioSource.clip = clip;
                 audioSource.Play();
             }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Floor"))
+            {
+                particleDropCrate.Play();
+                // Play SFX (Dropped)
+                PlaySFX(droppedClip);
+                
+            }
+            parachuteRender.gameObject.SetActive(false);
         }
     }
 }

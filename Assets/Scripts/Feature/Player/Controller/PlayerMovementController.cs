@@ -18,6 +18,7 @@ namespace Player.Controller
 
         public static event Action OnPlayerMove;
 
+        private bool canMove = true;
         private Vector3 rawInputMovement = Vector3.zero;
         private Vector3 velocity;
         private Vector3 moveDirection;
@@ -54,28 +55,41 @@ namespace Player.Controller
 
         private void Update()
         {
-            moveDirection = GetMovementInputDirection();
-            velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
-
-            // Gravity
-            if (controller.isGrounded)
+            if (canMove)
             {
-                if (velocity.y < 0f)
-                    velocity.y = -2f;
-            }
+                moveDirection = GetMovementInputDirection();
+                velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
 
-            velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
-
-            CheckOutOfBound();
-
-            if (rawInputMovement.magnitude > 0.1f)
-            {
-                if (OnPlayerMove != null)
+                // Gravity
+                if (controller.isGrounded)
                 {
-                    OnPlayerMove.Invoke();
+                    if (velocity.y < 0f)
+                        velocity.y = -2f;
+                }
+
+                velocity.y += gravity * Time.deltaTime;
+                controller.Move(velocity * Time.deltaTime);
+
+                CheckOutOfBound();
+
+                if (rawInputMovement.magnitude > 0.1f)
+                {
+                    if (OnPlayerMove != null)
+                    {
+                        OnPlayerMove.Invoke();
+                    }
                 }
             }
+            else
+            {
+                if (Animator) Animator.SetBool("IsWalking", false);
+            }
+            
+        }
+
+        public void SetCanMove(bool value)
+        {
+            canMove = value;
         }
 
         #region Callbacks

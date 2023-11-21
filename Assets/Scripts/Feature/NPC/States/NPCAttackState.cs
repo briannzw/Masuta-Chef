@@ -29,7 +29,7 @@ public class NPCAttackState : NPCState
         if (npc.Agent.remainingDistance > npc.StopDistance)
         {
             npc.Agent.isStopped = false;
-            npc.StateMachine.ChangeState(new EnemyMoveState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
+            //npc.StateMachine.ChangeState(new EnemyMoveState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
         }
     }
 

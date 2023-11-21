@@ -25,9 +25,13 @@ namespace NPC
         public float StopDistance;
         [HideInInspector]
         public NavMeshAgent Agent;
-        //public Character Character;
-        public NPCStateMachine StateMachine;
+
         protected Character chara;
+
+        [Header("Combat Properties")]
+        public float CombatEngageDistance = 7f;
+        public bool IsEngaging = false;
+        public GameObject CurrentEnemies;
 
         #region Joker Properties
         [HideInInspector]
@@ -36,7 +40,6 @@ namespace NPC
 
         protected void Awake()
         {
-            StateMachine = new NPCStateMachine();
             chara = GetComponent<Character>();
 
             Agent = GetComponent<NavMeshAgent>();
@@ -46,15 +49,9 @@ namespace NPC
         // Start is called before the first frame update
         protected void Start()
         {
-            if (ActiveWeapon != null){ Debug.Log("Cek Weapon"); ActiveWeapon.OnEquip(chara); }
+            if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
             chara.OnSpeedChanged += () => Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
-        }
-
-        // Update is called once per frame
-        protected void Update()
-        {
-            StateMachine.CurrentState.FrameUpdate();
         }
     }
 }

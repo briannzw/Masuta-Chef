@@ -68,7 +68,7 @@ namespace NPC.Companion
                 if (enemy != null && isAlive)
                 {
                     enemy.GetComponent<Enemy>().IsTaunted = true;
-                    enemy.GetComponent<NPC>().TargetPosition = transform.position;
+                    enemy.GetComponent<NPC>().CurrentEnemies = gameObject;
                 }
             }
         }

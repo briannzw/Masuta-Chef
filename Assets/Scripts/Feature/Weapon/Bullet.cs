@@ -11,10 +11,11 @@ public class Bullet : MonoBehaviour
     protected Vector3 startPosition;
     
     public Weapon.Weapon weapon;
-    private void Start()
+
+    private void OnEnable()
     {
         startPosition = transform.position;
-        this.GetComponent<Rigidbody>().velocity = transform.forward * TravelSpeed;
+        GetComponent<Rigidbody>().velocity = transform.forward * TravelSpeed;
     }
 
     private void Update()
@@ -23,5 +24,10 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

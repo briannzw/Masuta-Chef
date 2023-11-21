@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NPC;
-public class EnemyMoveState : NPCState
+using NPC.Enemy;
+
+public class EnemyMoveState : EnemyState
 {
-    public EnemyMoveState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+    Vector3 playerPos;
+    Vector3 enemyPos;
+
+    public EnemyMoveState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        npc.Agent.isStopped = false;
+        enemy.Agent.isStopped = false;
     }
 
     public override void ExitState()
@@ -22,12 +27,18 @@ public class EnemyMoveState : NPCState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        npc.Agent.SetDestination(npc.TargetPosition);
+        playerPos = GameManager.Instance.PlayerTransform.position;
+        enemyPos = enemy.transform.position;
+        enemy.Agent.SetDestination(enemy.TargetPosition);
 
-        if (npc.Agent.remainingDistance <= npc.StopDistance && !npc.IsThisJoker)
+        //if (Vector3.SqrMagnitude(playerPos - enemyPos) <= stopDistanceSquared && !enemy.IsThisJoker)
+        //{
+        //    enemy.Agent.isStopped = true;
+        //    enemy.StateMachine.ChangeState(new NPCAttackState(enemy.GetComponent<NPC.NPC>(), enemy.StateMachine));
+        //}
+        if (Vector3.SqrMagnitude(playerPos - enemyPos) <= enemy.CombatEngageDistance && !enemy.IsThisJoker)
         {
-            npc.Agent.isStopped = true;
-            npc.StateMachine.ChangeState(new NPCAttackState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
+            enemy.StateMachine.ChangeState(new EnemyMeleeEngageState(enemy.GetComponent<NPC.Enemy.Enemy>(), enemy.StateMachine));
         }
     }
 
