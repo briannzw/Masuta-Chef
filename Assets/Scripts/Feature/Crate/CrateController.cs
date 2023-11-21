@@ -24,6 +24,7 @@ namespace Crate
         //tambahkan audiosource
         public AudioSource audioSource;
         [SerializeField] private ParticleSystem particleDropCrate;
+        [SerializeField] private TrailRenderer trailEffect;
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -63,6 +64,7 @@ namespace Crate
         }
         public bool StartPickup(GameObject picker)
         {
+            trailEffect.gameObject.SetActive(false);
             CurrentPicker = picker;
             if (IsHeld && !picker.CompareTag("Player") && !picker.CompareTag("Enemy")) return false;
             if (Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
@@ -81,8 +83,7 @@ namespace Crate
         {
             Holder = null;
             rb.isKinematic = false;
-
-            
+            trailEffect.gameObject.SetActive(true);
         }
 
         private void PlaySFX(AudioClip clip)
