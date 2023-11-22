@@ -2108,18 +2108,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5ca3a2e68315f4a8e450141b4dcd4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawners:
+  CrateSpawner: {fileID: 7201132134800898900}
+  EnemySpawners:
     _serializedList:
     - Key: {fileID: 2609905847538178790, guid: ddf4fe37e33f98c4fb2af302797decee, type: 3}
       Value:
       - {fileID: 6034761634710862214}
-    - Key: {fileID: 991949117548394843, guid: 7816f12861d33fc4fa86d1ecac210297, type: 3}
-      Value:
-      - {fileID: 7848010975345709805}
     - Key: {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65, type: 3}
       Value:
       - {fileID: 3214976383098193758}
       - {fileID: 7265377008375887168}
+    - Key: {fileID: 991949117548394843, guid: 7816f12861d33fc4fa86d1ecac210297, type: 3}
+      Value:
+      - {fileID: 7848010975345709805}
 --- !u!1 &7007974530736249851
 GameObject:
   m_ObjectHideFlags: 0

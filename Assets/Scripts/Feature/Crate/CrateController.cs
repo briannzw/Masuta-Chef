@@ -64,6 +64,7 @@ namespace Crate
             initialPosition.y = initialFallHeight;
             transform.position = initialPosition;
             // Berikan kecepatan awal ke bawah
+            rb.isKinematic = false;
             rb.velocity = new Vector3(0, -fallSpeed, 0);
             parachuteRender.gameObject.SetActive(true);
         }

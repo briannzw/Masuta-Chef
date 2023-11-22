@@ -19,6 +19,8 @@ namespace Level
         [Header("Data")]
         [SerializeField] protected SerializedDictionary<string, int> characterDied = new();
 
+        private LevelAreaInfo levelAreaInfo;
+
         #region C# Events
         public Action OnLevelWin;
         public Action OnLevelLose;
@@ -43,7 +45,8 @@ namespace Level
         private void SpawnLevelArea()
         {
             GameObject levelArea = Instantiate(CurrentLevel.LevelAreaPrefab, transform.position, Quaternion.identity);
-            waveManager.Spawners = levelArea.GetComponent<LevelAreaInfo>().Spawners;
+            levelAreaInfo = levelArea.GetComponent<LevelAreaInfo>();
+            waveManager.Spawners = levelAreaInfo.EnemySpawners;
         }
 
         private void SpawnPlayer()
@@ -72,6 +75,16 @@ namespace Level
                 OnLevelLose?.Invoke();
                 Debug.Log("[Game Over] Player Lose (Health < 0)");
             }
+        }
+
+        public void DisableCrateSpawn()
+        {
+           levelAreaInfo.CrateSpawner.gameObject.SetActive(false);
+        }
+
+        public void EnableCrateSpawn()
+        {
+            levelAreaInfo.CrateSpawner.gameObject.SetActive(true);
         }
     }
 }

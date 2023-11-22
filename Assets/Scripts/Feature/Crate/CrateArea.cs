@@ -45,6 +45,7 @@ namespace Crate.Area
                 {
                     if (CrateGrid[i] == null) continue;
 
+                    CrateGrid[i].ExitPickup();
                     if (CrateGrid[i].GetComponent<SpawnObject>() != null)
                         CrateGrid[i].GetComponent<SpawnObject>().Release();
                     else Destroy(CrateGrid[i].gameObject);
