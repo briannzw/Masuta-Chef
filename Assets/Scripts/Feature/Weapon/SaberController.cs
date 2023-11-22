@@ -1,7 +1,7 @@
 using Character.Hit;
-using System.Collections;
-using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Weapon
 {
@@ -15,6 +15,9 @@ namespace Weapon
         [SerializeField] Animator animator;
         [SerializeField] SaberVFXController vfxController;
         [SerializeField] GameObject saberUltimateApplicator;
+
+        [SerializeField] GameObject slashVFXPrefab;
+        public Vector3 vfxSize;
         #endregion
 
         #region Method
@@ -29,6 +32,8 @@ namespace Weapon
             base.Attack();
             hitController.Initialize(this);
             animator.SetTrigger("Attack");
+
+            if(slashVFXPrefab != null) SpawnVFX();
         }
 
         public override void StartAttack()
@@ -57,6 +62,13 @@ namespace Weapon
         }
 
 
+
+        public void SpawnVFX()
+        {
+            GameObject go = Instantiate(slashVFXPrefab, transform);
+            go.transform.localScale = vfxSize;
+            Destroy(go, slashVFXPrefab.GetComponent<VisualEffect>().GetFloat("Lifetime"));
+        }
         #endregion
     }
 }
