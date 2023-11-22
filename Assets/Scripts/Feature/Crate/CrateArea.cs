@@ -25,6 +25,8 @@ namespace Crate.Area
             {
                 CrateGrid.Add(null);
             }
+
+            combineManager.UpdateCombine(null);
         }
 
         public void Interact(GameObject other = null)
@@ -49,6 +51,8 @@ namespace Crate.Area
 
                     CrateGrid[i] = null;
                 }
+
+                UpdateCombineUI();
             }
         }
 
@@ -82,6 +86,8 @@ namespace Crate.Area
             crateObj.transform.parent = GridTransform[i];
             crateObj.transform.localPosition = Vector3.zero;
             crateObj.transform.localRotation = Quaternion.identity;
+
+            UpdateCombineUI();
         }
 
         public void OnStealed(IPickable pickable, GameObject stealer = null)
@@ -89,6 +95,18 @@ namespace Crate.Area
             currentCrateCount--;
             if (!CrateGrid.Contains(pickable as CrateController)) return;
             CrateGrid[CrateGrid.IndexOf(pickable as CrateController)] = null;
+
+            UpdateCombineUI();
+        }
+
+        private void UpdateCombineUI()
+        {
+            List<CrateColor> colors = new List<CrateColor>();
+            foreach (var crate in CrateGrid)
+            {
+                if (crate != null) colors.Add(crate.crateColor);
+            }
+            combineManager.UpdateCombine(colors);
         }
 
         public int GetCurrentCrateCount()

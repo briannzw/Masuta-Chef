@@ -37,7 +37,7 @@ public class CreamyDispenserController : Weapon.Weapon
         base.StartAttack();
         if(!isUltimateCooldown)
         {
-            ShootUltimate();
+            //ShootUltimate();
         }
     }
 

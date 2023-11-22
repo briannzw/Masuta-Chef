@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
+using AYellowpaper.SerializedCollections;
 
 namespace Crate.Combine
 {
-    using AYellowpaper.SerializedCollections;
     using Cooking;
     using Loot.Object;
     using Player.CompanionSlot;
-    using UnityEngine.AI;
     using NPC.Companion;
 
     public class CombineManager : MonoBehaviour
@@ -15,6 +16,18 @@ namespace Crate.Combine
         [Header("References")]
         [SerializeField] private GameObject ingredientPrefab;
         [SerializeField] private GameObject medkitPrefab;
+
+        [Header("UI References")]
+        [SerializeField] private GameObject canvas;
+        [SerializeField] private Image itemBorder;
+        [SerializeField] private Image itemIcon;
+
+        [Header("UI Icon Sprites")]
+        [SerializeField] private Sprite medkitIcon;
+        [SerializeField] private Sprite weaponRandomIcon;
+        [SerializeField] private Sprite companionRandomIcon;
+        [SerializeField] private SerializedDictionary<CrateColor, Sprite> WeaponIcons;
+        [SerializeField] private SerializedDictionary<CrateColor, Sprite> CompanionsIcons;
 
         [Header("Position")]
         [SerializeField] private Vector3 offset;
@@ -77,6 +90,46 @@ namespace Crate.Combine
             }
 
             return true;
+        }
+
+        public void UpdateCombine(List<CrateColor> colors)
+        {
+            if(colors == null || colors.Count == 0)
+            {
+                canvas.SetActive(false);
+                return;
+            }
+
+            canvas.SetActive(true);
+
+            if (IsSameColor(colors)) itemBorder.color = (colors[0] == CrateColor.Red) ? Color.red : (colors[0] == CrateColor.Blue) ? Color.blue : Color.green;
+            else itemBorder.color = Color.white;
+
+            if (colors.Count == 1)
+            {
+                itemIcon.sprite = Ingredients[colors[0]].Icon;
+            }
+            else if (colors.Count == 2)
+            {
+                if (IsSameColor(colors)) itemIcon.sprite = medkitIcon;
+                else
+                    // CHANGE SPRITE TO X (Uncraftable)
+                    itemIcon.sprite = null;
+            }
+            else if (colors.Count == 3)
+            {
+                if (IsSameColor(colors)) itemIcon.sprite = WeaponIcons[colors[0]];
+                else
+                    // CHANGE SPRITE TO ? (Random)
+                    itemIcon.sprite = weaponRandomIcon;
+            }
+            else if (colors.Count == 4)
+            {
+                if (IsSameColor(colors)) itemIcon.sprite = CompanionsIcons[colors[0]];
+                else
+                    // CHANGE SPRITE TO ? (Random)
+                    itemIcon.sprite = companionRandomIcon;
+            }
         }
     }
 }
