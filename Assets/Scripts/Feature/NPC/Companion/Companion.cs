@@ -43,10 +43,10 @@ namespace NPC.Companion
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
         }
 
-        protected new void Update()
+        protected void Update()
         {
             CompanionStateMachine.CurrentState.FrameUpdate();
-            if(Animator != null) Animator.SetBool("IsRunning", Agent.remainingDistance > 2.5);
+            if(Animator != null) Animator.SetBool("IsRunning", Agent.remainingDistance > 0.5f);
 
 
 
@@ -63,8 +63,6 @@ namespace NPC.Companion
 
             if(IsFollowingEnemy && DistanceFromPlayer > MaxDistanceFromPlayer) IsFollowingEnemy = false;
 
-            if (DistanceFromPlayer < 4f && !IsFollowingEnemy) Agent.stoppingDistance = 4f;
-            else Agent.stoppingDistance = 2f;
 
             //Debug AI
         }
