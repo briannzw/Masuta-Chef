@@ -1,12 +1,14 @@
+using NPC.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyDebuffState : NPCState
+public class EnemyDebuffState : EnemyState
 {
     private float wanderRadius = 7f;
-    public EnemyDebuffState(NPC.NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
+
+    public EnemyDebuffState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
     }
 
@@ -18,24 +20,25 @@ public class EnemyDebuffState : NPCState
     public override void ExitState()
     {
         base.ExitState();
-        npc.Agent.isStopped = false;
+        enemy.Agent.isStopped = false;
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        //if (stun)
-        //{
-        //  npc.Agent.isStopped = true;
-        //}
-        //else
-        //{
-        //npc.StateMachine.ChangeState(new EnemyMoveState(npc.GetComponent<NPC.NPC>(), npc.StateMachine));
-        //}
-        //if (confused)
-        //{
-        //  Wander();
-        //}
+
+        if (enemy.IsStun)
+        {
+            enemy.Agent.isStopped = true;
+        }
+        else
+        {
+            enemy.StateMachine.ChangeState(new EnemyMoveState(enemy.GetComponent<NPC.Enemy.Enemy>(), enemy.StateMachine));
+        }
+        if (enemy.IsConfused)
+        {
+            Wander();
+        }
     }
 
     public override void PhysicsUpdate()
@@ -47,7 +50,7 @@ public class EnemyDebuffState : NPCState
     {
         Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
         NavMeshHit hit;
-        NavMesh.SamplePosition(npc.transform.position + randomDirection, out hit, wanderRadius, NavMesh.AllAreas);
-        npc.Agent.SetDestination(hit.position);
+        NavMesh.SamplePosition(enemy.transform.position + randomDirection, out hit, wanderRadius, NavMesh.AllAreas);
+        enemy.Agent.SetDestination(hit.position);
     }
 }

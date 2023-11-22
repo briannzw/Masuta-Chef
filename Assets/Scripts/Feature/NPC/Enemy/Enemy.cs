@@ -29,6 +29,8 @@ namespace NPC.Enemy
         public float MaxTauntedDistance;
         [HideInInspector]
         private GameObject defaultEnemyTarget;
+        public bool IsStun;
+        public bool IsConfused;
 
         private void OnEnable()
         {
