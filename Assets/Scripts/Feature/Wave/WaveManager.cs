@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Wave
 {
@@ -19,9 +20,10 @@ namespace Wave
         public SerializedDictionary<GameObject, List<NavMeshSpawner>> Spawners = new SerializedDictionary<GameObject, List<NavMeshSpawner>>();
 
         private float gameTime = 0f;
+        private bool isStopped = false;
         private int currentWaveIndex = 0;
 
-        private List<GameObject> spawnedEnemies = new List<GameObject>();
+        private HashSet<GameObject> spawnedEnemies = new();
 
         public int TotalEnemies
         {
@@ -45,7 +47,7 @@ namespace Wave
         {
             if (currentWaveIndex >= LevelData.Waves.Count) return;
 
-            gameTime += Time.deltaTime;
+            if(!isStopped) gameTime += Time.deltaTime;
 
             if (gameTime >= LevelData.Waves[currentWaveIndex].Time)
             {
@@ -76,7 +78,6 @@ namespace Wave
                 if(timer >= interval)
                 {
                     List<GameObject> enemies = spawner.Spawn(total < spawnCount ? total : spawnCount);
-                    spawnedEnemies.AddRange(enemies);
 
                     foreach (var enemy in enemies)
                     {
@@ -85,6 +86,8 @@ namespace Wave
                         enemy.GetComponent<Character>().InitializeStats();
                         if(enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
                         enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
+
+                        if(!spawnedEnemies.Contains(enemy)) spawnedEnemies.Add(enemy);
                     }
                     total -= spawnCount;
                     timer = 0f;
@@ -95,30 +98,30 @@ namespace Wave
         }
 
         #region NavMeshAgent
-        public void DisableNavMeshAgents()
+        public void DisableWave()
         {
+            isStopped = true;
             foreach (var enemy in spawnedEnemies)
             {
-                if (enemy != null && enemy.CompareTag("Enemy"))
+                if (enemy != null && enemy.activeSelf)
                 {
-                    UnityEngine.AI.NavMeshAgent navMeshAgent = enemy.GetComponent<UnityEngine.AI.NavMeshAgent>();
-                    if (navMeshAgent != null)
+                    if (enemy.TryGetComponent<NavMeshAgent>(out var navMeshAgent))
                     {
-                        navMeshAgent.enabled = false;
+                        navMeshAgent.isStopped = true;
                     }
                 }
             }
         }
-        public void EnableNavMeshAgents()
+        public void EnableWave()
         {
+            isStopped = false;
             foreach (var enemy in spawnedEnemies)
             {
-                if (enemy != null && enemy.CompareTag("Enemy"))
+                if (enemy != null && enemy.activeSelf)
                 {
-                    UnityEngine.AI.NavMeshAgent navMeshAgent = enemy.GetComponent<UnityEngine.AI.NavMeshAgent>();
-                    if (navMeshAgent != null)
+                    if (enemy.TryGetComponent<NavMeshAgent>(out var navMeshAgent))
                     {
-                        navMeshAgent.enabled = true;
+                        navMeshAgent.isStopped = false;
                     }
                 }
             }

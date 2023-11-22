@@ -9,13 +9,15 @@ public class ExplodingBullet : Bullet
     [SerializeField] private LayerMask layerMask;
     private bool alreadyHit = false;
 
+    [SerializeField] private float damageScaling;
+
     [Header("Explosion Properties")]
     public GameObject explosionApplicator;
     // Start is called before the first frame update
     protected void OnHit()
     {
         GameObject gameObject = Instantiate(explosionApplicator, transform.position, transform.rotation);
-        gameObject.GetComponentInChildren<AOEController>().Initialize(weapon);
+        gameObject.GetComponentInChildren<AOEController>().Initialize(weapon, damageScaling);
     }
 
     private void OnTriggerEnter(Collider other)

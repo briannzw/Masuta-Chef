@@ -312,7 +312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
   rb: {fileID: 2464117433372997242}
-  TargetTags: []
+  TargetTags:
+  - Enemy
   stats:
     _serializedList:
     - Key: 0
@@ -329,7 +330,7 @@ MonoBehaviour:
   isUltimateCancelable: 0
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 128
   hitController: {fileID: 8798173013038672523}
   animator: {fileID: 819498392342047893}
   vfxController: {fileID: 4473604326915842093}
@@ -337,7 +338,7 @@ MonoBehaviour:
     type: 3}
   slashVFXPrefab: {fileID: 5169191953964276620, guid: cb9a48bc499fd5948a8ac6fa28442ebb,
     type: 3}
-  vfxSize: {x: 1, y: 1, z: 1}
+  vfxSize: {x: 1.2, y: 1.2, z: 1.2}
 --- !u!65 &6586099308046957744
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -357,8 +358,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 2.25}
+  m_Center: {x: 0, y: 0, z: 1.2}
 --- !u!95 &819498392342047893
 Animator:
   serializedVersion: 5

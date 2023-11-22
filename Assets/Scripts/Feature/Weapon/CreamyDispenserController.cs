@@ -7,11 +7,14 @@ using UnityEngine;
 
 public class CreamyDispenserController : Weapon.Weapon
 {
+    [Header("Parameters")]
+    [SerializeField] private Spawner.Spawner spawner;
+    [SerializeField] private int timesPerSecond = 100;
+
+    [Space]
     #region Properties
-    public GameObject fireObjectPrefab;
     public float maxRange;
     public LayerMask enemyLayer;
-    public GameObject AttackArea;
 
     private ParticleSystem vfx;
 
@@ -23,29 +26,16 @@ public class CreamyDispenserController : Weapon.Weapon
     [SerializeField] private float ultimateBulletInterval = 1;
     #endregion
 
-    protected new void Start()
+    protected override void Start()
     {
         base.Start();
-        vfx = fireObjectPrefab.GetComponent<ParticleSystem>();
-        AOEController aoeController = AttackArea.GetComponent<AOEController>();
-        aoeController.Initialize(this);
-        // this.StopAttack();
-    }
-    protected new void Update()
-    {
-        //base.Update();
     }
 
     #region Method
     public override void StartAttack()
     {
-        //base.StartAttack();
-        if (!isUltimateAttack)
-        {
-            vfx.Play();
-            AttackArea.SetActive(true);
-        }
-        else if(!isUltimateCooldown)
+        base.StartAttack();
+        if(!isUltimateCooldown)
         {
             ShootUltimate();
         }
@@ -53,13 +43,26 @@ public class CreamyDispenserController : Weapon.Weapon
 
     public override void StopAttack()
     {
-        //base.StopAttack();
-        if (!isUltimateAttack)
+        base.StopAttack();
+    }
+
+    public override void Attack()
+    {
+        OnAttack?.Invoke();
+        StartCoroutine(SpawnWithInterval(Mathf.RoundToInt(timesPerSecond * stats[Weapon.WeaponStatsEnum.Speed].Value / 100 * Time.deltaTime), Time.deltaTime));
+    }
+
+    private IEnumerator SpawnWithInterval(int totalSpawn, float totalTime)
+    {
+        for (int i = 0; i < totalSpawn; i++)
         {
-            vfx.Stop();
-            AttackArea.SetActive(false);
+            var go = spawner.Spawn();
+            if(go.Count > 0) go[0].GetComponent<BulletHit>().Initialize(this, damageScaling);
+            yield return new WaitForSeconds(totalTime / totalSpawn);
         }
     }
+
+    private new void Update() { if (isFiring) Attack(); }
 
     protected override void UltimateAttack()
     {
@@ -69,7 +72,7 @@ public class CreamyDispenserController : Weapon.Weapon
 
     private void ShootUltimate()
     {
-        GameObject bullet = Instantiate(ultimateBulletObject, fireObjectPrefab.transform.position, fireObjectPrefab.transform.rotation);
+        GameObject bullet = Instantiate(ultimateBulletObject, ultimateBulletObject.transform.position, ultimateBulletObject.transform.rotation);
         bullet.GetComponent<Bullet>().weapon = this;
         bullet.GetComponent<Rigidbody>().velocity = transform.forward * bullet.GetComponent<Bullet>().TravelSpeed;
         // if bullet exhausted, stop ultimate attack
@@ -83,14 +86,11 @@ public class CreamyDispenserController : Weapon.Weapon
     {
         isUltimateAttack = true;
         ultimateBulletCount = 4;
-
-        AttackArea.SetActive(false);
     }
 
     private void StopUltimate()
     {
         isUltimateAttack = false;
-        AttackArea.SetActive(true);
     }
 
     private IEnumerator UltimateCooldown()

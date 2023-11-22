@@ -36,7 +36,7 @@ public class GunController : Weapon.Weapon
         foreach (var bullet in bullets)
         {
             var controller = bullet.GetComponent<BulletHit>();
-            controller.Initialize(this);
+            controller.Initialize(this, damageScaling);
         }
 
     }

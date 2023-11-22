@@ -32,7 +32,7 @@ namespace NPC.NPCWeapon
         public override void Attack()
         {
             base.Attack();
-            hitController.Initialize(this);
+            hitController.Initialize(this, damageScaling);
             animator.SetTrigger("Attack");
         }
 

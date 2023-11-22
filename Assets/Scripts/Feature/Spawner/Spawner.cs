@@ -21,6 +21,8 @@ namespace Spawner
         [Header("Rotations")]
         [SerializeField] private bool randomizeRotation;
         [SerializeField] private bool followSpawnerRotation;
+        [SerializeField] private bool randomEulerRotation;
+        [SerializeField] private Vector2 eulerRandomRange;
 
         [Header("Object Pool")]
         [SerializeField] protected int maxSpawnObjectInPool = 100;
@@ -50,8 +52,11 @@ namespace Spawner
                 Vector3 position = RandomSpawnPosition(transform, spawnOffset, spawnArea, isLocalOffset);
                 Quaternion rotation = (followSpawnerRotation) ? transform.rotation : Quaternion.identity;
                 rotation = (randomizeRotation) ? Random.rotation : rotation;
+                rotation = (randomEulerRotation) ? Quaternion.Euler(0f, Random.Range(-eulerRandomRange.y / 2, eulerRandomRange.y / 2), 0f) * rotation : rotation;
                 
                 rotation.x = 0f; rotation.z = 0f;
+
+                rotation = (randomEulerRotation) ? Quaternion.Euler(Random.Range(-eulerRandomRange.x / 2, eulerRandomRange.y / 2), 0f, 0f) * rotation : rotation;
 
                 GameObject go = poolManager.Pools[spawnPrefab].Get();
                 go.transform.position = position;

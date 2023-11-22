@@ -60,16 +60,6 @@ namespace Player.Controller
                 moveDirection = GetMovementInputDirection();
                 velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
 
-                // Gravity
-                if (controller.isGrounded)
-                {
-                    if (velocity.y < 0f)
-                        velocity.y = -2f;
-                }
-
-                velocity.y += gravity * Time.deltaTime;
-                controller.Move(velocity * Time.deltaTime);
-
                 CheckOutOfBound();
 
                 if (rawInputMovement.magnitude > 0.1f)
@@ -84,7 +74,16 @@ namespace Player.Controller
             {
                 if (Animator) Animator.SetBool("IsWalking", false);
             }
-            
+
+            // Gravity
+            if (controller.isGrounded)
+            {
+                if (velocity.y < 0f)
+                    velocity.y = -2f;
+            }
+
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
         }
 
         public void SetCanMove(bool value)

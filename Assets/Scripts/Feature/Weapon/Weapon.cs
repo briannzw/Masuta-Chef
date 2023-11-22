@@ -27,7 +27,10 @@ namespace Weapon
         [SerializeField] protected Rigidbody rb;
         protected Collider weaponCollider;
         [Tag] public List<string> TargetTags = new();
+
+        [Header("Stats")]
         public SerializedDictionary<WeaponStatsEnum, CharacterStat> stats;
+        public float damageScaling = 1f;
         
         protected bool isFiring;
         protected float attackTimer;

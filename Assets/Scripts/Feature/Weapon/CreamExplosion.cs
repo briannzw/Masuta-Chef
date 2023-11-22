@@ -12,6 +12,8 @@ public class CreamExplosion : AOEController
     [SerializeField] private ParticleSystem explosionParticle;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float explosionRadius;
+
+    [SerializeField] private float damageScaling;
     #endregion
 
     protected override void Start()
@@ -19,7 +21,7 @@ public class CreamExplosion : AOEController
         base.Start();
         explosionParticle.Play();
         // Destroy(explosionParticle, controller.AreaDuration);
-        Initialize(Source);
+        Initialize(Source, damageScaling);
         Attack();
     }
 

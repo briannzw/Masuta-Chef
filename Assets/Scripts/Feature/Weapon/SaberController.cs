@@ -30,7 +30,7 @@ namespace Weapon
         public override void Attack()
         {
             base.Attack();
-            hitController.Initialize(this);
+            hitController.Initialize(this, damageScaling);
             animator.SetTrigger("Attack");
 
             if(slashVFXPrefab != null) SpawnVFX();

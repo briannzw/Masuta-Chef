@@ -29,7 +29,7 @@ namespace Character.Hit
             }
         }
 
-        public void Initialize(Weapon source)
+        public void Initialize(Weapon source, float scaling)
         {
             Source = source;
             Value.WeaponAttack = Source.stats[WeaponStatsEnum.Power].Value;
@@ -39,7 +39,7 @@ namespace Character.Hit
                 return;
             }
             Value.CharacterAttack = Source.Holder.Stats.StatList[StatsEnum.Attack].Value;
-            Value.Multiplier = Source.Holder.Stats.StatList[StatsEnum.DamageMultiplier].Value;
+            Value.Multiplier = Source.Holder.Stats.StatList[StatsEnum.DamageMultiplier].Value * scaling;
         }
 
         public void Hit(Character character)
