@@ -35,6 +35,8 @@ namespace NPC.Enemy
         private void OnEnable()
         {
             Agent.isStopped = false;
+            Agent.enabled = true;
+            StateMachine.Initialize(new EnemyMeleeMoveState(this, StateMachine));
         }
 
         protected new void Awake()
@@ -76,7 +78,11 @@ namespace NPC.Enemy
             Agent.isStopped = true;
             //to do change to dead state
 
-            if(Animator != null) Animator.SetTrigger("Dead");
+            if (Animator != null)
+            {
+                Animator.SetTrigger("Dead");
+                StateMachine.ChangeState(new EnemyDeadState(this, StateMachine));
+            }
             else
             {
                 if (SelectedWeapon != AttackType.Joker)

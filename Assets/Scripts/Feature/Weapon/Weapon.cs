@@ -25,7 +25,7 @@ namespace Weapon
         [Header("References")]
         public Character Holder;
         [SerializeField] protected Rigidbody rb;
-        protected Collider weaponCollider;
+        public Collider weaponCollider;
         [Tag] public List<string> TargetTags = new();
 
         [Header("Stats")]
