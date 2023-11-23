@@ -50,12 +50,7 @@ namespace NPC.Enemy
         {
             StateMachine.CurrentState.FrameUpdate();
 
-            // Testing Drop Crate
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                if(hasCrate) OnPickUpCancel();
-
-            }
+            if (!Agent.enabled) return;
 
             Animator.SetBool("IsRunning", !Agent.isStopped);
             Animator.SetBool("IsCrateRunning", hasCrate);
