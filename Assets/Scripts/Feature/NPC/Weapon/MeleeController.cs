@@ -10,7 +10,6 @@ namespace NPC.NPCWeapon
     public class MeleeController : Weapon
     {
         public Animator WeaponAnimator;
-        public TrailRenderer EffectTrail;
 
         #region Properties
         public LayerMask enemyLayer;      
@@ -26,7 +25,6 @@ namespace NPC.NPCWeapon
             Holder = GetComponentInParent<Character>();
             weaponCollider.isTrigger = true;
             hitController.Initialize(this, damageScaling);
-            EffectTrail.enabled = false;
         }
 
         protected new void Update()
@@ -56,7 +54,6 @@ namespace NPC.NPCWeapon
                 }
                 WeaponAnimator.SetFloat("AttackSpeed", stats[WeaponStatsEnum.Speed].Value / 100 * animationLength);
                 WeaponAnimator.SetBool("IsAttacking", true);
-                EffectTrail.enabled = true;
             }
         }
 
@@ -64,7 +61,6 @@ namespace NPC.NPCWeapon
         {
             if (WeaponAnimator == null) base.StopAttack();
             else WeaponAnimator.SetBool("IsAttacking", false);
-            EffectTrail.enabled = false;
         }
     }
 }

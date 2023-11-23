@@ -32,10 +32,12 @@ namespace NPC.Enemy
         public bool IsStun;
         public bool IsConfused;
 
+        public Collider childCollider;
+
         private void OnEnable()
         {
             Agent.isStopped = false;
-            Agent.enabled = true;
+            childCollider.enabled = true;
         }
 
         protected new void Awake()
@@ -47,6 +49,7 @@ namespace NPC.Enemy
             DefaultAttackTimer = AttackTimer;
             DefaultAttackDuration = AttackDuration;
             defaultEnemyTarget = GameManager.Instance.PlayerTransform.gameObject;
+            childCollider.enabled = true;
         }
 
         protected new void Start()
@@ -83,6 +86,7 @@ namespace NPC.Enemy
                 StateMachine.ChangeState(new EnemyDeadState(this, StateMachine));
             }
             GameManager.Instance.OnEnemiesKilled?.Invoke();
+            childCollider.enabled = false;
 
         }
 

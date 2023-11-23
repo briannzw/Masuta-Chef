@@ -7,8 +7,6 @@ public class EventAnimationAttack : MonoBehaviour
     public Weapon.Weapon ActiveWeapon;
     public NPC.NPC NPC;
 
-    public TrailRenderer TrailEffect;
-
     public void Attack()
     {
         ActiveWeapon.Attack();
@@ -22,6 +20,5 @@ public class EventAnimationAttack : MonoBehaviour
     public void StopDamage()
     {
         ActiveWeapon.weaponCollider.enabled = false;
-        TrailEffect.Clear();
     }
 }

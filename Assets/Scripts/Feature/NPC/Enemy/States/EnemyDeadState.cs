@@ -13,7 +13,7 @@ public class EnemyDeadState : EnemyState
     {
         base.EnterState();
         enemy.Agent.isStopped = true;
-        enemy.Agent.enabled = false;
+        enemy.childCollider.enabled = false;
     }
 
     public override void ExitState()
