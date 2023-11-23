@@ -33,6 +33,13 @@ namespace NPC.Enemy
             StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
         }
 
+        private void OnEnable()
+        {
+            StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
+            CanPickUp = true;
+            Agent.enabled = true;
+        }
+
         private new void Start()
         {
             base.Start();
@@ -213,23 +220,10 @@ namespace NPC.Enemy
             TargetPosition = hit.position;
         }
 
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(Agent.destination, DetectionRadius);
-        }
         private void OnJokerDie()
         {
             CanPickUp = false;
             OnPickUpCancel();
-            Animator.SetTrigger("Dead");
-            Invoke("ReleaseObject", 1f);
-        }
-
-        private void ReleaseObject()
-        {
-            GetComponentInChildren<SpawnObject>().Release();
         }
     }
 }

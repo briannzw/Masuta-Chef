@@ -11,6 +11,11 @@ namespace NPC.Enemy.Melee
             base.Awake();
             StateMachine.Initialize(new EnemyMeleeMoveState(this, StateMachine));
         }
+
+        private void OnEnable()
+        {
+            StateMachine.Initialize(new EnemyMeleeMoveState(this, StateMachine));
+        }
     }
 }
 

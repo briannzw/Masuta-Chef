@@ -19,30 +19,30 @@ MonoBehaviour:
   Waves:
   - EnemyList:
       _serializedList:
-      - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
+      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
         Value: 10
     Time: 1
     SpawnInterval: 1
     SpawnPerInterval: 5
   - EnemyList:
       _serializedList:
-      - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
-        Value: 10
-    Time: 15
-    SpawnInterval: 1
-    SpawnPerInterval: 5
-  - EnemyList:
-      _serializedList:
-      - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
+      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
         Value: 10
     Time: 30
     SpawnInterval: 1
     SpawnPerInterval: 5
   - EnemyList:
       _serializedList:
-      - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
+      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
         Value: 10
-    Time: 50
+    Time: 60
+    SpawnInterval: 1
+    SpawnPerInterval: 5
+  - EnemyList:
+      _serializedList:
+      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
+        Value: 10
+    Time: 90
     SpawnInterval: 1
     SpawnPerInterval: 5
   EnemyLootDrop: {fileID: 11400000, guid: d326e2c1223c9504bba257c2e03eb5d7, type: 2}

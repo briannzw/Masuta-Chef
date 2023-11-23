@@ -36,7 +36,6 @@ namespace NPC.Enemy
         {
             Agent.isStopped = false;
             Agent.enabled = true;
-            StateMachine.Initialize(new EnemyMeleeMoveState(this, StateMachine));
         }
 
         protected new void Awake()
@@ -82,13 +81,6 @@ namespace NPC.Enemy
             {
                 Animator.SetTrigger("Dead");
                 StateMachine.ChangeState(new EnemyDeadState(this, StateMachine));
-            }
-            else
-            {
-                if (SelectedWeapon != AttackType.Joker)
-                {
-                    GetComponent<SpawnObject>().Release();
-                }
             }
             GameManager.Instance.OnEnemiesKilled?.Invoke();
 
