@@ -16,20 +16,35 @@ public class CompanionAttackState : CompanionState
         base.EnterState();
         companion.Agent.isStopped = true;
         companion.ActiveWeapon.StartAttack();
+        companion.Animator.SetBool("IsAttacking", true);
     }
 
     public override void ExitState()
     {
         base.ExitState();
         companion.ActiveWeapon.StopAttack();
+        companion.Animator.SetBool("IsAttacking", false);
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        companion.Agent.SetDestination(companion.TargetPosition);
         RotateToTarget(RotationSpeed);
-        if (companion.DistanceFromPlayer > companion.MaxDistanceFromPlayer)
+
+        if(companion.CurrentEnemy != null && !companion.CurrentEnemy.GetComponent<NPC.Enemy.Enemy>().IsDead)
+        {
+            if(Vector3.SqrMagnitude(companion.CurrentEnemy.transform.position - companion.transform.position) > companion.AttackDistance)
+            {
+                companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
+            }
+        }
+
+        if(Vector3.SqrMagnitude(GameManager.Instance.PlayerTransform.position - companion.transform.position) > companion.MaxDistanceFromPlayer)
+        {
+            companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
+        }
+
+        if (companion.CurrentEnemy.GetComponent<NPC.Enemy.Enemy>().IsDead)
         {
             companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
         }

@@ -10,6 +10,7 @@ namespace NPC.Companion
     public class Companion : NPC, IDetectionNPC
     {
         public float MaxDistanceFromPlayer;
+        public bool IsAltPath;
 
         public virtual float WanderRadius { get; set; }
         public virtual float WanderInterval { get; set; }
@@ -26,6 +27,10 @@ namespace NPC.Companion
 
         [SerializeField] private float minDistanceSlotFromPlayer;
         public CompanionStateMachine CompanionStateMachine;
+
+        [Header("Compat Properties")]
+        public float AttackDistance;
+        public GameObject CurrentEnemy;
         private new void Awake()
         {
             CompanionStateMachine = new CompanionStateMachine();
@@ -33,7 +38,7 @@ namespace NPC.Companion
 
             Agent = GetComponent<NavMeshAgent>();
             
-            CompanionStateMachine.Initialize(new CompanionMoveState(this, CompanionStateMachine));
+            CompanionStateMachine.Initialize(new CompanionIdleState(this, CompanionStateMachine));
             DetectionRadius = 8f;
         }
 
@@ -46,7 +51,7 @@ namespace NPC.Companion
         protected void Update()
         {
             CompanionStateMachine.CurrentState.FrameUpdate();
-            if(Animator != null) Animator.SetBool("IsRunning", Agent.remainingDistance > 0.5f);
+            //if(Animator != null) Animator.SetBool("IsRunning", );
 
 
 
@@ -58,12 +63,17 @@ namespace NPC.Companion
             NavMesh.SamplePosition(companionSlotPosition.position, out hit, Mathf.Infinity, 1 << NavMesh.GetAreaFromName("Walkable"));
             float distanceSlot = Mathf.Abs(hit.position.y - companionSlotPosition.position.y);
             slotPosition = (distanceSlot < 0.4f) ? hit.position : FindAltPath();
+            IsAltPath = (distanceSlot > 0.4f);
 
             SetTarget(slotPosition);
 
             if(IsFollowingEnemy && DistanceFromPlayer > MaxDistanceFromPlayer) IsFollowingEnemy = false;
 
-
+            if(CurrentEnemy != null)
+            {
+                if (CurrentEnemy.GetComponent<Enemy.Enemy>().IsDead) IsFollowingEnemy = false;
+            }
+            
             //Debug AI
         }
 
@@ -94,6 +104,7 @@ namespace NPC.Companion
                     float distanceToEnemy = Vector3.Distance(transform.position, collider.transform.position);
                     if (distanceToEnemy < closestDistance)
                     {
+                        if (collider.gameObject.GetComponent<Enemy.Enemy>().IsDead) return;
                         closestDistance = distanceToEnemy;
                         closestEnemy = collider.transform;
                     }
@@ -104,12 +115,14 @@ namespace NPC.Companion
             {
                 IsFollowingEnemy = true;
                 TargetPosition = closestEnemy.position;
+                CurrentEnemy = closestEnemy.gameObject;
             }
         }
 
         private void OnCompanionDie()
         {
             GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().DeleteCompanion(this);
+            Animator.SetTrigger("Dead");
         }
     }
 }

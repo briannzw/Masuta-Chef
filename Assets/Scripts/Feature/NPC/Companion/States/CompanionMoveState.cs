@@ -16,20 +16,28 @@ public class CompanionMoveState : CompanionState
     {
         base.EnterState();
         companion.Agent.isStopped = false;
+        companion.Animator.SetBool("IsRunning", true);
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        companion.Animator.SetBool("IsRunning", false);
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
         companion.Agent.SetDestination(companion.TargetPosition);
-        if (companion.IsFollowingEnemy && companion.Agent.remainingDistance <= companion.StopDistance)
+
+        if(companion.IsFollowingEnemy && companion.Agent.remainingDistance <= companion.AttackDistance - 0.1f)
         {
-            companion.CompanionStateMachine.ChangeState(new CompanionAttackState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
+            companion.CompanionStateMachine.ChangeState(new CompanionAttackState(companion, companion.CompanionStateMachine));
+        }
+
+        if(!companion.IsFollowingEnemy && companion.Agent.remainingDistance <= companion.StopDistance + 0.1f)
+        {
+            companion.CompanionStateMachine.ChangeState(new CompanionIdleState(companion, companion.CompanionStateMachine));
         }
     }
 

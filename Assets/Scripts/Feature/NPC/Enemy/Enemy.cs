@@ -31,6 +31,7 @@ namespace NPC.Enemy
         private GameObject defaultEnemyTarget;
         public bool IsStun;
         public bool IsConfused;
+        public bool IsDead;
 
         public Collider childCollider;
 
@@ -38,6 +39,7 @@ namespace NPC.Enemy
         {
             Agent.isStopped = false;
             childCollider.enabled = true;
+            IsDead = false;
         }
 
         protected new void Awake()
@@ -79,7 +81,7 @@ namespace NPC.Enemy
             killCount++;
             Agent.isStopped = true;
             //to do change to dead state
-
+            IsDead = true;
             if (Animator != null)
             {
                 Animator.SetTrigger("Dead");
