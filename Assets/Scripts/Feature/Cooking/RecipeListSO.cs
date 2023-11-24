@@ -5,6 +5,8 @@ using AYellowpaper.SerializedCollections;
 namespace Cooking.Recipe
 {
     using Character.StatEffect;
+    using Save;
+    using Save.Data;
 
     [CreateAssetMenu(menuName = "Recipe List", fileName = "Recipe List", order = 0)]
     public class RecipeListSO : ScriptableObject
@@ -24,6 +26,19 @@ namespace Cooking.Recipe
         public AddOnStat GetDefaultUniqueStat(Recipe recipe)
         {
             return UniqueStatList[DefaultUniqueStat[recipe]];
+        }
+
+        public void PopulateData(SaveData saveData)
+        {
+            foreach (var recipe in Recipes)
+            {
+                recipe.data = saveData.RecipeData[recipe.name];
+            }
+
+            foreach (var ingredient in Ingredients)
+            {
+                ingredient.data = saveData.IngredientData[ingredient.name];
+            }
         }
     }
 }

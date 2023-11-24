@@ -36,7 +36,7 @@ namespace Cooking.RecipeBook
             RecipeName.text = recipe.name;
         }
 
-        public void Lock(RecipeData data = null)
+        public void Lock(Recipe recipe = null)
         {
             this.recipe = null;
 
@@ -45,7 +45,7 @@ namespace Cooking.RecipeBook
             RecipeLockedIcon.gameObject.SetActive(true);
             RecipeName.text = "???";
 
-            if (data != null) RecipeName.text += $"\n({data.CurrentBlueprint} / {data.NeededBlueprint})";
+            if (recipe != null) RecipeName.text += $"\n({recipe.data.CurrentBlueprint} / {recipe.NeededBlueprint})";
         }
 
         public void OnClick()

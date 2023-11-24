@@ -9,18 +9,16 @@ namespace Cooking.Recipe
     public class RecipeData
     {
         [Header("Blueprint")]
-        [ReadOnly] public int CurrentBlueprint;
-        [JsonIgnore] public int NeededBlueprint;
+        public int CurrentBlueprint;
 
         [Header("Cooking")]
-        [ReadOnly] public int CookingDone;
-        [ReadOnly] public int PerfectCookingDone;
-        [ReadOnly] public int ConsecutivePerfectCookingDone;
+        public int CookingDone;
+        public int PerfectCookingDone;
+        public int ConsecutivePerfectCookingDone;
         public int UniqueStatIndex = -1;
 
-        [ReadOnly] public int CookingPoint;
+        public int CookingPoint;
 
-        [JsonIgnore] public bool IsLocked => CurrentBlueprint < NeededBlueprint;
         [JsonIgnore] public bool IsAutoCookUnlocked => PerfectCookingDone > 10;
     }
 }

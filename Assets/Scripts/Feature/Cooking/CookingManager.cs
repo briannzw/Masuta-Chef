@@ -3,7 +3,6 @@ using UnityEngine;
 namespace Cooking
 {
     using AYellowpaper.SerializedCollections;
-    using MyBox;
     using Save;
     using UnityEngine.SceneManagement;
 
@@ -33,6 +32,8 @@ namespace Cooking
 
         [Header("Gameplay")]
         public Recipe.Recipe CurrentRecipe;
+
+        public static int selectedIndex = 0;
 
         private string initialScene;
 

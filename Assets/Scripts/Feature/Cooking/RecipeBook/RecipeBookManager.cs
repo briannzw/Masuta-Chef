@@ -46,7 +46,8 @@ namespace Cooking.RecipeBook
         {
             // Load SaveData on Awake
             SaveManager.Load();
-            FetchData();
+            initialRecipeIndex = CookingManager.selectedIndex;
+            recipeSO.PopulateData(SaveManager.SaveData);
         }
 
         private void Start()
@@ -73,7 +74,7 @@ namespace Cooking.RecipeBook
                     recipeItem.Set(recipeSO.Recipes[i]);
 
                     // Set then Lock
-                    if (recipeSO.Recipes[i].data.IsLocked) recipeItem.Lock(recipeSO.Recipes[i].data);
+                    if (recipeSO.Recipes[i].IsLocked) recipeItem.Lock(recipeSO.Recipes[i]);
                 }
                 else recipeItem.Lock();
             }
@@ -122,7 +123,7 @@ namespace Cooking.RecipeBook
             }
 
             // Locks
-            RerollLock.SetActive(false);
+            RerollLock.SetActive(recipe.data.CookingDone < recipeSO.UnlockSettings[2]);
 
             // Auto Cook
             AutoCookLock.SetActive(recipe.data.PerfectCookingDone < recipeSO.AutoCookUnlockSettings);
@@ -155,20 +156,7 @@ namespace Cooking.RecipeBook
         {
             Destroy(CookingManager.gameObject);
 
-            SceneManager.LoadScene("MainMenu");
-        }
-
-        private void FetchData()
-        {
-            foreach(var recipe in recipeSO.Recipes)
-            {
-                recipe.data = SaveManager.SaveData.RecipeData[recipe.name];
-            }
-
-            foreach(var ingredient in recipeSO.Ingredients)
-            {
-                ingredient.data = SaveManager.SaveData.IngredientData[ingredient.name];
-            }
+            SceneManager.LoadScene("Menu");
         }
 
 
@@ -182,6 +170,29 @@ namespace Cooking.RecipeBook
         public void LoadGame()
         {
             SaveManager.Load();
+        }
+
+
+        [ButtonMethod]
+        public void NewGame()
+        {
+            if (recipeSO == null || recipeSO.Recipes.Count == 0 || recipeSO.Ingredients.Count == 0)
+            {
+                Debug.LogError("Please recheck if recipeSO is defined before proceeding.");
+                return;
+            }
+
+            foreach (var recipe in recipeSO.Recipes)
+            {
+                SaveManager.SaveData.Add(recipe, 0);
+            }
+
+            foreach (var ingredient in recipeSO.Ingredients)
+            {
+                SaveManager.SaveData.Add(ingredient, 0);
+            }
+
+            SaveGame();
         }
     }
 }

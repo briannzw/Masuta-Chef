@@ -59,4 +59,24 @@ public class GameManager : MonoBehaviour
         // Load Recipe Book Stat Mods
         if(Application.isPlaying) StatsManager.Load();
     }
+
+    [ButtonMethod]
+    public void NewGame()
+    {
+        if(StatsManager.RecipeSO == null || StatsManager.RecipeSO.Recipes.Count == 0 || StatsManager.RecipeSO.Ingredients.Count == 0)
+        {
+            Debug.LogError("Please recheck if StatsManager RecipeSO is defined before proceeding.");
+            return;
+        }
+
+        foreach(var recipe in StatsManager.RecipeSO.Recipes)
+        {
+            SaveManager.SaveData.Add(recipe, 0);
+        }
+
+        foreach(var ingredient in StatsManager.RecipeSO.Ingredients)
+        {
+            SaveManager.SaveData.Add(ingredient, 0);
+        }
+    }
 }

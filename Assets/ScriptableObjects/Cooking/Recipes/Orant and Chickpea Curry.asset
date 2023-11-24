@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Orant and Chickpea Curry
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 9b64ed6493b2cff4aae0988044c31073, type: 3}
+  LockedIcon: {fileID: 21300000, guid: bb8968a89eaa21a408114154fb446055, type: 3}
   name: Orant and Chickpea Curry
   Description: A flavorful and aromatic vegetarian dish that combines the natural
     sweetness of orants with the nutty richness of chickpeas, all enveloped in a
-    harmonious blend of spices and herbs. This curry is a delightful representation
-    of the vibrant and diverse world of Praksha cuisine, showcasing the art of creating
-    a comforting and satisfying meal from plant-based.
+    harmonious blend of spices and herbs.
   CookingType: 2
   Ingredients:
     _serializedList:
@@ -26,12 +25,12 @@ MonoBehaviour:
       Value: 7
   data:
     CurrentBlueprint: 1
-    NeededBlueprint: 0
     CookingDone: 0
     PerfectCookingDone: 0
     ConsecutivePerfectCookingDone: 0
     UniqueStatIndex: -1
     CookingPoint: 0
+  NeededBlueprint: 1
   Stats:
   - AffectedCharacter: Player
     Stat:
