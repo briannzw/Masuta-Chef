@@ -1,4 +1,3 @@
-using MyBox;
 using Newtonsoft.Json;
 using System;
 using UnityEngine;
@@ -15,10 +14,11 @@ namespace Cooking.Recipe
         public int CookingDone;
         public int PerfectCookingDone;
         public int ConsecutivePerfectCookingDone;
-        public int UniqueStatIndex = -1;
+        public string StatsIndex;
 
         public int CookingPoint;
 
         [JsonIgnore] public bool IsAutoCookUnlocked => PerfectCookingDone > 10;
+        [JsonIgnore] public bool IsStat3Assigned => !string.IsNullOrEmpty(StatsIndex);
     }
 }

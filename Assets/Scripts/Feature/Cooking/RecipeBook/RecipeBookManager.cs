@@ -29,6 +29,13 @@ namespace Cooking.RecipeBook
         [SerializeField] private Transform recipeIngredientParent;
         [SerializeField] private GameObject recipeIngredientItemPrefab;
         [SerializeField] private RecipeStatItem[] recipeStatItems;
+        [SerializeField] private Button recipeRerollButton;
+
+        [Space]
+        [SerializeField] private Image recipeStatRarity;
+        [SerializeField] private TMP_Text recipeStatRarityText;
+        [SerializeField] private Color[] recipeStatRarityBackgroundColor;
+        [SerializeField] private Color[] recipeStatRarityTextColor;
 
         [Header("Recipe Notes")]
         [SerializeField] private Transform recipeNotesParent;
@@ -40,7 +47,16 @@ namespace Cooking.RecipeBook
         [SerializeField] private GameObject AutoCookLock;
         [SerializeField] private TMP_Text AutoCookLockText;
 
+        [Header("Reroll Panel")]
+        [SerializeField] private TMP_Text prevStatText;
+        [SerializeField] private Image prevStatRarityBackground;
+        [SerializeField] private TMP_Text prevStatRarityText;
+        [SerializeField] private TMP_Text nextStatText;
+        [SerializeField] private Image nextStatRarityBackground;
+        [SerializeField] private TMP_Text nextStatRarityText;
+
         private Recipe currentRecipe;
+        private string currentReroll;
 
         private void Awake()
         {
@@ -99,6 +115,7 @@ namespace Cooking.RecipeBook
             // Ingredients
             foreach (Transform child in recipeIngredientParent.transform) Destroy(child.gameObject);
             foreach (var ingredient in recipe.Ingredients)
+
             {
                 var go = Instantiate(recipeIngredientItemPrefab, recipeIngredientParent);
                 go.GetComponent<IngredientItem>().Set(ingredient.Key, ingredient.Value);
@@ -108,14 +125,31 @@ namespace Cooking.RecipeBook
             for (int i = 0; i < recipe.Stats.Length; i++)
             {
                 // Replace Stat 3 with Unique Stat
-                if (i >= 2 && recipe.data.UniqueStatIndex != -1)
+                if (i >= 2)
                 {
-                    recipe.Stats[i] = recipeSO.UniqueStatList[recipe.data.UniqueStatIndex];
+                    if(recipe.data.CookingDone >= recipeSO.UnlockSettings[i] && !recipe.data.IsStat3Assigned)
+                    {
+                        recipe.data.StatsIndex = Reroll();
+                        // Save after First time Reroll
+                        SaveManager.Save();
+                    }
+                    if (recipe.data.IsStat3Assigned)
+                    {
+                        recipe.Stats[i] = recipeSO.GetStatFromIndex(recipe.data.StatsIndex);
+                        recipeStatRarityText.text = recipe.data.StatsIndex[0].ToString();
+                        recipeStatRarity.color = recipeStatRarityBackgroundColor[(recipeStatRarityText.text == "C") ? 0 : 1];
+                        recipeStatRarityText.color = recipeStatRarityTextColor[(recipeStatRarityText.text == "C") ? 0 : 1];
+                    }
+
+                    recipeStatRarity.gameObject.SetActive(recipe.data.IsStat3Assigned);
                 }
 
-                SetRecipeStatUI(recipeStatItems[i], recipe.Stats[i]);
+                recipeStatItems[i].StatsText.text = GetStatInfo(recipe.Stats[i]);
 
-                if (recipe.data.CookingDone >= recipeSO.UnlockSettings[i]) recipeStatItems[i].Unlock();
+                if (recipe.data.CookingDone >= recipeSO.UnlockSettings[i])
+                {
+                    recipeStatItems[i].Unlock();
+                }
                 else
                 {
                     recipeStatItems[i].LockText.text = $"{recipe.data.CookingDone} / {recipeSO.UnlockSettings[i]} Cooking Done";
@@ -123,24 +157,34 @@ namespace Cooking.RecipeBook
             }
 
             // Locks
-            RerollLock.SetActive(recipe.data.CookingDone < recipeSO.UnlockSettings[2]);
+            RerollLock.SetActive(!(recipe.data.IsStat3Assigned));
+
+            recipeRerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll ({recipeSO.RerollPointsNeeded} CP)";
+            recipeRerollButton.interactable = recipe.data.CookingPoint >= recipeSO.RerollPointsNeeded;
 
             // Auto Cook
             AutoCookLock.SetActive(recipe.data.PerfectCookingDone < recipeSO.AutoCookUnlockSettings);
             AutoCookLockText.text = $"{recipe.data.PerfectCookingDone} / {recipeSO.AutoCookUnlockSettings}\nPerfect Cooking";
         }
 
-        private void SetRecipeStatUI(RecipeStatItem item, AddOnStat stat)
+        private string GetStatInfo(AddOnStat stat, bool reverseSign = false)
         {
+            string value = "";
+
             stat.Stat.Initialize();
 
-            item.StatsText.text = $"+{stat.Stat.Modifier.Value} ";
-            item.StatsText.text += (stat.AffectedCharacter == "Player") ? "" : (stat.AffectedCharacter + " ");
+            if(!reverseSign) value = $"+{stat.Stat.Modifier.Value} ";
+
+            value += (stat.AffectedCharacter == "Player") ? "" : (stat.AffectedCharacter + " ");
             if (stat.Stat.StatType == StatsType.Character)
             {
-                item.StatsText.text += (stat.Stat.AffectDynamicStat) ? StatAbbreviation.Get(stat.Stat.DynamicStatsAffected) : StatAbbreviation.Get(stat.Stat.StatsAffected);
+                value += (stat.Stat.AffectDynamicStat) ? StatAbbreviation.Get(stat.Stat.DynamicStatsAffected) : StatAbbreviation.Get(stat.Stat.StatsAffected);
             }
-            else item.StatsText.text += StatAbbreviation.Get(stat.Stat.WeaponStatsAffected);
+            else value += StatAbbreviation.Get(stat.Stat.WeaponStatsAffected);
+
+            if(reverseSign) value += $" +{stat.Stat.Modifier.Value}";
+
+            return value;
         }
 
         public void Cook()
@@ -150,6 +194,51 @@ namespace Cooking.RecipeBook
             CookingManager.CurrentRecipe = currentRecipe;
 
             SceneManager.LoadScene(CookingManager.CookingScenes[currentRecipe.CookingType]);
+        }
+
+        private string Reroll()
+        {
+            string statIndex;
+
+            float randValue = Random.value;
+            if(randValue < recipeSO.UniqueStatChance)
+            {
+                statIndex = 'U' + Random.Range(0, recipeSO.UniqueStatList.Stats.Count).ToString("000");
+            }
+            else
+            {
+                statIndex = 'C' + Random.Range(0, recipeSO.CommonStatList.Stats.Count).ToString("000");
+            }
+
+            return statIndex;
+        }
+
+        public void OnReroll()
+        {
+            currentReroll = Reroll();
+
+            currentRecipe.data.CookingPoint -= recipeSO.RerollPointsNeeded;
+            SetUI(currentRecipe);
+            SaveManager.Save();
+
+            prevStatText.text = GetStatInfo(currentRecipe.Stats[2], true);
+            nextStatText.text = GetStatInfo(recipeSO.GetStatFromIndex(currentReroll), true);
+
+            // Rarity
+            prevStatRarityText.text = (recipeStatRarityText.text[0] == 'C') ? "COMMON" : "UNIQUE"; ;
+            prevStatRarityText.color = recipeStatRarityText.color;
+            prevStatRarityBackground.color = recipeStatRarity.color;
+            nextStatRarityText.text = (currentReroll[0] == 'C') ? "COMMON" : "UNIQUE";
+            nextStatRarityText.color = recipeStatRarityTextColor[(currentReroll[0] == 'C') ? 0 : 1];
+            nextStatRarityBackground.color = recipeStatRarityBackgroundColor[(currentReroll[0] == 'C') ? 0 : 1];
+        }
+
+        public void OnRerollAccepted()
+        {
+            currentRecipe.data.StatsIndex = currentReroll;
+            SaveManager.Save();
+
+            SetUI(currentRecipe);
         }
 
         public void Back()

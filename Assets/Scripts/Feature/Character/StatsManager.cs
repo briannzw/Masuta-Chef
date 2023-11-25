@@ -52,10 +52,10 @@ namespace Character
 
                     var recipeStat = recipe.Stats[i];
 
-                    // Replace Stat 3 with Unique Stat
-                    if(i >= 2 && recipe.data.UniqueStatIndex != -1)
+                    // Replace Stat 3
+                    if(i >= 2 && recipe.data.IsStat3Assigned)
                     {
-                        recipeStat = RecipeSO.UniqueStatList[recipe.data.UniqueStatIndex];
+                        recipeStat = RecipeSO.GetStatFromIndex(recipe.data.StatsIndex);
                     }
 
                     // Initialize Modifier with StatsManager as Source
