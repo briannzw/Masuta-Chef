@@ -52,10 +52,19 @@ namespace Cooking.Gameplay.TapNumber
             Debug.Log(CookingIndicator.FinalResult.ToString());
 
             // Save to Recipe
-            CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
 
-            if (successTap == 0) OnCookingFailed?.Invoke();
-            else OnCookingSuccess?.Invoke();
+            if (successTap == 0)
+            {
+                OnCookingFailed?.Invoke();
+
+                CookingManager.Instance.CookingFailed();
+            }
+            else
+            {
+                OnCookingSuccess?.Invoke();
+
+                CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
+            }
         }
 
         public void TapSuccess(int num)

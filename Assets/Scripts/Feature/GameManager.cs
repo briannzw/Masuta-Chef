@@ -5,6 +5,8 @@ using MyBox;
 using Character;
 using System;
 using UnityEngine.AI;
+using UnityEditor;
+
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -69,13 +71,17 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        foreach(var recipe in StatsManager.RecipeSO.Recipes)
+        Unsupported.SmartReset(SaveManager);
+
+        foreach (var recipe in StatsManager.RecipeSO.Recipes)
         {
+            recipe.data = new();
             SaveManager.SaveData.Add(recipe, 0);
         }
 
         foreach(var ingredient in StatsManager.RecipeSO.Ingredients)
         {
+            ingredient.data = new();
             SaveManager.SaveData.Add(ingredient, 0);
         }
     }

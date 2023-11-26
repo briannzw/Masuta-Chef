@@ -1,6 +1,8 @@
 using MyBox;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEditor;
 using TMPro;
 
 namespace Cooking.RecipeBook
@@ -10,7 +12,6 @@ namespace Cooking.RecipeBook
     using Recipe;
     using Recipe.UI;
     using Save;
-    using UnityEngine.SceneManagement;
 
     public class RecipeBookManager : MonoBehaviour
     {
@@ -30,6 +31,8 @@ namespace Cooking.RecipeBook
         [SerializeField] private GameObject recipeIngredientItemPrefab;
         [SerializeField] private RecipeStatItem[] recipeStatItems;
         [SerializeField] private Button recipeRerollButton;
+        [SerializeField] private Button recipeCookButton;
+        [SerializeField] private Button recipeAutoCookButton;
 
         [Space]
         [SerializeField] private Image recipeStatRarity;
@@ -162,9 +165,14 @@ namespace Cooking.RecipeBook
             recipeRerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll ({recipeSO.RerollPointsNeeded} CP)";
             recipeRerollButton.interactable = recipe.data.CookingPoint >= recipeSO.RerollPointsNeeded;
 
+            // Cook
+            recipeCookButton.interactable = recipe.HasEnoughIngredients();
+
             // Auto Cook
             AutoCookLock.SetActive(recipe.data.PerfectCookingDone < recipeSO.AutoCookUnlockSettings);
             AutoCookLockText.text = $"{recipe.data.PerfectCookingDone} / {recipeSO.AutoCookUnlockSettings}\nPerfect Cooking";
+
+            recipeAutoCookButton.interactable = (recipe.data.PerfectCookingDone >= recipeSO.AutoCookUnlockSettings && recipe.HasEnoughIngredients());
         }
 
         private string GetStatInfo(AddOnStat stat, bool reverseSign = false)
@@ -241,6 +249,14 @@ namespace Cooking.RecipeBook
             SetUI(currentRecipe);
         }
 
+        public void OnAutoCook()
+        {
+            CookingManager.CurrentRecipe = currentRecipe;
+            CookingManager.CookingDone(CookingResult.Perfect);
+
+            SetUI(currentRecipe);
+        }
+
         public void Back()
         {
             Destroy(CookingManager.gameObject);
@@ -271,13 +287,17 @@ namespace Cooking.RecipeBook
                 return;
             }
 
+            Unsupported.SmartReset(SaveManager);
+
             foreach (var recipe in recipeSO.Recipes)
             {
+                recipe.data = new();
                 SaveManager.SaveData.Add(recipe, 0);
             }
 
             foreach (var ingredient in recipeSO.Ingredients)
             {
+                ingredient.data = new();
                 SaveManager.SaveData.Add(ingredient, 0);
             }
 
