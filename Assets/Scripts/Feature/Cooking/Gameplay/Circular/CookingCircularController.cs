@@ -35,9 +35,10 @@ namespace Cooking.Gameplay.Circular
 
         private void Update()
         {
-            if (currentVelocity > 0f)
+            if (currentVelocity > 0f || currentVelocity < 0f)
             {
                 currentVelocity -= VelocityDrop * Mathf.Sign(currentVelocity) * Time.deltaTime;
+                currentVelocity = Mathf.Round(currentVelocity * 100f) / 100f;
                 currentVelocity = Mathf.Clamp(currentVelocity, -MaxVelocity, MaxVelocity);
             }
             
