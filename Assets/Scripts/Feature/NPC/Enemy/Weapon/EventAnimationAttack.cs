@@ -16,4 +16,9 @@ public class EventAnimationAttack : MonoBehaviour
     {
         NPC.GetComponent<SpawnObject>().Release();
     }
+
+    public void StopDamage()
+    {
+        ActiveWeapon.weaponCollider.enabled = false;
+    }
 }

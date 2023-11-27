@@ -33,6 +33,13 @@ namespace NPC.Enemy
             StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
         }
 
+        private void OnEnable()
+        {
+            StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
+            CanPickUp = true;
+            Agent.enabled = true;
+        }
+
         private new void Start()
         {
             base.Start();
@@ -43,23 +50,10 @@ namespace NPC.Enemy
         {
             StateMachine.CurrentState.FrameUpdate();
 
-            // Testing Drop Crate
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                if(hasCrate) OnPickUpCancel();
-
-            }
+            if (!Agent.enabled) return;
 
             Animator.SetBool("IsRunning", !Agent.isStopped);
             Animator.SetBool("IsCrateRunning", hasCrate);
-            if (Agent.remainingDistance <= StopDistance)
-            {
-                Agent.isStopped = true;
-            }
-            else
-            {
-                Agent.isStopped = false;
-            }
 
             DetectTarget();
             if (!isPickingUpCrate && !hasCrate)
@@ -184,10 +178,8 @@ namespace NPC.Enemy
                 // Calculate the direction away from the player
                 Vector3 runDirection = transform.position - GameManager.Instance.PlayerTransform.position;
 
-                // Calculate the target position by adding the run direction to the enemy's position
-                TargetPosition = transform.position + runDirection.normalized * safeDistance;
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(TargetPosition, out hit, 5f, 1 << NavMesh.GetAreaFromName("Walkable")))
+                if (NavMesh.SamplePosition(transform.position + runDirection.normalized * safeDistance, out hit, 5f, 1 << NavMesh.GetAreaFromName("Walkable")))
                 {
                     TargetPosition = hit.position;
                 }
@@ -213,23 +205,10 @@ namespace NPC.Enemy
             TargetPosition = hit.position;
         }
 
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(Agent.destination, DetectionRadius);
-        }
         private void OnJokerDie()
         {
             CanPickUp = false;
             OnPickUpCancel();
-            Animator.SetTrigger("Dead");
-            Invoke("ReleaseObject", 1f);
-        }
-
-        private void ReleaseObject()
-        {
-            GetComponentInChildren<SpawnObject>().Release();
         }
     }
 }

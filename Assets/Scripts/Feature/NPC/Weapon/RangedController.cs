@@ -14,7 +14,8 @@ namespace NPC.NPCWeapon
     public class RangedController : Weapon
     {
         #region Properties
-        public GameObject fireObjectPrefab;
+        public Animator WeaponAnimator;
+        [SerializeField] private Spawner.Spawner bulletSpawner;
         #endregion
 
         private new void Awake()
@@ -34,15 +35,40 @@ namespace NPC.NPCWeapon
         public override void Attack()
         {
             base.Attack();
-            var fireObject = Instantiate(fireObjectPrefab, transform.position, transform.rotation);
-            var controller = fireObject.GetComponent<BulletHit>();
-            controller.Initialize(this, damageScaling);
-            fireObject.GetComponent<Rigidbody>().velocity = transform.forward * fireObject.GetComponent<Bullet>().TravelSpeed;
+            var bullets = bulletSpawner.Spawn();
+            foreach (var bullet in bullets)
+            {
+                var controller = bullet.GetComponent<BulletHit>();
+                controller.Initialize(this, damageScaling);
+            }
+
         }
 
         public override void StartAttack()
         {
-            base.StartAttack();
+            if (WeaponAnimator == null) base.StartAttack();
+            else
+            {
+                float animationLength = 0;
+                foreach (AnimationClip clip in WeaponAnimator.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "attack")
+                    {
+                        animationLength = clip.length;
+                    }
+                }
+
+                WeaponAnimator.SetFloat("AttackSpeed", stats[WeaponStatsEnum.Speed].Value / 100 * animationLength);
+                WeaponAnimator.SetBool("IsAttacking", true);
+            }
+
+        }
+
+        public override void StopAttack()
+        {
+            if (WeaponAnimator == null) base.StopAttack();
+            else WeaponAnimator.SetBool("IsAttacking", false);
+
         }
         #endregion
     }

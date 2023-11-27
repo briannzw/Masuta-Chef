@@ -29,7 +29,6 @@ namespace NPC
         protected Character chara;
 
         [Header("Combat Properties")]
-        public float CombatEngageDistance = 7f;
         public bool IsEngaging = false;
         public GameObject CurrentEnemies;
 

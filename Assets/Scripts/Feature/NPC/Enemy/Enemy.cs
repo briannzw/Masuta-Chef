@@ -19,6 +19,7 @@ namespace NPC.Enemy
         [Header("Combat Properties")]
 
         public float AttackDistance;
+        public float CombatEngageDistance = 7f;
         public float AttackTimer;
         [HideInInspector]
         public float DefaultAttackTimer;
@@ -31,10 +32,15 @@ namespace NPC.Enemy
         private GameObject defaultEnemyTarget;
         public bool IsStun;
         public bool IsConfused;
+        public bool IsDead;
+
+        public Collider childCollider;
 
         private void OnEnable()
         {
             Agent.isStopped = false;
+            childCollider.enabled = true;
+            IsDead = false;
         }
 
         protected new void Awake()
@@ -46,6 +52,7 @@ namespace NPC.Enemy
             DefaultAttackTimer = AttackTimer;
             DefaultAttackDuration = AttackDuration;
             defaultEnemyTarget = GameManager.Instance.PlayerTransform.gameObject;
+            childCollider.enabled = true;
         }
 
         protected new void Start()
@@ -75,16 +82,14 @@ namespace NPC.Enemy
             killCount++;
             Agent.isStopped = true;
             //to do change to dead state
-
-            if(Animator != null) Animator.SetTrigger("Dead");
-            else
+            IsDead = true;
+            if (Animator != null)
             {
-                if (SelectedWeapon != AttackType.Joker)
-                {
-                    GetComponent<SpawnObject>().Release();
-                }
+                Animator.SetTrigger("Dead");
+                StateMachine.ChangeState(new EnemyDeadState(this, StateMachine));
             }
             GameManager.Instance.OnEnemiesKilled?.Invoke();
+            childCollider.enabled = false;
 
         }
 

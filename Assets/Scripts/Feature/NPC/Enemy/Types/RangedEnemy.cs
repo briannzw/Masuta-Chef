@@ -11,5 +11,10 @@ namespace NPC.Enemy.Ranged
             base.Awake();
             StateMachine.Initialize(new EnemyRangedMoveState(this, StateMachine));
         }
+
+        private void OnEnable()
+        {
+            StateMachine.Initialize(new EnemyRangedMoveState(this, StateMachine));
+        }
     }
 }
