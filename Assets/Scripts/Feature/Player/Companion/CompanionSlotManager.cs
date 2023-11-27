@@ -4,6 +4,8 @@ using UnityEngine;
 namespace Player.CompanionSlot
 {
     using NPC.Companion;
+    using Spawner;
+
     public class CompanionSlotManager : MonoBehaviour
     {
         [Header("References")]
@@ -26,7 +28,8 @@ namespace Player.CompanionSlot
         public void DeleteCompanion(Companion companion)
         {
             companions.RemoveAt(companion.GetComponent<Companion>().companionSpawnOrder);
-            Destroy(companion.gameObject);
+            if (companion.GetComponent<SpawnObject>() != null) companion.GetComponent<SpawnObject>().Release();
+            else Destroy(companion.gameObject);
             UpdateSlotFormation();
         }
 

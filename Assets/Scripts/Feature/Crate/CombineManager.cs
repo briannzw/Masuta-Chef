@@ -10,6 +10,7 @@ namespace Crate.Combine
     using Loot.Object;
     using Player.CompanionSlot;
     using NPC.Companion;
+    using Spawner;
 
     public class CombineManager : MonoBehaviour
     {
@@ -19,7 +20,6 @@ namespace Crate.Combine
 
         [Header("UI References")]
         [SerializeField] private GameObject canvas;
-        [SerializeField] private Image itemBorder;
         [SerializeField] private Image itemIcon;
 
         [Header("UI Icon Sprites")]
@@ -35,7 +35,7 @@ namespace Crate.Combine
         [Header("Dictionaries")]
         [SerializeField] private SerializedDictionary<CrateColor, Ingredient> Ingredients;
         [SerializeField] private SerializedDictionary<CrateColor, GameObject> Weapons;
-        [SerializeField] private SerializedDictionary<CrateColor, GameObject> Companions;
+        [SerializeField] private SerializedDictionary<CrateColor, NavMeshSpawner> CompanionsSpawner;
 
         public bool Combine(List<CrateColor> colors)
         {
@@ -68,11 +68,11 @@ namespace Crate.Combine
                 GameObject companion;
                 if (IsSameColor(colors))
                 {
-                    companion = Instantiate(Companions[colors[0]], hit.position, Quaternion.identity);
+                    companion = CompanionsSpawner[colors[0]].Spawn()[0];
                 }
                 else
                 {
-                    companion = Instantiate(Companions[(CrateColor)Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)], hit.position, Quaternion.identity);
+                    companion = CompanionsSpawner[(CrateColor)Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)].Spawn()[0];
                 }
                 GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().AddCompanion(companion.GetComponent<Companion>());
             }
@@ -101,9 +101,6 @@ namespace Crate.Combine
             }
 
             canvas.SetActive(true);
-
-            if (IsSameColor(colors)) itemBorder.color = (colors[0] == CrateColor.Red) ? Color.red : (colors[0] == CrateColor.Blue) ? Color.blue : Color.green;
-            else itemBorder.color = Color.white;
 
             if (colors.Count == 1)
             {
