@@ -499,6 +499,7 @@ MonoBehaviour:
   CurrentEnemies: {fileID: 0}
   IsThisJoker: 0
   MaxDistanceFromPlayer: 20
+  IsAltPath: 0
   IsFollowingEnemy: 0
   DistanceFromPlayer: 0
   companionSlotPosition: {fileID: 0}
@@ -772,7 +773,7 @@ MonoBehaviour:
         BaseValue: 100
     - Key: 1
       Value:
-        BaseValue: 50
+        BaseValue: 100
     - Key: 2
       Value:
         BaseValue: 100

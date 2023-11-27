@@ -54,14 +54,6 @@ namespace NPC.Enemy
 
             Animator.SetBool("IsRunning", !Agent.isStopped);
             Animator.SetBool("IsCrateRunning", hasCrate);
-            if (Agent.remainingDistance <= StopDistance)
-            {
-                Agent.isStopped = true;
-            }
-            else
-            {
-                Agent.isStopped = false;
-            }
 
             DetectTarget();
             if (!isPickingUpCrate && !hasCrate)
@@ -186,10 +178,8 @@ namespace NPC.Enemy
                 // Calculate the direction away from the player
                 Vector3 runDirection = transform.position - GameManager.Instance.PlayerTransform.position;
 
-                // Calculate the target position by adding the run direction to the enemy's position
-                TargetPosition = transform.position + runDirection.normalized * safeDistance;
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(TargetPosition, out hit, 5f, 1 << NavMesh.GetAreaFromName("Walkable")))
+                if (NavMesh.SamplePosition(transform.position + runDirection.normalized * safeDistance, out hit, 5f, 1 << NavMesh.GetAreaFromName("Walkable")))
                 {
                     TargetPosition = hit.position;
                 }

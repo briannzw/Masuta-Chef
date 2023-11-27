@@ -27,9 +27,9 @@ public class CompanionIdleState : CompanionState
             companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion, companion.CompanionStateMachine));
         }
 
-        if (companion.IsFollowingEnemy && companion.Agent.remainingDistance <= companion.AttackDistance - 0.1f)
+        if (companion.IsFollowingEnemy)
         {
-            companion.CompanionStateMachine.ChangeState(new CompanionAttackState(companion, companion.CompanionStateMachine));
+            companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion, companion.CompanionStateMachine));
         }
 
     }

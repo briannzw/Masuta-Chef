@@ -31,15 +31,17 @@ public class CompanionAttackState : CompanionState
         base.FrameUpdate();
         RotateToTarget(RotationSpeed);
 
-        if(companion.CurrentEnemy != null && !companion.CurrentEnemy.GetComponent<NPC.Enemy.Enemy>().IsDead)
+        if (companion.CurrentEnemy == null)
         {
-            if(Vector3.SqrMagnitude(companion.CurrentEnemy.transform.position - companion.transform.position) > companion.AttackDistance)
-            {
-                companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
-            }
+            companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
         }
 
-        if(Vector3.SqrMagnitude(GameManager.Instance.PlayerTransform.position - companion.transform.position) > companion.MaxDistanceFromPlayer)
+        if (Vector3.SqrMagnitude(companion.CurrentEnemy.transform.position - companion.transform.position) > companion.AttackDistance)
+        {
+            companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
+        }
+
+        if (Vector3.SqrMagnitude(GameManager.Instance.PlayerTransform.position - companion.transform.position) > companion.MaxDistanceFromPlayer)
         {
             companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
         }
@@ -47,6 +49,11 @@ public class CompanionAttackState : CompanionState
         if (companion.CurrentEnemy.GetComponent<NPC.Enemy.Enemy>().IsDead)
         {
             companion.CompanionStateMachine.ChangeState(new CompanionMoveState(companion.GetComponent<Companion>(), companion.CompanionStateMachine));
+        }
+
+        if(Vector3.SqrMagnitude(companion.CurrentEnemy.transform.position - companion.transform.position) > companion.DetectionRadius)
+        {
+            companion.CurrentEnemy = null;
         }
     }
 

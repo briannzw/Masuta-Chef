@@ -19,6 +19,7 @@ namespace NPC.Enemy
         [Header("Combat Properties")]
 
         public float AttackDistance;
+        public float CombatEngageDistance = 7f;
         public float AttackTimer;
         [HideInInspector]
         public float DefaultAttackTimer;

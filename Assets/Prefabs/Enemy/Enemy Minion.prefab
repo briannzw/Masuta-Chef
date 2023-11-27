@@ -753,6 +753,7 @@ MonoBehaviour:
   MaxTauntedDistance: 0
   IsStun: 0
   IsConfused: 0
+  IsDead: 0
   childCollider: {fileID: 8657363976833129869}
 --- !u!136 &7173073296068579108
 CapsuleCollider:
@@ -774,9 +775,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2.1104918
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.13662365, z: 0}
 --- !u!1 &3047489862162921547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,9 +1776,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2.0252457
   m_Direction: 1
-  m_Center: {x: -0.99, y: 0.98, z: 0}
+  m_Center: {x: -0.9899999, y: 1.2386483, z: 0}
 --- !u!4 &8642275204211893554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3040415652556724830, guid: 9c6ff0f82834235439af9285bb553574,
