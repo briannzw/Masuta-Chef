@@ -155,6 +155,7 @@ namespace Cooking.RecipeBook
                 }
                 else
                 {
+                    recipeStatItems[i].Lock();
                     recipeStatItems[i].LockText.text = $"{recipe.data.CookingDone} / {recipeSO.UnlockSettings[i]} Cooking Done";
                 }
             }
