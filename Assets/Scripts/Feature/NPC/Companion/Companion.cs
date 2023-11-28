@@ -32,7 +32,6 @@ namespace NPC.Companion
 
         [Header("Compat Properties")]
         public float AttackDistance;
-        public GameObject CurrentEnemy;
 
         private new void Awake()
         {
@@ -45,9 +44,8 @@ namespace NPC.Companion
             DetectionRadius = 8f;
         }
 
-        private new void Start()
+        protected void Start()
         {
-            base.Start();
             chara.OnDie += OnCompanionDie;
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
         }

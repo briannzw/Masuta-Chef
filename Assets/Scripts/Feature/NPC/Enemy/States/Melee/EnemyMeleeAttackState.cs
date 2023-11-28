@@ -27,12 +27,12 @@ public class EnemyMeleeAttackState : EnemyState
         base.FrameUpdate();
         RotateToTarget(15f);
         enemy.AttackDuration -= Time.deltaTime;
-        if(Vector3.Distance(enemy.transform.position, enemy.CurrentEnemies.transform.position) > enemy.AttackDistance || enemy.AttackDuration <= 0)
+        if(Vector3.Distance(enemy.transform.position, enemy.CurrentEnemy.transform.position) > enemy.AttackDistance || enemy.AttackDuration <= 0)
         {
             enemy.StateMachine.ChangeState(new EnemyMeleeEngageState(enemy, enemy.StateMachine));
         }
 
-        enemy.Agent.SetDestination(enemy.CurrentEnemies.transform.position);
+        enemy.Agent.SetDestination(enemy.CurrentEnemy.transform.position);
     }
 
     public override void PhysicsUpdate()
@@ -42,7 +42,7 @@ public class EnemyMeleeAttackState : EnemyState
 
     private void RotateToTarget(float rotationSpeed)
     {
-        Vector3 direction = enemy.CurrentEnemies.transform.position - enemy.transform.position;
+        Vector3 direction = enemy.CurrentEnemy.transform.position - enemy.transform.position;
         direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);

@@ -30,7 +30,7 @@ namespace NPC
 
         [Header("Combat Properties")]
         public bool IsEngaging = false;
-        public GameObject CurrentEnemies;
+        public GameObject CurrentEnemy;
 
         #region Joker Properties
         [HideInInspector]
@@ -45,8 +45,8 @@ namespace NPC
 
             Agent.stoppingDistance = StopDistance;
         }
-        // Start is called before the first frame update
-        protected void Start()
+
+        private void OnEnable()
         {
             if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;

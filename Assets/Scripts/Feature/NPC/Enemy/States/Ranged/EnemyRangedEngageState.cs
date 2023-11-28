@@ -78,7 +78,7 @@ public class EnemyRangedEngageState : EnemyState
     private void RotateToTarget(float rotationSpeed)
     {
         // Calculate the direction from this GameObject to the target
-        Vector3 direction = enemy.CurrentEnemies.transform.position - enemyPos;
+        Vector3 direction = enemy.CurrentEnemy.transform.position - enemyPos;
         direction.y = 0;
 
         // Create a rotation that looks in the calculated direction
@@ -92,7 +92,7 @@ public class EnemyRangedEngageState : EnemyState
     {
         Vector3 currentPosition = enemy.transform.position;
 
-        float angleToCenter = Mathf.Atan2(currentPosition.z - enemy.CurrentEnemies.transform.position.z, currentPosition.x - enemy.CurrentEnemies.transform.position.x) * Mathf.Rad2Deg;
+        float angleToCenter = Mathf.Atan2(currentPosition.z - enemy.CurrentEnemy.transform.position.z, currentPosition.x - enemy.CurrentEnemy.transform.position.x) * Mathf.Rad2Deg;
 
         angleToCenter = (angleToCenter + 360) % 360;
 

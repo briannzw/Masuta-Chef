@@ -494,7 +494,6 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 1.8
   Agent: {fileID: 0}
-  CombatEngageDistance: 7
   IsEngaging: 0
   CurrentEnemies: {fileID: 0}
   IsThisJoker: 0
@@ -592,7 +591,7 @@ MonoBehaviour:
           BaseValue: 1
       - Key: 2
         Value:
-          BaseValue: 1
+          BaseValue: 0.5
       - Key: 3
         Value:
           BaseValue: 1
