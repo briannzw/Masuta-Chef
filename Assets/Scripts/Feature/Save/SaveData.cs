@@ -15,7 +15,7 @@ namespace Save.Data
             if (!RecipeData.ContainsKey(recipe.name))
                 RecipeData.Add(recipe.name, recipe.data);
 
-            if (!RecipeData[recipe.name].IsLocked) return false;
+            if (!recipe.IsLocked) return false;
 
             RecipeData[recipe.name].CurrentBlueprint += value;
             return true;

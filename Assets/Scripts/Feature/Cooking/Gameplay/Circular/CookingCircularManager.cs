@@ -129,10 +129,18 @@ namespace Cooking.Gameplay.Circular
             controller.enabled = false;
             StopAllCoroutines();
 
-            if (stirValue <= 0) OnCookingFailed?.Invoke();
-            else OnCookingSuccess?.Invoke();
+            if (stirValue <= 0)
+            {
+                OnCookingFailed?.Invoke();
 
-            CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
+                CookingManager.Instance.CookingFailed();
+            }
+            else
+            {
+                OnCookingSuccess?.Invoke();
+
+                CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
+            }
         }
 
         private IEnumerator AnimateArrow(float zEndValue)

@@ -5,6 +5,8 @@ using MyBox;
 using Character;
 using System;
 using UnityEngine.AI;
+using UnityEditor;
+
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -58,5 +60,29 @@ public class GameManager : MonoBehaviour
         SaveManager.Load();
         // Load Recipe Book Stat Mods
         if(Application.isPlaying) StatsManager.Load();
+    }
+
+    [ButtonMethod]
+    public void NewGame()
+    {
+        if(StatsManager.RecipeSO == null || StatsManager.RecipeSO.Recipes.Count == 0 || StatsManager.RecipeSO.Ingredients.Count == 0)
+        {
+            Debug.LogError("Please recheck if StatsManager RecipeSO is defined before proceeding.");
+            return;
+        }
+
+        Unsupported.SmartReset(SaveManager);
+
+        foreach (var recipe in StatsManager.RecipeSO.Recipes)
+        {
+            recipe.data = new();
+            SaveManager.SaveData.Add(recipe, 0);
+        }
+
+        foreach(var ingredient in StatsManager.RecipeSO.Ingredients)
+        {
+            ingredient.data = new();
+            SaveManager.SaveData.Add(ingredient, 0);
+        }
     }
 }

@@ -132,12 +132,12 @@ namespace Cooking.Gameplay.Slider
         {
             cookingControls.Cooking.Disable();
             CookingBarController.GameOver();
-            // Show Result
-            // Toggle to Panel Input (?)
-            Debug.Log(CookingIndicator.FinalResult.ToString());
 
-            // Save to Recipe
-            CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
+            if (timeoutTimer >= TimeoutTime)
+                CookingManager.Instance.CookingFailed();
+
+            if (gameTimer > GameTime)
+                CookingManager.Instance.CookingDone(CookingIndicator.FinalResult);
         }
 
         #region Callbacks

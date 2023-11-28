@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cactyrn-filled Chutney Sandwich
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 5259e790fac19df419ba6b95ecdba45d, type: 3}
+  LockedIcon: {fileID: 21300000, guid: 7804d2bc84ada804ea10884a3b07b649, type: 3}
   name: Cactyrn-filled Chutney Sandwich
   Description: Popular and delectable snack or light meal that features a delightful
     combination of flavors and textures. This sandwich is a true representation of
@@ -25,12 +26,12 @@ MonoBehaviour:
       Value: 5
   data:
     CurrentBlueprint: 0
-    NeededBlueprint: 1
     CookingDone: 0
     PerfectCookingDone: 0
     ConsecutivePerfectCookingDone: 0
-    UniqueStatIndex: -1
+    StatsIndex: 
     CookingPoint: 0
+  NeededBlueprint: 1
   Stats:
   - AffectedCharacter: Player
     Stat:

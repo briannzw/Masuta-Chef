@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebd77abc0a1f38499fa04fad2e3a89d, type: 3}
+  m_Name: Common Stats List
+  m_EditorClassIdentifier: 
+  Stats:
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 1
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 2
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 10
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 1
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 0
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 5
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0

@@ -12,6 +12,11 @@ namespace Cooking.Recipe.UI
         public GameObject LockedOverlay;
         public TMP_Text LockText;
 
+        public void Lock()
+        {
+            LockedOverlay.SetActive(true);
+        }
+
         public void Unlock()
         {
             LockedOverlay.SetActive(false);
