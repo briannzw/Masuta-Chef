@@ -40,6 +40,9 @@ namespace Weapon
         [SerializeField] protected bool isCooldownUltimate = false;
         [SerializeField] private bool isUltimateCancelable = false;
 
+        [Header("Icons")]
+        public WeaponData data;
+
         private bool initialTrigger;
 
         private Dictionary<WeaponStatsEnum, float> previousFlatModValue = new();

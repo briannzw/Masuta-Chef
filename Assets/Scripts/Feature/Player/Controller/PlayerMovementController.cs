@@ -26,10 +26,6 @@ namespace Player.Controller
 
         // Movement Parameters
         private float speed;
-        private float turnSmoothVelocity = 0;
-
-        [Header("Environment")]
-        public float PushForce;
 
         [Header("Modifiers")]
         public float speedMultiplier = 1;

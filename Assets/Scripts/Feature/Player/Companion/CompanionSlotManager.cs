@@ -5,6 +5,7 @@ namespace Player.CompanionSlot
 {
     using NPC.Companion;
     using Spawner;
+    using System;
 
     public class CompanionSlotManager : MonoBehaviour
     {
@@ -13,11 +14,13 @@ namespace Player.CompanionSlot
         public List<Transform> slots = new List<Transform>();
         public int maxSlot = 4;
 
+        public Action OnCompanionChanged;
+
         public void AddCompanion(Companion companion)
         {
             if (companions.Count >= maxSlot)
             {
-                Destroy(companions[0].gameObject);
+                companions[0].GetComponent<SpawnObject>().Release();
                 companions.RemoveAt(0);
             }
 
@@ -41,6 +44,8 @@ namespace Player.CompanionSlot
                     companions[i].GetComponent<Companion>().companionSpawnOrder = i;
                 }
             }
+
+            OnCompanionChanged?.Invoke();
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Character
 #endif
 
         #region C# Events
+        public Action OnStatsInitialized;
         public Action OnDie;
         public Action OnDamaged;
         public Action OnHealed;
@@ -68,6 +69,8 @@ namespace Character
         protected virtual void Start()
         {
             FetchStatMods();
+
+            OnStatsInitialized?.Invoke();
         }
 
         public void FetchStatMods()

@@ -312,6 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
   rb: {fileID: 2464117433372997242}
+  weaponCollider: {fileID: 0}
   TargetTags:
   - Enemy
   stats:
@@ -325,9 +326,12 @@ MonoBehaviour:
     - Key: 2
       Value:
         BaseValue: 100
+  damageScaling: 1
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  data:
+    icon: {fileID: 21300000, guid: 13c7674323aea7f45b077e5bca2da8a5, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128

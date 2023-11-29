@@ -27,13 +27,9 @@ namespace Character
                 Debug.LogError("Assign RecipeSO field in inspector before loading stats!");
                 return;
             }
-
+            
             // Update SO Data
-            foreach (var recipe in RecipeSO.Recipes)
-            {
-                if (saveData.RecipeData.ContainsKey(recipe.name))
-                    recipe.data = saveData.RecipeData[recipe.name];
-            }
+            RecipeSO.PopulateData(saveData);
 
             PopulateMods();
         }
@@ -48,6 +44,7 @@ namespace Character
             {
                 for (int i = 0; i < recipe.Stats.Length; i++)
                 {
+                    if (recipe.IsLocked) continue;
                     if (recipe.data.CookingDone < RecipeSO.UnlockSettings[i]) continue;
 
                     var recipeStat = recipe.Stats[i];
@@ -71,10 +68,7 @@ namespace Character
                             if (!CharacterDynamicStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.DynamicStatsAffected))
                             {
                                 // Initialize new List of Mods on that Stats
-                                CharacterDynamicStatMods[recipeStat.AffectedCharacter] = new()
-                            {
-                                { recipeStat.Stat.DynamicStatsAffected, new List<StatModifier>() }
-                            };
+                                CharacterDynamicStatMods[recipeStat.AffectedCharacter].Add(recipeStat.Stat.DynamicStatsAffected, new List<StatModifier>());
                             }
 
                             // And finally add the modifier.
@@ -89,12 +83,8 @@ namespace Character
                             if (!CharacterStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.StatsAffected))
                             {
                                 // Initialize new List of Mods on that Stats
-                                CharacterStatMods[recipeStat.AffectedCharacter] = new()
-                            {
-                                { recipeStat.Stat.StatsAffected, new List<StatModifier>() }
-                            };
+                                CharacterStatMods[recipeStat.AffectedCharacter].Add(recipeStat.Stat.StatsAffected, new List<StatModifier>());
                             }
-
                             // And finally add the modifier.
                             CharacterStatMods[recipeStat.AffectedCharacter][recipeStat.Stat.StatsAffected].Add(recipeStat.Stat.Modifier);
                         }
@@ -108,10 +98,7 @@ namespace Character
                         if (!WeaponStatMods[recipeStat.AffectedCharacter].ContainsKey(recipeStat.Stat.WeaponStatsAffected))
                         {
                             // Initialize new List of Mods on that Stats
-                            WeaponStatMods[recipeStat.AffectedCharacter] = new()
-                        {
-                            { recipeStat.Stat.WeaponStatsAffected, new List<StatModifier>() }
-                        };
+                            WeaponStatMods[recipeStat.AffectedCharacter].Add(recipeStat.Stat.WeaponStatsAffected, new List<StatModifier>());
                         }
 
                         // And finally add the modifier.

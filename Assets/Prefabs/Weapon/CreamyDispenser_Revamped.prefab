@@ -179,6 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
   rb: {fileID: 1811569729608071877}
+  weaponCollider: {fileID: 0}
   TargetTags:
   - Enemy
   stats:
@@ -196,6 +197,8 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  data:
+    icon: {fileID: 21300000, guid: c62c65298aae0e144821f6a35dbb725c, type: 3}
   spawner: {fileID: 289710697886632661}
   timesPerSecond: 150
   maxRange: 10
@@ -417,6 +420,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c9c60685f1e948b49a28e397bf80ec1c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: d611690f0cfaa3e43b62efd580dd5e96, type: 2}
     - target: {fileID: 919132149155446097, guid: c9c60685f1e948b49a28e397bf80ec1c,
         type: 3}
       propertyPath: m_Name
