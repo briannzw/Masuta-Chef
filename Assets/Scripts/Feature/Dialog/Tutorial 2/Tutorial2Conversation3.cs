@@ -14,13 +14,15 @@ namespace DialogueEditor
         public Button interactButton5;
         public Button interactButton6;
         public Button interactButton7;
-        public CrateArea crateArea;
+        public Button interactButton8;
+        private CrateArea crateArea;
         private bool updateActive = true;
         private bool interactButton4Activated = false;
         private bool interactButton5Activated = false;
         private bool interactButton6Activated = false;
+        private bool interactButton8Activated = false;
 
-        public InputFieldGrabber inputFieldGrabber;
+        private InputFieldGrabber inputFieldGrabber;
 
         // Start is called before the first frame update
         void Start()
@@ -41,6 +43,8 @@ namespace DialogueEditor
         public void EnableCon()
         {
             int crateCount = crateArea.GetCurrentCrateCount();
+            bool isCombined = crateArea.GetInteractStatus();
+            bool isSameColor = crateArea.GetCurrentCrateColor();
             if (crateCount == 1)
             {
                 if (interactButton2.gameObject.activeSelf)
@@ -64,13 +68,22 @@ namespace DialogueEditor
                 interactButton5.gameObject.SetActive(true);
                 interactButton5Activated = true;
             }
-            else if (crateCount == 2 && !interactButton4Activated)
+            else if (crateCount == 2 )
             {
-                interactButton7.onClick.Invoke();
-                interactButton4.gameObject.SetActive(true);
-                interactButton4Activated = true;
+                if (isSameColor && !interactButton4Activated)
+                {
+                    interactButton7.onClick.Invoke();
+                    interactButton4.gameObject.SetActive(true);
+                    interactButton4Activated = true;
+                    interactButton8Activated = true;
+                }
+                else if (!isSameColor && !interactButton8Activated)
+                {
+                    interactButton8.onClick.Invoke();
+                    interactButton8Activated = true;
+                }
             }
-            else if (crateCount == 0)
+            else if (crateCount == 0 && isCombined)
             {
                 if (interactButton3.gameObject.activeSelf)
                 {
