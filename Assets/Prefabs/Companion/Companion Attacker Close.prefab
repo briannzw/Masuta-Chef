@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 4548308470103963913}
   - component: {fileID: 3907041791003499652}
   - component: {fileID: 3655331824645883266}
-  - component: {fileID: 8266016971758490317}
+  - component: {fileID: 8200674065798141720}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8266016971758490317
+--- !u!114 &8200674065798141720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -387,9 +387,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6145847250420525652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da51be4a55b754b41b831d50903e3f1d, type: 3}
+  m_Script: {fileID: 11500000, guid: cc58d666553e8794a883e78b1f6f12ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chara: {fileID: -4670273841599568030}
+  slider: {fileID: 5023010013339776116}
+  disableOnAwake: 1
+  useBillboard: 1
+  DynamicEnum: 0
 --- !u!1 &7212286518193524450
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +512,8 @@ MonoBehaviour:
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   AttackDistance: 3.2
+  data:
+    icon: {fileID: 0}
   wanderRadius: 2
   wanderInterval: 4
   rotationSpeed: 5
@@ -780,6 +787,8 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  data:
+    icon: {fileID: 0}
   WeaponAnimator: {fileID: 8930124451320153791}
   enemyLayer:
     serializedVersion: 2

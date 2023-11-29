@@ -15,7 +15,9 @@ MonoBehaviour:
   name: Level 1
   LevelAreaPrefab: {fileID: 6615127187657421027, guid: 71ad26f3cc10e434d921deddee2d609a,
     type: 3}
+  Description: 
   PlayerSpawnPoint: {x: 0, y: 1, z: 0}
+  EnemyLootDrop: {fileID: 11400000, guid: d326e2c1223c9504bba257c2e03eb5d7, type: 2}
   Waves:
   - EnemyList:
       _serializedList:
@@ -23,7 +25,6 @@ MonoBehaviour:
         Value: 10
       - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
         Value: 5
-    Time: 0
     SpawnInterval: 0
     SpawnPerInterval: 3
   - EnemyList:
@@ -34,7 +35,6 @@ MonoBehaviour:
         Value: 10
       - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
         Value: 10
-    Time: 50
     SpawnInterval: 1
     SpawnPerInterval: 3
   - EnemyList:
@@ -45,9 +45,13 @@ MonoBehaviour:
         Value: 15
       - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
         Value: 15
-    Time: 110
     SpawnInterval: 1
     SpawnPerInterval: 3
-  EnemyLootDrop: {fileID: 11400000, guid: d326e2c1223c9504bba257c2e03eb5d7, type: 2}
+  WaveWaitTime: 15
   CrateSpawnMinInterval: 1
   CrateSpawnMaxInterval: 5
+  DisasterDamageScaling: 1
+  DisasterStartTime: 30
+  DisasterDuration: 10
+  DisasterMinInterval: 15
+  DisasterMaxInterval: 30

@@ -55,8 +55,6 @@ public class CompanionLevelSystem : MonoBehaviour
             currentLevel++;           // Increase the level
             currentExp = excessExp;   // Carry over excess experience points to the next level
 
-            OnLevelUp?.Invoke();
-
             // Add Stats per level
             foreach(var stat in StatsPerLevel.StatList)
             {
@@ -68,6 +66,8 @@ public class CompanionLevelSystem : MonoBehaviour
             {
                 character.Stats.DynamicStatList[dynamicStat.Key].AddModifier(new Kryz.CharacterStats.StatModifier(dynamicStat.Value.Value, Kryz.CharacterStats.StatModType.Flat));
             }
+
+            OnLevelUp?.Invoke();
 
             // Stages (each 10 level)
             if (currentLevel % 10 == 0)

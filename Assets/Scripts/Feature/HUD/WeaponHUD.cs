@@ -17,7 +17,7 @@ namespace HUD
         {
             Reset();
             weaponController.OnWeaponChanged += SetUI;
-            SetUI();
+            if(weaponController.ActiveWeapon != null) SetUI();
         }
 
         private void Reset()

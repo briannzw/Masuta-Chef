@@ -24,7 +24,7 @@ namespace Weapon
         #region Properties
         [Header("References")]
         public Character Holder;
-        [SerializeField] protected Rigidbody rb;
+        public Rigidbody rb;
         public Collider weaponCollider;
         [Tag] public List<string> TargetTags = new();
 
@@ -60,9 +60,15 @@ namespace Weapon
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            if(rb == null) rb = GetComponentInParent<Rigidbody>();
-            weaponCollider = GetComponent<Collider>();
-            initialTrigger = weaponCollider.isTrigger;
+            if (rb == null)
+            {
+                if(GetComponentInParent<Rigidbody>() != null) rb = GetComponentInParent<Rigidbody>();
+            }
+            if (weaponCollider == null)
+            {
+                if(GetComponent<Collider>() != null) weaponCollider = GetComponent<Collider>();
+            }
+            if(weaponCollider != null) initialTrigger = weaponCollider.isTrigger;
         }
 
         // Start is called before the first frame update
@@ -73,8 +79,8 @@ namespace Weapon
             // If Spawned
             if (Holder == null)
             {
-                rb.isKinematic = false;
-                weaponCollider.isTrigger = false;
+                if(rb != null) rb.isKinematic = false;
+                if(weaponCollider != null) weaponCollider.isTrigger = false;
             }
         }
 
@@ -142,6 +148,8 @@ namespace Weapon
             if (Holder != null) return;
 
             Holder = holder;
+
+            if (weaponCollider == null) return;
             rb.isKinematic = true;
             weaponCollider.isTrigger = initialTrigger;
             gameObject.layer = LayerMask.NameToLayer("Default");

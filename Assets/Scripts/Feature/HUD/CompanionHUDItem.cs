@@ -40,6 +40,7 @@ namespace HUD
             SetLevelUI();
 
             companionLevel.OnLevelUp += SetLevelUI;
+            companionLevel.OnLevelUp += SetHealthUI;
             companionChara.OnDamaged += SetHealthUI;
             companionChara.OnHealed += SetHealthUI;
         }
@@ -53,6 +54,7 @@ namespace HUD
             companionChara = null;
 
             companionLevel.OnLevelUp -= SetLevelUI;
+            companionLevel.OnLevelUp -= SetHealthUI;
             companionLevel = null;
 
             Reset();

@@ -27,6 +27,13 @@ namespace Character.Stat
             _currentValue = BaseValue;
         }
 
+        public override void AddModifier(StatModifier mod)
+        {
+            float ratio = CurrentValue / Value;
+            base.AddModifier(mod);
+            CurrentValue = (float)Math.Round(Value * ratio, 4);
+        }
+
         public void ResetCurrentValue()
         {
             _currentValue = BaseValue;

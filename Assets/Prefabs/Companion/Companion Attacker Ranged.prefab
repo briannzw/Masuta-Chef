@@ -153,6 +153,8 @@ MonoBehaviour:
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   AttackDistance: 8
+  data:
+    icon: {fileID: 0}
   wanderRadius: 2
   wanderInterval: 4
   rotationSpeed: 12
@@ -519,7 +521,7 @@ GameObject:
   - component: {fileID: 7384722168337838590}
   - component: {fileID: 4880749327388735415}
   - component: {fileID: 5806786688220768023}
-  - component: {fileID: 3551083721353475204}
+  - component: {fileID: 8983143313132666725}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -610,7 +612,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3551083721353475204
+--- !u!114 &8983143313132666725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -619,9 +621,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7864698203775723377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da51be4a55b754b41b831d50903e3f1d, type: 3}
+  m_Script: {fileID: 11500000, guid: cc58d666553e8794a883e78b1f6f12ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chara: {fileID: 6165715537076772562}
+  slider: {fileID: 9116366767697262245}
+  disableOnAwake: 1
+  useBillboard: 1
+  DynamicEnum: 0
 --- !u!1 &8958914655740330219
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,6 +1097,8 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  data:
+    icon: {fileID: 0}
   WeaponAnimator: {fileID: 7395055910845119106}
   bulletSpawner: {fileID: 5870651534604449403}
 --- !u!114 &8742749873467420988 stripped

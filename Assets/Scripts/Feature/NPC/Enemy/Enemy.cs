@@ -97,9 +97,9 @@ namespace NPC.Enemy
                 Animator.SetTrigger("Dead");
                 StateMachine.ChangeState(new EnemyDeadState(this, StateMachine));
             }
-            GameManager.Instance.OnEnemiesKilled?.Invoke();
             ChildCollider.enabled = false;
 
+            if (GetComponent<SpawnObject>()) GetComponent<SpawnObject>().ReleaseAfter(3f);
         }
 
         void RemoveTauntByDistance()

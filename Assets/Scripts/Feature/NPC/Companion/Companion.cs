@@ -140,6 +140,8 @@ namespace NPC.Companion
             Animator.SetTrigger("Dead");
             Agent.isStopped = true;
             ChildCollider.enabled = false;
+
+            if (GetComponent<Spawner.SpawnObject>()) GetComponent<Spawner.SpawnObject>().ReleaseAfter(3f);
         }
     }
 }

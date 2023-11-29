@@ -12,6 +12,9 @@ namespace Wave
     using Spawner;
     using Character;
     using Character.Stat;
+    using Weapon;
+    using Character.Hit;
+    using Player.Controller;
 
     public class WaveManager : MonoBehaviour
     {
@@ -26,10 +29,26 @@ namespace Wave
         [SerializeField] private TMP_Text nextWaveText;
         [SerializeField] private float incomingWaveDuration = 5f;
 
+        [Header("Weapon Selection")]
+        [SerializeField] private bool startWaveAfterSelect = false;
+        [SerializeField] private PlayerWeaponController weaponController;
+        [SerializeField] private GameObject weaponSelectionParent;
+
+        [Header("Disaster Mode")]
+        [SerializeField] private Character disasterChara;
+        [SerializeField] private Weapon disasterWeapon;
+        [Space]
+        [SerializeField] private GameObject disasterPrefab;
+        [SerializeField] private GameObject disasterIcon;
+        [SerializeField] private GameObject disasterText;
+        [SerializeField] private TMP_Text disasterWarningText;
+
         private int currentWaveIndex = 0;
         private int currentEnemyCount = 0;
 
         private HashSet<GameObject> spawnedEnemies = new();
+
+        private bool disasterStopped;
 
         public int TotalEnemies
         {
@@ -47,23 +66,43 @@ namespace Wave
         private void Awake()
         {   
             LevelData = levelManager.CurrentLevel;
+            levelManager.DisableCrateSpawn();
         }
 
         private void Start()
         {
+            if (startWaveAfterSelect)
+            {
+                weaponController.OnWeaponChanged += FirstWave;
+                return;
+            }
+
+            FirstWave();
+        }
+
+        private void FirstWave()
+        {
             StartWave(LevelData.Waves[0]);
+            StartCoroutine(DoDisaster());
+            levelManager.EnableCrateSpawn();
+
+            if (startWaveAfterSelect)
+            {
+                weaponController.OnWeaponChanged -= FirstWave;
+                weaponSelectionParent.SetActive(false);
+            }
         }
 
         public void EnemyDied()
         {
-            if (currentWaveIndex >= LevelData.Waves.Count - 1) return;
-
             currentEnemyCount++;
+
             waveEnemiesText.text = $"Enemies Left: {LevelData.Waves[currentWaveIndex].TotalEnemies - currentEnemyCount}";
 
             if (currentEnemyCount == LevelData.Waves[currentWaveIndex].TotalEnemies)
             {
                 currentEnemyCount = 0;
+                if (currentWaveIndex >= LevelData.Waves.Count - 1) return;
                 StartCoroutine(CountdownWave());
             }
         }
@@ -116,27 +155,75 @@ namespace Wave
 
         private IEnumerator CountdownWave()
         {
-            nextWaveText.enabled = true;
+            nextWaveText.gameObject.SetActive(true);
 
             int time = LevelData.WaveWaitTime;
+            disasterStopped = true;
             while(time > 0)
             {
                 nextWaveText.text = $"Next wave in\n{time}";
                 yield return new WaitForSeconds(1f);
                 time--;
             }
+            disasterStopped = false;
 
             currentWaveIndex++;
             StartWave(LevelData.Waves[currentWaveIndex]);
 
             nextWaveText.text = "INCOMING WAVE";
+
             yield return new WaitForSeconds(incomingWaveDuration);
-            nextWaveText.enabled = false;
+
+            nextWaveText.gameObject.SetActive(false);
+        }
+
+        private IEnumerator DoDisaster()
+        {
+            disasterWeapon.OnEquip(disasterChara);
+            disasterPrefab.GetComponent<HitController>().Initialize(disasterWeapon, LevelData.DisasterDamageScaling);
+            yield return new WaitForSeconds(LevelData.DisasterStartTime);
+
+            float time = Random.Range(LevelData.DisasterMinInterval, LevelData.DisasterMaxInterval);
+
+            while (true)
+            {
+                while (time > 0f)
+                {
+                    time -= (!disasterStopped ? Time.deltaTime : 0f);
+
+                    if (time <= 10f)
+                    {
+                        disasterText.SetActive(true);
+
+                        disasterWarningText.gameObject.SetActive(true);
+                        disasterWarningText.text = (!disasterStopped) ? $"Disaster in\n{Mathf.Round(time)}" : "Disaster\nON HOLD";
+                    }
+
+                    yield return null;
+                }
+
+                disasterIcon.SetActive(true);
+
+                // Spawn Disaster
+                GameObject disasterGO = Instantiate(disasterPrefab);
+
+                disasterWarningText.gameObject.SetActive(false);
+
+                yield return new WaitForSeconds(LevelData.DisasterDuration);
+
+                Destroy(disasterGO);
+                disasterIcon.SetActive(false);
+                disasterText.SetActive(false);
+
+                time = Random.Range(LevelData.DisasterMinInterval, LevelData.DisasterMaxInterval);
+            }
         }
 
         #region NavMeshAgent
         public void DisableWave()
         {
+            disasterStopped = true;
+            levelManager.DisableCrateSpawn();
             foreach (var enemy in spawnedEnemies)
             {
                 if (enemy != null && enemy.activeSelf)
@@ -150,6 +237,8 @@ namespace Wave
         }
         public void EnableWave()
         {
+            disasterStopped = false;
+            levelManager.EnableCrateSpawn();
             foreach (var enemy in spawnedEnemies)
             {
                 if (enemy != null && enemy.activeSelf)
