@@ -141,7 +141,8 @@ MonoBehaviour:
   StopDistance: 1.8
   Agent: {fileID: 347959739561581255}
   IsEngaging: 0
-  CurrentEnemies: {fileID: 0}
+  CurrentEnemy: {fileID: 0}
+  ChildCollider: {fileID: 2867727414229033579}
   IsThisJoker: 0
   MaxDistanceFromPlayer: 20
   IsAltPath: 0
@@ -152,7 +153,6 @@ MonoBehaviour:
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   AttackDistance: 8
-  CurrentEnemy: {fileID: 0}
   wanderRadius: 2
   wanderInterval: 4
   rotationSpeed: 12
@@ -231,13 +231,13 @@ MonoBehaviour:
       _serializedList:
       - Key: 0
         Value:
-          BaseValue: 0
+          BaseValue: 2
       - Key: 1
         Value:
-          BaseValue: 0
+          BaseValue: 2
       - Key: 2
         Value:
-          BaseValue: 50
+          BaseValue: 0
       - Key: 3
         Value:
           BaseValue: 0
@@ -1605,6 +1605,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6167095946835307673}
+    - targetCorrespondingSourceObject: {fileID: 5634705561197986632, guid: 60684777ce0aeff408d03a5d2fda0597,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2867727414229033579}
   m_SourcePrefab: {fileID: 100100000, guid: 60684777ce0aeff408d03a5d2fda0597, type: 3}
 --- !u!1 &4001662014577698064 stripped
 GameObject:
@@ -1626,6 +1630,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActiveWeapon: {fileID: 3739718944004436562}
   NPC: {fileID: 1249614277476891951}
+--- !u!136 &2867727414229033579
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4001662014577698064}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3213322
+  m_Height: 0.99999994
+  m_Direction: 1
+  m_Center: {x: -0, y: 0.53448904, z: -0}
 --- !u!4 &4378363921806114730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5006224282757339634, guid: 60684777ce0aeff408d03a5d2fda0597,

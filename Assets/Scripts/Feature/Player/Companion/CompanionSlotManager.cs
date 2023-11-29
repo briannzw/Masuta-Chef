@@ -31,8 +31,6 @@ namespace Player.CompanionSlot
         public void DeleteCompanion(Companion companion)
         {
             companions.RemoveAt(companion.GetComponent<Companion>().companionSpawnOrder);
-            if (companion.GetComponent<SpawnObject>() != null) companion.GetComponent<SpawnObject>().Release();
-            else Destroy(companion.gameObject);
             UpdateSlotFormation();
         }
 
