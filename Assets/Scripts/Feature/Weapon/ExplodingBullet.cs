@@ -33,8 +33,9 @@ public class ExplodingBullet : Bullet
 
     protected void OnHit()
     {
-        GameObject gameObject = Instantiate(explosionApplicator, transform.position, transform.rotation);
-        gameObject.GetComponent<HitController>().Initialize(gameObject.GetComponent<BulletHit>().Source, damageScaling);
+        GameObject explosionController = Instantiate(explosionApplicator, transform.position, transform.rotation);
+        var hitController = explosionController.GetComponent<HitController>();
+        hitController.Initialize(GetComponent<BulletHit>().Source, damageScaling);
     }
 
     private void OnEnable()
@@ -53,12 +54,9 @@ public class ExplodingBullet : Bullet
 
     private void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & layerMask.value) > 0)
-        {
-            // Play Some Effect
-            alreadyHit = true;
-            OnHit();
-            GetComponent<SpawnObject>().Release();
-        }
+        // Play Some Effect
+        alreadyHit = true;
+        OnHit();
+        GetComponent<SpawnObject>().Release();
     }
 }
