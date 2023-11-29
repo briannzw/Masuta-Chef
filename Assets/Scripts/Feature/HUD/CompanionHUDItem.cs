@@ -25,7 +25,8 @@ namespace HUD
         {
             hpBar.fillAmount = 1f;
             companionIcon.sprite = null;
-            companionLevelText.text = "";
+            companionIcon.enabled = false;
+            companionLevelText.text = "Lv. 0";
         }
 
         public void SubToCompanion(Companion companion)
@@ -34,20 +35,21 @@ namespace HUD
             companionLevel = companion.GetComponent<CompanionLevelSystem>();
 
             companionIcon.sprite = companion.data.icon;
+            companionIcon.enabled = true;
             SetHealthUI();
             SetLevelUI();
 
             companionLevel.OnLevelUp += SetLevelUI;
             companionChara.OnDamaged += SetHealthUI;
             companionChara.OnHealed += SetHealthUI;
-            companionChara.OnDie += UnsubToCompanion;
         }
 
-        private void UnsubToCompanion()
+        public void UnsubToCompanion()
         {
+            if (companionChara == null || companionLevel == null) return;
+
             companionChara.OnDamaged -= SetHealthUI;
             companionChara.OnHealed -= SetHealthUI;
-            companionChara.OnDie -= UnsubToCompanion;
             companionChara = null;
 
             companionLevel.OnLevelUp -= SetLevelUI;

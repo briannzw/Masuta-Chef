@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace NPC.Companion.Data
 {
-    public class CompanionData : MonoBehaviour
+    [System.Serializable]
+    public class CompanionData
     {
         public Sprite icon;
     }

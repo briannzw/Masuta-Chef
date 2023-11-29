@@ -33,8 +33,12 @@ namespace HUD
         {
             for(int i = 0; i < initialSlot; i++)
             {
-                if (companionSlot.companions[i] != null) hudItems[i].SubToCompanion(companionSlot.companions[i]);
-                else hudItems[i].Reset();
+                hudItems[i].UnsubToCompanion();
+
+                if (i < companionSlot.companions.Count && companionSlot.companions[i] != null)
+                    hudItems[i].SubToCompanion(companionSlot.companions[i]);
+                else
+                    hudItems[i].Reset();
             }
         }
     }
