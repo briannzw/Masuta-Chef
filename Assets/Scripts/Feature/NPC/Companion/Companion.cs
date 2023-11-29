@@ -6,6 +6,7 @@ using UnityEngine.AI;
 namespace NPC.Companion
 {
     using Character;
+    using Data;
     using Player.CompanionSlot;
     public class Companion : NPC, IDetectionNPC
     {
@@ -33,6 +34,9 @@ namespace NPC.Companion
         [Header("Compat Properties")]
         public float AttackDistance;
         public GameObject CurrentEnemy;
+
+        [Header("Data")]
+        public CompanionData data;
 
         private new void Awake()
         {

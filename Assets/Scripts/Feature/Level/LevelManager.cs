@@ -61,7 +61,11 @@ namespace Level
             characterDied[chara.tag]++;
 
             // Action
-            if (chara.CompareTag("Enemy")) GameManager.Instance.OnEnemiesKilled?.Invoke();
+            if (chara.CompareTag("Enemy"))
+            {
+                GameManager.Instance.OnEnemiesKilled?.Invoke();
+                waveManager.EnemyDied();
+            }
 
             // If All enemy in all Waves killed
             if (chara.CompareTag("Enemy") && characterDied["Enemy"] >= waveManager.TotalEnemies)

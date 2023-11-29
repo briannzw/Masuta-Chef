@@ -1,34 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Module.UI
 {
     using Character;
-    using Character.Stat;
 
     public class StatsBattleUI : MonoBehaviour
     {
         [SerializeField] private Character chara;
         [SerializeField] private Slider slider;
+        [SerializeField] private bool disableOnAwake = true;
+        [SerializeField] private bool useBillboard = true;
+        [SerializeField] private DynamicStatsEnum DynamicEnum = DynamicStatsEnum.Health;
+
         private void Awake()
         {
-            chara = GetComponentInParent<Character>();
-            slider = GetComponentInChildren<Slider>();
+            if(chara == null) chara = GetComponentInParent<Character>();
+            if(slider == null) slider = GetComponentInChildren<Slider>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            slider.maxValue = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+            slider.gameObject.SetActive(!disableOnAwake);
+            chara.OnDamaged += ValueChanged;
+            chara.OnHealed += ValueChanged;
+            chara.OnStatsInitialized += Initialize;
         }
+
+        private void OnDisable()
+        {
+            chara.OnDamaged -= ValueChanged;
+            chara.OnHealed -= ValueChanged;
+        }
+
+        private void Initialize()
+        {
+            slider.maxValue = chara.Stats.DynamicStatList[DynamicEnum].Value;
+            if(!disableOnAwake) ValueChanged();
+            chara.OnStatsInitialized -= Initialize;
+        }
+
         private void LateUpdate()
         {
-            transform.LookAt(transform.position + Camera.main.transform.forward);
+            if (useBillboard) transform.LookAt(transform.position + Camera.main.transform.forward);
         }
-        private void Update()
+
+        private void ValueChanged()
         {
-            slider.value = chara.Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue;
+            if(!slider.gameObject.activeSelf) slider.gameObject.SetActive(true);
+            slider.value = chara.Stats.DynamicStatList[DynamicEnum].CurrentValue;
         }
 
 

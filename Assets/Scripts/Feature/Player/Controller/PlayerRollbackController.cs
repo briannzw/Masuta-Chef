@@ -20,6 +20,8 @@ namespace Player.Rollback
 
         [SerializeField] private float rollbackCooldown = 5f;
 
+        private float prevGrav;
+
         private float timer;
 
         private Vector3 forward;
@@ -36,6 +38,11 @@ namespace Player.Rollback
             forward = transform.forward;
             timer = 0f;
 
+            // BEFORE
+            charaController.detectCollisions = false;
+            prevGrav = controller.gravity;
+            controller.gravity = 0f;
+
             while (true)
             {
                 timer += Time.deltaTime/ rollbackDuration;
@@ -50,6 +57,10 @@ namespace Player.Rollback
             }
 
             controller.enabled = true;
+
+            // AFTER
+            charaController.detectCollisions = true;
+            controller.gravity = prevGrav;
 
             yield return new WaitForSeconds(rollbackCooldown);
 

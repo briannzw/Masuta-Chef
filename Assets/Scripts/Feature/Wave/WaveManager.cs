@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 namespace Wave
 {
@@ -17,11 +18,16 @@ namespace Wave
         [Header("References")]
         [SerializeField] private LevelManager levelManager;
         protected LevelData LevelData;
-        public SerializedDictionary<GameObject, List<NavMeshSpawner>> Spawners = new SerializedDictionary<GameObject, List<NavMeshSpawner>>();
+        public SerializedDictionary<GameObject, List<NavMeshSpawner>> Spawners = new();
 
-        private float gameTime = 0f;
-        private bool isStopped = false;
+        [Header("UI References")]
+        [SerializeField] private TMP_Text waveText;
+        [SerializeField] private TMP_Text waveEnemiesText;
+        [SerializeField] private TMP_Text nextWaveText;
+        [SerializeField] private float incomingWaveDuration = 5f;
+
         private int currentWaveIndex = 0;
+        private int currentEnemyCount = 0;
 
         private HashSet<GameObject> spawnedEnemies = new();
 
@@ -39,24 +45,35 @@ namespace Wave
         }
 
         private void Awake()
-        {
+        {   
             LevelData = levelManager.CurrentLevel;
         }
 
-        private void Update()
+        private void Start()
         {
-            if (currentWaveIndex >= LevelData.Waves.Count) return;
+            StartWave(LevelData.Waves[0]);
+        }
 
-            if(!isStopped) gameTime += Time.deltaTime;
+        public void EnemyDied()
+        {
+            if (currentWaveIndex >= LevelData.Waves.Count - 1) return;
 
-            if (gameTime >= LevelData.Waves[currentWaveIndex].Time)
+            currentEnemyCount++;
+            waveEnemiesText.text = $"Enemies Left: {LevelData.Waves[currentWaveIndex].TotalEnemies - currentEnemyCount}";
+
+            if (currentEnemyCount == LevelData.Waves[currentWaveIndex].TotalEnemies)
             {
-                StartWave(LevelData.Waves[currentWaveIndex++]);
+                currentEnemyCount = 0;
+                StartCoroutine(CountdownWave());
             }
         }
 
         private void StartWave(Wave wave)
         {
+            // UI
+            waveText.text = $"Wave {currentWaveIndex + 1}";
+            waveEnemiesText.text = $"Enemies Left: {wave.TotalEnemies}";
+
             foreach (var enemy in wave.EnemyList)
             {
                 int spawnMod = enemy.Value % Spawners[enemy.Key.Prefab].Count;
@@ -83,7 +100,7 @@ namespace Wave
                     {
                         if(enemy.GetComponent<Character>() == null) enemy.AddComponent<Character>();
                         enemy.GetComponent<Character>().StatsPreset = enemyPreset;
-                        enemy.GetComponent<Character>().InitializeStats();
+                        enemy.GetComponent<Character>().Reset();
                         if(enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
                         enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
 
@@ -97,10 +114,29 @@ namespace Wave
             }
         }
 
+        private IEnumerator CountdownWave()
+        {
+            nextWaveText.enabled = true;
+
+            int time = LevelData.WaveWaitTime;
+            while(time > 0)
+            {
+                nextWaveText.text = $"Next wave in\n{time}";
+                yield return new WaitForSeconds(1f);
+                time--;
+            }
+
+            currentWaveIndex++;
+            StartWave(LevelData.Waves[currentWaveIndex]);
+
+            nextWaveText.text = "INCOMING WAVE";
+            yield return new WaitForSeconds(incomingWaveDuration);
+            nextWaveText.enabled = false;
+        }
+
         #region NavMeshAgent
         public void DisableWave()
         {
-            isStopped = true;
             foreach (var enemy in spawnedEnemies)
             {
                 if (enemy != null && enemy.activeSelf)
@@ -114,7 +150,6 @@ namespace Wave
         }
         public void EnableWave()
         {
-            isStopped = false;
             foreach (var enemy in spawnedEnemies)
             {
                 if (enemy != null && enemy.activeSelf)
