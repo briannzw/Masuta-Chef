@@ -179,23 +179,24 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   StopDistance: 2
   Agent: {fileID: 0}
-  CombatEngageDistance: 7
   IsEngaging: 0
-  CurrentEnemies: {fileID: 0}
+  CurrentEnemy: {fileID: 0}
+  ChildCollider: {fileID: 621799735682508127}
   IsThisJoker: 0
-  IsTaunted: 0
   maxTauntTimer: 5
   rotationSpeed: 5
   AttackDistance: 0
+  CombatEngageDistance: 7
   AttackTimer: 0
   DefaultAttackTimer: 0
   AttackDuration: 0
   DefaultAttackDuration: 0
   MaxTauntedDistance: 0
+  IsTaunted: 0
   IsStun: 0
   IsConfused: 0
   IsDead: 0
-  childCollider: {fileID: 621799735682508127}
+  DebuffIcon: {fileID: 0}
   pickCrateRadius: 2
   <DetectionRadius>k__BackingField: 7
   <WanderRadius>k__BackingField: 15

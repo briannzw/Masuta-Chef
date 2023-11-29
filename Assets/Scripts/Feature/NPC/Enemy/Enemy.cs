@@ -38,12 +38,12 @@ namespace NPC.Enemy
         public bool IsDead;
         public GameObject DebuffIcon;
 
-        public Collider childCollider;
+        
 
         private void OnEnable()
         {
             Agent.isStopped = false;
-            childCollider.enabled = true;
+            ChildCollider.enabled = true;
             IsDead = false;
         }
 
@@ -56,7 +56,7 @@ namespace NPC.Enemy
             DefaultAttackTimer = AttackTimer;
             DefaultAttackDuration = AttackDuration;
             defaultEnemyTarget = GameManager.Instance.PlayerTransform.gameObject;
-            childCollider.enabled = true;
+            ChildCollider.enabled = true;
             MaxTauntedDistance = AttackDistance;
         }
 
@@ -98,7 +98,7 @@ namespace NPC.Enemy
                 StateMachine.ChangeState(new EnemyDeadState(this, StateMachine));
             }
             GameManager.Instance.OnEnemiesKilled?.Invoke();
-            childCollider.enabled = false;
+            ChildCollider.enabled = false;
 
         }
 

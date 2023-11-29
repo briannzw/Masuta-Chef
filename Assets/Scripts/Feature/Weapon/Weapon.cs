@@ -60,7 +60,6 @@ namespace Weapon
             if(rb == null) rb = GetComponentInParent<Rigidbody>();
             weaponCollider = GetComponent<Collider>();
             initialTrigger = weaponCollider.isTrigger;
-            Holder = null;
         }
 
         // Start is called before the first frame update

@@ -247,6 +247,7 @@ MonoBehaviour:
   Agent: {fileID: 0}
   IsEngaging: 0
   CurrentEnemy: {fileID: 0}
+  ChildCollider: {fileID: 3695874510820880078}
   IsThisJoker: 0
   maxTauntTimer: 0.1
   rotationSpeed: 5
@@ -262,7 +263,6 @@ MonoBehaviour:
   IsConfused: 0
   IsDead: 0
   DebuffIcon: {fileID: 774027797129017138}
-  childCollider: {fileID: 3695874510820880078}
 --- !u!82 &-5201471026571070349
 AudioSource:
   m_ObjectHideFlags: 0

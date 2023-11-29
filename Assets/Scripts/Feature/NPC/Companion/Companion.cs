@@ -33,6 +33,12 @@ namespace NPC.Companion
         [Header("Compat Properties")]
         public float AttackDistance;
 
+        private void OnEnable()
+        {
+            Agent.isStopped = false;
+            ChildCollider.enabled = true;
+        }
+
         private new void Awake()
         {
             CompanionStateMachine = new CompanionStateMachine();
@@ -127,8 +133,9 @@ namespace NPC.Companion
 
         private void OnCompanionDie()
         {
-            GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().DeleteCompanion(this);
             Animator.SetTrigger("Dead");
+            Agent.isStopped = true;
+            ChildCollider.enabled = false;
         }
     }
 }

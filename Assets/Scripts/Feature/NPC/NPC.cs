@@ -31,7 +31,7 @@ namespace NPC
         [Header("Combat Properties")]
         public bool IsEngaging = false;
         public GameObject CurrentEnemy;
-
+        public Collider ChildCollider;
         #region Joker Properties
         [HideInInspector]
         public bool IsThisJoker = false;

@@ -105,6 +105,7 @@ MonoBehaviour:
   Agent: {fileID: 0}
   IsEngaging: 0
   CurrentEnemy: {fileID: 0}
+  ChildCollider: {fileID: 1473812847911946108}
   IsThisJoker: 0
   MaxDistanceFromPlayer: 5
   IsAltPath: 0
@@ -118,6 +119,7 @@ MonoBehaviour:
   rotationSpeed: 5
   maxTauntedEnemies: 5
   tauntRadius: 20
+  isAlive: 1
 --- !u!114 &-6445478362395283380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,6 +1061,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9039801946341377163}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5e260df35fe5494d984b4ab1ed86074,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1473812847911946108}
   m_SourcePrefab: {fileID: 100100000, guid: f5e260df35fe5494d984b4ab1ed86074, type: 3}
 --- !u!1 &200859440104191592 stripped
 GameObject:
@@ -1101,6 +1107,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActiveWeapon: {fileID: 0}
   NPC: {fileID: 5191980429148765842}
+--- !u!136 &1473812847911946108
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200859440104191592}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.28239024
+  m_Height: 1.3927575
+  m_Direction: 1
+  m_Center: {x: -0, y: 0.8385894, z: 0}
 --- !u!4 &685189482084953298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5e260df35fe5494d984b4ab1ed86074,
