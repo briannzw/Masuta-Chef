@@ -22,6 +22,11 @@ namespace Level
         public int WaveWaitTime = 15;
         public float CrateSpawnMinInterval;
         public float CrateSpawnMaxInterval;
+
+        [Header("Disaster Mode")]
+        public float DisasterDamageScaling = 1f;
+        public float DisasterStartTime = 30f;
+        public float DisasterDuration = 10f;
         public float DisasterMinInterval;
         public float DisasterMaxInterval;
     }

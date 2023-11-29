@@ -116,6 +116,8 @@ MonoBehaviour:
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   AttackDistance: 0
+  data:
+    icon: {fileID: 0}
   rotationSpeed: 5
   maxTauntedEnemies: 5
   tauntRadius: 20
@@ -608,7 +610,7 @@ GameObject:
   - component: {fileID: 6535495937382685766}
   - component: {fileID: 6727156066951926554}
   - component: {fileID: 5206724979697546154}
-  - component: {fileID: 6492965699769089533}
+  - component: {fileID: 7151464564836881553}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -699,7 +701,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6492965699769089533
+--- !u!114 &7151464564836881553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -708,9 +710,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8123188456417888042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da51be4a55b754b41b831d50903e3f1d, type: 3}
+  m_Script: {fileID: 11500000, guid: cc58d666553e8794a883e78b1f6f12ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chara: {fileID: -6445478362395283380}
+  slider: {fileID: 1678932231212597916}
+  disableOnAwake: 1
+  useBillboard: 1
+  DynamicEnum: 0
 --- !u!1001 &1011323413743831865
 PrefabInstance:
   m_ObjectHideFlags: 0

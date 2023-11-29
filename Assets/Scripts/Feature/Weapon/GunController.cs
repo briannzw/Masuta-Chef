@@ -21,6 +21,7 @@ public class GunController : Weapon.Weapon
     [SerializeField] private float ultimateBulletInterval = 1;
     [SerializeField] private float bulletAmount = 3;
     [SerializeField] private Spawner.Spawner bulletSpawner;
+    [SerializeField] private Spawner.Spawner ultimateSpawner;
     #endregion
 
     protected new void Update()
@@ -77,11 +78,17 @@ public class GunController : Weapon.Weapon
     private IEnumerator ShootFussiliBombs()
     {
         isFiringUltimate = true;
+        var fusiliBombs = ultimateSpawner.Spawn();
+
+
+
         for (int i = 0; i < bulletAmount; i++)
         {
-            GameObject gameObject = Instantiate(ultimateBulletObject, bulletSpawner.transform.position, bulletSpawner.transform.rotation);
-            gameObject.GetComponent<Bullet>().weapon = this;
-            gameObject.GetComponent<Rigidbody>().velocity = transform.forward * gameObject.GetComponent<Bullet>().TravelSpeed;
+            foreach (var fusiliBomb in fusiliBombs)
+            {
+                var fusiliHit = fusiliBomb.GetComponent<BulletHit>();
+                fusiliHit.Initialize(this, damageScaling);
+            }
             yield return new WaitForSeconds(ultimateDuration / bulletAmount);
         }
         isFiringUltimate = false;

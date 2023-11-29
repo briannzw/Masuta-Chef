@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2177336295160426399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1021676132991123961}
+  - component: {fileID: 4260871053630592275}
+  m_Layer: 10
+  m_Name: Ultimate Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1021676132991123961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177336295160426399}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.383}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6344312249660022038}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4260871053630592275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177336295160426399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5253d860404de4f97d306d765ae45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 5932148092711293870, guid: 61ad26a6b9fbc8841aa471f790702e6b,
+    type: 3}
+  spawnArea: {x: 0.15, y: 0.15, z: 0.1}
+  spawnOffset: {x: 0, y: 0, z: 0.44}
+  isLocalOffset: 1
+  randomizeRotation: 0
+  followSpawnerRotation: 1
+  randomEulerRotation: 0
+  eulerRandomRange: {x: 0, y: 0}
+  maxSpawnObjectInPool: 100
 --- !u!1 &3889096519632603906
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +90,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7618232650568874890}
+  - {fileID: 1021676132991123961}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8233849171143517420
@@ -102,6 +157,7 @@ MonoBehaviour:
   ultimateBulletInterval: 1
   bulletAmount: 3
   bulletSpawner: {fileID: 7255329349913092742}
+  ultimateSpawner: {fileID: 4260871053630592275}
 --- !u!54 &8469763974586944811
 Rigidbody:
   m_ObjectHideFlags: 0
