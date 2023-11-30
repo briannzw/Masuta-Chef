@@ -74,6 +74,7 @@ namespace Crate.Combine
                 {
                     companion = CompanionsSpawner[(CrateColor)Random.Range(0, System.Enum.GetNames(typeof(CrateColor)).Length)].Spawn()[0];
                 }
+                companion.GetComponent<Character.Character>().Reset();
                 GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().AddCompanion(companion.GetComponent<Companion>());
             }
 

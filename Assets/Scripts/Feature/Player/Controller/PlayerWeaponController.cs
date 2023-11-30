@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 namespace Player.Controller
 {
     using Input;
+    using System;
     using Weapon;
     public class PlayerWeaponController : PlayerInputControl
     {
@@ -23,6 +24,10 @@ namespace Player.Controller
 
         [Header("Settings")]
         [SerializeField] private LayerMask groundMask;
+        #endregion
+
+        #region C# Events
+        public Action OnWeaponChanged;
         #endregion
 
         #region Lifecycle
@@ -120,6 +125,8 @@ namespace Player.Controller
 
             // New Weapon
             ActiveWeapon = newWeapon;
+
+            OnWeaponChanged?.Invoke();
 
             // For Weapon as child (Models)
             weapOrigin = newWeapon.transform;

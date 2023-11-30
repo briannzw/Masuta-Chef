@@ -26,6 +26,7 @@ namespace Character
 #endif
 
         #region C# Events
+        public Action OnStatsInitialized;
         public Action OnDie;
         public Action OnDamaged;
         public Action OnHealed;
@@ -44,7 +45,7 @@ namespace Character
             FetchStatMods();
         }
 
-        private void Awake()
+        private void OnEnable()
         {
             InitializeStats();
 
@@ -53,6 +54,16 @@ namespace Character
             HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
             OnDamaged += () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
             OnHealed += () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+#endif
+        }
+
+        private void OnDisable()
+        {
+
+#if UNITY_EDITOR
+            // EDITOR ONLY
+            OnDamaged -= () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
+            OnHealed -= () => HealthDisplay = Stats.DynamicStatList[DynamicStatsEnum.Health].CurrentValue + " / " + Stats.DynamicStatList[DynamicStatsEnum.Health].Value;
 #endif
         }
 
@@ -119,6 +130,8 @@ namespace Character
                     }
                 }
             }
+
+            OnStatsInitialized?.Invoke();
         }
 
         public virtual void TakeDamage(float damageAmount, DynamicStatsEnum dynamicEnum, float multiplier = 1, StatModType modType = StatModType.Flat)

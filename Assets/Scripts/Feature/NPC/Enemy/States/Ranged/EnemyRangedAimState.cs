@@ -35,7 +35,7 @@ public class EnemyRangedAimState : EnemyState
             enemy.StateMachine.ChangeState(new EnemyRangedAttackState(enemy, enemy.StateMachine));
         }
 
-        if(Vector3.Distance(enemy.CurrentEnemies.transform.position, enemyPos) > enemy.AttackDistance + 4f)
+        if(Vector3.Distance(enemy.CurrentEnemy.transform.position, enemyPos) > enemy.AttackDistance + 4f)
         {
             enemy.StateMachine.ChangeState(new EnemyRangedEngageState(enemy, enemy.StateMachine));
         }
@@ -48,7 +48,7 @@ public class EnemyRangedAimState : EnemyState
 
     private void RotateToTarget(float rotationSpeed)
     {
-        Vector3 direction = enemy.CurrentEnemies.transform.position - enemyPos;
+        Vector3 direction = enemy.CurrentEnemy.transform.position - enemyPos;
         direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);

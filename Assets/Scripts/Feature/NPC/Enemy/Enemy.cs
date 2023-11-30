@@ -9,7 +9,7 @@ namespace NPC.Enemy
 
     public class Enemy : NPC
     {
-        public bool IsTaunted = false;
+        
         private float currentTauntTimer;
         [SerializeField] private float maxTauntTimer = 0.1f;
         public float rotationSpeed = 5.0f;
@@ -30,16 +30,20 @@ namespace NPC.Enemy
         public float MaxTauntedDistance;
         [HideInInspector]
         private GameObject defaultEnemyTarget;
+
+        [Header("Debuff Modifier")]
+        public bool IsTaunted = false;
         public bool IsStun;
         public bool IsConfused;
         public bool IsDead;
+        public GameObject DebuffIcon;
 
-        public Collider childCollider;
+        
 
         private void OnEnable()
         {
             Agent.isStopped = false;
-            childCollider.enabled = true;
+            ChildCollider.enabled = true;
             IsDead = false;
         }
 
@@ -48,16 +52,16 @@ namespace NPC.Enemy
             base.Awake();
             StateMachine = new EnemyStateMachine();
             currentTauntTimer = maxTauntTimer;
-            CurrentEnemies = GameManager.Instance.PlayerTransform.gameObject;
+            CurrentEnemy = GameManager.Instance.PlayerTransform.gameObject;
             DefaultAttackTimer = AttackTimer;
             DefaultAttackDuration = AttackDuration;
             defaultEnemyTarget = GameManager.Instance.PlayerTransform.gameObject;
-            childCollider.enabled = true;
+            ChildCollider.enabled = true;
+            MaxTauntedDistance = AttackDistance;
         }
 
-        protected new void Start()
+        protected void Start()
         {
-            base.Start();
             chara.OnDie += EnemyDie;
             Agent.speed += Random.Range(-0.05f, -0.3f);
         }
@@ -65,15 +69,20 @@ namespace NPC.Enemy
         protected void Update()
         {
             StateMachine.CurrentState.FrameUpdate();
-            currentTauntTimer -= Time.deltaTime;
             if (!IsTaunted && !IsEngaging)
             {
                 TargetPosition = GameManager.Instance.PlayerTransform.position;
             }
 
-            if (IsTaunted && currentTauntTimer <= 0f)
+            if (IsTaunted) //Remove taunt if outside range from taunter
             {
-                RemoveTauntEffect();
+                RemoveTauntByDistance();
+            }
+
+            if (!IsTaunted && CurrentEnemy != defaultEnemyTarget)
+            {
+                CurrentEnemy = defaultEnemyTarget;
+                DebuffIcon.SetActive(false);
             }
         }
 
@@ -88,22 +97,20 @@ namespace NPC.Enemy
                 Animator.SetTrigger("Dead");
                 StateMachine.ChangeState(new EnemyDeadState(this, StateMachine));
             }
-            GameManager.Instance.OnEnemiesKilled?.Invoke();
-            childCollider.enabled = false;
+            ChildCollider.enabled = false;
 
+            if (GetComponent<SpawnObject>()) GetComponent<SpawnObject>().ReleaseAfter(3f);
         }
 
-        void RemoveTauntEffect()
+        void RemoveTauntByDistance()
         {
-            if (Vector3.Distance(CurrentEnemies.transform.position, transform.position) < MaxTauntedDistance)
+            if (CurrentEnemy.GetComponent<Companion.CompanionTaunter>().isAlive)
             {
                 return;
             }
 
             IsTaunted = false;
             Agent.isStopped = false;
-            currentTauntTimer = maxTauntTimer;
-            CurrentEnemies = defaultEnemyTarget;
         }
 
          public static int GetKillCount()

@@ -18,6 +18,9 @@ namespace Crate.Area
 
         private int currentCrateCount = 0;
 
+        private bool isSameColors = false;  
+        private bool isCombined = false;
+
         private void Awake()
         {
             CrateGrid = new List<CrateController>();
@@ -51,6 +54,11 @@ namespace Crate.Area
                     else Destroy(CrateGrid[i].gameObject);
 
                     CrateGrid[i] = null;
+                    isCombined = true;
+                    if (isCombined)
+                    {
+                        Debug.Log("COMBINEEEDD");
+                    }
                 }
 
                 UpdateCombineUI();
@@ -89,6 +97,8 @@ namespace Crate.Area
             crateObj.transform.localRotation = Quaternion.identity;
 
             UpdateCombineUI();
+
+            isSameColors = AreCratesSameColor();
         }
 
         public void OnStealed(IPickable pickable, GameObject stealer = null)
@@ -99,6 +109,27 @@ namespace Crate.Area
 
             UpdateCombineUI();
         }
+
+        public bool AreCratesSameColor()
+        {
+            if (CrateGrid.Count == 0 || CrateGrid[0] == null)
+            {
+                return false;
+            }
+
+            CrateColor firstColor = CrateGrid[0].crateColor;
+
+            for (int i = 1; i < CrateGrid.Count; i++)
+            {
+                if (CrateGrid[i] != null && CrateGrid[i].crateColor != firstColor)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
 
         private void UpdateCombineUI()
         {
@@ -113,6 +144,14 @@ namespace Crate.Area
         public int GetCurrentCrateCount()
         {
             return currentCrateCount;
+        }
+        public bool GetInteractStatus()
+        {
+            return isCombined;
+        }
+        public bool GetCurrentCrateColor()
+        {
+            return isSameColors;
         }
     }
 }

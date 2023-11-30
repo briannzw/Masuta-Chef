@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Spawner;
+using Player.CompanionSlot;
+using NPC.Companion;
 public class EventAnimationAttack : MonoBehaviour
 {
     public Weapon.Weapon ActiveWeapon;
@@ -14,7 +16,11 @@ public class EventAnimationAttack : MonoBehaviour
 
     public void Dead()
     {
-        NPC.GetComponent<SpawnObject>().Release();
+        if (NPC.gameObject.CompareTag("Companion"))
+        {
+            GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().DeleteCompanion(NPC.GetComponent<Companion>());
+            return;
+        }
     }
 
     public void StopDamage()

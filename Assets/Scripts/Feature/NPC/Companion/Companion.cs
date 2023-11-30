@@ -6,6 +6,7 @@ using UnityEngine.AI;
 namespace NPC.Companion
 {
     using Character;
+    using Data;
     using Player.CompanionSlot;
     public class Companion : NPC, IDetectionNPC
     {
@@ -32,7 +33,15 @@ namespace NPC.Companion
 
         [Header("Compat Properties")]
         public float AttackDistance;
-        public GameObject CurrentEnemy;
+
+        private void OnEnable()
+        {
+            Agent.isStopped = false;
+            ChildCollider.enabled = true;
+        }
+
+        [Header("Data")]
+        public CompanionData data;
 
         private new void Awake()
         {
@@ -45,9 +54,8 @@ namespace NPC.Companion
             DetectionRadius = 8f;
         }
 
-        private new void Start()
+        protected void Start()
         {
-            base.Start();
             chara.OnDie += OnCompanionDie;
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
         }
@@ -129,8 +137,11 @@ namespace NPC.Companion
 
         private void OnCompanionDie()
         {
-            GameManager.Instance.PlayerTransform.GetComponent<CompanionSlotManager>().DeleteCompanion(this);
             Animator.SetTrigger("Dead");
+            Agent.isStopped = true;
+            ChildCollider.enabled = false;
+
+            if (GetComponent<Spawner.SpawnObject>()) GetComponent<Spawner.SpawnObject>().ReleaseAfter(3f);
         }
     }
 }

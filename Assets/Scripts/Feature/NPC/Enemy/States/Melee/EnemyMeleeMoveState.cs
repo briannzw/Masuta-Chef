@@ -26,7 +26,7 @@ public class EnemyMeleeMoveState : EnemyState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        currentEnemyPos = enemy.CurrentEnemies.transform.position;
+        currentEnemyPos = enemy.CurrentEnemy.transform.position;
         agentPos = enemy.transform.position;
         enemy.Agent.SetDestination(currentEnemyPos);
 

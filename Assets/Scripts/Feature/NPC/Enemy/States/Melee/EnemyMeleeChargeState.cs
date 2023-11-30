@@ -28,10 +28,10 @@ public class EnemyMeleeChargeState : EnemyState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        enemy.Agent.SetDestination(enemy.CurrentEnemies.transform.position);
+        enemy.Agent.SetDestination(enemy.CurrentEnemy.transform.position);
         enemy.Agent.speed = newSpeed;
 
-        if (Vector3.Distance(enemy.transform.position, enemy.CurrentEnemies.transform.position) < enemy.AttackDistance)
+        if (Vector3.Distance(enemy.transform.position, enemy.CurrentEnemy.transform.position) < enemy.AttackDistance)
         {
             enemy.StateMachine.ChangeState(new EnemyMeleeAttackState(enemy, enemy.StateMachine));
         }

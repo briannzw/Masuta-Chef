@@ -1,42 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using Character.Hit;
 using UnityEngine;
-using Weapon;
+using Spawner;
 
 public class ExplodingBullet : Bullet
 {
     [SerializeField] private LayerMask layerMask;
-    private bool alreadyHit = false;
 
     [SerializeField] private float damageScaling;
 
     [Header("Explosion Properties")]
     public GameObject explosionApplicator;
     // Start is called before the first frame update
-    protected void OnHit()
-    {
-        GameObject gameObject = Instantiate(explosionApplicator, transform.position, transform.rotation);
-        gameObject.GetComponentInChildren<AOEController>().Initialize(weapon, damageScaling);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & layerMask.value) > 0)
-        {
-            // Play Some Effect
-            alreadyHit = true;
-            OnHit();
-            Destroy(gameObject);
-        }
-    }
 
     private void Update()
     {
         if (Vector3.Distance(startPosition, transform.position) >= Mathf.Abs(TravelDistance))
         {
             OnHit();
-            Destroy(gameObject);
+            GetComponent<SpawnObject>().Release();
+        }
+    }
+
+    protected void OnHit()
+    {
+        GameObject explosionController = Instantiate(explosionApplicator, transform.position, transform.rotation);
+        var hitController = explosionController.GetComponent<HitController>();
+        hitController.Initialize(GetComponent<BulletHit>().Source, damageScaling);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Play Some Effect
+        if(other.CompareTag("Crate") || other.CompareTag("Enemy") || other.CompareTag("Environment"))
+        {
+            OnHit();
+            GetComponent<SpawnObject>().Release();
         }
     }
 }

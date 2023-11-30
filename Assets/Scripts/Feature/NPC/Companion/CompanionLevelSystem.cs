@@ -1,5 +1,6 @@
 using UnityEngine;
 using Character.Stat;
+using System;
 
 public class CompanionLevelSystem : MonoBehaviour
 {
@@ -16,12 +17,15 @@ public class CompanionLevelSystem : MonoBehaviour
     private int currentLevel;
     private int currentExp;
 
+    public Action OnLevelUp;
+    public int CurrentLevel => currentLevel;
+
     private void Awake()
     {
         if (character == null) character = GetComponent<Character.Character>();
     }
 
-    void Start()
+    void OnEnable()
     {
         currentLevel = 1; // Start at level 1
         currentExp = 0;  // Initialize current experience points
@@ -29,6 +33,12 @@ public class CompanionLevelSystem : MonoBehaviour
 
         // Add experience relative to the survived time
         InvokeRepeating("ExpGainedPerSecond", 1f, 1f);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+        GameManager.Instance.OnEnemiesKilled -= () => AddExperience(expPerEnemyKill);
     }
 
     private void LevelProgression()
@@ -56,6 +66,8 @@ public class CompanionLevelSystem : MonoBehaviour
             {
                 character.Stats.DynamicStatList[dynamicStat.Key].AddModifier(new Kryz.CharacterStats.StatModifier(dynamicStat.Value.Value, Kryz.CharacterStats.StatModType.Flat));
             }
+
+            OnLevelUp?.Invoke();
 
             // Stages (each 10 level)
             if (currentLevel % 10 == 0)

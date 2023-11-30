@@ -26,10 +26,6 @@ namespace Player.Controller
 
         // Movement Parameters
         private float speed;
-        private float turnSmoothVelocity = 0;
-
-        [Header("Environment")]
-        public float PushForce;
 
         [Header("Modifiers")]
         public float speedMultiplier = 1;
@@ -58,7 +54,7 @@ namespace Player.Controller
             if (canMove)
             {
                 moveDirection = GetMovementInputDirection();
-                velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
+                
 
                 CheckOutOfBound();
 
@@ -73,8 +69,9 @@ namespace Player.Controller
             else
             {
                 if (Animator) Animator.SetBool("IsWalking", false);
+                moveDirection = Vector3.zero;
             }
-
+            velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
             // Gravity
             if (controller.isGrounded)
             {

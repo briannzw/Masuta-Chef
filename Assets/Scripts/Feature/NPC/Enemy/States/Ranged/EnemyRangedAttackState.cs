@@ -46,7 +46,7 @@ public class EnemyRangedAttackState : EnemyState
     private void RotateToTarget(float rotationSpeed)
     {
         // Calculate the direction from this GameObject to the target
-        Vector3 direction = enemy.CurrentEnemies.transform.position - enemyPos;
+        Vector3 direction = enemy.CurrentEnemy.transform.position - enemyPos;
         direction.y = 0;
 
         // Create a rotation that looks in the calculated direction

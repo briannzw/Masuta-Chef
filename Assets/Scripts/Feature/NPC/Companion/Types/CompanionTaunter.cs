@@ -1,27 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace NPC.Companion
 {
+    using Character;
     using Enemy;
     public class CompanionTaunter : Companion
     {
         [SerializeField] float rotationSpeed = 5.0f;
         [SerializeField] int maxTauntedEnemies = 5;
         [SerializeField] float tauntRadius;
-        private bool isAlive = true;
+        public bool isAlive = true;
+
+        private void OnEnable()
+        {
+            CompanionStateMachine.Initialize(new GourdakinIdleState(this, CompanionStateMachine));
+            isAlive = true;
+        }
+
+        private void OnDisable()
+        {
+            isAlive = false;
+        }
+        private new void Awake()
+        {
+            CompanionStateMachine = new CompanionStateMachine();
+            
+            chara = GetComponent<Character>();
+
+            Agent = GetComponent<NavMeshAgent>();
+            CompanionStateMachine.Initialize(new GourdakinIdleState(this, CompanionStateMachine));
+        }
+
+        private new void Start()
+        {
+            base.Start();
+            chara.OnDie += OnTaunterDie;
+        }
+
 
         private new void Update()
         {
             base.Update();
-            DetectTarget();
-            Taunt();
+            if (isAlive)
+            {
+                Taunt();
+            }
+            
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, tauntRadius);
         }
 
         void Taunt()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, DetectionRadius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, tauntRadius);
             List<Transform> closestEnemies = new List<Transform>();
 
             foreach (Collider collider in colliders)
@@ -68,9 +106,15 @@ namespace NPC.Companion
                 if (enemy != null && isAlive)
                 {
                     enemy.GetComponent<Enemy>().IsTaunted = true;
-                    enemy.GetComponent<NPC>().CurrentEnemies = gameObject;
+                    enemy.GetComponent<Enemy>().DebuffIcon.SetActive(true);
+                    enemy.GetComponent<NPC>().CurrentEnemy = gameObject;
                 }
             }
+        }
+
+        void OnTaunterDie()
+        {
+            isAlive = false;
         }
     }
 }

@@ -41,7 +41,7 @@ public class EnemyMeleeEngageState : EnemyState
     {
         base.FrameUpdate();
         enemy.AttackTimer -= Time.deltaTime;
-        centerObject = enemy.CurrentEnemies.transform;
+        centerObject = enemy.CurrentEnemy.transform;
         agentPos = enemy.transform.position;
         angle += randomSpeed * Time.deltaTime;
 
@@ -78,7 +78,7 @@ public class EnemyMeleeEngageState : EnemyState
     private void RotateToTarget(float rotationSpeed)
     {
         // Calculate the direction from this GameObject to the target
-        Vector3 direction = enemy.CurrentEnemies.transform.position - agentPos;
+        Vector3 direction = enemy.CurrentEnemy.transform.position - agentPos;
         direction.y = 0;
 
         // Create a rotation that looks in the calculated direction
