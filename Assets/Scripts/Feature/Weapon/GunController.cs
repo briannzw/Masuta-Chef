@@ -78,12 +78,10 @@ public class GunController : Weapon.Weapon
     private IEnumerator ShootFussiliBombs()
     {
         isFiringUltimate = true;
-        var fusiliBombs = ultimateSpawner.Spawn();
-
-
 
         for (int i = 0; i < bulletAmount; i++)
         {
+            var fusiliBombs = ultimateSpawner.Spawn();
             foreach (var fusiliBomb in fusiliBombs)
             {
                 var fusiliHit = fusiliBomb.GetComponent<BulletHit>();

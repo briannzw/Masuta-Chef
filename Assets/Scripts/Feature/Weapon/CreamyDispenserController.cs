@@ -17,13 +17,15 @@ public class CreamyDispenserController : Weapon.Weapon
     public LayerMask enemyLayer;
 
     private ParticleSystem vfx;
+    private bool isFiringUltimate = false;
 
     private bool isUltimateAttack = false;
-    private int ultimateBulletCount = 4;
     private bool isUltimateCooldown = false;
     [Header("Ultimate Attack Properties")]
     public GameObject ultimateBulletObject;
-    [SerializeField] private float ultimateBulletInterval = 1;
+    [SerializeField] private float ultimateDuration;
+    [SerializeField] private float bulletAmount = 4;
+    [SerializeField] private Spawner.Spawner ultimateSpawner;
     #endregion
 
     protected override void Start()
@@ -48,6 +50,7 @@ public class CreamyDispenserController : Weapon.Weapon
 
     public override void Attack()
     {
+        if (isFiringUltimate) return;
         OnAttack?.Invoke();
         StartCoroutine(SpawnWithInterval(Mathf.RoundToInt(timesPerSecond * stats[Weapon.WeaponStatsEnum.Speed].Value / 100 * Time.deltaTime), Time.deltaTime));
     }
@@ -67,37 +70,24 @@ public class CreamyDispenserController : Weapon.Weapon
     protected override void UltimateAttack()
     {
         if (isUltimateAttack) return;
-        StartUltimate();
+        StartCoroutine(ShootCreamyDeluge());
     }
 
-    private void ShootUltimate()
+    private IEnumerator ShootCreamyDeluge()
     {
-        GameObject bullet = Instantiate(ultimateBulletObject, ultimateBulletObject.transform.position, ultimateBulletObject.transform.rotation);
-        bullet.GetComponent<Bullet>().weapon = this;
-        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bullet.GetComponent<Bullet>().TravelSpeed;
-        // if bullet exhausted, stop ultimate attack
-        if(--ultimateBulletCount == 0)
+        isFiringUltimate = true;
+
+        for (int i = 0; i < bulletAmount; i++)
         {
-            StopUltimate();
+            var creamyDeluges = ultimateSpawner.Spawn();
+            foreach (var creamyDeluge in creamyDeluges)
+            {
+                var creamyHit = creamyDeluge.GetComponent<BulletHit>();
+                creamyHit.Initialize(this, damageScaling);
+            }
+            yield return new WaitForSeconds(ultimateDuration / bulletAmount);
         }
-    }
-
-    private void StartUltimate()
-    {
-        isUltimateAttack = true;
-        ultimateBulletCount = 4;
-    }
-
-    private void StopUltimate()
-    {
-        isUltimateAttack = false;
-    }
-
-    private IEnumerator UltimateCooldown()
-    {
-        isUltimateCooldown = true;
-        yield return new WaitForSeconds(ultimateBulletInterval);
-        isUltimateCooldown = false;
+        isFiringUltimate = false;
     }
     #endregion
 }

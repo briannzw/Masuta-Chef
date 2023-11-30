@@ -31,7 +31,10 @@ public class ExplodingBullet : Bullet
     private void OnTriggerEnter(Collider other)
     {
         // Play Some Effect
-        OnHit();
-        GetComponent<SpawnObject>().Release();
+        if(other.CompareTag("Crate") || other.CompareTag("Enemy") || other.CompareTag("Environment"))
+        {
+            OnHit();
+            GetComponent<SpawnObject>().Release();
+        }
     }
 }
