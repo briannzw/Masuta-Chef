@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -6246212377481548447}
   - component: {fileID: 2609906586364614981}
   - component: {fileID: 6313532088697825098}
+  - component: {fileID: 6367259546842593378}
   m_Layer: 6
   m_Name: Companion Taunter
   m_TagString: Companion
@@ -323,6 +324,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6367259546842593378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204745779977513086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bdaafcc21684347a8ae3b183677732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharaRenderer: {fileID: 5216500224251479711}
+  hitColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &974479665228264613
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +732,7 @@ MonoBehaviour:
   slider: {fileID: 1678932231212597916}
   disableOnAwake: 1
   useBillboard: 1
+  disableOnDie: 1
   DynamicEnum: 0
 --- !u!1001 &1011323413743831865
 PrefabInstance:
@@ -1140,6 +1156,12 @@ CapsuleCollider:
 --- !u!4 &685189482084953298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5e260df35fe5494d984b4ab1ed86074,
+    type: 3}
+  m_PrefabInstance: {fileID: 1011323413743831865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5216500224251479711 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5074512353664290214, guid: f5e260df35fe5494d984b4ab1ed86074,
     type: 3}
   m_PrefabInstance: {fileID: 1011323413743831865}
   m_PrefabAsset: {fileID: 0}

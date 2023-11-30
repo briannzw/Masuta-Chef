@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: -5201471026571070349}
   - component: {fileID: -1372031222334392991}
   - component: {fileID: 5803816308237544641}
+  - component: {fileID: 6365198778072129187}
   m_Layer: 7
   m_Name: Enemy Ranged
   m_TagString: Enemy
@@ -399,6 +400,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6365198778072129187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2609905847538178790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bdaafcc21684347a8ae3b183677732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharaRenderer: {fileID: 6868925777243095868}
+  hitColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &3362469876523438622
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +568,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chara: {fileID: -8786994105791154135}
   slider: {fileID: 3634628455288281167}
+  disableOnAwake: 1
+  useBillboard: 1
+  disableOnDie: 1
+  DynamicEnum: 0
 --- !u!1 &4025721674513901839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,6 +1527,12 @@ CapsuleCollider:
   m_Height: 2.2901518
   m_Direction: 1
   m_Center: {x: 0, y: 1.19, z: 0}
+--- !u!137 &6868925777243095868 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1526964690268444965, guid: a33408fdcca9ce44d9918fe972b2a4b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3863088121178842599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8600705352275973074 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4811997102770009653, guid: a33408fdcca9ce44d9918fe972b2a4b1,

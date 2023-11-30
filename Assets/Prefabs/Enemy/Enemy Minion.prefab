@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 4768947446379554580}
   - component: {fileID: 1756001019041995699}
   - component: {fileID: 7173073296068579108}
+  - component: {fileID: 5905157576766555597}
   m_Layer: 7
   m_Name: Enemy Minion
   m_TagString: Enemy
@@ -779,6 +780,20 @@ CapsuleCollider:
   m_Height: 2.1104918
   m_Direction: 1
   m_Center: {x: 0, y: 0.13662365, z: 0}
+--- !u!114 &5905157576766555597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2660703370237670014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bdaafcc21684347a8ae3b183677732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharaRenderer: {fileID: 6264991003968193806}
+  hitColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &3047489862162921547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1048,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chara: {fileID: 4768947446379554580}
   slider: {fileID: 8698065927627268354}
+  disableOnAwake: 1
+  useBillboard: 1
+  disableOnDie: 1
+  DynamicEnum: 0
 --- !u!1 &5284585949786806831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1267,8 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  data:
+    icon: {fileID: 0}
   WeaponAnimator: {fileID: 4661639907289547569}
   enemyLayer:
     serializedVersion: 2
@@ -1781,6 +1802,12 @@ CapsuleCollider:
   m_Height: 2.0252457
   m_Direction: 1
   m_Center: {x: -0.9899999, y: 1.2386483, z: 0}
+--- !u!137 &6264991003968193806 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8417361359673230750, guid: 9c6ff0f82834235439af9285bb553574,
+    type: 3}
+  m_PrefabInstance: {fileID: 2459459699194904720}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8642275204211893554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3040415652556724830, guid: 9c6ff0f82834235439af9285bb553574,

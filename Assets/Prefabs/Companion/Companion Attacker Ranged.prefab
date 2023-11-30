@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: -778370667173244660}
   - component: {fileID: 568359642643547007}
   - component: {fileID: 615737573981097010}
+  - component: {fileID: 1966361478454771771}
   m_Layer: 6
   m_Name: Companion Attacker Ranged
   m_TagString: Companion
@@ -359,6 +360,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1966361478454771771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3577502455029801522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bdaafcc21684347a8ae3b183677732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharaRenderer: {fileID: 5874534510479212186}
+  hitColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &5623926738835714372
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +643,7 @@ MonoBehaviour:
   slider: {fileID: 9116366767697262245}
   disableOnAwake: 1
   useBillboard: 1
+  disableOnDie: 1
   DynamicEnum: 0
 --- !u!1 &8958914655740330219
 GameObject:
@@ -1665,6 +1681,12 @@ CapsuleCollider:
 --- !u!4 &4378363921806114730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5006224282757339634, guid: 60684777ce0aeff408d03a5d2fda0597,
+    type: 3}
+  m_PrefabInstance: {fileID: 8771530740284008024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5874534510479212186 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2899252454806706370, guid: 60684777ce0aeff408d03a5d2fda0597,
     type: 3}
   m_PrefabInstance: {fileID: 8771530740284008024}
   m_PrefabAsset: {fileID: 0}

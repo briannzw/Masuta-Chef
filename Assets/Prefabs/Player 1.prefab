@@ -767,6 +767,7 @@ GameObject:
   - component: {fileID: 4741457136705717365}
   - component: {fileID: 3067022664444725292}
   - component: {fileID: 7487281331979223930}
+  - component: {fileID: 6836377255993688281}
   m_Layer: 8
   m_Name: Player 1
   m_TagString: Player
@@ -835,7 +836,6 @@ MonoBehaviour:
   Animator: {fileID: 2695209031499080925}
   gravity: -9.8
   turnSmoothTime: 0.1
-  PushForce: 0
   speedMultiplier: 1
 --- !u!114 &1079237927158394645
 MonoBehaviour:
@@ -1026,6 +1026,20 @@ MonoBehaviour:
   - {fileID: 3425403164667841640}
   - {fileID: 231130160776277868}
   maxSlot: 4
+--- !u!114 &6836377255993688281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015340368926785847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bdaafcc21684347a8ae3b183677732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharaRenderer: {fileID: 1156921361399251212}
+  hitColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &7068706092199493517
 GameObject:
   m_ObjectHideFlags: 0

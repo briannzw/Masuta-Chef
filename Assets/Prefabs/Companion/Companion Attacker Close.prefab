@@ -394,6 +394,7 @@ MonoBehaviour:
   slider: {fileID: 5023010013339776116}
   disableOnAwake: 1
   useBillboard: 1
+  disableOnDie: 1
   DynamicEnum: 0
 --- !u!1 &7212286518193524450
 GameObject:
@@ -411,6 +412,7 @@ GameObject:
   - component: {fileID: 490781985289795330}
   - component: {fileID: 6871964901301136818}
   - component: {fileID: 8871140646095513230}
+  - component: {fileID: 7165290652419216994}
   m_Layer: 6
   m_Name: Companion Attacker Close
   m_TagString: Companion
@@ -718,6 +720,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7165290652419216994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212286518193524450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bdaafcc21684347a8ae3b183677732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharaRenderer: {fileID: 7582672519807713612}
+  hitColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &7472611706981444811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,6 +1106,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.0000016857393
       objectReference: {fileID: 0}
+    - target: {fileID: 4222171003418912805, guid: f6f77568503deea46b684e7ed015fac3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b18177215519d8e4a9c647ca76164f38, type: 2}
     - target: {fileID: 4554318437487275502, guid: f6f77568503deea46b684e7ed015fac3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1356,6 +1377,12 @@ CapsuleCollider:
 --- !u!4 &1901029805169582905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5315068732617017936, guid: f6f77568503deea46b684e7ed015fac3,
+    type: 3}
+  m_PrefabInstance: {fileID: 6026724855330400617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7582672519807713612 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4222171003418912805, guid: f6f77568503deea46b684e7ed015fac3,
     type: 3}
   m_PrefabInstance: {fileID: 6026724855330400617}
   m_PrefabAsset: {fileID: 0}
