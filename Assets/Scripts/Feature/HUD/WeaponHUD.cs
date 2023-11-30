@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace HUD
 {
@@ -12,6 +13,9 @@ namespace HUD
 
         [Header("UI References")]
         [SerializeField] private Image weaponIcon;
+        [SerializeField] private Image weaponCooldownImage;
+        [SerializeField] private TMP_Text weaponCooldownText;
+        [SerializeField] private GameObject weaponUltimateHint;
 
         private void Awake()
         {
@@ -24,6 +28,27 @@ namespace HUD
         {
             weaponIcon.sprite = null;
             weaponIcon.enabled = false;
+
+            weaponCooldownImage.fillAmount = 0f;
+            weaponCooldownText.text = "";
+            weaponUltimateHint.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (weaponController.ActiveWeapon == null) return;
+
+            if (weaponController.ActiveWeapon.isCooldownUltimate)
+            {
+                weaponUltimateHint.SetActive(false);
+                weaponCooldownImage.fillAmount = 1 - weaponController.ActiveWeapon.UltimateCooldownRatio;
+                weaponCooldownText.text = Mathf.RoundToInt(weaponController.ActiveWeapon.UltTimer).ToString();
+            }
+            else
+            {
+                weaponUltimateHint.SetActive(true);
+                if(!string.IsNullOrEmpty(weaponCooldownText.text)) weaponCooldownText.text = "";
+            }
         }
 
         private void SetUI()

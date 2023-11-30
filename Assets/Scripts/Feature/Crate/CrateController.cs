@@ -74,7 +74,7 @@ namespace Crate
             trailEffect.gameObject.SetActive(false);
             CurrentPicker = picker;
             if (IsHeld && !picker.CompareTag("Player") && !picker.CompareTag("Enemy")) return false;
-            if (Holder != picker && Holder != null) Holder.GetComponent<IPicker>().OnStealed(this);
+            if (Holder != picker && Holder != null && Holder.GetComponent<IPicker>() != null) Holder.GetComponent<IPicker>().OnStealed(this);
             // Memindahkan objek ke pemegang (picker)
             Holder = picker.transform;
             rb.isKinematic = true;

@@ -195,8 +195,8 @@ namespace Wave
                     {
                         disasterText.SetActive(true);
 
-                        disasterWarningText.gameObject.SetActive(true);
-                        disasterWarningText.text = (!disasterStopped) ? $"Disaster in\n{Mathf.Round(time)}" : "Disaster\nON HOLD";
+                        disasterWarningText.gameObject.SetActive(!disasterStopped);
+                        disasterWarningText.text = $"Disaster in\n{Mathf.Round(time)}";
                     }
 
                     yield return null;

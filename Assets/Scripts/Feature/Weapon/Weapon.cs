@@ -37,8 +37,11 @@ namespace Weapon
 
         [Header("Ultimate Properties")]
         [SerializeField] protected float UltimateTimer = 1;
-        [SerializeField] protected bool isCooldownUltimate = false;
+        public bool isCooldownUltimate = false;
         [SerializeField] private bool isUltimateCancelable = false;
+
+        public float UltTimer;
+        public float UltimateCooldownRatio => (UltimateTimer - UltTimer) / UltimateTimer;
 
         [Header("Icons")]
         public WeaponData data;
@@ -238,7 +241,13 @@ namespace Weapon
         private IEnumerator UltimateCooldown()
         {
             isCooldownUltimate = true;
-            yield return new WaitForSeconds(UltimateTimer);
+            UltTimer = UltimateTimer;
+            while (UltTimer > 0f)
+            {
+                UltTimer -= Time.deltaTime;
+                yield return null;
+            }
+            UltTimer = 0f;
             isCooldownUltimate = false;
         }
         #endregion
