@@ -880,12 +880,12 @@ MonoBehaviour:
       - m_Target: {fileID: 207638989}
         m_TargetAssemblyTypeName: AudioSetting, Assembly-CSharp
         m_MethodName: SetMusicVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
@@ -1435,12 +1435,12 @@ MonoBehaviour:
       - m_Target: {fileID: 207638989}
         m_TargetAssemblyTypeName: AudioSetting, Assembly-CSharp
         m_MethodName: SetSFXVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
@@ -1563,7 +1563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aff22cf8325253479750601d3520a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Recipes: []
+  RecipeSO: {fileID: 0}
 --- !u!1 &1270089255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,6 +1897,7 @@ MonoBehaviour:
   LevelManager: {fileID: 666763695}
   SaveManager: {fileID: 1410782209}
   StatsManager: {fileID: 1264775656}
+  AIAvoidancePredictionTime: 0.7
 --- !u!114 &1410782209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1916,27 +1917,27 @@ MonoBehaviour:
       - Key: Stuffed Bitter Gourdakin
         Value:
           CurrentBlueprint: 8
-          NeededBlueprint: 100
           CookingDone: 5
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          StatsIndex: 
+          CookingPoint: 0
       - Key: Cactyrn-filled Chutney Sandwich
         Value:
           CurrentBlueprint: 9
-          NeededBlueprint: 100
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          StatsIndex: 
+          CookingPoint: 0
       - Key: Orant and Chickpea Curry
         Value:
           CurrentBlueprint: 8
-          NeededBlueprint: 100
           CookingDone: 16
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
-          UniqueValueUnlocked: 0
+          StatsIndex: 
+          CookingPoint: 0
     IngredientData:
       _serializedList:
       - Key: Chicken
