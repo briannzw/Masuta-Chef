@@ -3,7 +3,6 @@ using UnityEngine;
 namespace Loot
 {
     using Character;
-    using Interactable;
     using Object;
     using System.Collections.Generic;
     using UnityEngine.AI;
@@ -30,7 +29,7 @@ namespace Loot
                 {
                     GameObject lootObj = Instantiate(lootChance.LootPrefab[LootType.Recipe], hit.position, Quaternion.identity);
                     int index = Random.Range(0, (loot as RecipeLoot).Recipes.Count);
-                    lootObj.GetComponent<RecipeLootObject>().Recipe = (loot as RecipeLoot).Recipes[index];
+                    lootObj.GetComponent<RecipeLootObject>().Set((loot as RecipeLoot).Recipes[index], lootChance.RecipeAmount);
                 }
                 else if(loot.Type == LootType.Weapon)
                 {

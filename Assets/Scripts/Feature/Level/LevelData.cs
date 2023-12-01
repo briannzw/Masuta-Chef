@@ -16,6 +16,7 @@ namespace Level
         [Header("Level Parameters")]
         public Vector3 PlayerSpawnPoint;
         public LootChance EnemyLootDrop;
+        [Range(0f, 1f)] public float LoseDropMultiplier = .5f;
 
         [Header("Wave Info")]
         public List<Wave> Waves;

@@ -8,6 +8,6 @@ public class SliderValue : MonoBehaviour
 
     public void UpdateText(float value)
     {
-        m_Text.text = value.ToString() + suffix;
+        m_Text.text = Mathf.RoundToInt(value * 100f).ToString() + suffix;
     }
 }

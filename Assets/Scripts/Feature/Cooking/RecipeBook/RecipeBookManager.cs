@@ -293,13 +293,13 @@ namespace Cooking.RecipeBook
             foreach (var recipe in recipeSO.Recipes)
             {
                 recipe.data = new();
-                SaveManager.SaveData.Add(recipe, 0);
+                SaveManager.SaveData.New(recipe);
             }
 
             foreach (var ingredient in recipeSO.Ingredients)
             {
                 ingredient.data = new();
-                SaveManager.SaveData.Add(ingredient, 0);
+                SaveManager.SaveData.New(ingredient);
             }
 
             SaveGame();

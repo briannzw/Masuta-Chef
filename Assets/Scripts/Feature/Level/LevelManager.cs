@@ -5,8 +5,14 @@ using UnityEngine;
 namespace Level
 {
     using AYellowpaper.SerializedCollections;
+    using Cooking;
+    using Cooking.Recipe;
     using Level.Area;
+    using Result;
+    using System.Linq;
     using Wave;
+    using static UnityEngine.Rendering.DebugUI;
+
     public class LevelManager : MonoBehaviour
     {
         public LevelData CurrentLevel;
@@ -15,9 +21,11 @@ namespace Level
         public WaveManager waveManager;
         public Transform PlayerTransform;
         public NavMeshSurface[] surfaces;
+        public BattleEndResult resultUI;
 
         [Header("Data")]
         [SerializeField] protected SerializedDictionary<string, int> characterDied = new();
+        protected BattleResult result = new();
 
         private LevelAreaInfo levelAreaInfo;
 
@@ -55,6 +63,8 @@ namespace Level
             PlayerTransform.position = CurrentLevel.PlayerSpawnPoint;
         }
 
+        public void GameStarted() => result.startTime = DateTime.Now;
+
         public void CharacterDied(Character.Character chara)
         {
             if(!characterDied.ContainsKey(chara.tag)) characterDied.Add(chara.tag, 0);
@@ -70,15 +80,71 @@ namespace Level
             // If All enemy in all Waves killed
             if (chara.CompareTag("Enemy") && characterDied["Enemy"] >= waveManager.TotalEnemies)
             {
-                OnLevelWin?.Invoke();
                 Debug.Log("[Game Over] Player Win (All Waves Cleared)");
+
+                CalculateReward(true);
+                result.clearTime = DateTime.Now;
+                result.clearDuration = result.clearTime - result.startTime;
+                result.isBestTime = GameManager.Instance.SaveManager.SaveData.Add(CurrentLevel.name, result.clearDuration);
+                ShowResultUI(true);
+                // SAVE
+                OnLevelWin?.Invoke();
             }
 
             if (chara.CompareTag("Player") && characterDied["Player"] >= 1)
             {
-                OnLevelLose?.Invoke();
                 Debug.Log("[Game Over] Player Lose (Health < 0)");
+
+                CalculateReward(false);
+                ShowResultUI(false);
+                // SAVE
+                OnLevelLose?.Invoke();
             }
+        }
+
+        private void CalculateReward(bool victory)
+        {
+            foreach(var ingredient in result.ingredientsCollected.ToArray())
+            {
+                result.ingredientsCollected[ingredient.Key] = Mathf.CeilToInt(ingredient.Value * (victory ? 1 : CurrentLevel.LoseDropMultiplier));
+
+                int remainder = GameManager.Instance.SaveManager.SaveData.Add(ingredient.Key, result.ingredientsCollected[ingredient.Key]);
+                result.ingredientsCollected[ingredient.Key] -= remainder;
+                if (result.ingredientsCollected[ingredient.Key] < 0) result.ingredientsCollected[ingredient.Key] = 0;
+            }
+
+            foreach(var blueprint in result.blueprintsCollected.ToArray())
+            {
+                result.blueprintsCollected[blueprint.Key] = Mathf.CeilToInt(blueprint.Value * (victory ? 1 : CurrentLevel.LoseDropMultiplier));
+
+                int remainder = GameManager.Instance.SaveManager.SaveData.Add(blueprint.Key, result.blueprintsCollected[blueprint.Key]);
+                result.blueprintsCollected[blueprint.Key] -= remainder;
+                if (result.blueprintsCollected[blueprint.Key] < 0) result.blueprintsCollected[blueprint.Key] = 0;
+            }
+        }
+
+        private void ShowResultUI(bool victory)
+        {
+            Time.timeScale = 0f;
+            // Canvas
+            resultUI.transform.parent.gameObject.SetActive(true);
+            resultUI.Set(victory, result);
+        }
+
+        public void IngredientCollected(Ingredient ingredient, int count)
+        {
+            if (!result.ingredientsCollected.ContainsKey(ingredient))
+                result.ingredientsCollected.Add(ingredient, 0);
+
+            result.ingredientsCollected[ingredient] += count;
+        }
+
+        public void BlueprintCollected(Recipe recipe, int count)
+        {
+            if (!result.blueprintsCollected.ContainsKey(recipe))
+                result.blueprintsCollected.Add(recipe, 0);
+
+            result.blueprintsCollected[recipe] += count;
         }
 
         public void DisableCrateSpawn()

@@ -33,7 +33,7 @@ namespace Cooking.Gameplay
         protected override void Start()
         {
             base.Start();
-            InputManager.ToggleActionMap(playerControls.Gameplay);
+            InputManager.ToggleActionMap(playerControls.Panel);
         }
 
         public void Set(CookingResult result)
@@ -68,14 +68,14 @@ namespace Cooking.Gameplay
         {
             if (playerControls == null) return;
 
-            playerControls.Gameplay.Fire.canceled += OnClick;
+            playerControls.Panel.Select.canceled += OnClick;
         }
 
         protected override void UnregisterInputCallbacks()
         {
             if (playerControls == null) return;
 
-            playerControls.Gameplay.Fire.canceled -= OnClick;
+            playerControls.Panel.Select.canceled -= OnClick;
         }
     }
 }

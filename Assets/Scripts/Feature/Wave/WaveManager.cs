@@ -82,6 +82,8 @@ namespace Wave
 
         private void FirstWave()
         {
+            levelManager.GameStarted();
+
             StartWave(LevelData.Waves[0]);
             StartCoroutine(DoDisaster());
             levelManager.EnableCrateSpawn();

@@ -8,11 +8,18 @@ namespace Loot.Object
     public class RecipeLootObject : LootFollowObject
     {
         [Header("References")]
-        public Recipe Recipe;
+        private Recipe recipe;
+        private int count = 1;
 
         protected override void ReachedTarget()
         {
             Destroy(gameObject);
+        }
+
+        public void Set(Recipe recipe, int count)
+        {
+            this.recipe = recipe;
+            this.count = count;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -23,7 +30,7 @@ namespace Loot.Object
             {
                 target = other.transform;
                 // Change amount(?)
-                if (!GameManager.Instance.SaveManager.SaveData.Add(Recipe, 1)) Debug.Log("Recipe " + Recipe.name +" is already unlocked!");
+                GameManager.Instance.LevelManager.BlueprintCollected(recipe, count);
             }
         }
     }

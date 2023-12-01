@@ -12,6 +12,9 @@ namespace Loot
         [Header("References")]
         public SerializedDictionary<LootType, GameObject> LootPrefab;
 
+        [Header("Amount")]
+        public int RecipeAmount = 1;
+
         [SerializeReference]
         public List<Loot> LootList = new();
 

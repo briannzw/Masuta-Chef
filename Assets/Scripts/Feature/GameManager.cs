@@ -6,6 +6,7 @@ using Character;
 using System;
 using UnityEngine.AI;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [Header("Settings")]
-    public bool LoadOnAwake;
-    public bool SaveOnGameOver;
+    public bool LoadOnAwake = true;
+    public bool SaveOnGameOver = true;
 
     [Header("Static References")]
     public Transform PlayerTransform;
@@ -48,10 +49,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void BackToLevelSelection()
+    {
+        if (SceneManager.GetActiveScene().name == "LevelSelection") return;
+
+        Time.timeScale = 1f;
+        InputManager.ToggleActionMap(InputManager.PlayerAction.Gameplay);
+        SceneManager.LoadScene("LevelSelection");
+    }
+
     [ButtonMethod]
     public void SaveGame()
     {
         SaveManager.Save();
+
+        if (SaveOnGameOver)
+        {
+            LevelManager.OnLevelLose -= SaveGame;
+            LevelManager.OnLevelWin -= SaveGame;
+        }
     }
 
     [ButtonMethod]
@@ -76,13 +92,13 @@ public class GameManager : MonoBehaviour
         foreach (var recipe in StatsManager.RecipeSO.Recipes)
         {
             recipe.data = new();
-            SaveManager.SaveData.Add(recipe, 0);
+            SaveManager.SaveData.New(recipe);
         }
 
         foreach(var ingredient in StatsManager.RecipeSO.Ingredients)
         {
             ingredient.data = new();
-            SaveManager.SaveData.Add(ingredient, 0);
+            SaveManager.SaveData.New(ingredient);
         }
     }
 }

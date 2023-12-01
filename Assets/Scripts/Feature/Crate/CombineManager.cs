@@ -32,6 +32,9 @@ namespace Crate.Combine
         [Header("Position")]
         [SerializeField] private Vector3 offset;
 
+        [Header("Amount")]
+        [SerializeField] private int ingredientCount = 2;
+
         [Header("Dictionaries")]
         [SerializeField] private SerializedDictionary<CrateColor, Ingredient> Ingredients;
         [SerializeField] private SerializedDictionary<CrateColor, GameObject> Weapons;
@@ -47,7 +50,7 @@ namespace Crate.Combine
             if (colors.Count == 1)
             {
                 GameObject lootObj = Instantiate(ingredientPrefab, hit.position, Quaternion.identity);
-                lootObj.GetComponent<IngredientLootObject>().Ingredient = Ingredients[colors[0]];
+                lootObj.GetComponent<IngredientLootObject>().Set(Ingredients[colors[0]], ingredientCount);
             }
             else if(colors.Count == 2)
             {
