@@ -101,6 +101,8 @@ namespace Player.Controller
         }
         private void Aim()
         {
+            if (Time.timeScale == 0f) return;
+
             var (success, position) = GetMousePosition();
             if (success)
             {

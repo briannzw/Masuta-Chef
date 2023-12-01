@@ -53,9 +53,19 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "LevelSelection") return;
 
+        ResumeGame();
+        SceneManager.LoadScene("LevelSelection");
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+    
+    public void ResumeGame()
+    {
         Time.timeScale = 1f;
         InputManager.ToggleActionMap(InputManager.PlayerAction.Gameplay);
-        SceneManager.LoadScene("LevelSelection");
     }
 
     [ButtonMethod]
