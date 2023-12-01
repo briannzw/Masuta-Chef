@@ -200,6 +200,7 @@ namespace Cooking.RecipeBook
         {
             DontDestroyOnLoad(CookingManager.gameObject);
 
+            CookingManager.selectedIndex = recipeSO.Recipes.IndexOf(currentRecipe);
             CookingManager.CurrentRecipe = currentRecipe;
 
             SceneManager.LoadScene(CookingManager.CookingScenes[currentRecipe.CookingType]);

@@ -686,6 +686,15 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e425a46a-2368-4307-8026-c32b3c171c67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -831,6 +840,28 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""action"": ""Touch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b2e4d26-a349-44f8-9757-3274f75d1d30"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""148e3a69-b1b0-4398-96ef-a537dc8cb7c0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -890,6 +921,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Cooking = asset.FindActionMap("Cooking", throwIfNotFound: true);
         m_Cooking_Move = m_Cooking.FindAction("Move", throwIfNotFound: true);
         m_Cooking_Touch = m_Cooking.FindAction("Touch", throwIfNotFound: true);
+        m_Cooking_Pause = m_Cooking.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1165,12 +1197,14 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private List<ICookingActions> m_CookingActionsCallbackInterfaces = new List<ICookingActions>();
     private readonly InputAction m_Cooking_Move;
     private readonly InputAction m_Cooking_Touch;
+    private readonly InputAction m_Cooking_Pause;
     public struct CookingActions
     {
         private @PlayerAction m_Wrapper;
         public CookingActions(@PlayerAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Cooking_Move;
         public InputAction @Touch => m_Wrapper.m_Cooking_Touch;
+        public InputAction @Pause => m_Wrapper.m_Cooking_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Cooking; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1186,6 +1220,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Touch.started += instance.OnTouch;
             @Touch.performed += instance.OnTouch;
             @Touch.canceled += instance.OnTouch;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(ICookingActions instance)
@@ -1196,6 +1233,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Touch.started -= instance.OnTouch;
             @Touch.performed -= instance.OnTouch;
             @Touch.canceled -= instance.OnTouch;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(ICookingActions instance)
@@ -1258,5 +1298,6 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnTouch(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
