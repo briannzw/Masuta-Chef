@@ -11,7 +11,6 @@ namespace Level
     using Result;
     using System.Linq;
     using Wave;
-    using static UnityEngine.Rendering.DebugUI;
 
     public class LevelManager : MonoBehaviour
     {

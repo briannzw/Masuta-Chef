@@ -34,7 +34,7 @@ namespace HUD
             companionChara = companion.GetComponent<Character>();
             companionLevel = companion.GetComponent<CompanionLevelSystem>();
 
-            companionIcon.sprite = companion.data.icon;
+            companionIcon.sprite = companion.Data.icon;
             companionIcon.enabled = true;
             SetHealthUI();
             SetLevelUI();

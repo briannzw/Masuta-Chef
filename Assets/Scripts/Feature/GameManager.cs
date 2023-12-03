@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
         }
         else Instance = this;
 
-        if(LoadOnAwake) LoadGame();
+        if (LoadOnAwake) LoadGame();
+        if (LevelManager != null) LevelManager.CurrentLevel = SelectedLevel;
     }
     #endregion
 
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Static Value")]
     public Action OnEnemiesKilled;
-
+    public static LevelData SelectedLevel;
 
     private void Start()
     {
@@ -55,6 +56,14 @@ public class GameManager : MonoBehaviour
 
         ResumeGame();
         SceneManager.LoadScene("LevelSelection");
+    }
+
+    public void BackToMenu()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
+
+        ResumeGame();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void PauseGame()
@@ -83,9 +92,11 @@ public class GameManager : MonoBehaviour
     [ButtonMethod]
     public void LoadGame()
     {
+        if (!SaveManager.CheckDataExists()) NewGame();
+
         SaveManager.Load();
         // Load Recipe Book Stat Mods
-        if(Application.isPlaying) StatsManager.Load();
+        if(Application.isPlaying && StatsManager != null) StatsManager.Load();
     }
 
     [ButtonMethod]
@@ -97,8 +108,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+#if UNITY_EDITOR
         Unsupported.SmartReset(SaveManager);
-
+#endif
         foreach (var recipe in StatsManager.RecipeSO.Recipes)
         {
             recipe.data = new();

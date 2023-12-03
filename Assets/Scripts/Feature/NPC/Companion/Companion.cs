@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace NPC.Companion
 {
     using Character;
-    using Data;
-    using Player.CompanionSlot;
     public class Companion : NPC, IDetectionNPC
     {
         public float MaxDistanceFromPlayer;
@@ -39,9 +35,6 @@ namespace NPC.Companion
             Agent.isStopped = false;
             ChildCollider.enabled = true;
         }
-
-        [Header("Data")]
-        public CompanionData data;
 
         private new void Awake()
         {

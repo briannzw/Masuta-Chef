@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace NPC.Companion.Data
+namespace NPC.Data
 {
     [System.Serializable]
-    public class CompanionData
+    public class NPCData
     {
         public Sprite icon;
     }

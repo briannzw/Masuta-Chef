@@ -8,6 +8,8 @@ namespace NPC
     using Character;
     using Spawner;
     using Enemy;
+    using Data;
+
     public class NPC : MonoBehaviour
     {
         public enum AttackType
@@ -36,6 +38,9 @@ namespace NPC
         [HideInInspector]
         public bool IsThisJoker = false;
         #endregion
+
+        [Header("Data")]
+        public NPCData Data;
 
         protected void Awake()
         {

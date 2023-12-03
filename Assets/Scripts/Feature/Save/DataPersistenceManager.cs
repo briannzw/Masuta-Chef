@@ -37,7 +37,7 @@ namespace Save
                     WriteEncryptedData(data, stream, settings);
                     return true;
                 }
-                
+
                 stream.Close();
 
                 File.WriteAllText(path, JsonConvert.SerializeObject(data, Formatting.Indented, settings));
@@ -69,7 +69,7 @@ namespace Save
         {
             string path = Application.persistentDataPath + relativePath;
 
-            if(!File.Exists(path))
+            if (!File.Exists(path))
             {
                 Debug.Log($"Cannot load file at {path}. File does not exist!");
                 throw new FileNotFoundException($"{path} does not exist.");
@@ -94,7 +94,7 @@ namespace Save
 
                 return data;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.LogError($"Failed to load data: {e.Message} {e.StackTrace} ");
                 throw e;
@@ -124,6 +124,13 @@ namespace Save
             string result = reader.ReadToEnd();
 
             return JsonConvert.DeserializeObject<T>(result, settings);
+        }
+
+        public bool CheckExists(string relativePath)
+        {
+            string path = Application.persistentDataPath + relativePath;
+
+            return File.Exists(path);
         }
     }
 }

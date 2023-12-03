@@ -743,6 +743,8 @@ MonoBehaviour:
   CurrentEnemy: {fileID: 0}
   ChildCollider: {fileID: 8657363976833129869}
   IsThisJoker: 0
+  Data:
+    icon: {fileID: 21300000, guid: 3b3019efc67bf5b4ebada5227fe23798, type: 3}
   maxTauntTimer: 0.1
   rotationSpeed: 5
   AttackDistance: 3.4
@@ -1267,6 +1269,7 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  UltTimer: 0
   data:
     icon: {fileID: 0}
   WeaponAnimator: {fileID: 4661639907289547569}

@@ -31,5 +31,10 @@ namespace Save
             SaveData = dataPersistence.ReadData<SaveData>("/data.save", IsEncrypted);
             loadTime = (DateTime.Now.Ticks - startTime) / TimeSpan.TicksPerMillisecond;
         }
+
+        public bool CheckDataExists()
+        {
+            return dataPersistence.CheckExists("/data.save");
+        }
     }
 }

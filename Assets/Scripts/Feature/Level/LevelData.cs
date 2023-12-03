@@ -3,7 +3,11 @@ using UnityEngine;
 
 namespace Level
 {
+    using LevelSelection;
     using Loot;
+    using NPC.Data;
+    using NPC.Enemy;
+    using System.Linq;
     using Wave;
     [CreateAssetMenu(menuName = "Level/Level Data", fileName = "New Level Data")]
     public class LevelData : ScriptableObject
@@ -11,7 +15,25 @@ namespace Level
         [Header("Level Info")]
         public new string name;
         public GameObject LevelAreaPrefab;
-        [TextArea] public string Description;
+        public LevelSelectionInfo Info;
+        public List<NPCData> EnemiesInLevel
+        {
+            get
+            {
+                HashSet<NPCData> list = new HashSet<NPCData>();
+                foreach(var wave in Waves)
+                {
+                    foreach(var enemy in wave.EnemyList)
+                    {
+                        if (!enemy.Key.Prefab.CompareTag("Enemy")) continue;
+
+                        if (!list.Contains(enemy.Key.Prefab.GetComponent<Enemy>().Data))
+                            list.Add(enemy.Key.Prefab.GetComponent<Enemy>().Data);
+                    }
+                }
+                return list.ToList();
+            }
+        }
 
         [Header("Level Parameters")]
         public Vector3 PlayerSpawnPoint;

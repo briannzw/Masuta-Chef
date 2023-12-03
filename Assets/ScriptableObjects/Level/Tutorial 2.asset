@@ -15,9 +15,16 @@ MonoBehaviour:
   name: Tutorial 2
   LevelAreaPrefab: {fileID: 8079023862561323113, guid: 589678590d4948a43b025b1cb3489100,
     type: 3}
-  Description: 
+  Info:
+    MapIcon: {fileID: 21300000, guid: 275abc097a0c4f141bbdfe0ca6cc560d, type: 3}
+    Region: Praksha
+    Objectives: []
+    LevelImage: {fileID: 0}
+    Instruction: 
+    IsTutorial: 1
   PlayerSpawnPoint: {x: 0, y: 0.1455578, z: -47}
   EnemyLootDrop: {fileID: 11400000, guid: d326e2c1223c9504bba257c2e03eb5d7, type: 2}
+  LoseDropMultiplier: 0.5
   Waves:
   - EnemyList:
       _serializedList:
@@ -30,5 +37,8 @@ MonoBehaviour:
   WaveWaitTime: 0
   CrateSpawnMinInterval: 1
   CrateSpawnMaxInterval: 5
+  DisasterDamageScaling: 1
+  DisasterStartTime: 30
+  DisasterDuration: 10
   DisasterMinInterval: 0
   DisasterMaxInterval: 0
