@@ -289,7 +289,9 @@ namespace Cooking.RecipeBook
                 return;
             }
 
+            #if UNITY_EDITOR
             Unsupported.SmartReset(SaveManager);
+            #endif
 
             foreach (var recipe in recipeSO.Recipes)
             {

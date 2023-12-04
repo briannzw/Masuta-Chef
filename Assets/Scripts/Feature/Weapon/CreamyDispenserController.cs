@@ -37,7 +37,8 @@ public class CreamyDispenserController : Weapon.Weapon
     public override void StartAttack()
     {
         base.StartAttack();
-        if(!isUltimateCooldown)
+        OnAttack?.Invoke();
+        if (!isUltimateCooldown)
         {
             //ShootUltimate();
         }
@@ -51,7 +52,7 @@ public class CreamyDispenserController : Weapon.Weapon
     public override void Attack()
     {
         if (isFiringUltimate) return;
-        OnAttack?.Invoke();
+        
         StartCoroutine(SpawnWithInterval(Mathf.RoundToInt(timesPerSecond * stats[Weapon.WeaponStatsEnum.Speed].Value / 100 * Time.deltaTime), Time.deltaTime));
     }
 
