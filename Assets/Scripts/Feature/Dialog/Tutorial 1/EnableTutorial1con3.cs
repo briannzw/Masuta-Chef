@@ -11,6 +11,7 @@ public class EnableTutorial1con3 : MonoBehaviour
     private bool updateActive = true;
     public Image check2;
     public Image check3;
+    public Image check4;
 
     public PlayerWeaponController playerWeaponController;
 
@@ -36,11 +37,16 @@ public class EnableTutorial1con3 : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (playerWeaponController.WeaponTransform.gameObject.activeSelf && other.CompareTag("Player"))
+        if (playerWeaponController.WeaponTransform.gameObject.activeSelf)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 SetActive2();
+            }
+            
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                SetActive3();
             }
         }
     }
@@ -49,9 +55,12 @@ public class EnableTutorial1con3 : MonoBehaviour
     { check2.gameObject.SetActive(true); }
     public void SetActive3()
     { check3.gameObject.SetActive(true); }
+    public void SetActive4()
+    { check4.gameObject.SetActive(true); }
 
     public void ActivateDialogue()
     {
+        SetActive4();
         interactButton.onClick.Invoke();
         interactButton.gameObject.SetActive(false);
     }

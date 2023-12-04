@@ -1984,7 +1984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4091262779919454203}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84974, y: 0.84974, z: 0.84974}
   m_ConstrainProportionsScale: 0
@@ -2013,9 +2013,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5ca3a2e68315f4a8e450141b4dcd4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrateSpawner: {fileID: 0}
+  CrateSpawner: {fileID: 5611984980522720468}
   EnemySpawners:
-    _serializedList: []
+    _serializedList:
+    - Key: {fileID: 2660703370237670014, guid: 6524ca34e7ee17b419ee263c59218b65, type: 3}
+      Value:
+      - {fileID: 1232723964476894143}
 --- !u!1 &4093504952887920020
 GameObject:
   m_ObjectHideFlags: 0
@@ -4197,6 +4200,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3102954623768449953}
+  - {fileID: 7240143795142745334}
   m_Father: {fileID: 3714560941880251713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7015937718944391130
@@ -4285,6 +4289,62 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7654969830572170526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7240143795142745334}
+  - component: {fileID: 5611984980522720468}
+  m_Layer: 0
+  m_Name: Crate Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7240143795142745334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654969830572170526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.1304913, y: 5.6073217, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3117892536349157723}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5611984980522720468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654969830572170526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4638e39b23553734eb8a4fbc41941802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 4423516174392846161, guid: 68f9d1dcd40cdd14fb084960b78e5f2f,
+    type: 3}
+  spawnArea: {x: 50, y: 1, z: 50}
+  spawnOffset: {x: 0, y: 1, z: 0}
+  isLocalOffset: 0
+  randomizeRotation: 0
+  followSpawnerRotation: 0
+  randomEulerRotation: 0
+  eulerRandomRange: {x: 0, y: 0}
+  maxSpawnObjectInPool: 10
+  maxRandomPosIteration: 1000
+  amount: 1
 --- !u!1 &7699327737291608348
 GameObject:
   m_ObjectHideFlags: 0
