@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 7255329349913092742}
   m_Layer: 10
   m_Name: PastaGun
-  m_TagString: Untagged
+  m_TagString: Gun Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  UltTimer: 0
   data:
     icon: {fileID: 21300000, guid: 6552399d88f2b2b458eaddd56991883d, type: 3}
   fireObjectPrefab: {fileID: 2116179339103635329, guid: 77e223fad0613c940abdeacc3306c668,
