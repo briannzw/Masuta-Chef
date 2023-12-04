@@ -29,6 +29,9 @@ namespace Cooking.Menu
 
         private Queue<Recipe.Recipe> notifyRecipe = new();
 
+        [Header("Scene Load")]
+        [SerializeField] private GameObject sceneLoadPrefab;
+
         private void Awake()
         {
             // Load SaveData on Awake
@@ -52,7 +55,7 @@ namespace Cooking.Menu
 
         public void BackToMenu()
         {
-            SceneManager.LoadScene("MainMenu");
+            LoadScene("MainMenu");
         }
 
         public void ChangePage(int direction)
@@ -92,6 +95,13 @@ namespace Cooking.Menu
             saveManager.Save();
 
             notifyPanel.SetActive(false);
+        }
+
+        private void LoadScene(string sceneName, int panelIndex = -1)
+        {
+            GameObject go = Instantiate(sceneLoadPrefab);
+            go.GetComponent<SceneLoad>().loadingIndex = panelIndex;
+            go.GetComponent<SceneLoad>().LoadScene(sceneName);
         }
     }
 }

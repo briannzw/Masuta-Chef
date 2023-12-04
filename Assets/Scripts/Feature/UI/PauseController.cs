@@ -2,7 +2,7 @@ using Cooking;
 using Player.Input;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseController : PlayerInputControl
 {
@@ -16,7 +16,10 @@ public class PauseController : PlayerInputControl
     [Header("Type")]
     [SerializeField] private bool isCooking = false;
 
-    public void Pause()
+    [Header("Scene Load")]
+    [SerializeField] private GameObject sceneLoadPrefab;
+
+    public void Pause(InputAction.CallbackContext context)
     {
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
@@ -26,7 +29,7 @@ public class PauseController : PlayerInputControl
         backToText.text = "Return to " + (isCooking ? "Recipe Book" : "Level Selection");
     }
 
-    public void Resume()
+    public void Resume(InputAction.CallbackContext context)
     {
         if (settingsPanel.activeSelf)
         {
@@ -50,22 +53,30 @@ public class PauseController : PlayerInputControl
     {
         Time.timeScale = 1f;
         InputManager.ToggleActionMap(InputManager.PlayerAction.Gameplay);
-        SceneManager.LoadScene("MainMenu");
+        LoadScene("MainMenu");
     }
+
+    private void LoadScene(string sceneName, int panelIndex = -1)
+    {
+        GameObject go = Instantiate(sceneLoadPrefab);
+        go.GetComponent<SceneLoad>().loadingIndex = panelIndex;
+        go.GetComponent<SceneLoad>().LoadScene(sceneName);
+    }
+
 
     protected override void RegisterInputCallbacks()
     {
         if (playerControls == null) return;
-        if(!isCooking) playerControls.Gameplay.Pause.performed += (ctx) => Pause();
-        else playerControls.Cooking.Pause.performed += (ctx) => Pause();
-        playerControls.Panel.Cancel.performed += (ctx) => Resume();
+        if(!isCooking) playerControls.Gameplay.Pause.performed += Pause;
+        else playerControls.Cooking.Pause.performed += Pause;
+        playerControls.Panel.Cancel.performed += Resume;
     }
 
     protected override void UnregisterInputCallbacks()
     {
         if (playerControls == null) return;
-        if(!isCooking) playerControls.Gameplay.Pause.performed -= (ctx) => Pause();
-        else playerControls.Cooking.Pause.performed -= (ctx) => Pause();
-        playerControls.Panel.Cancel.performed -= (ctx) => Resume();
+        if(!isCooking) playerControls.Gameplay.Pause.performed -= Pause;
+        else playerControls.Cooking.Pause.performed -= Pause;
+        playerControls.Panel.Cancel.performed -= Resume;
     }
 }

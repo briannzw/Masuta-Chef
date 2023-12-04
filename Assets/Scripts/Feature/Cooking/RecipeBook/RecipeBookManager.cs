@@ -61,6 +61,9 @@ namespace Cooking.RecipeBook
         private Recipe currentRecipe;
         private string currentReroll;
 
+        [Header("Scene Load")]
+        [SerializeField] private GameObject sceneLoadPrefab;
+
         private void Awake()
         {
             // Load SaveData on Awake
@@ -203,7 +206,14 @@ namespace Cooking.RecipeBook
             CookingManager.selectedIndex = recipeSO.Recipes.IndexOf(currentRecipe);
             CookingManager.CurrentRecipe = currentRecipe;
 
-            SceneManager.LoadScene(CookingManager.CookingScenes[currentRecipe.CookingType]);
+            LoadScene(CookingManager.CookingScenes[currentRecipe.CookingType]);
+        }
+
+        private void LoadScene(string sceneName, int panelIndex = -1)
+        {
+            GameObject go = Instantiate(sceneLoadPrefab);
+            go.GetComponent<SceneLoad>().loadingIndex = panelIndex;
+            go.GetComponent<SceneLoad>().LoadScene(sceneName);
         }
 
         private string Reroll()

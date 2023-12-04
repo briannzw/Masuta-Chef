@@ -177,7 +177,7 @@ namespace Cooking.Menu
             isLocked = !isLocked;
 
             menuInfo.gameObject.SetActive(!isLocked);
-            menuImageButton.interactable = !isLocked;
+            //menuImageButton.interactable = !isLocked;
             lockOverlay.gameObject.SetActive(isLocked);
 
             // Page Index

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         else Instance = this;
 
         if (LoadOnAwake) LoadGame();
-        if (LevelManager != null) LevelManager.CurrentLevel = SelectedLevel;
+        if (LevelManager != null && SelectedLevel != null) LevelManager.CurrentLevel = SelectedLevel;
     }
     #endregion
 
@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     public Action OnEnemiesKilled;
     public static LevelData SelectedLevel;
 
+    [Header("Scene Load")]
+    [SerializeField] private GameObject sceneLoadPrefab;
+
     private void Start()
     {
         NavMesh.avoidancePredictionTime = AIAvoidancePredictionTime;
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "LevelSelection") return;
 
         ResumeGame();
-        SceneManager.LoadScene("LevelSelection");
+        LoadScene("LevelSelection");
     }
 
     public void BackToMenu()
@@ -63,7 +66,14 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainMenu") return;
 
         ResumeGame();
-        SceneManager.LoadScene("MainMenu");
+        LoadScene("MainMenu");
+    }
+
+    private void LoadScene(string sceneName, int panelIndex = -1)
+    {
+        GameObject go = Instantiate(sceneLoadPrefab);
+        go.GetComponent<SceneLoad>().loadingIndex = panelIndex;
+        go.GetComponent<SceneLoad>().LoadScene(sceneName);
     }
 
     public void PauseGame()
