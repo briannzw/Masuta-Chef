@@ -27,6 +27,8 @@ namespace LevelSelection
         [SerializeField] private GameObject levelBestTimeBar;
         [SerializeField] private TMP_Text levelBestTimeText;
 
+        private LevelData selectedData;
+
         private void Awake()
         {
             levelBackPanel.SetActive(false);
@@ -35,6 +37,8 @@ namespace LevelSelection
 
         public void Set(LevelData data)
         {
+            selectedData = data;
+
             levelBackPanel.SetActive(true);
             levelPanel.SetActive(true);
 
@@ -78,10 +82,10 @@ namespace LevelSelection
             else levelBestTimeText.text = "-";
         }
 
-        public void Play(LevelData data)
+        public void Play()
         {
-            GameManager.SelectedLevel = data;
-            if (data.Info.IsTutorial)
+            GameManager.SelectedLevel = selectedData;
+            if (selectedData.Info.IsTutorial)
             {
                 SceneManager.LoadScene("Tutorial 1");
                 return;
