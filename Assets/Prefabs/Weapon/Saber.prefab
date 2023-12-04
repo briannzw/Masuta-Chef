@@ -259,9 +259,6 @@ MonoBehaviour:
   maxRadius: 7
   speed: 30
   startWidth: 3
-  slashVFXPrefab: {fileID: 7638502962264667764, guid: 01a035937a64e814789302fa19e0cd4f,
-    type: 3}
-  vfxSize: {x: 0, y: 0, z: 0}
 --- !u!1 &8608244446285638674
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +276,7 @@ GameObject:
   - component: {fileID: 7066713740898636517}
   m_Layer: 10
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Melee Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,6 +330,7 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  UltTimer: 0
   data:
     icon: {fileID: 21300000, guid: 13c7674323aea7f45b077e5bca2da8a5, type: 3}
   enemyLayer:

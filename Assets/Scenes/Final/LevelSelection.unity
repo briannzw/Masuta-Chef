@@ -977,7 +977,42 @@ PrefabInstance:
     - target: {fileID: 2981665652462828558, guid: b94bf3a158931d442a55bc343e86dae9,
         type: 3}
       propertyPath: m_Name
-      value: Button_Default
+      value: Button_Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019754360435386951, guid: b94bf3a158931d442a55bc343e86dae9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019754360435386951, guid: b94bf3a158931d442a55bc343e86dae9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019754360435386951, guid: b94bf3a158931d442a55bc343e86dae9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1117295360}
+    - target: {fileID: 6019754360435386951, guid: b94bf3a158931d442a55bc343e86dae9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019754360435386951, guid: b94bf3a158931d442a55bc343e86dae9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019754360435386951, guid: b94bf3a158931d442a55bc343e86dae9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelSelection.LevelInfoController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019754360435386951, guid: b94bf3a158931d442a55bc343e86dae9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6097574145422878133, guid: b94bf3a158931d442a55bc343e86dae9,
         type: 3}

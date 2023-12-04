@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 1811569729608071877}
   m_Layer: 10
   m_Name: CreamyDispenser_Revamped
-  m_TagString: Untagged
+  m_TagString: Gun Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  UltTimer: 0
   data:
     icon: {fileID: 21300000, guid: c62c65298aae0e144821f6a35dbb725c, type: 3}
   spawner: {fileID: 289710697886632661}
@@ -262,7 +263,7 @@ MonoBehaviour:
     m_Bits: 128
   ultimateBulletObject: {fileID: 7769012843354398645, guid: f07dda005ab44a345a76e0d336782f4c,
     type: 3}
-  ultimateBulletInterval: 1
+  ultimateDuration: 0
   bulletAmount: 4
   ultimateSpawner: {fileID: 3532375201333642121}
 --- !u!82 &1081356617267295124
