@@ -1169,6 +1169,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 30b9ca2c43fbf0c4390ff94c630d5be0, type: 2}
   musicSlider: {fileID: 6404795833380249673}
   SFXSlider: {fileID: 2186920623458445059}
+  bgmValue: {fileID: 1785280673086610829}
+  sfxValue: {fileID: 2641080442378978158}
 --- !u!1 &1898924317516335858
 GameObject:
   m_ObjectHideFlags: 0
@@ -3247,7 +3249,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5539591690893559677
 MonoBehaviour:
   m_ObjectHideFlags: 0

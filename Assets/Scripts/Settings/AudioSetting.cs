@@ -8,10 +8,13 @@ public class AudioSetting : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider SFXSlider;
 
+    [SerializeField] private SliderValue bgmValue;
+    [SerializeField] private SliderValue sfxValue;
+
     private const string musicVolumeKey = "MusicVolume";
     private const string SFXVolumeKey = "SFXVolume";
 
-    private void Start()
+    private void OnEnable()
     {
         if (PlayerPrefs.HasKey(musicVolumeKey) && PlayerPrefs.HasKey(SFXVolumeKey))
         {
@@ -46,6 +49,9 @@ public class AudioSetting : MonoBehaviour
 
         SetMusicVolume(savedMusicVolume);
         SetSFXVolume(savedSFXVolume);
+
+        bgmValue.UpdateText(musicSlider.value);
+        sfxValue.UpdateText(SFXSlider.value);
     }
 }
 

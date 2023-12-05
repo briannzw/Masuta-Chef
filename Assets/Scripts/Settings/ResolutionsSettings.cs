@@ -13,7 +13,7 @@ public class ResolutionSettings : MonoBehaviour
     private float currentRefresRate;
     private int currentResolutionIndex = 0;
 
-    void Start()
+    void OnEnable()
     {
         resolutions = Screen.resolutions;
         filteredResolutions = new List<Resolution>();

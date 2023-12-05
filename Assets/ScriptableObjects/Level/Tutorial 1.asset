@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a14daedbc2f794d82cd2a365288b9d, type: 3}
   m_Name: Tutorial 1
   m_EditorClassIdentifier: 
-  name: Tutorial 1
+  name: Tutorial
   LevelAreaPrefab: {fileID: 4091262779919454203, guid: 1a1c2ea12d442884eacb616a76c9a183,
     type: 3}
   Info:
     MapIcon: {fileID: 21300000, guid: 275abc097a0c4f141bbdfe0ca6cc560d, type: 3}
     Region: Praksha
-    Objectives: []
-    LevelImage: {fileID: 0}
-    Instruction: 
+    Objectives:
+    - Clear Tutorial 1
+    - Clear Tutorial 2
+    LevelImage: {fileID: 21300000, guid: 275abc097a0c4f141bbdfe0ca6cc560d, type: 3}
+    Instruction: "Flavor Text for the level, For example, you going to market for\r\n  
+      the first time but all of a sudden, chaos emerged. What you do next is ..."
     IsTutorial: 1
   PlayerSpawnPoint: {x: 0, y: 1.6, z: -38}
   EnemyLootDrop: {fileID: 11400000, guid: d326e2c1223c9504bba257c2e03eb5d7, type: 2}
