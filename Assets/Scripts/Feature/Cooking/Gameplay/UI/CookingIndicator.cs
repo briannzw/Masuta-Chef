@@ -15,7 +15,6 @@ namespace Cooking.Gameplay.UI
     {
         [Header("References")]
         public Image IndicatorImage;
-        [SerializeField] private UnityEngine.UI.Slider leftBarSlider;
 
         [Header("Accuracy Values")]
         [ReadOnly] public SerializedDictionary<CookingResult, float> AccuracyPercentages = new();
@@ -46,8 +45,6 @@ namespace Cooking.Gameplay.UI
             {
                 FinalResult = CookingResult.Perfect;
             }
-
-            leftBarSlider.value = accuracy;
             // Optimization for UI drawcall
             if (FinalResult == prevResult) return;
             prevResult = FinalResult;
