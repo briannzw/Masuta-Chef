@@ -40,6 +40,9 @@ namespace Cooking
 
         private string initialScene;
 
+        [Header("Scene Load")]
+        [SerializeField] private GameObject sceneLoadPrefab;
+
         private void OnEnable()
         {
             SceneManager.sceneLoaded += LoadGame;
@@ -89,7 +92,14 @@ namespace Cooking
 
             Destroy(gameObject);
             InputManager.ToggleActionMap(InputManager.PlayerAction.Gameplay);
-            SceneManager.LoadScene("RecipeBook");
+            LoadScene("RecipeBook");
+        }
+
+        private void LoadScene(string sceneName, int panelIndex = -1)
+        {
+            GameObject go = Instantiate(sceneLoadPrefab);
+            go.GetComponent<SceneLoad>().loadingIndex = panelIndex;
+            go.GetComponent<SceneLoad>().LoadScene(sceneName);
         }
 
         public void LoadGame(Scene scene, LoadSceneMode mode)

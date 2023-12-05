@@ -705,6 +705,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Tutorial 2
+  sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
+    type: 3}
 --- !u!1 &269366335
 GameObject:
   m_ObjectHideFlags: 3
@@ -2003,6 +2005,7 @@ MonoBehaviour:
   SaveManager: {fileID: 652335939}
   StatsManager: {fileID: 1178781492}
   AIAvoidancePredictionTime: 0.7
+  sceneLoadPrefab: {fileID: 0}
 --- !u!1 &654917524
 GameObject:
   m_ObjectHideFlags: 0

@@ -93,7 +93,7 @@ namespace Spawner
         private void OnDestroy()
         {
             OnRelease -= Release;
-            poolManager.Remove(spawnPrefab);
+            if(poolManager != null) poolManager.Remove(spawnPrefab);
 
             StopAllCoroutines();
         }

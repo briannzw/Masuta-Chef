@@ -27,6 +27,9 @@ namespace LevelSelection
         [SerializeField] private GameObject levelBestTimeBar;
         [SerializeField] private TMP_Text levelBestTimeText;
 
+        [Header("Scene Load")]
+        [SerializeField] private GameObject sceneLoadPrefab;
+
         private LevelData selectedData;
 
         private void Awake()
@@ -87,11 +90,18 @@ namespace LevelSelection
             GameManager.SelectedLevel = selectedData;
             if (selectedData.Info.IsTutorial)
             {
-                SceneManager.LoadScene("Tutorial 1");
+                LoadScene("Tutorial 1");
                 return;
             }
 
-            SceneManager.LoadScene("Main");
+            LoadScene("Main");
+        }
+
+        private void LoadScene(string sceneName, int panelIndex = -1)
+        {
+            GameObject go = Instantiate(sceneLoadPrefab);
+            go.GetComponent<SceneLoad>().loadingIndex = panelIndex;
+            go.GetComponent<SceneLoad>().LoadScene(sceneName);
         }
     }
 }

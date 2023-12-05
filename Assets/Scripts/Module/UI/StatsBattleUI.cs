@@ -32,7 +32,7 @@ namespace Module.UI
 
         private void OnDisable()
         {
-            if (chara.CompareTag("Companion")) chara.GetComponent<CompanionLevelSystem>().OnLevelUp -= MaxValueChanged;
+            if (chara != null && chara.CompareTag("Companion")) chara.GetComponent<CompanionLevelSystem>().OnLevelUp -= MaxValueChanged;
             if(disableOnDie) chara.OnDie -= DisableBar;
             chara.OnDamaged -= ValueChanged;
             chara.OnHealed -= ValueChanged;
