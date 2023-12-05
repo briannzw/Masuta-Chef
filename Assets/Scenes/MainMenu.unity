@@ -1515,6 +1515,7 @@ MonoBehaviour:
           ConsecutivePerfectCookingDone: 0
           StatsIndex: 
           CookingPoint: 0
+          IsNotified: 0
       - Key: Orant and Chickpea Curry
         Value:
           CurrentBlueprint: 1
@@ -1523,6 +1524,7 @@ MonoBehaviour:
           ConsecutivePerfectCookingDone: 0
           StatsIndex: U001
           CookingPoint: 7
+          IsNotified: 0
       - Key: Stuffed Bitter Gourdakin
         Value:
           CurrentBlueprint: 1
@@ -1531,6 +1533,7 @@ MonoBehaviour:
           ConsecutivePerfectCookingDone: 0
           StatsIndex: 
           CookingPoint: 10
+          IsNotified: 0
     IngredientData:
       _serializedList:
       - Key: Cactryn
@@ -1566,6 +1569,7 @@ MonoBehaviour:
   SaveManager: {fileID: 1603759067}
   StatsManager: {fileID: 0}
   AIAvoidancePredictionTime: 0.7
+  sceneLoadPrefab: {fileID: 0}
 --- !u!4 &1603759069
 Transform:
   m_ObjectHideFlags: 0
@@ -1769,6 +1773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae513dd17d20d446a5a4fe7ed1a8bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
+    type: 3}
 --- !u!1001 &1748712695
 PrefabInstance:
   m_ObjectHideFlags: 0

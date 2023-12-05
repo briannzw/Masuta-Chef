@@ -900,6 +900,7 @@ MonoBehaviour:
   PlayerTransform: {fileID: 64046733}
   surfaces:
   - {fileID: 1959936578}
+  resultUI: {fileID: 0}
   characterDied:
     _serializedList: []
 --- !u!114 &666763696
@@ -917,6 +918,19 @@ MonoBehaviour:
   levelManager: {fileID: 666763695}
   Spawners:
     _serializedList: []
+  waveText: {fileID: 0}
+  waveEnemiesText: {fileID: 0}
+  nextWaveText: {fileID: 0}
+  incomingWaveDuration: 5
+  startWaveAfterSelect: 0
+  weaponController: {fileID: 0}
+  weaponSelectionParent: {fileID: 0}
+  disasterChara: {fileID: 0}
+  disasterWeapon: {fileID: 0}
+  disasterPrefab: {fileID: 0}
+  disasterIcon: {fileID: 0}
+  disasterText: {fileID: 0}
+  disasterWarningText: {fileID: 0}
 --- !u!1 &772660533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,6 +1618,8 @@ MonoBehaviour:
   SaveManager: {fileID: 1410782209}
   StatsManager: {fileID: 1264775656}
   AIAvoidancePredictionTime: 0.7
+  sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
+    type: 3}
 --- !u!114 &1410782209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,6 +1644,7 @@ MonoBehaviour:
           ConsecutivePerfectCookingDone: 0
           StatsIndex: 
           CookingPoint: 0
+          IsNotified: 0
       - Key: Cactyrn-filled Chutney Sandwich
         Value:
           CurrentBlueprint: 9
@@ -1636,6 +1653,7 @@ MonoBehaviour:
           ConsecutivePerfectCookingDone: 0
           StatsIndex: 
           CookingPoint: 0
+          IsNotified: 0
       - Key: Orant and Chickpea Curry
         Value:
           CurrentBlueprint: 8
@@ -1644,6 +1662,7 @@ MonoBehaviour:
           ConsecutivePerfectCookingDone: 0
           StatsIndex: 
           CookingPoint: 0
+          IsNotified: 0
     IngredientData:
       _serializedList:
       - Key: Chicken
