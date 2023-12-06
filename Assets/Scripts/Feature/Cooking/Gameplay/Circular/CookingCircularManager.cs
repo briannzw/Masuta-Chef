@@ -22,6 +22,8 @@ namespace Cooking.Gameplay.Circular
         [SerializeField] private RectTransform indicatorBarImage;
         [SerializeField] private RectTransform indicatorBarCursor;
         [SerializeField] private float indicatorBarOffset = 10f;
+        [SerializeField] private ParticleSystem hitEffect;
+        [SerializeField] private ParticleSystem missedEffect;
 
         [Header("Game")]
         [SerializeField] private float gameTime = 60f;
@@ -51,6 +53,7 @@ namespace Cooking.Gameplay.Circular
         private Vector3 currentAngle;
 
         private int prevState;
+        private float lastStirValue;
 
         private void Awake()
         {
@@ -62,6 +65,8 @@ namespace Cooking.Gameplay.Circular
         private void Start()
         {
             StartCoroutine(SetDirection(Random.value < .5 ? 1 : -1));
+            lastStirValue = stirValue;
+            InvokeRepeating("IsStirValueChanged", 0.5f, 1f);
         }
 
         private void Update()
@@ -188,6 +193,26 @@ namespace Cooking.Gameplay.Circular
         private void UpdateIndicatorBar()
         {
             indicatorBarCursor.anchoredPosition = new Vector2(indicatorBarCursor.anchoredPosition.x, (stirValue - 0.5f) * (indicatorBarImage.sizeDelta.y - indicatorBarOffset * 2));
+        }
+
+        private void IsStirValueChanged()
+        {
+            if(stirValue < lastStirValue)
+            {
+                hitEffect.Stop();
+                missedEffect.Play();
+            }
+            else if(stirValue > lastStirValue)
+            {
+                missedEffect.Stop();
+                hitEffect.Play();
+            }
+            else
+            {
+                missedEffect.Stop();
+                hitEffect.Stop();
+            }
+            lastStirValue = stirValue;
         }
 
         private void OnGUI()
