@@ -15,6 +15,9 @@ namespace Wave
     using Weapon;
     using Character.Hit;
     using Player.Controller;
+    using System.Linq;
+    using HUD;
+    using Tracker;
 
     public class WaveManager : MonoBehaviour
     {
@@ -28,6 +31,7 @@ namespace Wave
         [SerializeField] private TMP_Text waveEnemiesText;
         [SerializeField] private TMP_Text nextWaveText;
         [SerializeField] private float incomingWaveDuration = 5f;
+        [SerializeField] private IndicatorHUD indicatorHUD;
 
         [Header("Weapon Selection")]
         [SerializeField] private bool startWaveAfterSelect = false;
@@ -93,6 +97,8 @@ namespace Wave
                 weaponController.OnWeaponChanged -= FirstWave;
                 weaponSelectionParent.SetActive(false);
             }
+
+            indicatorHUD.IsGameStarted = true;
         }
 
         public void EnemyDied()
@@ -139,11 +145,18 @@ namespace Wave
 
                     foreach (var enemy in enemies)
                     {
+                        // Assign Preset
                         if(enemy.GetComponent<Character>() == null) enemy.AddComponent<Character>();
                         enemy.GetComponent<Character>().StatsPreset = enemyPreset;
                         enemy.GetComponent<Character>().Reset();
+
+                        // Assign Loot Drop
                         if(enemy.GetComponent<LootDropController>() == null) enemy.AddComponent<LootDropController>();
                         enemy.GetComponent<LootDropController>().lootChance = LevelData.EnemyLootDrop;
+
+                        // Assign Screen Tracker
+                        if (enemy.GetComponent<EnemyTracker>() == null) enemy.AddComponent<EnemyTracker>();
+                        enemy.GetComponent<EnemyTracker>().indicator = indicatorHUD;
 
                         if(!spawnedEnemies.Contains(enemy)) spawnedEnemies.Add(enemy);
                     }
@@ -219,6 +232,29 @@ namespace Wave
 
                 time = Random.Range(LevelData.DisasterMinInterval, LevelData.DisasterMaxInterval);
             }
+        }
+
+        public Transform NearestEnemy()
+        {
+            if (spawnedEnemies.Count == 0) return null;
+
+            Transform bestTarget = null;
+            float closestDistanceSqr = Mathf.Infinity;
+            Vector3 currentPosition = GameManager.Instance.PlayerTransform.position;
+            foreach(var enemy in spawnedEnemies)
+            {
+                if (enemy == null || !enemy.activeSelf) continue;
+
+                Vector3 directionToTarget = enemy.transform.position - currentPosition;
+                float dSqrToTarget = directionToTarget.sqrMagnitude;
+                if (dSqrToTarget < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = enemy.transform;
+                }
+            }
+
+            return bestTarget;
         }
 
         #region NavMeshAgent

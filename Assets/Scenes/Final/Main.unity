@@ -873,6 +873,7 @@ MonoBehaviour:
   waveEnemiesText: {fileID: 1581043933}
   nextWaveText: {fileID: 427402746}
   incomingWaveDuration: 5
+  indicatorHUD: {fileID: 301430483173115482}
   startWaveAfterSelect: 1
   weaponController: {fileID: 1353104850}
   weaponSelectionParent: {fileID: 2145220350}
@@ -1874,26 +1875,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8775412077813489307, guid: d661f148390273746a8c619250c9be20,
         type: 3}
       propertyPath: chara
@@ -1904,6 +1885,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d661f148390273746a8c619250c9be20, type: 3}
+--- !u!114 &301430483173115482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3548684122718831891, guid: d661f148390273746a8c619250c9be20,
+    type: 3}
+  m_PrefabInstance: {fileID: 301430483173115481}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f86934bdd6f00408dea07022c2f15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2258325826187014424
 PrefabInstance:
   m_ObjectHideFlags: 0
