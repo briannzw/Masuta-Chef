@@ -43,6 +43,13 @@ namespace Character
         {
             InitializeStats();
             FetchStatMods();
+
+            if (CompareTag("Enemy"))
+            {
+                GetComponent<NPC.Enemy.Enemy>().IsStun = false;
+                GetComponent<NPC.Enemy.Enemy>().IsTaunted = false;
+                GetComponent<NPC.Enemy.Enemy>().IsConfused = false;
+            }
         }
 
         private void OnEnable()
@@ -274,6 +281,13 @@ namespace Character
                 // If Flat -> Adds directly, else adds value * Dynamic Max Value
                 TakeHeal(effect.Modifier.Value / (effect.Modifier.Type == StatModType.Flat ? 1 : 100), effect.DynamicStatsAffected, 1, effect.Modifier.Type);
             }
+            else if(effect.StatusEffect == StatusEffects.Stun || effect.StatusEffect == StatusEffects.Taunt || effect.StatusEffect == StatusEffects.Confuse)
+            {
+                // Enemy Only
+                Debug.Log("test");
+                if (!CompareTag("Enemy")) return;
+                StartCoroutine(TakeEnemy(effect));
+            }
             else if (effect.AffectDynamicStat)
                 Stats.DynamicStatList[effect.DynamicStatsAffected].AddModifier(effect.Modifier);
             else
@@ -281,6 +295,37 @@ namespace Character
 
             // Events
             if(effect.StatsAffected == StatsEnum.Speed) OnSpeedChanged?.Invoke();
+        }
+
+        private IEnumerator TakeEnemy(Effect effect)
+        {
+            switch (effect.StatusEffect)
+            {
+                case StatusEffects.Taunt:
+                    GetComponent<NPC.Enemy.Enemy>().IsTaunted = true;
+                    break;
+                case StatusEffects.Stun:
+                    GetComponent<NPC.Enemy.Enemy>().IsStun = true;
+                    break;
+                case StatusEffects.Confuse:
+                    GetComponent<NPC.Enemy.Enemy>().IsConfused = true;
+                    break;
+            }
+
+            yield return new WaitForSeconds(effect.Modifier.Value);
+
+            switch (effect.StatusEffect)
+            {
+                case StatusEffects.Taunt:
+                    GetComponent<NPC.Enemy.Enemy>().IsTaunted = false;
+                    break;
+                case StatusEffects.Stun:
+                    GetComponent<NPC.Enemy.Enemy>().IsStun = false;
+                    break;
+                case StatusEffects.Confuse:
+                    GetComponent<NPC.Enemy.Enemy>().IsConfused = false;
+                    break;
+            }
         }
     }
 }

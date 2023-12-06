@@ -6,5 +6,8 @@ namespace Character.StatEffect
         Debuff,
         Heal,
         Burn,
+        Taunt,
+        Stun,
+        Confuse,
     }
 }
