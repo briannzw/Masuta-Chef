@@ -38,10 +38,9 @@ namespace NPC.Enemy
         public bool IsDead;
         public GameObject DebuffIcon;
 
-        
-
-        private void OnEnable()
+        private new void OnEnable()
         {
+            base.OnEnable();
             Agent.isStopped = false;
             ChildCollider.enabled = true;
             IsDead = false;

@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4421009952883726468}
   - component: {fileID: 8298004112653459571}
   - component: {fileID: 2271315899212457775}
-  - component: {fileID: 6750046872635748590}
+  - component: {fileID: 8006201599028715509}
   m_Layer: 0
   m_Name: FusilliExplosion
   m_TagString: Untagged
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5003278f0ef78418752eb082add431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TravelDistance: 30
+  TravelDistance: 20
   TravelSpeed: 10
   weapon: {fileID: 0}
   layerMask:
@@ -302,8 +302,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &6750046872635748590
-CapsuleCollider:
+--- !u!135 &8006201599028715509
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -320,8 +320,6 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
+  serializedVersion: 3
+  m_Radius: 0.32030532
   m_Center: {x: 0, y: 0, z: 0}

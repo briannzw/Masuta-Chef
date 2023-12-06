@@ -22,6 +22,8 @@ namespace Cooking.Gameplay.Circular
         [SerializeField] private RectTransform indicatorBarImage;
         [SerializeField] private RectTransform indicatorBarCursor;
         [SerializeField] private float indicatorBarOffset = 10f;
+        [SerializeField] private ParticleSystem hitEffect;
+        [SerializeField] private ParticleSystem missedEffect;
 
         [Header("Game")]
         [SerializeField] private float gameTime = 60f;
@@ -62,6 +64,8 @@ namespace Cooking.Gameplay.Circular
         private void Start()
         {
             StartCoroutine(SetDirection(Random.value < .5 ? 1 : -1));
+            OnCookingHit += PlayHitEffect;
+            OnCookingMissed += PlayMissedEffect;
         }
 
         private void Update()
@@ -188,6 +192,18 @@ namespace Cooking.Gameplay.Circular
         private void UpdateIndicatorBar()
         {
             indicatorBarCursor.anchoredPosition = new Vector2(indicatorBarCursor.anchoredPosition.x, (stirValue - 0.5f) * (indicatorBarImage.sizeDelta.y - indicatorBarOffset * 2));
+        }
+
+        private void PlayHitEffect()
+        {
+            missedEffect.Stop();
+            hitEffect.Play();
+        }
+
+        private void PlayMissedEffect()
+        {
+            hitEffect.Stop();
+            missedEffect.Play();
         }
 
         private void OnGUI()
