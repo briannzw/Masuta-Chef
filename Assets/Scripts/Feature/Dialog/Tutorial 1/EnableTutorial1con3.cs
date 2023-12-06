@@ -12,6 +12,7 @@ public class EnableTutorial1con3 : MonoBehaviour
     public Image check2;
     public Image check3;
     public Image check4;
+    public GameObject waveManager;
 
     public PlayerWeaponController playerWeaponController;
 
@@ -31,6 +32,7 @@ public class EnableTutorial1con3 : MonoBehaviour
         if (killCount == 5)
         {
             ActivateDialogue();
+            waveManager.gameObject.SetActive(false);
             updateActive = false;
         }
     }

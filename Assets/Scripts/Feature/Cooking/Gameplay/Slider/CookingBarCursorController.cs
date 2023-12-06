@@ -12,6 +12,7 @@ namespace Cooking.Gameplay.Slider
         [Header("References")]
         public CookingBarController CookingBarController;
         public RectTransform CursorTransform;
+        [SerializeField] private UnityEngine.UI.Slider leftBarSlider;
 
         [Header("Indicator UI")]
         public CookingIndicator CookingIndicator;
@@ -53,6 +54,7 @@ namespace Cooking.Gameplay.Slider
             // Could be source of input bug on other scenes
             InputManager.ToggleActionMap(cookingControls.Cooking);
             RegisterInputCallbacks();
+            leftBarSlider.maxValue = TimeoutTime;
         }
 
         private void OnEnable()
@@ -106,7 +108,7 @@ namespace Cooking.Gameplay.Slider
             if (!CookingBarController.IsInsideBar(xPos - CookingBarController.MainSize / 2))
             {
                 timeoutTimer += Time.deltaTime;
-
+                leftBarSlider.value += Time.deltaTime;
                 // To ensure only called once
                 if (prevState != 0)
                 {
@@ -118,9 +120,9 @@ namespace Cooking.Gameplay.Slider
             {
                 stayTime += Time.deltaTime;
                 timeoutTimer = 0f;
-
+                leftBarSlider.value -= Time.deltaTime;
                 // To ensure only called once
-                if(prevState != 1)
+                if (prevState != 1)
                 {
                     prevState = 1;
                     OnCookingHit?.Invoke();
@@ -155,16 +157,6 @@ namespace Cooking.Gameplay.Slider
 
             cookingControls.Cooking.Move.performed -= OnMove;
             cookingControls.Cooking.Move.canceled -= OnMoveCanceled;
-        }
-        #endregion
-
-        #region
-        private void OnGUI()
-        {
-            GUI.color = Color.black;
-            GUI.Label(new Rect(10, 10, 400, 50), "Game Timer : " + gameTimer);
-            GUI.Label(new Rect(10, 60, 400, 50), "Timeout Timer : " + timeoutTimer);
-            GUI.Label(new Rect(10, 110, 400, 50), "Stay Percentage : " + stayTime / gameTimer * 100 + "%");
         }
         #endregion
     }

@@ -45,7 +45,6 @@ namespace Cooking.Gameplay.UI
             {
                 FinalResult = CookingResult.Perfect;
             }
-
             // Optimization for UI drawcall
             if (FinalResult == prevResult) return;
             prevResult = FinalResult;

@@ -23,8 +23,8 @@ public class Bullet : MonoBehaviour
 
     private void OnEnable()
     {
-        startPosition = transform.position;
         GetComponent<Rigidbody>().velocity = transform.forward * TravelSpeed;
+        Invoke(nameof(SetStartPos), 0.1f);
     }
 
     private void Update()
@@ -42,5 +42,10 @@ public class Bullet : MonoBehaviour
         {
             trail.Clear();
         }
+    }
+
+    private void SetStartPos()
+    {
+        startPosition = transform.position;
     }
 }

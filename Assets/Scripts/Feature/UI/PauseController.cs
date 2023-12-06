@@ -29,6 +29,19 @@ public class PauseController : PlayerInputControl
         backToText.text = "Return to " + (isCooking ? "Recipe Book" : "Level Selection");
     }
 
+    public void Resume()
+    {
+        if (settingsPanel.activeSelf)
+        {
+            settingsPanel.SetActive(false);
+            return;
+        }
+
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
+        InputManager.ToggleActionMap(!isCooking ? InputManager.PlayerAction.Gameplay : InputManager.PlayerAction.Cooking);
+    }
+
     public void Resume(InputAction.CallbackContext context)
     {
         if (settingsPanel.activeSelf)

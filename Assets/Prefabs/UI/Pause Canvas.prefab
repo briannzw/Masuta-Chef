@@ -784,10 +784,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9211056604456562366}
+  - component: {fileID: 6000929097636454523}
   - component: {fileID: 7828813953309970667}
   - component: {fileID: 1574839181753642047}
   - component: {fileID: 1651121051054113063}
-  - component: {fileID: 6000929097636454523}
   m_Layer: 5
   m_Name: Pause Canvas
   m_TagString: Untagged
@@ -815,6 +815,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &6000929097636454523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383068533409177246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e9279ce0f2eec4384732dc13dbc031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 825091953479332274}
+  backToButtonText: {fileID: 6520714187382469466}
+  backToText: {fileID: 3630117514873435787}
+  settingsPanel: {fileID: 1673417772206650350}
+  isCooking: 0
+  sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
+    type: 3}
 --- !u!223 &7828813953309970667
 Canvas:
   m_ObjectHideFlags: 0
@@ -878,25 +897,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6000929097636454523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1383068533409177246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95e9279ce0f2eec4384732dc13dbc031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pausePanel: {fileID: 825091953479332274}
-  backToButtonText: {fileID: 6520714187382469466}
-  backToText: {fileID: 3630117514873435787}
-  settingsPanel: {fileID: 1673417772206650350}
-  isCooking: 0
-  sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
-    type: 3}
 --- !u!1 &3450708075967277613
 GameObject:
   m_ObjectHideFlags: 0
