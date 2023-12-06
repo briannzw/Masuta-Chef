@@ -51,11 +51,12 @@ namespace NPC
             Agent.stoppingDistance = StopDistance;
         }
 
-        private void OnEnable()
+        protected void OnEnable()
         {
             if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
             chara.OnSpeedChanged += () => Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
+            Debug.Log(Agent.speed);
         }
     }
 }

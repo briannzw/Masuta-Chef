@@ -25,7 +25,7 @@ public class EnemyMeleeEngageState : EnemyState
         enemy.Agent.stoppingDistance = 0;
         enemy.IsEngaging = true;
         isClockwise = Random.Range(0, 2) == 0;
-        randomSpeed = Random.Range(0.4f, 0.7f) * (isClockwise ? 1 : -1); ;
+        randomSpeed = Random.Range(0.9f, 1.2f) * (isClockwise ? 1 : -1); ;
         angle = Random.Range(0f, 360f);
         radius = Random.Range(4f, 8.5f);
     }

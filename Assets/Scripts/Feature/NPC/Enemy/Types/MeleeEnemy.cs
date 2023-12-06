@@ -6,14 +6,15 @@ namespace NPC.Enemy.Melee
 {
     public class MeleeEnemy : Enemy
     {
-        protected new void Awake()
+        private new void Awake()
         {
             base.Awake();
             StateMachine.Initialize(new EnemyMeleeMoveState(this, StateMachine));
         }
 
-        private void OnEnable()
+        private new void OnEnable()
         {
+            base.OnEnable();
             StateMachine.Initialize(new EnemyMeleeMoveState(this, StateMachine));
         }
     }
