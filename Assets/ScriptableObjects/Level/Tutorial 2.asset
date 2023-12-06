@@ -32,9 +32,15 @@ MonoBehaviour:
         Value: 10
     SpawnInterval: 0
     SpawnPerInterval: 3
-  WaveWaitTime: 0
-  CrateSpawnMinInterval: 1
-  CrateSpawnMaxInterval: 5
+  - EnemyList:
+      _serializedList:
+      - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
+        Value: 1
+    SpawnInterval: 50
+    SpawnPerInterval: 3
+  WaveWaitTime: 50
+  CrateSpawnMinInterval: 2
+  CrateSpawnMaxInterval: 6
   DisasterDamageScaling: 1
   DisasterStartTime: 30
   DisasterDuration: 10

@@ -2436,9 +2436,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1383733798}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1383733798}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: DisableWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 816002002}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7779,6 +7803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Main
+  sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
+    type: 3}
 --- !u!4 &1409701675
 Transform:
   m_ObjectHideFlags: 0
@@ -9542,9 +9568,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 15
-  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":14}],"EditorInfo":{"isRoot":true,"xPos":447.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Exellent!
-    This is your companion. They will assist you in this adventure.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":905.5,"yPos":168.8},"ID":12,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
-    carefull, Chef!","parentUIDs":[14],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0.1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":12}],"EditorInfo":{"isRoot":false,"xPos":604,"yPos":170.8},"ID":14,"ParamActions":[],"TMPFontGUID":null,"Text":"Try
+  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":14}],"EditorInfo":{"isRoot":true,"xPos":543,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Exellent!
+    This is your companion. They will assist you in this adventure.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":1001,"yPos":168.8},"ID":12,"ParamActions":[],"TMPFontGUID":null,"Text":"Be
+    carefull, Chef!","parentUIDs":[14],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0.1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":12}],"EditorInfo":{"isRoot":false,"xPos":699.5,"yPos":170.8},"ID":14,"ParamActions":[],"TMPFontGUID":null,"Text":"Try
     beat the minnions with new weapon and companion","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: ...
@@ -9558,31 +9584,7 @@ MonoBehaviour:
   EndConversationFont: {fileID: 0}
   Event:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 143697248}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1383733798}
-        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
-        m_MethodName: DisableWave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   inputFieldGrabber: {fileID: 0}
 --- !u!114 &1650473411
 MonoBehaviour:
@@ -9603,6 +9605,129 @@ MonoBehaviour:
   interactButton6: {fileID: 330333009}
   interactButton7: {fileID: 86331967}
   interactButton8: {fileID: 92468860}
+--- !u!1001 &1762661850
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1383068533409177246, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_Name
+      value: Pause Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533080249903601987, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211056604456562366, guid: cc0c5640ca637af4aba36825aa0c4af1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc0c5640ca637af4aba36825aa0c4af1, type: 3}
 --- !u!1 &1769590972
 GameObject:
   m_ObjectHideFlags: 0
@@ -9856,6 +9981,7 @@ MonoBehaviour:
   SaveManager: {fileID: 1831658051}
   StatsManager: {fileID: 1349560739}
   AIAvoidancePredictionTime: 0.7
+  sceneLoadPrefab: {fileID: 0}
 --- !u!1 &1844932662
 GameObject:
   m_ObjectHideFlags: 0
@@ -10758,7 +10884,7 @@ PrefabInstance:
     - target: {fileID: 3900108754347413305, guid: d9fa78e8c3c4f2b4b8f7f77ca8426cca,
         type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 17.6
       objectReference: {fileID: 0}
     - target: {fileID: 3900108754347413305, guid: d9fa78e8c3c4f2b4b8f7f77ca8426cca,
         type: 3}
@@ -10814,6 +10940,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900108754347413311, guid: d9fa78e8c3c4f2b4b8f7f77ca8426cca,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.7999878
       objectReference: {fileID: 0}
     - target: {fileID: 3900108755062758274, guid: d9fa78e8c3c4f2b4b8f7f77ca8426cca,
         type: 3}
@@ -11148,3 +11279,4 @@ SceneRoots:
   - {fileID: 86649070}
   - {fileID: 357509443}
   - {fileID: 1557274138}
+  - {fileID: 1762661850}
