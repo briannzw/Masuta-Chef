@@ -6,14 +6,15 @@ namespace NPC.Enemy.Ranged
 {
     public class RangedEnemy : Enemy
     {
-        protected new void Awake()
+        private new void Awake()
         {
             base.Awake();
             StateMachine.Initialize(new EnemyRangedMoveState(this, StateMachine));
         }
 
-        private void OnEnable()
+        private new void OnEnable()
         {
+            base.OnEnable();
             StateMachine.Initialize(new EnemyRangedMoveState(this, StateMachine));
         }
     }

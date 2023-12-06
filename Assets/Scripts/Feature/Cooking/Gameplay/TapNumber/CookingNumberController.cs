@@ -14,6 +14,7 @@ namespace Cooking.Gameplay.TapNumber
         public TMP_Text NumberText;
         public Image TimingCircle;
         public Image AccuracyCircle;
+        [SerializeField] private ParticleSystem hitEffect;
 
         [Header("Parameters")]
         public float Duration;
@@ -50,8 +51,9 @@ namespace Cooking.Gameplay.TapNumber
             // Make sure that TimingCircle and AccuracyCircle Width and Height is the same.
             if (TimingCircle.rectTransform.localScale.x <= AccuracyCircleScale) Manager.TapSuccess(int.Parse(NumberText.text));
             else Manager.TapMissed(int.Parse(NumberText.text));
-
+            Vector3 particlePos = transform.position + new Vector3(0, 0, -5);
             // Some VFX(s)
+            Instantiate(hitEffect, particlePos, Quaternion.Euler(180f,0,0));
             Destroy(gameObject);
         }   
 

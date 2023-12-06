@@ -237,6 +237,7 @@ MonoBehaviour:
   check2: {fileID: 2091646571}
   check3: {fileID: 271578310}
   check4: {fileID: 802260587}
+  waveManager: {fileID: 540866560}
   playerWeaponController: {fileID: 1505552039}
 --- !u!1 &37625902
 GameObject:
@@ -2709,7 +2710,12 @@ PrefabInstance:
     - target: {fileID: 3332561375009103550, guid: dc331d0515d65694c8664a2f67ce62b9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 29.999878
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384990644638692161, guid: dc331d0515d65694c8664a2f67ce62b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
         type: 3}
@@ -3611,6 +3617,30 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 469620038}
           m_ObjectArgumentAssemblyTypeName: DialogueEditor.NPCConversation, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2075199223}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6060,6 +6090,12 @@ MonoBehaviour:
   TMPFont: {fileID: 0}
   Icon: {fileID: 0}
   Audio: {fileID: 0}
+--- !u!1 &2075199223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3384990644638692161, guid: dc331d0515d65694c8664a2f67ce62b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1024518352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2081050093
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,8 +33,9 @@ namespace NPC.Enemy
             StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
         }
 
-        private void OnEnable()
+        private new void OnEnable()
         {
+            base.OnEnable();
             StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
             CanPickUp = true;
             Agent.enabled = true;

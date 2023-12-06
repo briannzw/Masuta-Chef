@@ -16,7 +16,7 @@ public class EnemyMeleeChargeState : EnemyState
         base.EnterState();
         enemy.Agent.stoppingDistance = enemy.AttackDistance - 0.1f;
         defaultSpeed = enemy.Agent.speed;
-        newSpeed = enemy.Agent.speed + 1f;
+        newSpeed = enemy.Agent.speed + 2f;
     }
 
     public override void ExitState()

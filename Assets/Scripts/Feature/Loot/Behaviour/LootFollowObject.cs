@@ -12,6 +12,7 @@ namespace Loot.Object.Behaviour
         [SerializeField] private float maxSpeed = 5f;
         [SerializeField] private float minSmoothSpeed = 2f;
         [SerializeField] private float maxSmoothSpeed = 4f;
+        [SerializeField] protected ParticleSystem lootGlow;
         protected Transform target;
         private Vector3 _velocity;
 
@@ -20,6 +21,7 @@ namespace Loot.Object.Behaviour
             if (target == null) return;
             transform.position = Vector3.SmoothDamp(transform.position, target.position, ref _velocity, Time.deltaTime * Random.Range(minSmoothSpeed, maxSmoothSpeed), maxSpeed);
             if (Vector3.Distance(transform.position, target.position) < 1f) ReachedTarget();
+            if(lootGlow != null) lootGlow.Stop();
         }
 
         protected virtual void ReachedTarget() { }

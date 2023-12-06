@@ -30,8 +30,9 @@ namespace NPC.Companion
         [Header("Compat Properties")]
         public float AttackDistance;
 
-        private void OnEnable()
+        private new void OnEnable()
         {
+            base.OnEnable();
             Agent.isStopped = false;
             ChildCollider.enabled = true;
         }
@@ -50,7 +51,6 @@ namespace NPC.Companion
         protected void Start()
         {
             chara.OnDie += OnCompanionDie;
-            Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
         }
 
         protected void Update()
