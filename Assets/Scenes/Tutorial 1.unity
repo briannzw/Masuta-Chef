@@ -1323,11 +1323,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 9
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":693,"yPos":399.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":446,"yPos":399.8},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
-    go","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":548,"yPos":146.8},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":413.4,"yPos":399.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":166.4,"yPos":399.8},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
+    go","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":268.4,"yPos":146.8},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
     go to the next tutorial","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"New
-    bool","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":543,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Congratulations,
-    Chef! You''ve completed the first tutorial.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":6}],"EditorInfo":{"isRoot":false,"xPos":540,"yPos":284.800049},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
+    bool","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":263.4,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Congratulations,
+    Chef! You''ve completed the first tutorial.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":6}],"EditorInfo":{"isRoot":false,"xPos":260.4,"yPos":284.800049},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
     Now it''s time to battle! Face the Minions and use the skills you''ve learned.","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: 
@@ -1343,19 +1343,7 @@ MonoBehaviour:
   EndConversationFont: {fileID: 0}
   Event:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1505552039}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   inputFieldGrabber: {fileID: 0}
 --- !u!4 &469620039
 Transform:
@@ -1426,9 +1414,11 @@ MonoBehaviour:
   nextWaveText: {fileID: 826085936}
   incomingWaveDuration: 5
   indicatorHUD: {fileID: 636587338}
+  startWaveOnStart: 0
   startWaveAfterSelect: 0
   weaponController: {fileID: 1505552039}
   weaponSelectionParent: {fileID: 0}
+  enableDisaster: 0
   disasterChara: {fileID: 0}
   disasterWeapon: {fileID: 0}
   disasterPrefab: {fileID: 0}
@@ -2269,12 +2259,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 8
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":859,"yPos":439.799927},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[7],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":444,"yPos":399.799927},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
-    go","parentUIDs":[],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isClicked","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":543,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Great!
-    Now let''s learn how to attack.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":540,"yPos":148.799973},"ID":2,"ParamActions":[{"__type":"EditableSetBoolParamAction:#DialogueEditor","ParameterName":"isClicked","Value":false}],"TMPFontGUID":null,"Text":"Use
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":506.400024,"yPos":438.799927},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[7],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":91.3999939,"yPos":398.799927},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
+    go","parentUIDs":[],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isClicked","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":190.4,"yPos":21},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Great!
+    Now let''s learn how to attack.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":187.4,"yPos":147.799973},"ID":2,"ParamActions":[{"__type":"EditableSetBoolParamAction:#DialogueEditor","ParameterName":"isClicked","Value":false}],"TMPFontGUID":null,"Text":"Use
     the (mouse left click) to unleash your primary fire. Then, use the keyboard button
-    (Q) or joystick (X) to launch your Ultimate Attack.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":540,"yPos":284.800049},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
-    Now it''s time to battle! Face the Minions and use the skills you''ve learned.","parentUIDs":[2],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0.1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":857,"yPos":300.8},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"Keep
+    (Q) or joystick (X) to launch your Ultimate Attack.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":187.4,"yPos":283.800049},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
+    Now it''s time to battle! Face the Minions and use the skills you''ve learned.","parentUIDs":[2],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0.1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":504.400024,"yPos":299.8},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"Keep
     an eye on your HP bar, don''t let the minions take you down","parentUIDs":[4],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: 
@@ -2292,9 +2282,21 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1646303994}
-        m_TargetAssemblyTypeName: EnableTutorial1con2, Assembly-CSharp
-        m_MethodName: SetActive1
+      - m_Target: {fileID: 1033607543}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: EnableWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2306,7 +2308,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 540866562}
         m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
-        m_MethodName: DisableWave
+        m_MethodName: FirstWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3127,6 +3129,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: DisableWave
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4177,9 +4191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 6
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":539,"yPos":281.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[2],"SpeechUID":-1}],"Parameters":[{"__type":"EditableIntParameter:#DialogueEditor","ParameterName":"Movement","IntValue":0},{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isContinue","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":543,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Welcome,
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":261.4,"yPos":381.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[2],"SpeechUID":-1}],"Parameters":[{"__type":"EditableIntParameter:#DialogueEditor","ParameterName":"Movement","IntValue":0},{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isContinue","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":265.4,"yPos":122},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Welcome,
     Chef! I am your guide on this adventure. To proceed, head towards the point in
-    front of you.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":548,"yPos":144.8},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"Use
+    front of you.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":270.4,"yPos":244.8},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"Use
     the keyboard to move your character. Press [Shift] to sprint.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0.843}]}'
   saveVersion: 110
   DefaultName: 
@@ -5601,6 +5615,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: EnableWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: FirstWave
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
