@@ -108,6 +108,8 @@ MonoBehaviour:
   CurrentEnemy: {fileID: 0}
   ChildCollider: {fileID: 1473812847911946108}
   IsThisJoker: 0
+  Data:
+    icon: {fileID: 21300000, guid: de6d394c343e50141a9b7bc2eb8b1441, type: 3}
   MaxDistanceFromPlayer: 5
   IsAltPath: 0
   IsFollowingEnemy: 0
@@ -117,8 +119,6 @@ MonoBehaviour:
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   AttackDistance: 0
-  data:
-    icon: {fileID: 0}
   rotationSpeed: 5
   maxTauntedEnemies: 5
   tauntRadius: 20

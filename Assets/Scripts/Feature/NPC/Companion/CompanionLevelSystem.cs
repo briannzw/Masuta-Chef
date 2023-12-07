@@ -10,6 +10,8 @@ public class CompanionLevelSystem : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private int maxLevel;
     [SerializeField] private int expPerEnemyKill;
+    [SerializeField] private int expPerSecond = 2;
+    [SerializeField] private int expNeededLvlUp = 10;
 
     [Header("Level Stats")]
     public Stats StatsPerLevel;
@@ -44,14 +46,12 @@ public class CompanionLevelSystem : MonoBehaviour
     private void LevelProgression()
     {
         // Iterated Version
-        // int targetExp = currentLevel * 10;
-        
-        int targetExp = 10;
+        // int expNeededLvlUp = currentLevel * 10;
 
         // Check if the current experience points exceed the target for the next level
-        if (currentExp >= targetExp && currentLevel < maxLevel)
+        if (currentExp >= expNeededLvlUp && currentLevel < maxLevel)
         {
-            int excessExp = currentExp - targetExp; // Calculate excess experience points
+            int excessExp = currentExp - expNeededLvlUp; // Calculate excess experience points
             currentLevel++;           // Increase the level
             currentExp = excessExp;   // Carry over excess experience points to the next level
 
@@ -85,7 +85,7 @@ public class CompanionLevelSystem : MonoBehaviour
     // Method to add experience points to the companion per second passed
     private void ExpGainedPerSecond()
     {
-        AddExperience(10);
+        AddExperience(expPerSecond);
     }
 
     // Method to add experience points to the companion per enemy killed

@@ -284,7 +284,6 @@ namespace Character
             else if(effect.StatusEffect == StatusEffects.Stun || effect.StatusEffect == StatusEffects.Taunt || effect.StatusEffect == StatusEffects.Confuse)
             {
                 // Enemy Only
-                Debug.Log("test");
                 if (!CompareTag("Enemy")) return;
                 StartCoroutine(TakeEnemy(effect));
             }

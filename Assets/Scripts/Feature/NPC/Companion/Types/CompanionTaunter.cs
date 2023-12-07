@@ -14,7 +14,7 @@ namespace NPC.Companion
         [SerializeField] float tauntRadius;
         public bool isAlive = true;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
             CompanionStateMachine.Initialize(new GourdakinIdleState(this, CompanionStateMachine));
             isAlive = true;
@@ -24,7 +24,7 @@ namespace NPC.Companion
         {
             isAlive = false;
         }
-        private new void Awake()
+        protected override void Awake()
         {
             CompanionStateMachine = new CompanionStateMachine();
             
@@ -34,14 +34,14 @@ namespace NPC.Companion
             CompanionStateMachine.Initialize(new GourdakinIdleState(this, CompanionStateMachine));
         }
 
-        private new void Start()
+        protected override void Start()
         {
             base.Start();
             chara.OnDie += OnTaunterDie;
         }
 
 
-        private new void Update()
+        protected override void Update()
         {
             base.Update();
             if (isAlive)

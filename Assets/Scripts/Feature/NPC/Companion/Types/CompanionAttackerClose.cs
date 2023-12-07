@@ -11,7 +11,7 @@ namespace NPC.Companion
         public override float WanderRadius => wanderRadius;
         public override float WanderInterval => wanderInterval;
         [SerializeField] float rotationSpeed = 5.0f;
-        private new void Update()
+        protected override void Update()
         {
             base.Update();
             DetectTarget();
