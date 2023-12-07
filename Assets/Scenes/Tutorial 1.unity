@@ -239,6 +239,7 @@ MonoBehaviour:
   check4: {fileID: 802260587}
   waveManager: {fileID: 540866560}
   playerWeaponController: {fileID: 1505552039}
+  levelManager: {fileID: 540866563}
 --- !u!1 &37625902
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +879,174 @@ RectTransform:
   m_AnchoredPosition: {x: -100, y: -16.074986}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &284722311
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1135489256383719421, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: chara
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187137191521663721, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187137191521663721, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365971302765056097, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_Name
+      value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 2664657600435287570, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: weaponController
+      value: 
+      objectReference: {fileID: 1505552039}
+    - target: {fileID: 3207078428914779964, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: companionSlot
+      value: 
+      objectReference: {fileID: 1505552044}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135098044455069816, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775412077813489307, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: chara
+      value: 
+      objectReference: {fileID: 1505552045}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d661f148390273746a8c619250c9be20, type: 3}
 --- !u!1 &286128362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,11 +1323,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 9
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":494,"yPos":399.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":247,"yPos":399.8},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
-    go","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":349,"yPos":146.8},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":413.4,"yPos":399.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":166.4,"yPos":399.8},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
+    go","parentUIDs":[4],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":268.4,"yPos":146.8},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
     go to the next tutorial","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"New
-    bool","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":344,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Congratulations,
-    Chef! You''ve completed the first tutorial.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":6}],"EditorInfo":{"isRoot":false,"xPos":341,"yPos":284.800049},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
+    bool","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":263.4,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Congratulations,
+    Chef! You''ve completed the first tutorial.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":6}],"EditorInfo":{"isRoot":false,"xPos":260.4,"yPos":284.800049},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
     Now it''s time to battle! Face the Minions and use the skills you''ve learned.","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: 
@@ -1240,13 +1409,16 @@ MonoBehaviour:
   levelManager: {fileID: 540866563}
   Spawners:
     _serializedList: []
-  waveText: {fileID: 1795678224}
-  waveEnemiesText: {fileID: 655072285}
-  nextWaveText: {fileID: 1024518353}
+  waveText: {fileID: 1244470837}
+  waveEnemiesText: {fileID: 920578956}
+  nextWaveText: {fileID: 826085936}
   incomingWaveDuration: 5
+  indicatorHUD: {fileID: 636587338}
+  startWaveOnStart: 0
   startWaveAfterSelect: 0
-  weaponController: {fileID: 0}
+  weaponController: {fileID: 1505552039}
   weaponSelectionParent: {fileID: 0}
+  enableDisaster: 0
   disasterChara: {fileID: 0}
   disasterWeapon: {fileID: 0}
   disasterPrefab: {fileID: 0}
@@ -1903,6 +2075,18 @@ PrefabInstance:
       addedObject: {fileID: 1506495388}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9fa78e8c3c4f2b4b8f7f77ca8426cca, type: 3}
+--- !u!114 &636587338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3548684122718831891, guid: d661f148390273746a8c619250c9be20,
+    type: 3}
+  m_PrefabInstance: {fileID: 284722311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f86934bdd6f00408dea07022c2f15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &652335937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,45 +2228,6 @@ Transform:
   - {fileID: 1763897072}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &655072285 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9041656922710448524, guid: dc331d0515d65694c8664a2f67ce62b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1024518352}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &682348425 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1285371004383117106, guid: dc331d0515d65694c8664a2f67ce62b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1024518352}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &682348429
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682348425}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6512025adf71b8047b6794d715f475a6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &733316649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,12 +2259,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 8
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":568,"yPos":197.799927},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[7],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":153,"yPos":157.799927},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
-    go","parentUIDs":[],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isClicked","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":252,"yPos":-220},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Great!
-    Now let''s learn how to attack.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":249,"yPos":-93.20003},"ID":2,"ParamActions":[{"__type":"EditableSetBoolParamAction:#DialogueEditor","ParameterName":"isClicked","Value":false}],"TMPFontGUID":null,"Text":"Use
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":506.400024,"yPos":438.799927},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright","parentUIDs":[7],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":91.3999939,"yPos":398.799927},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"Let''s
+    go","parentUIDs":[],"SpeechUID":-1}],"Parameters":[{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isClicked","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":190.4,"yPos":21},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Great!
+    Now let''s learn how to attack.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":187.4,"yPos":147.799973},"ID":2,"ParamActions":[{"__type":"EditableSetBoolParamAction:#DialogueEditor","ParameterName":"isClicked","Value":false}],"TMPFontGUID":null,"Text":"Use
     the (mouse left click) to unleash your primary fire. Then, use the keyboard button
-    (Q) or joystick (X) to launch your Ultimate Attack.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":249,"yPos":42.80005},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
-    Now it''s time to battle! Face the Minions and use the skills you''ve learned.","parentUIDs":[2],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0.1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":566,"yPos":58.7999878},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"Keep
+    (Q) or joystick (X) to launch your Ultimate Attack.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":7}],"EditorInfo":{"isRoot":false,"xPos":187.4,"yPos":283.800049},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"
+    Now it''s time to battle! Face the Minions and use the skills you''ve learned.","parentUIDs":[2],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0.1,"Volume":0},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":504.400024,"yPos":299.8},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"Keep
     an eye on your HP bar, don''t let the minions take you down","parentUIDs":[4],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: 
@@ -2137,45 +2282,9 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1505552043}
-        m_TargetAssemblyTypeName: Player.Controller.PlayerMovementController, Assembly-CSharp
-        m_MethodName: SetCanMove
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1646303994}
-        m_TargetAssemblyTypeName: EnableTutorial1con2, Assembly-CSharp
-        m_MethodName: DestroyObject
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1505552039}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1505552039}
-        m_TargetAssemblyTypeName: Player.Controller.PlayerWeaponController, Assembly-CSharp
-        m_MethodName: SetWeapon
+      - m_Target: {fileID: 1033607543}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2188,6 +2297,18 @@ MonoBehaviour:
       - m_Target: {fileID: 540866562}
         m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
         m_MethodName: EnableWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: FirstWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2404,6 +2525,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802260585}
   m_CullTransparentMesh: 1
+--- !u!1 &826085934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 691458240735950595, guid: d661f148390273746a8c619250c9be20,
+    type: 3}
+  m_PrefabInstance: {fileID: 284722311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &826085936 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6511471317978377946, guid: d661f148390273746a8c619250c9be20,
+    type: 3}
+  m_PrefabInstance: {fileID: 284722311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826085934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &848070020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,6 +2585,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4c0b782eb7dde540982a891b634646b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &920578956 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5323428565750049394, guid: d661f148390273746a8c619250c9be20,
+    type: 3}
+  m_PrefabInstance: {fileID: 284722311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1005062161
@@ -2669,210 +2820,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021115682}
   m_CullTransparentMesh: 1
---- !u!1001 &1024518352
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2132993761689664730, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2132993761689664730, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2132993761689664730, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2132993761689664730, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2425775922531212440, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: weaponController
-      value: 
-      objectReference: {fileID: 1505552039}
-    - target: {fileID: 2569727671166920032, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: chara
-      value: 
-      objectReference: {fileID: 1505552045}
-    - target: {fileID: 3332561375009103550, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3384990644638692161, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3812062603654916492, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4054309734905026477, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: chara
-      value: 
-      objectReference: {fileID: 1505552045}
-    - target: {fileID: 5840693423371513839, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_Name
-      value: HUD
-      objectReference: {fileID: 0}
-    - target: {fileID: 7253033713055789375, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7253033713055789375, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7628621673923852771, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: companionSlot
-      value: 
-      objectReference: {fileID: 1505552044}
-    - target: {fileID: 8454958330586496224, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9041656922710448524, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      propertyPath: m_text
-      value: 'Enemies Left: 0'
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1285371004383117106, guid: dc331d0515d65694c8664a2f67ce62b9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 682348429}
-  m_SourcePrefab: {fileID: 100100000, guid: dc331d0515d65694c8664a2f67ce62b9, type: 3}
---- !u!114 &1024518353 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2626506676015270309, guid: dc331d0515d65694c8664a2f67ce62b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1024518352}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1033607543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3012,6 +2959,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RecipeSO: {fileID: 0}
+--- !u!114 &1244470837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2244894660280640246, guid: d661f148390273746a8c619250c9be20,
+    type: 3}
+  m_PrefabInstance: {fileID: 284722311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1298782807
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,6 +3129,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: DisableWave
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3634,7 +3605,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2075199223}
+      - m_Target: {fileID: 826085934}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -4200,7 +4171,6 @@ GameObject:
   - component: {fileID: 1697428153}
   - component: {fileID: 1697428151}
   - component: {fileID: 1697428154}
-  - component: {fileID: 1697428155}
   m_Layer: 0
   m_Name: Tutorial1Con1
   m_TagString: Untagged
@@ -4221,9 +4191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 6
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":538,"yPos":279.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[2],"SpeechUID":-1}],"Parameters":[{"__type":"EditableIntParameter:#DialogueEditor","ParameterName":"Movement","IntValue":0},{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isContinue","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":543,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Welcome,
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":261.4,"yPos":381.8},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Okay","parentUIDs":[2],"SpeechUID":-1}],"Parameters":[{"__type":"EditableIntParameter:#DialogueEditor","ParameterName":"Movement","IntValue":0},{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"isContinue","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":265.4,"yPos":122},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Welcome,
     Chef! I am your guide on this adventure. To proceed, head towards the point in
-    front of you.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":546,"yPos":144.8},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"Use
+    front of you.","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":1},{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":270.4,"yPos":244.8},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"Use
     the keyboard to move your character. Press [Shift] to sprint.","parentUIDs":[0],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"...","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":2,"Volume":0.843}]}'
   saveVersion: 110
   DefaultName: 
@@ -4238,18 +4208,6 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1005062161}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 764141832}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -4260,7 +4218,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   inputFieldGrabber: {fileID: 0}
 --- !u!4 &1697428153
@@ -4300,22 +4258,6 @@ MonoBehaviour:
   s: {fileID: 1609670874}
   d: {fileID: 425973463}
   componentsToPause: []
---- !u!114 &1697428155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697428150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3719375c1a3cc644b8e5d5e11b3a6502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputData: {fileID: 11400000, guid: e4964aa0fe7ba854db3149b90d82d091, type: 2}
-  warning: {fileID: 0}
-  interactButton: {fileID: 0}
-  submitButton: {fileID: 0}
 --- !u!1 &1763897071
 GameObject:
   m_ObjectHideFlags: 0
@@ -4604,18 +4546,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1795678224 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114345110204437864, guid: dc331d0515d65694c8664a2f67ce62b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1024518352}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1839885251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5488,7 +5418,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 682348429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -5685,6 +5615,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: EnableWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 540866562}
+        m_TargetAssemblyTypeName: Wave.WaveManager, Assembly-CSharp
+        m_MethodName: FirstWave
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6090,12 +6044,6 @@ MonoBehaviour:
   TMPFont: {fileID: 0}
   Icon: {fileID: 0}
   Audio: {fileID: 0}
---- !u!1 &2075199223 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3384990644638692161, guid: dc331d0515d65694c8664a2f67ce62b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1024518352}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2081050093
 GameObject:
   m_ObjectHideFlags: 0
@@ -6402,5 +6350,5 @@ SceneRoots:
   - {fileID: 2017765213}
   - {fileID: 591045577}
   - {fileID: 43903688}
-  - {fileID: 1024518352}
+  - {fileID: 284722311}
   - {fileID: 182172122}

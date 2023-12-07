@@ -15,7 +15,6 @@ namespace Wave
     using Weapon;
     using Character.Hit;
     using Player.Controller;
-    using System.Linq;
     using HUD;
     using Tracker;
 
@@ -34,11 +33,13 @@ namespace Wave
         [SerializeField] private IndicatorHUD indicatorHUD;
 
         [Header("Weapon Selection")]
+        [SerializeField] private bool startWaveOnStart = true;
         [SerializeField] private bool startWaveAfterSelect = false;
         [SerializeField] private PlayerWeaponController weaponController;
         [SerializeField] private GameObject weaponSelectionParent;
 
         [Header("Disaster Mode")]
+        [SerializeField] private bool enableDisaster = true;
         [SerializeField] private Character disasterChara;
         [SerializeField] private Weapon disasterWeapon;
         [Space]
@@ -81,10 +82,10 @@ namespace Wave
                 return;
             }
 
-            FirstWave();
+            if(startWaveOnStart) FirstWave();
         }
 
-        private void FirstWave()
+        public void FirstWave()
         {
             levelManager.GameStarted();
 
@@ -288,6 +289,6 @@ namespace Wave
                 }
             }
         }
-        #endregion
+        #endregion        
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyDebuffState : EnemyState
 {
-    private float wanderRadius = 7f;
+    private float wanderRadius = 10f;
+    private float confusedTimer;
+    private float wanderInterval = 2f;
 
     public EnemyDebuffState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
@@ -15,12 +17,16 @@ public class EnemyDebuffState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
+        enemy.Agent.isStopped = false;
     }
 
     public override void ExitState()
     {
         base.ExitState();
         enemy.Agent.isStopped = false;
+        enemy.IsDebuffed = false;
+        enemy.StunIcon.gameObject.SetActive(false);
+        enemy.ConfusedIcon.gameObject.SetActive(false);
     }
 
     public override void FrameUpdate()
@@ -30,15 +36,24 @@ public class EnemyDebuffState : EnemyState
         if (enemy.IsStun)
         {
             enemy.Agent.isStopped = true;
+            enemy.StunIcon.gameObject.SetActive(true);
+        }
+        else if (enemy.IsConfused)
+        {
+            enemy.ConfusedIcon.gameObject.SetActive(true);
+            confusedTimer -= Time.deltaTime;
+            if (confusedTimer <= 0f)
+            {
+                // Time to choose a new random destination.
+                Wander();
+                confusedTimer = wanderInterval;
+            }
         }
         else
         {
             enemy.StateMachine.ChangeState(new EnemyMoveState(enemy.GetComponent<NPC.Enemy.Enemy>(), enemy.StateMachine));
         }
-        if (enemy.IsConfused)
-        {
-            Wander();
-        }
+
     }
 
     public override void PhysicsUpdate()

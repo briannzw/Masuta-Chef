@@ -9,6 +9,7 @@ namespace Level
     {
         [Header("References")]
         [SerializeField] private Weapon weapon;
+        public bool IsSaber;
 
         private void Awake()
         {
@@ -26,6 +27,12 @@ namespace Level
             if (other.CompareTag("Player"))
             {
                 weapon.rb.isKinematic = false;
+                if (IsSaber)
+                {
+                    weapon.transform.parent.SetParent(null);
+                    weapon.Interact(other.gameObject);
+                    return;
+                }
                 weapon.transform.SetParent(null);
                 weapon.Interact(other.gameObject);
             }

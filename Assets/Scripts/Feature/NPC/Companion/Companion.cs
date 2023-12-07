@@ -30,14 +30,15 @@ namespace NPC.Companion
         [Header("Compat Properties")]
         public float AttackDistance;
 
-        private new void OnEnable()
+        protected override void OnEnable()
         {
             base.OnEnable();
             Agent.isStopped = false;
             ChildCollider.enabled = true;
+            CompanionStateMachine.Initialize(new CompanionIdleState(this, CompanionStateMachine));
         }
 
-        private new void Awake()
+        protected override void Awake()
         {
             CompanionStateMachine = new CompanionStateMachine();
             chara = GetComponent<Character>();
@@ -48,12 +49,12 @@ namespace NPC.Companion
             DetectionRadius = 8f;
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
             chara.OnDie += OnCompanionDie;
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             CompanionStateMachine.CurrentState.FrameUpdate();
             playerPos = GameManager.Instance.PlayerTransform.position;
@@ -130,7 +131,11 @@ namespace NPC.Companion
 
         private void OnCompanionDie()
         {
-            Animator.SetTrigger("Dead");
+            if (Animator != null)
+            {
+                Animator.SetTrigger("Dead");
+                CompanionStateMachine.ChangeState(new CompanionDeadState(this, CompanionStateMachine));
+            }
             Agent.isStopped = true;
             ChildCollider.enabled = false;
 

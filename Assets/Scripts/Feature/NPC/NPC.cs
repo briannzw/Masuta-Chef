@@ -42,7 +42,7 @@ namespace NPC
         [Header("Data")]
         public NPCData Data;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             chara = GetComponent<Character>();
 
@@ -51,12 +51,11 @@ namespace NPC
             Agent.stoppingDistance = StopDistance;
         }
 
-        protected void OnEnable()
+        protected virtual void OnEnable()
         {
             if (ActiveWeapon != null) ActiveWeapon.OnEquip(chara);
             Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
             chara.OnSpeedChanged += () => Agent.speed = chara.Stats.StatList[StatsEnum.Speed].Value / 10;
-            Debug.Log(Agent.speed);
         }
     }
 }

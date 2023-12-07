@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 7302721648460572842}
+  IsSaber: 0
 --- !u!135 &6582467240962048569
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 4356288815898851326}
+  IsSaber: 0
 --- !u!135 &4263255842498464561
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -217,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 6332167493425276776}
+  IsSaber: 1
 --- !u!135 &7245072429778350223
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -336,6 +339,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Saber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367247601449369405, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367247601449369405, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367247601449369405, guid: f7e625e0551451a4f85455dea7599387,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8471929417207873113, guid: f7e625e0551451a4f85455dea7599387,
         type: 3}

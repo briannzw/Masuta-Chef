@@ -505,6 +505,8 @@ MonoBehaviour:
   CurrentEnemy: {fileID: 0}
   ChildCollider: {fileID: 8519227965900296159}
   IsThisJoker: 0
+  Data:
+    icon: {fileID: 21300000, guid: 4e3e16565b1a45a4bb4a97e58b9bdf6f, type: 3}
   MaxDistanceFromPlayer: 20
   IsAltPath: 0
   IsFollowingEnemy: 0
@@ -514,8 +516,6 @@ MonoBehaviour:
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   AttackDistance: 3.2
-  data:
-    icon: {fileID: 0}
   wanderRadius: 2
   wanderInterval: 4
   rotationSpeed: 5
@@ -803,6 +803,7 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  UltTimer: 0
   data:
     icon: {fileID: 0}
   WeaponAnimator: {fileID: 8930124451320153791}

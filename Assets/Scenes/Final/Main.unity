@@ -1875,6 +1875,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164900648646468101, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393955395654792721, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 29.999756
+      objectReference: {fileID: 0}
     - target: {fileID: 8775412077813489307, guid: d661f148390273746a8c619250c9be20,
         type: 3}
       propertyPath: chara
@@ -2081,17 +2106,22 @@ PrefabInstance:
     - target: {fileID: 1084581541600236099, guid: 9cd86463118c9d341adc23b310a743bf,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1084581541600236099, guid: 9cd86463118c9d341adc23b310a743bf,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1084581541600236099, guid: 9cd86463118c9d341adc23b310a743bf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 180
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026126030954504150, guid: 9cd86463118c9d341adc23b310a743bf,
+        type: 3}
+      propertyPath: IsSaber
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4944118684003499855, guid: 9cd86463118c9d341adc23b310a743bf,
         type: 3}
