@@ -192,7 +192,23 @@ MonoBehaviour:
     Multiplier: 1
   Type: 0
   ApplyEffectBeforeHit: 0
-  <Effects>k__BackingField: []
+  <Effects>k__BackingField:
+  - StatType: 0
+    AffectDynamicStat: 0
+    StatsAffected: 0
+    DynamicStatsAffected: 0
+    WeaponStatsAffected: 0
+    StatValue: 0.125
+    StatModifierType: 100
+    overwriteOrder: 0
+    priorityOrder: 0
+    Behaviour: 0
+    StatusEffect: 5
+    Timer: 0
+    Duration: 0
+    UseInterval: 0
+    IntervalTimer: 0
+    Interval: 0
   AreaDuration: 50
   Behaviour: 1
   areaRadius: 1.36
