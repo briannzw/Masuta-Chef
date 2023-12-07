@@ -68,7 +68,11 @@ namespace Player.Controller
             }
             else
             {
-                if (Animator) Animator.SetBool("IsWalking", false);
+                if (Animator)
+                {
+                    Animator.SetBool("IsWalking", false);
+                    Animator.SetBool("IsRunning", false);
+                }
                 moveDirection = Vector3.zero;
             }
             velocity = new Vector3(moveDirection.x * speed * speedMultiplier, velocity.y, moveDirection.z * speed * speedMultiplier);
