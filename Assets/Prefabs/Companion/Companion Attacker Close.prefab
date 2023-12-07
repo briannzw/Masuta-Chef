@@ -196,7 +196,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.656
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.50980395}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -581,6 +581,8 @@ MonoBehaviour:
   character: {fileID: -4670273841599568030}
   maxLevel: 30
   expPerEnemyKill: 2
+  expPerSecond: 2
+  expNeededLvlUp: 10
   StatsPerLevel:
     DynamicStatList:
       _serializedList:

@@ -16,9 +16,9 @@ namespace Cooking.Gameplay
         [SerializeField] private Sprite cookingSuccessSealSprite;
         [SerializeField] private Sprite cookingFailedSprite;
         [SerializeField] private Sprite cookingFailedSealSprite;
-        [SerializeField] private Color cookingFailedColor;
+        [SerializeField] private Sprite cookingFailedResultSprite;
         [SerializeField] private string cookingFailedBubbleText;
-        [SerializeField] private SerializedDictionary<CookingResult, Color> resultColor = new();
+        [SerializeField] private SerializedDictionary<CookingResult, Sprite> resultSprite = new();
         [SerializeField] private SerializedDictionary<CookingResult, List<string>> resultBubbleText = new();
 
         [Header("References")]
@@ -26,7 +26,6 @@ namespace Cooking.Gameplay
         [SerializeField] private TMP_Text titleText;
         [SerializeField] private TMP_Text cookingPointsAmountText;
         [SerializeField] private Image cookingResultBackground;
-        [SerializeField] private TMP_Text cookingResultText;
         [SerializeField] private TMP_Text bubbleText;
         [SerializeField] private Image cookingSealImage;
 
@@ -41,8 +40,7 @@ namespace Cooking.Gameplay
             titleBackground.sprite = cookingSuccessSprite;
             titleText.text = "Cooking Success";
             cookingPointsAmountText.text = CookingManager.Instance.CookingPoints[result].ToString();
-            cookingResultBackground.color = resultColor[result];
-            cookingResultText.text = result.ToString().ToUpper();
+            cookingResultBackground.sprite = resultSprite[result];
             bubbleText.text = resultBubbleText[result][Random.Range(0, resultBubbleText[result].Count)];
             cookingSealImage.sprite = cookingSuccessSealSprite;
         }
@@ -52,8 +50,7 @@ namespace Cooking.Gameplay
             titleBackground.sprite = cookingFailedSprite;
             titleText.text = "Cooking Failed";
             cookingPointsAmountText.text = "0";
-            cookingResultBackground.color = cookingFailedColor;
-            cookingResultText.text = "FAILED";
+            cookingResultBackground.sprite = cookingFailedResultSprite;
             bubbleText.text = cookingFailedBubbleText;
             cookingSealImage.sprite = cookingFailedSealSprite;
         }
