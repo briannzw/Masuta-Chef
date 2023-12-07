@@ -15,7 +15,6 @@ public class EnableTutorial1con2 : MonoBehaviour
     public Image check2;
 
     private bool enableOnTriggerStay = false;
-    private bool isClicked = false;
 
     // Start is called before the first frame update
     void Start()
