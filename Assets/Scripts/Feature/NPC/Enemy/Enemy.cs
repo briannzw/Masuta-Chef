@@ -48,7 +48,6 @@ namespace NPC.Enemy
             Agent.isStopped = false;
             ChildCollider.enabled = true;
             IsDead = false;
-            Debug.Log("OnEnable");
         }
 
         protected override void Awake()
