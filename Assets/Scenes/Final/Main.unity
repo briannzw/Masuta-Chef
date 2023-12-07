@@ -752,7 +752,7 @@ MonoBehaviour:
       _serializedList:
       - Key: 0
         Value:
-          BaseValue: 500
+          BaseValue: 300
       - Key: 1
         Value:
           BaseValue: 0
@@ -782,7 +782,10 @@ MonoBehaviour:
   Holder: {fileID: 0}
   rb: {fileID: 0}
   weaponCollider: {fileID: 0}
-  TargetTags: []
+  TargetTags:
+  - Player
+  - Enemy
+  - Companion
   stats:
     _serializedList:
     - Key: 0
@@ -874,13 +877,16 @@ MonoBehaviour:
   nextWaveText: {fileID: 427402746}
   incomingWaveDuration: 5
   indicatorHUD: {fileID: 301430483173115482}
+  startWaveOnStart: 1
   startWaveAfterSelect: 1
   weaponController: {fileID: 1353104850}
   weaponSelectionParent: {fileID: 2145220350}
+  enableDisaster: 1
   disasterChara: {fileID: 562811717}
   disasterWeapon: {fileID: 562811718}
-  disasterPrefab: {fileID: 7936079460588203582, guid: 9b34189b7a8d25045afc1e4d3150ebde,
-    type: 3}
+  disasterSpawner: {fileID: 0}
+  disasterMinCount: 4
+  disasterMaxCount: 6
   disasterIcon: {fileID: 1765437952}
   disasterText: {fileID: 405088700}
   disasterWarningText: {fileID: 149869555}

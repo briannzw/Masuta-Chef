@@ -284,8 +284,10 @@ namespace Character
             else if(effect.StatusEffect == StatusEffects.Stun || effect.StatusEffect == StatusEffects.Taunt || effect.StatusEffect == StatusEffects.Confuse)
             {
                 // Enemy Only
-                if (!CompareTag("Enemy")) return;
-                StartCoroutine(TakeEnemy(effect));
+                if (CompareTag("Enemy"))
+                    StartCoroutine(TakeEnemy(effect));
+                if (CompareTag("Player"))
+                    StartCoroutine(StunPlayer(effect));
             }
             else if (effect.AffectDynamicStat)
                 Stats.DynamicStatList[effect.DynamicStatsAffected].AddModifier(effect.Modifier);
@@ -325,6 +327,18 @@ namespace Character
                     GetComponent<NPC.Enemy.Enemy>().IsConfused = false;
                     break;
             }
+        }
+
+        private IEnumerator StunPlayer(Effect effect)
+        {
+            if (effect.StatusEffect != StatusEffects.Stun) yield break;
+
+
+            GetComponent<Player.Controller.PlayerMovementController>().SetCanMove(false);
+            GetComponent<Player.Controller.PlayerWeaponController>().enabled = false;
+            yield return new WaitForSeconds(effect.Modifier.Value);
+            GetComponent<Player.Controller.PlayerMovementController>().SetCanMove(true);
+            GetComponent<Player.Controller.PlayerWeaponController>().enabled = true;
         }
     }
 }
