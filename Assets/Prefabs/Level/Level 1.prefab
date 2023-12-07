@@ -1461,6 +1461,61 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 80, y: 15, z: 3.82}
   m_Center: {x: -2.5, y: 8.55, z: 0}
+--- !u!1 &5498597309885201843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3400534052228059674}
+  - component: {fileID: 6328922022117807957}
+  m_Layer: 0
+  m_Name: Disaster Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3400534052228059674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5498597309885201843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4563190563715540634}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6328922022117807957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5498597309885201843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216a265b6f752d94bbfc22fbb91d7684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 7936079460588203582, guid: 9b34189b7a8d25045afc1e4d3150ebde,
+    type: 3}
+  spawnArea: {x: 50, y: 1, z: 50}
+  spawnOffset: {x: 0, y: 1, z: 0}
+  isLocalOffset: 0
+  randomizeRotation: 0
+  followSpawnerRotation: 0
+  randomEulerRotation: 0
+  eulerRandomRange: {x: 0, y: 0}
+  maxSpawnObjectInPool: 10
+  maxRandomPosIteration: 1000
 --- !u!1 &5554480259576699539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,6 +1713,7 @@ Transform:
   - {fileID: 4160895958671051636}
   - {fileID: 4298090358189223477}
   - {fileID: 2993749548831816595}
+  - {fileID: 3400534052228059674}
   m_Father: {fileID: 4241932386359998352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5864869965313899675
@@ -1822,6 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CrateSpawner: {fileID: 7201132134800898900}
+  DisasterSpawner: {fileID: 6328922022117807957}
   EnemySpawners:
     _serializedList:
     - Key: {fileID: 2609905847538178790, guid: ddf4fe37e33f98c4fb2af302797decee, type: 3}

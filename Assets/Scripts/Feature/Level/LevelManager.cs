@@ -54,6 +54,7 @@ namespace Level
             GameObject levelArea = Instantiate(CurrentLevel.LevelAreaPrefab, transform.position, Quaternion.identity);
             levelAreaInfo = levelArea.GetComponent<LevelAreaInfo>();
             waveManager.Spawners = levelAreaInfo.EnemySpawners;
+            waveManager.disasterSpawner = levelAreaInfo.DisasterSpawner;
         }
 
         private void SpawnPlayer()
