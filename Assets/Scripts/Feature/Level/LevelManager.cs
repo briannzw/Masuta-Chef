@@ -148,7 +148,7 @@ namespace Level
 
         public void DisableCrateSpawn()
         {
-           levelAreaInfo.CrateSpawner.gameObject.SetActive(false);
+           if(levelAreaInfo != null) levelAreaInfo.CrateSpawner.gameObject.SetActive(false);
         }
 
         public void EnableCrateSpawn()
