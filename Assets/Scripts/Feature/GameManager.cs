@@ -132,5 +132,7 @@ public class GameManager : MonoBehaviour
             ingredient.data = new();
             SaveManager.SaveData.New(ingredient);
         }
+
+        SaveGame();
     }
 }
