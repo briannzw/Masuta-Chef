@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using NPC.Enemy;
 using Player.Controller;
+using Level;
 
 public class EnableTutorial1con3 : MonoBehaviour
 {
@@ -13,8 +14,8 @@ public class EnableTutorial1con3 : MonoBehaviour
     public Image check3;
     public Image check4;
     public GameObject waveManager;
-
     public PlayerWeaponController playerWeaponController;
+    public LevelManager levelManager;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class EnableTutorial1con3 : MonoBehaviour
         if (!updateActive)
             return;
 
-        int killCount = Enemy.GetKillCount();
+        int killCount = levelManager.GetCurrentEnemyCount("Enemy");
 
         if (killCount == 5)
         {

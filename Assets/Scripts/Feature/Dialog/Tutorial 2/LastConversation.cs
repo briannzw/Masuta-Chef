@@ -3,28 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NPC.Enemy;
+using Level;
 
 public class LastConversation : MonoBehaviour
 {
-
-    private bool updateActive = true;
+    public LevelManager levelManager;
     public Button interactButton;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool updateActive = true;
 
-    // Update is called once per frame
     void Update()
     {
         if (!updateActive)
             return;
 
-        int killCount = Enemy.GetKillCount();
+        int killCount = levelManager.GetCurrentEnemyCount("Enemy");
 
-        if (killCount == 15)
+        if (killCount == 10)
         {
             ActivateDialogue();
             updateActive = false;

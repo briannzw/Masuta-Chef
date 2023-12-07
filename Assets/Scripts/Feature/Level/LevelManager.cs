@@ -155,5 +155,17 @@ namespace Level
         {
             levelAreaInfo.CrateSpawner.gameObject.SetActive(true);
         }
+
+        public int GetCurrentEnemyCount(string characterTag)
+        {
+            if (characterDied.ContainsKey(characterTag))
+            {
+                return characterDied[characterTag];
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -58,13 +58,17 @@ namespace DialogueEditor
             }
             else if (crateCount == 4 && !interactButton6Activated)
             {
+                interactButton7.gameObject.SetActive(true);
                 interactButton7.onClick.Invoke();
+
                 interactButton6.gameObject.SetActive(true);
                 interactButton6Activated = true;
             }
             else if (crateCount == 3 && !interactButton5Activated)
             {
+                interactButton7.gameObject.SetActive(true);
                 interactButton7.onClick.Invoke();
+                
                 interactButton5.gameObject.SetActive(true);
                 interactButton5Activated = true;
             }
@@ -72,7 +76,9 @@ namespace DialogueEditor
             {
                 if (isSameColor && !interactButton4Activated)
                 {
+                    interactButton7.gameObject.SetActive(true);
                     interactButton7.onClick.Invoke();
+                
                     interactButton4.gameObject.SetActive(true);
                     interactButton4Activated = true;
                     interactButton8Activated = true;
@@ -110,6 +116,7 @@ namespace DialogueEditor
                     updateActive = false;
                 }
             }
+            interactButton7.gameObject.SetActive(false);
         }
 
         public void SetInputFieldNull()
