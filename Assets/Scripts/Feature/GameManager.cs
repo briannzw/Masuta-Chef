@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         else Instance = this;
 
         if (LoadOnAwake) LoadGame();
-        if (LevelManager != null && SelectedLevel != null) LevelManager.CurrentLevel = SelectedLevel;
+        if (LevelManager != null && SelectedLevel != null) LevelManager.Initialize(SelectedLevel);
     }
     #endregion
 

@@ -34,8 +34,9 @@ namespace Level
         public Action OnLevelLose;
         #endregion
 
-        private void Awake()
+        public void Initialize(LevelData level)
         {
+            CurrentLevel = level;
             SpawnLevelArea();
             SpawnPlayer();
             GenerateNavMesh();
