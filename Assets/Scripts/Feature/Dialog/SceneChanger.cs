@@ -1,3 +1,4 @@
+using Level;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class SceneChanger : MonoBehaviour
     public string sceneToLoad;
     [Header("Scene Load")]
     [SerializeField] private GameObject sceneLoadPrefab;
+    [SerializeField] private LevelData levelData;
 
     private void LoadScene(string sceneName, int panelIndex = -1)
     {
@@ -18,6 +20,7 @@ public class SceneChanger : MonoBehaviour
 
     public void ChangeScene()
     {
+        GameManager.SelectedLevel = levelData;
         LoadScene(sceneToLoad);
     }
 }

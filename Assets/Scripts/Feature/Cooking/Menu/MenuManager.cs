@@ -40,7 +40,7 @@ namespace Cooking.Menu
 
             foreach(var recipe in recipeSO.Recipes)
             {
-                if(recipe.data.IsNotified == false)
+                if(!recipe.data.IsNotified == false && !recipe.IsLocked)
                     notifyRecipe.Enqueue(recipe);
             }
 

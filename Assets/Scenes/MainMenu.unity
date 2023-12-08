@@ -2032,6 +2032,7 @@ GameObject:
   - component: {fileID: 1603759069}
   - component: {fileID: 1603759068}
   - component: {fileID: 1603759067}
+  - component: {fileID: 1603759070}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -2115,7 +2116,7 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   LevelManager: {fileID: 0}
   SaveManager: {fileID: 1603759067}
-  StatsManager: {fileID: 0}
+  StatsManager: {fileID: 1603759070}
   PlayerAudioController: {fileID: 0}
   AIAvoidancePredictionTime: 0.7
   sceneLoadPrefab: {fileID: 0}
@@ -2134,6 +2135,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1603759070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603759066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aff22cf8325253479750601d3520a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RecipeSO: {fileID: 11400000, guid: 96b68158337f07946a4fc85b83d6986d, type: 2}
 --- !u!1 &1638210571
 GameObject:
   m_ObjectHideFlags: 0

@@ -709,6 +709,7 @@ MonoBehaviour:
   sceneToLoad: Tutorial 2
   sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
     type: 3}
+  levelData: {fileID: 11400000, guid: 757c771a6d6f9d646b85ec2bc4308771, type: 2}
 --- !u!1001 &262468225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1596,6 +1597,7 @@ MonoBehaviour:
   surfaces:
   - {fileID: 544443918}
   resultUI: {fileID: 0}
+  lightingTransform: {fileID: 0}
   characterDied:
     _serializedList: []
 --- !u!1 &544443916

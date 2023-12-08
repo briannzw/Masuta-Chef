@@ -19,7 +19,7 @@ namespace Cooking.Recipe
         public int CookingPoint;
 
         [Header("Misc")]
-        public bool IsNotified;
+        public bool IsNotified = false;
 
         [JsonIgnore] public bool IsAutoCookUnlocked => PerfectCookingDone > 10;
         [JsonIgnore] public bool IsStat3Assigned => !string.IsNullOrEmpty(StatsIndex);
