@@ -4022,6 +4022,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5393955395654792721, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30.000122
+      objectReference: {fileID: 0}
     - target: {fileID: 8775412077813489307, guid: d661f148390273746a8c619250c9be20,
         type: 3}
       propertyPath: chara
@@ -6023,6 +6028,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a7f97cd455bf844aa38e7f41e991e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1334220011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3706497261512048609, guid: 3357df7fd92a92344896b259dbc655eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1334220008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b94c8b8dc1d7594aa4d908f43c316c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1345660507
@@ -8868,7 +8885,7 @@ MonoBehaviour:
   LevelManager: {fileID: 1383733799}
   SaveManager: {fileID: 1831658051}
   StatsManager: {fileID: 1349560739}
-  PlayerAudioController: {fileID: 0}
+  PlayerAudioController: {fileID: 1334220011}
   AIAvoidancePredictionTime: 0.7
   sceneLoadPrefab: {fileID: 0}
 --- !u!1 &1844932662
