@@ -26,6 +26,7 @@ namespace Crate.Combine
         [SerializeField] private Sprite medkitIcon;
         [SerializeField] private Sprite weaponRandomIcon;
         [SerializeField] private Sprite companionRandomIcon;
+        [SerializeField] private Sprite cantCraftIcon;
         [SerializeField] private SerializedDictionary<CrateColor, Sprite> WeaponIcons;
         [SerializeField] private SerializedDictionary<CrateColor, Sprite> CompanionsIcons;
 
@@ -115,7 +116,7 @@ namespace Crate.Combine
                 if (IsSameColor(colors)) itemIcon.sprite = medkitIcon;
                 else
                     // CHANGE SPRITE TO X (Uncraftable)
-                    itemIcon.sprite = null;
+                    itemIcon.sprite = cantCraftIcon;
             }
             else if (colors.Count == 3)
             {
