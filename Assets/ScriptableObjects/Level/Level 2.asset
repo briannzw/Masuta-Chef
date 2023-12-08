@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03a14daedbc2f794d82cd2a365288b9d, type: 3}
-  m_Name: Level 1
+  m_Name: Level 2
   m_EditorClassIdentifier: 
-  name: Level 1
-  LevelAreaPrefab: {fileID: 6615127187657421027, guid: 71ad26f3cc10e434d921deddee2d609a,
+  name: Level 2
+  LevelAreaPrefab: {fileID: 3924722874340935815, guid: 2ba9c60eab7391441a3213113182131d,
     type: 3}
   Info:
     MapIcon: {fileID: 21300000, guid: 9966005572d46df40a328ab0a89ee286, type: 3}
@@ -23,29 +23,25 @@ MonoBehaviour:
     - Survive Wave 2
     - Survive Wave 3
     LevelImage: {fileID: 21300000, guid: 5ad658b3d09e9104293a19ed4107910d, type: 3}
-    Instruction: You going to market for the first time but all of a sudden, chaos
-      emerged. What you do next is ...
+    Instruction: Flavor Text for the level, For example, you going to market for
+      the first time but all of a sudden, chaos emerged. What you do next is ...
     IsTutorial: 0
   PlayerSpawnPoint: {x: 0, y: 1, z: 0}
-  EnemyLootDrop: {fileID: 11400000, guid: d326e2c1223c9504bba257c2e03eb5d7, type: 2}
+  EnemyLootDrop: {fileID: 11400000, guid: 3e171ede6d6e6a1469b1db2891e0cd17, type: 2}
   LoseDropMultiplier: 0.5
   Waves:
   - EnemyList:
       _serializedList:
       - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
-        Value: 10
-      - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
-        Value: 5
+        Value: 20
     SpawnInterval: 0
     SpawnPerInterval: 3
   - EnemyList:
       _serializedList:
       - Key: {fileID: 11400000, guid: 3cafeac65a2a511458e100f52b1a3dbb, type: 2}
-        Value: 15
+        Value: 10
       - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
         Value: 10
-      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
-        Value: 5
     SpawnInterval: 1
     SpawnPerInterval: 3
   - EnemyList:
@@ -54,14 +50,12 @@ MonoBehaviour:
         Value: 15
       - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
         Value: 15
-      - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
-        Value: 5
     SpawnInterval: 1
     SpawnPerInterval: 3
   WaveWaitTime: 20
   CrateSpawnMinInterval: 5
   CrateSpawnMaxInterval: 10
-  DisasterDamageScaling: 1
+  DisasterDamageScaling: 1.2
   DisasterStartTime: 5
   DisasterDuration: 30
   DisasterMinInterval: 15

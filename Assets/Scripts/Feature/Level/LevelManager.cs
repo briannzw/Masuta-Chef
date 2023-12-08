@@ -21,7 +21,7 @@ namespace Level
         public Transform PlayerTransform;
         public NavMeshSurface[] surfaces;
         public BattleEndResult resultUI;
-        public Transform lightingTransform;
+        public Light lightingTransform;
 
         [Header("Data")]
         [SerializeField] protected SerializedDictionary<string, int> characterDied = new();
@@ -57,7 +57,8 @@ namespace Level
             levelAreaInfo = levelArea.GetComponent<LevelAreaInfo>();
             waveManager.Spawners = levelAreaInfo.EnemySpawners;
             waveManager.disasterSpawner = levelAreaInfo.DisasterSpawner;
-            lightingTransform.eulerAngles = levelAreaInfo.sunRotation;
+            lightingTransform.colorTemperature = levelAreaInfo.ColorTemperature;
+            lightingTransform.intensity = levelAreaInfo.LightIntensity;
         }
 
         private void SpawnPlayer()

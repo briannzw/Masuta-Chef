@@ -24,59 +24,60 @@ MonoBehaviour:
     - Key: {fileID: 11400000, guid: 2a816c1ac26ce34478d35f62976e99ae, type: 2}
       Value: 5
   data:
-    CurrentBlueprint: 8
-    CookingDone: 0
-    PerfectCookingDone: 0
+    CurrentBlueprint: 1
+    CookingDone: 6
+    PerfectCookingDone: 6
     ConsecutivePerfectCookingDone: 0
-    UniqueStatIndex: -1
-    CookingPoint: 0
-  NeededBlueprint: 1
+    StatsIndex: 
+    CookingPoint: 60
+    IsNotified: 1
+  NeededBlueprint: 20
   Stats:
   - AffectedCharacter: Player
     Stat:
-      StatType: 0
-      AffectDynamicStat: 0
-      StatsAffected: 0
-      DynamicStatsAffected: 0
-      WeaponStatsAffected: 0
-      StatValue: 2
-      StatModifierType: 100
-      overwriteOrder: 0
-      priorityOrder: 0
-      Behaviour: 0
-      StatusEffect: 0
-      Timer: 0
-      Duration: 0
-      UseInterval: 0
-      IntervalTimer: 0
-      Interval: 0
-  - AffectedCharacter: Player
-    Stat:
-      StatType: 0
-      AffectDynamicStat: 0
-      StatsAffected: 1
-      DynamicStatsAffected: 0
-      WeaponStatsAffected: 0
-      StatValue: 2
-      StatModifierType: 100
-      overwriteOrder: 0
-      priorityOrder: 0
-      Behaviour: 0
-      StatusEffect: 0
-      Timer: 0
-      Duration: 0
-      UseInterval: 0
-      IntervalTimer: 0
-      Interval: 0
-  - AffectedCharacter: Player
-    Stat:
-      StatType: 0
+      StatType: 1
       AffectDynamicStat: 0
       StatsAffected: 2
       DynamicStatsAffected: 0
       WeaponStatsAffected: 0
-      StatValue: 2
-      StatModifierType: 100
+      StatValue: 5
+      StatModifierType: 200
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 2
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 5
+      StatModifierType: 200
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 1
+      AffectDynamicStat: 0
+      StatsAffected: 2
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 10
+      StatModifierType: 200
       overwriteOrder: 0
       priorityOrder: 0
       Behaviour: 0

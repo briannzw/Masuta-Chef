@@ -15,6 +15,7 @@ namespace Level.Area
         public SerializedDictionary<GameObject, List<NavMeshSpawner>> EnemySpawners;
 
         [Header("Lighting")]
-        public Vector3 sunRotation = new Vector3(50f, -30f, 0f);
+        public float ColorTemperature = 5000f;
+        public float LightIntensity = 1f;
     }
 }

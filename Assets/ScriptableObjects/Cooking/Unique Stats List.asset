@@ -20,8 +20,8 @@ MonoBehaviour:
       StatsAffected: 0
       DynamicStatsAffected: 0
       WeaponStatsAffected: 1
-      StatValue: 15
-      StatModifierType: 100
+      StatValue: 10
+      StatModifierType: 200
       overwriteOrder: 0
       priorityOrder: 0
       Behaviour: 0
@@ -57,7 +57,61 @@ MonoBehaviour:
       DynamicStatsAffected: 0
       WeaponStatsAffected: 1
       StatValue: 20
-      StatModifierType: 100
+      StatModifierType: 200
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 1
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 50
+      StatModifierType: 200
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 1
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 50
+      StatModifierType: 200
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
+  - AffectedCharacter: Companion
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 2
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 1
+      StatValue: 10
+      StatModifierType: 200
       overwriteOrder: 0
       priorityOrder: 0
       Behaviour: 0
