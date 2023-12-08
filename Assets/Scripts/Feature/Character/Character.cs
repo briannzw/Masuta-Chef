@@ -15,6 +15,7 @@ namespace Character
         [Header("Stats")]
         public StatsPreset StatsPreset;
         [ConditionalField(nameof(StatsPreset), inverse:true)] public Stats Stats;
+        [SerializeField] private bool IsTutorial = false;
 
         [Header("Effect")]
         protected List<Effect> CurrentStatusEffects;
@@ -165,6 +166,10 @@ namespace Character
 
             if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health)
             {
+                if (IsTutorial)
+                {
+                    return;
+                }
                 OnDie?.Invoke();
 
                 // Send Die data to Level Manager
