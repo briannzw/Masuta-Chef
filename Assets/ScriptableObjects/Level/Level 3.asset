@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03a14daedbc2f794d82cd2a365288b9d, type: 3}
-  m_Name: Level 2
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  name: Level 2
-  LevelAreaPrefab: {fileID: 3924722874340935815, guid: 1a394aa1d9d778b4fb890c22699e8380,
+  name: Level 3
+  LevelAreaPrefab: {fileID: 3924722874340935815, guid: 2ba9c60eab7391441a3213113182131d,
     type: 3}
   Info:
-    MapIcon: {fileID: 21300000, guid: 86e0751f975f3bf41b06aa7ad52cbb32, type: 3}
+    MapIcon: {fileID: 21300000, guid: 8be624eca20763e4280535b6cd1e60e5, type: 3}
     Region: Praksha
     Objectives:
     - Survive Wave 1
@@ -27,7 +27,7 @@ MonoBehaviour:
       the first time but all of a sudden, chaos emerged. What you do next is ...
     IsTutorial: 0
   PlayerSpawnPoint: {x: 0, y: 1, z: 0}
-  EnemyLootDrop: {fileID: 11400000, guid: 3e171ede6d6e6a1469b1db2891e0cd17, type: 2}
+  EnemyLootDrop: {fileID: 11400000, guid: 62ba6229d6314e547991dacbe71cffa3, type: 2}
   LoseDropMultiplier: 0.5
   Waves:
   - EnemyList:
