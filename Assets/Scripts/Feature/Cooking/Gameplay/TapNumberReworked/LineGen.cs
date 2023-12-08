@@ -26,9 +26,9 @@ namespace Pattern {
             prevPos = new Vector3(Random.Range(-playPanel.rect.width / 2, playPanel.rect.width / 2), Random.Range(-playPanel.rect.height / 2, playPanel.rect.height / 2), 0);
         }
 
-        public void GenerateLine(LineLength len, float duration)
+        public void GenerateLine(LineLength len, float duration, bool newPattern = false)
         {
-            prevPos = pos;
+            prevPos = (newPattern) ? new Vector3(Random.Range(-playPanel.rect.width / 2, playPanel.rect.width / 2), Random.Range(-playPanel.rect.height / 2, playPanel.rect.height / 2), 0) : pos;
 
             float distance = 0f;
             while (distance > pointDistances[len].Max || distance < pointDistances[len].Min)

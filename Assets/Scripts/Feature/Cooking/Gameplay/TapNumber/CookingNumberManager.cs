@@ -5,12 +5,18 @@ namespace Cooking.Gameplay.TapNumber
 {
     using AYellowpaper.SerializedCollections;
     using Cooking.Gameplay.UI;
+    using TMPro;
+    using UnityEngine.UI;
 
     public class CookingNumberManager : CookingGameplay
     {
         [Header("Indicator UI")]
         public CookingIndicator CookingIndicator;
         public SerializedDictionary<CookingResult, float> AccuracyPercentages = new();
+
+        [Header("UI References")]
+        [SerializeField] private Image gameTimeImage;
+        [SerializeField] private TMP_Text accuracyText;
 
         [Header("Parameters")]
         public float GameTime = 60f;
@@ -35,6 +41,7 @@ namespace Cooking.Gameplay.TapNumber
             if(GameEnded) return;
 
             timer += Time.deltaTime;
+            gameTimeImage.fillAmount = timer / GameTime;
 
             if (timer > GameTime) GameOver();
         }
@@ -43,6 +50,8 @@ namespace Cooking.Gameplay.TapNumber
         {
             GameEnded = true;
             // Save to Recipe
+
+            gameTimeImage.fillAmount = 1f;
 
             if (successTap == 0)
             {
@@ -75,8 +84,10 @@ namespace Cooking.Gameplay.TapNumber
             }
             lastTapNum = num;
 
+            float accuracy = (float)successTap / (successTap + missedTap);
+            accuracyText.text = Mathf.RoundToInt(accuracy * 100f).ToString() + "%";
             // Update according current total Target executed (Start: Perfect > Good > Bad)
-            CookingIndicator.SetIndicatorUI((float) successTap / (successTap + missedTap));
+            CookingIndicator.SetIndicatorUI(accuracy);
         }
 
         public void TapMissed(int num)
@@ -84,18 +95,12 @@ namespace Cooking.Gameplay.TapNumber
             missedTap++;
             lastTapNum = num;
 
+            float accuracy = (float)successTap / (successTap + missedTap);
+            accuracyText.text = Mathf.RoundToInt(accuracy * 100f).ToString() + "%";
             // Update according current total Target executed (Start: Perfect > Good > Bad)
-            CookingIndicator.SetIndicatorUI((float) successTap / (successTap + missedTap));
+            CookingIndicator.SetIndicatorUI(accuracy);
 
             OnCookingMissed?.Invoke();
         }
-
-        #region GUI
-        private void OnGUI()
-        {
-            GUI.skin.label.fontSize = 50;
-            GUI.Label(new Rect(10, 10, 500, 200), "Missed Count : " + missedTap);
-        }
-        #endregion
     }
 }

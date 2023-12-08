@@ -16,6 +16,7 @@ namespace Pattern
 
         [Header("Pattern")]
         [SerializeField] private int maxRepeat = 3;
+        [SerializeField] private CookingDifficultyFrequency maxPattern;
         [SerializeField] private float waitTime = .5f;
 
         private float playTimer;
@@ -23,6 +24,7 @@ namespace Pattern
         // Repeat
         private LineLength prevLen;
         private int repeated = 0;
+        private int lineSpawned = 0;
 
         private void Start()
         {
@@ -36,6 +38,7 @@ namespace Pattern
 
         private IEnumerator GeneratePattern()
         {
+            int randomPattern = Random.Range((int)maxPattern.Min, (int)maxPattern.Max);
             while (playTimer < playTime)
             {
                 // FEED PATTERN HERE
@@ -52,8 +55,14 @@ namespace Pattern
                 prevLen = len;
 
                 float randomDuration = Random.Range(linesTime[len].Min, linesTime[len].Max);
-                lineGen.GenerateLine(len, randomDuration);
+                lineGen.GenerateLine(len, randomDuration, lineSpawned >= randomPattern);
+                if (lineSpawned >= randomPattern)
+                {
+                    randomPattern = Random.Range((int)maxPattern.Min, (int)maxPattern.Max);
+                    lineSpawned = 0;
+                }
                 yield return new WaitForSeconds(randomDuration + waitTime);
+                lineSpawned++;
             }
         }
     }

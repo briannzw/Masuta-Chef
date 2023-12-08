@@ -19,6 +19,29 @@ public class PauseController : PlayerInputControl
     [Header("Scene Load")]
     [SerializeField] private GameObject sceneLoadPrefab;
 
+    [Header("How TO")]
+    [SerializeField] private GameObject howToPanel;
+
+    protected override void Start()
+    {
+        base.Start();
+        if (!isCooking) return;
+        HowToPause();
+        howToPanel.SetActive(true);
+    }
+
+    public void HowToPause()
+    {
+        Time.timeScale = 0f;
+        InputManager.ToggleActionMap(playerControls.Panel);
+    }
+
+    public void HowToResume()
+    {
+        Time.timeScale = 1f;
+        InputManager.ToggleActionMap(!isCooking ? InputManager.PlayerAction.Gameplay : InputManager.PlayerAction.Cooking);
+    }
+
     public void Pause(InputAction.CallbackContext context)
     {
         pausePanel.SetActive(true);
@@ -37,6 +60,13 @@ public class PauseController : PlayerInputControl
             return;
         }
 
+        if (howToPanel != null && howToPanel.activeSelf)
+        {
+            howToPanel.SetActive(false);
+            HowToResume();
+            return;
+        }
+
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
         InputManager.ToggleActionMap(!isCooking ? InputManager.PlayerAction.Gameplay : InputManager.PlayerAction.Cooking);
@@ -44,15 +74,7 @@ public class PauseController : PlayerInputControl
 
     public void Resume(InputAction.CallbackContext context)
     {
-        if (settingsPanel.activeSelf)
-        {
-            settingsPanel.SetActive(false);
-            return;
-        }
-
-        pausePanel.SetActive(false);
-        Time.timeScale = 1f;
-        InputManager.ToggleActionMap(!isCooking ? InputManager.PlayerAction.Gameplay : InputManager.PlayerAction.Cooking);
+        Resume();
     }
 
     public void Back()
