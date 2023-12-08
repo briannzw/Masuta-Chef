@@ -1,54 +1,51 @@
+using AYellowpaper.SerializedCollections;
+using Cooking.Gameplay;
 using System.Collections;
 using UnityEngine;
 
-public class LineGen : MonoBehaviour
-{
-    [Header("UI References")]
-    [SerializeField] private RectTransform playPanel;
+namespace Pattern {
+    public enum LineLength { Short, Middle, Long }
 
-    [Header("Parameters")]
-    [SerializeField] private float playTime = 60f;
-    [SerializeField] private float lineTime;
-
-    [Header("Line Settings")]
-    [SerializeField] private float minPointDistance;
-    [SerializeField] private float maxPointDistance;
-
-    private float playTimer;
-    private Vector3 prevPos;
-    private Vector3 pos;
-
-    private void Start()
+    public class LineGen : MonoBehaviour
     {
-        // Starting Pos
-        prevPos = new Vector3(Random.Range(-playPanel.rect.width / 2, playPanel.rect.width / 2), Random.Range(-playPanel.rect.height / 2, playPanel.rect.height / 2), 0);
+        [Header("References")]
+        [SerializeField] private NodesGen nodesGen;
 
-        StartCoroutine(GenerateLine());
-    }
+        [Header("UI References")]
+        [SerializeField] private RectTransform playPanel;
 
-    private void Update()
-    {
-        if(playTimer < playTime) playTimer += Time.deltaTime;
-    }
+        [Header("Line Settings")]
+        [SerializeField] private SerializedDictionary<LineLength, CookingDifficultyFrequency> pointDistances;
 
-    private IEnumerator GenerateLine()
-    {
-        while (playTimer < playTime)
+        private Vector3 prevPos;
+        private Vector3 pos;
+
+        private void Start()
         {
-            pos = new Vector3(Random.Range(-playPanel.rect.width / 2, playPanel.rect.width / 2), Random.Range(-playPanel.rect.height / 2, playPanel.rect.height / 2), 0);
-
-            Debug.Log(Vector2.Distance(prevPos, pos).ToString());
-            yield return new WaitForSeconds(lineTime);
-
-            prevPos = pos;
+            // Starting Pos
+            prevPos = new Vector3(Random.Range(-playPanel.rect.width / 2, playPanel.rect.width / 2), Random.Range(-playPanel.rect.height / 2, playPanel.rect.height / 2), 0);
         }
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(playPanel.TransformPoint(pos), 5f);
+        public void GenerateLine(LineLength len, float duration)
+        {
+            prevPos = pos;
 
-        Gizmos.DrawLine(playPanel.TransformPoint(prevPos), playPanel.TransformPoint(pos));
+            float distance = 0f;
+            while (distance > pointDistances[len].Max || distance < pointDistances[len].Min)
+            {
+                pos = new Vector3(Random.Range(-playPanel.rect.width / 2, playPanel.rect.width / 2), Random.Range(-playPanel.rect.height / 2, playPanel.rect.height / 2), 0);
+                distance = Vector2.Distance(prevPos, pos);
+            }
+
+            StartCoroutine(nodesGen.GenerateNodes(len, playPanel.TransformPoint(prevPos), playPanel.TransformPoint(pos), duration));
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(playPanel.TransformPoint(pos), 5f);
+
+            Gizmos.DrawLine(playPanel.TransformPoint(prevPos), playPanel.TransformPoint(pos));
+        }
     }
 }
