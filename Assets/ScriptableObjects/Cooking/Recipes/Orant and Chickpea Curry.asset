@@ -22,16 +22,35 @@ MonoBehaviour:
   Ingredients:
     _serializedList:
     - Key: {fileID: 11400000, guid: 07478163e41e7e74cb5b6934beded27e, type: 2}
-      Value: 7
+      Value: 5
   data:
     CurrentBlueprint: 1
-    CookingDone: 0
-    PerfectCookingDone: 0
+    CookingDone: 2
+    PerfectCookingDone: 2
     ConsecutivePerfectCookingDone: 0
-    UniqueStatIndex: -1
-    CookingPoint: 0
-  NeededBlueprint: 1
+    StatsIndex: 
+    CookingPoint: 20
+    IsNotified: 1
+  NeededBlueprint: 20
   Stats:
+  - AffectedCharacter: Player
+    Stat:
+      StatType: 0
+      AffectDynamicStat: 0
+      StatsAffected: 1
+      DynamicStatsAffected: 0
+      WeaponStatsAffected: 0
+      StatValue: 25
+      StatModifierType: 100
+      overwriteOrder: 0
+      priorityOrder: 0
+      Behaviour: 0
+      StatusEffect: 0
+      Timer: 0
+      Duration: 0
+      UseInterval: 0
+      IntervalTimer: 0
+      Interval: 0
   - AffectedCharacter: Player
     Stat:
       StatType: 0
@@ -39,8 +58,8 @@ MonoBehaviour:
       StatsAffected: 0
       DynamicStatsAffected: 0
       WeaponStatsAffected: 0
-      StatValue: 5
-      StatModifierType: 100
+      StatValue: 7
+      StatModifierType: 200
       overwriteOrder: 0
       priorityOrder: 0
       Behaviour: 0
@@ -52,30 +71,12 @@ MonoBehaviour:
       Interval: 0
   - AffectedCharacter: Player
     Stat:
-      StatType: 1
+      StatType: 0
       AffectDynamicStat: 0
-      StatsAffected: 0
-      DynamicStatsAffected: 0
-      WeaponStatsAffected: 0
-      StatValue: 10
-      StatModifierType: 100
-      overwriteOrder: 0
-      priorityOrder: 0
-      Behaviour: 0
-      StatusEffect: 0
-      Timer: 0
-      Duration: 0
-      UseInterval: 0
-      IntervalTimer: 0
-      Interval: 0
-  - AffectedCharacter: Player
-    Stat:
-      StatType: 1
-      AffectDynamicStat: 0
-      StatsAffected: 0
+      StatsAffected: 2
       DynamicStatsAffected: 0
       WeaponStatsAffected: 1
-      StatValue: 5
+      StatValue: 10
       StatModifierType: 100
       overwriteOrder: 0
       priorityOrder: 0

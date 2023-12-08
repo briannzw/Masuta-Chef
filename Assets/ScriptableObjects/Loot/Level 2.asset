@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 790ec6397369dcf40b9515ef726cebd2, type: 3}
-  m_Name: Level 1
+  m_Name: Level 2
   m_EditorClassIdentifier: 
   LootPrefab:
     _serializedList:
@@ -32,19 +32,19 @@ MonoBehaviour:
         Type: 0
         Chance: 25
         Recipes:
-        - {fileID: 11400000, guid: cafa5b7c85a9683478ab8fac5106a1da, type: 2}
+        - {fileID: 11400000, guid: da0e9f42a41aff6428ef169eb9da5f5c, type: 2}
     - rid: 409706919606353960
       type: {class: WeaponLoot, ns: Loot, asm: Assembly-CSharp}
       data:
         Type: 1
-        Chance: 3
+        Chance: 1
         Weapons:
         - {fileID: 119512540170356325, guid: f7e625e0551451a4f85455dea7599387, type: 3}
     - rid: 409706919606353961
       type: {class: WeaponLoot, ns: Loot, asm: Assembly-CSharp}
       data:
         Type: 1
-        Chance: 1
+        Chance: 3
         Weapons:
         - {fileID: 3889096519632603906, guid: 0e473d8eba594374097f47f38a2181dd, type: 3}
     - rid: 6460550238254137364

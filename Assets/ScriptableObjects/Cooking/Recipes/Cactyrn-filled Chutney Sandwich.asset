@@ -25,22 +25,23 @@ MonoBehaviour:
     - Key: {fileID: 11400000, guid: 43b2583e4b1c2ef4caecff3843064e74, type: 2}
       Value: 5
   data:
-    CurrentBlueprint: 0
-    CookingDone: 0
-    PerfectCookingDone: 0
+    CurrentBlueprint: 1
+    CookingDone: 6
+    PerfectCookingDone: 1
     ConsecutivePerfectCookingDone: 0
     StatsIndex: 
-    CookingPoint: 0
-  NeededBlueprint: 1
+    CookingPoint: 35
+    IsNotified: 1
+  NeededBlueprint: 20
   Stats:
-  - AffectedCharacter: Player
+  - AffectedCharacter: Companion
     Stat:
       StatType: 0
       AffectDynamicStat: 0
       StatsAffected: 2
       DynamicStatsAffected: 0
       WeaponStatsAffected: 0
-      StatValue: 5
+      StatValue: 10
       StatModifierType: 100
       overwriteOrder: 0
       priorityOrder: 0
@@ -58,8 +59,8 @@ MonoBehaviour:
       StatsAffected: 1
       DynamicStatsAffected: 0
       WeaponStatsAffected: 0
-      StatValue: 5
-      StatModifierType: 100
+      StatValue: 10
+      StatModifierType: 200
       overwriteOrder: 0
       priorityOrder: 0
       Behaviour: 0
@@ -76,8 +77,8 @@ MonoBehaviour:
       StatsAffected: 0
       DynamicStatsAffected: 0
       WeaponStatsAffected: 0
-      StatValue: 5
-      StatModifierType: 100
+      StatValue: 20
+      StatModifierType: 200
       overwriteOrder: 0
       priorityOrder: 0
       Behaviour: 0
