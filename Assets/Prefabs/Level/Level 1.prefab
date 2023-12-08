@@ -428,8 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b94c8b8dc1d7594aa4d908f43c316c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSound: {fileID: 5749332898423085997}
-  jumpSound: {fileID: 0}
+  LootCollectedAudio: {fileID: 0}
+  LootCollectedClip: {fileID: 0}
 --- !u!1 &2144821687340149465
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +615,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2187
+  m_VersionIndex: 2190
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -905,7 +905,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2187
+  m_VersionIndex: 2190
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2187
+  m_VersionIndex: 2190
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2144,7 +2144,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2191
+  m_VersionIndex: 2194
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2276,7 +2276,7 @@ Transform:
   m_GameObject: {fileID: 7935171185735799759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2296,14 +2296,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 4423516174392846161, guid: 68f9d1dcd40cdd14fb084960b78e5f2f,
     type: 3}
-  spawnArea: {x: 50, y: 1, z: 50}
+  spawnArea: {x: 50, y: 1, z: 30}
   spawnOffset: {x: 0, y: 1, z: 0}
   isLocalOffset: 0
   randomizeRotation: 0
   followSpawnerRotation: 0
   randomEulerRotation: 0
   eulerRandomRange: {x: 0, y: 0}
-  maxSpawnObjectInPool: 15
+  maxSpawnObjectInPool: 20
   maxRandomPosIteration: 1000
   amount: 1
 --- !u!1001 &96255130754909782
