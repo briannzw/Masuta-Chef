@@ -70,7 +70,7 @@ namespace Wave
             }
         }
 
-        private void Awake()
+        public void Initialize()
         {   
             LevelData = levelManager.CurrentLevel;
             levelManager.DisableCrateSpawn();

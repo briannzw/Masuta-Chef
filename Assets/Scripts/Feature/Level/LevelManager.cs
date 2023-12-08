@@ -37,6 +37,7 @@ namespace Level
         public void Initialize(LevelData level)
         {
             CurrentLevel = level;
+            waveManager.Initialize();
             SpawnLevelArea();
             SpawnPlayer();
             GenerateNavMesh();
