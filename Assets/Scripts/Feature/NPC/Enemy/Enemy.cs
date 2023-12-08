@@ -37,8 +37,12 @@ namespace NPC.Enemy
         public bool IsConfused;
         public bool IsDead;
         public GameObject DebuffIcon;
+        public bool IsDebuffed = false;
 
-        private new void OnEnable()
+        public GameObject ConfusedIcon;
+        public GameObject StunIcon;
+
+        protected override void OnEnable()
         {
             base.OnEnable();
             Agent.isStopped = false;
@@ -46,7 +50,7 @@ namespace NPC.Enemy
             IsDead = false;
         }
 
-        protected new void Awake()
+        protected override void Awake()
         {
             base.Awake();
             StateMachine = new EnemyStateMachine();
@@ -82,6 +86,12 @@ namespace NPC.Enemy
             {
                 CurrentEnemy = defaultEnemyTarget;
                 DebuffIcon.SetActive(false);
+            }
+
+            if((IsStun || IsConfused) && !IsDebuffed && !IsDead)
+            {
+                IsDebuffed = true;
+                StateMachine.ChangeState(new EnemyDebuffState(this, StateMachine));
             }
         }
 

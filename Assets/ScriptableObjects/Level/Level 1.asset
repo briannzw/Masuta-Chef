@@ -45,7 +45,7 @@ MonoBehaviour:
       - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
         Value: 10
       - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
-        Value: 10
+        Value: 5
     SpawnInterval: 1
     SpawnPerInterval: 3
   - EnemyList:
@@ -55,14 +55,14 @@ MonoBehaviour:
       - Key: {fileID: 11400000, guid: deb09f5ffedb1b94a89892061b294b6f, type: 2}
         Value: 15
       - Key: {fileID: 11400000, guid: ff5a2608bda6f2047a005c91e61bceff, type: 2}
-        Value: 15
+        Value: 5
     SpawnInterval: 1
     SpawnPerInterval: 3
-  WaveWaitTime: 15
-  CrateSpawnMinInterval: 1
-  CrateSpawnMaxInterval: 5
+  WaveWaitTime: 20
+  CrateSpawnMinInterval: 5
+  CrateSpawnMaxInterval: 10
   DisasterDamageScaling: 1
-  DisasterStartTime: 30
-  DisasterDuration: 10
+  DisasterStartTime: 5
+  DisasterDuration: 30
   DisasterMinInterval: 15
-  DisasterMaxInterval: 30
+  DisasterMaxInterval: 15

@@ -33,9 +33,8 @@ namespace Character.Hit
         // Instant, Hit is only applied once to every Chara.
         [SerializeField] private HashSet<Character> characterAffected = new HashSet<Character>();
 
-        protected override void Start()
+        protected virtual void Start()
         {
-            base.Start();
             StartCoroutine(RemoveAllEffect(AreaDuration));
         }
 

@@ -21,7 +21,7 @@ namespace Character.Hit
         [ConditionalField(nameof(Type), true, HitType.EffectOnly)] public bool ApplyEffectBeforeHit;
         [field:SerializeField] public List<Effect> Effects { get; set; }
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             foreach(Effect effect in Effects)
             {

@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager;
     public SaveManager SaveManager;
     public StatsManager StatsManager;
+    public Player.Controller.PlayerAudioController PlayerAudioController;
     public float AIAvoidancePredictionTime = 0.7f; //Default value is 2.0, Describes how far in the future the agents predict collisions for avoidance.
 
     [Header("Static Value")]
@@ -132,5 +133,7 @@ public class GameManager : MonoBehaviour
             ingredient.data = new();
             SaveManager.SaveData.New(ingredient);
         }
+
+        SaveGame();
     }
 }

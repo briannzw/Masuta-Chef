@@ -14,6 +14,7 @@ namespace Player.Controller
         [Header("References")]
         public Weapon ActiveWeapon;
         public Transform WeaponTransform;
+        [SerializeField] private Animator animator;
 
         [Header("Weapon Setting")]
         public List<Weapon> WeaponSlot;
@@ -139,6 +140,7 @@ namespace Player.Controller
             weapOrigin.SetParent(WeaponTransform);
             weapOrigin.localPosition = Vector3.zero;
             weapOrigin.localRotation = Quaternion.identity;
+            animator.SetBool("RunGun", ActiveWeapon.IsGun);
         }
         #endregion
 

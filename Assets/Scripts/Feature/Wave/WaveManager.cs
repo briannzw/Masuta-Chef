@@ -15,7 +15,6 @@ namespace Wave
     using Weapon;
     using Character.Hit;
     using Player.Controller;
-    using System.Linq;
     using HUD;
     using Tracker;
 
@@ -34,15 +33,19 @@ namespace Wave
         [SerializeField] private IndicatorHUD indicatorHUD;
 
         [Header("Weapon Selection")]
+        [SerializeField] private bool startWaveOnStart = true;
         [SerializeField] private bool startWaveAfterSelect = false;
         [SerializeField] private PlayerWeaponController weaponController;
         [SerializeField] private GameObject weaponSelectionParent;
 
         [Header("Disaster Mode")]
+        [SerializeField] private bool enableDisaster = true;
         [SerializeField] private Character disasterChara;
         [SerializeField] private Weapon disasterWeapon;
         [Space]
-        [SerializeField] private GameObject disasterPrefab;
+        public NavMeshSpawner disasterSpawner;
+        [SerializeField] private int disasterMinCount = 4;
+        [SerializeField] private int disasterMaxCount = 6;
         [SerializeField] private GameObject disasterIcon;
         [SerializeField] private GameObject disasterText;
         [SerializeField] private TMP_Text disasterWarningText;
@@ -81,15 +84,15 @@ namespace Wave
                 return;
             }
 
-            FirstWave();
+            if(startWaveOnStart) FirstWave();
         }
 
-        private void FirstWave()
+        public void FirstWave()
         {
             levelManager.GameStarted();
 
             StartWave(LevelData.Waves[0]);
-            StartCoroutine(DoDisaster());
+            if(enableDisaster) StartCoroutine(DoDisaster());
             levelManager.EnableCrateSpawn();
 
             if (startWaveAfterSelect)
@@ -195,7 +198,6 @@ namespace Wave
         private IEnumerator DoDisaster()
         {
             disasterWeapon.OnEquip(disasterChara);
-            disasterPrefab.GetComponent<HitController>().Initialize(disasterWeapon, LevelData.DisasterDamageScaling);
             yield return new WaitForSeconds(LevelData.DisasterStartTime);
 
             float time = Random.Range(LevelData.DisasterMinInterval, LevelData.DisasterMaxInterval);
@@ -220,13 +222,21 @@ namespace Wave
                 disasterIcon.SetActive(true);
 
                 // Spawn Disaster
-                GameObject disasterGO = Instantiate(disasterPrefab);
+                List<GameObject> disasterGO = disasterSpawner.Spawn(Random.Range(disasterMinCount, disasterMaxCount));
+
+                foreach(var go in disasterGO)
+                {
+                    go.GetComponent<HitController>().Initialize(disasterWeapon, LevelData.DisasterDamageScaling);
+                }
 
                 disasterWarningText.gameObject.SetActive(false);
 
                 yield return new WaitForSeconds(LevelData.DisasterDuration);
 
-                Destroy(disasterGO);
+                foreach (var go in disasterGO)
+                {
+                    go.GetComponent<SpawnObject>().Release();
+                }
                 disasterIcon.SetActive(false);
                 disasterText.SetActive(false);
 
@@ -288,6 +298,6 @@ namespace Wave
                 }
             }
         }
-        #endregion
+        #endregion        
     }
 }

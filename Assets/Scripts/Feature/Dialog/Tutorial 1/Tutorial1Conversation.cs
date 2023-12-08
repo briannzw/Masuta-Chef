@@ -18,13 +18,11 @@ namespace DialogueEditor
         public Image d;
 
         public MonoBehaviour[] componentsToPause;
-        // Start is called before the first frame update
+
         void Start()
         {
-            // Jalankan metode onclick() pada tombol
             interactButton.onClick.Invoke();
             interactButton.gameObject.SetActive(false);
-            // Jeda semua komponen yang perlu dijeda
             foreach (var component in componentsToPause)
             {
                 if (component != null)

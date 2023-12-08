@@ -25,6 +25,9 @@ public class CharacterAudioController : MonoBehaviour
 
     private void Damage()
     {
-        AudioSource.PlayOneShot(DamagedClip);
+        if(!AudioSource.isPlaying)
+        {
+            AudioSource.PlayOneShot(DamagedClip);
+        }
     }
 }

@@ -55,7 +55,10 @@ namespace Weapon
             // Start Damage
             GameObject ultimate = Instantiate(saberUltimateApplicator, transform.position, transform.rotation);
             ultimate.GetComponent<AOEController>().Source = this;
-            ultimate.GetComponent<AOEController>().AreaDuration = UltimateTimer;
+
+            // Heal
+            //ultimate.GetComponentInChildren<HitController>().Source = this;
+            ultimate.transform.GetChild(0).GetComponent<HitController>().Hit(Holder);
             
             // Start VFX
             vfxController.StartVFX();

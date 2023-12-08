@@ -11,6 +11,7 @@ namespace Level.Area
     {
         [Header("Spawners")]
         public CrateSpawner CrateSpawner;
+        public NavMeshSpawner DisasterSpawner;
         public SerializedDictionary<GameObject, List<NavMeshSpawner>> EnemySpawners;
     }
 }

@@ -26,6 +26,7 @@ namespace Weapon
         public Character Holder;
         public Rigidbody rb;
         public Collider weaponCollider;
+        public bool IsGun;
         [Tag] public List<string> TargetTags = new();
 
         [Header("Stats")]

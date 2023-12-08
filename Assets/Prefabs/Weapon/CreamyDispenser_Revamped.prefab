@@ -235,6 +235,7 @@ MonoBehaviour:
   Holder: {fileID: 0}
   rb: {fileID: 1811569729608071877}
   weaponCollider: {fileID: 0}
+  IsGun: 1
   TargetTags:
   - Enemy
   stats:
@@ -249,7 +250,7 @@ MonoBehaviour:
       Value:
         BaseValue: 100
   damageScaling: 0.01
-  UltimateTimer: 5
+  UltimateTimer: 8
   isCooldownUltimate: 0
   isUltimateCancelable: 0
   UltTimer: 0

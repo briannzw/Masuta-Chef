@@ -5,15 +5,21 @@ namespace Loot.Object
     using Cooking;
     using Behaviour;
     using Level;
+    using Player.Controller;
 
     public class IngredientLootObject : LootFollowObject
     {
         [Header("References")]
         private Ingredient ingredient;
         private int count = 1;
+        private PlayerAudioController audioController = GameManager.Instance.PlayerAudioController;
 
         protected override void ReachedTarget()
         {
+            if (!audioController.LootCollectedAudio.isPlaying)
+            {
+                audioController.LootCollectedAudio.PlayOneShot(audioController.LootCollectedClip);
+            }
             Destroy(gameObject);
         }
 

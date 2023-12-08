@@ -54,6 +54,7 @@ namespace Level
             GameObject levelArea = Instantiate(CurrentLevel.LevelAreaPrefab, transform.position, Quaternion.identity);
             levelAreaInfo = levelArea.GetComponent<LevelAreaInfo>();
             waveManager.Spawners = levelAreaInfo.EnemySpawners;
+            waveManager.disasterSpawner = levelAreaInfo.DisasterSpawner;
         }
 
         private void SpawnPlayer()
@@ -148,12 +149,24 @@ namespace Level
 
         public void DisableCrateSpawn()
         {
-           levelAreaInfo.CrateSpawner.gameObject.SetActive(false);
+           if(levelAreaInfo != null) levelAreaInfo.CrateSpawner.gameObject.SetActive(false);
         }
 
         public void EnableCrateSpawn()
         {
             levelAreaInfo.CrateSpawner.gameObject.SetActive(true);
+        }
+
+        public int GetCurrentEnemyCount(string characterTag)
+        {
+            if (characterDied.ContainsKey(characterTag))
+            {
+                return characterDied[characterTag];
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

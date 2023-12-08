@@ -15,6 +15,7 @@ namespace Character
         [Header("Stats")]
         public StatsPreset StatsPreset;
         [ConditionalField(nameof(StatsPreset), inverse:true)] public Stats Stats;
+        [SerializeField] private bool IsTutorial = false;
 
         [Header("Effect")]
         protected List<Effect> CurrentStatusEffects;
@@ -165,6 +166,10 @@ namespace Character
 
             if (Stat.CurrentValue <= 0 && dynamicEnum == DynamicStatsEnum.Health)
             {
+                if (IsTutorial)
+                {
+                    return;
+                }
                 OnDie?.Invoke();
 
                 // Send Die data to Level Manager
@@ -284,9 +289,10 @@ namespace Character
             else if(effect.StatusEffect == StatusEffects.Stun || effect.StatusEffect == StatusEffects.Taunt || effect.StatusEffect == StatusEffects.Confuse)
             {
                 // Enemy Only
-                Debug.Log("test");
-                if (!CompareTag("Enemy")) return;
-                StartCoroutine(TakeEnemy(effect));
+                if (CompareTag("Enemy"))
+                    StartCoroutine(TakeEnemy(effect));
+                if (CompareTag("Player"))
+                    StartCoroutine(StunPlayer(effect));
             }
             else if (effect.AffectDynamicStat)
                 Stats.DynamicStatList[effect.DynamicStatsAffected].AddModifier(effect.Modifier);
@@ -326,6 +332,18 @@ namespace Character
                     GetComponent<NPC.Enemy.Enemy>().IsConfused = false;
                     break;
             }
+        }
+
+        private IEnumerator StunPlayer(Effect effect)
+        {
+            if (effect.StatusEffect != StatusEffects.Stun) yield break;
+
+
+            GetComponent<Player.Controller.PlayerMovementController>().SetCanMove(false);
+            GetComponent<Player.Controller.PlayerWeaponController>().enabled = false;
+            yield return new WaitForSeconds(effect.Modifier.Value);
+            GetComponent<Player.Controller.PlayerMovementController>().SetCanMove(true);
+            GetComponent<Player.Controller.PlayerWeaponController>().enabled = true;
         }
     }
 }

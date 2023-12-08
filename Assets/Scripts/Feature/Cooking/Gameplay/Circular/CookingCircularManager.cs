@@ -205,12 +205,5 @@ namespace Cooking.Gameplay.Circular
             hitEffect.Stop();
             missedEffect.Play();
         }
-
-        private void OnGUI()
-        {
-            GUI.color = Color.black;
-            GUI.Label(new Rect(10, 10, 400, 50), "Stir Velocity: " + controller.CurrentVelocity);
-            GUI.Label(new Rect(10, 60, 400, 50), "Game Timer : " + gameTimer);
-        }
     }
 }

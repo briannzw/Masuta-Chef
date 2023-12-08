@@ -26,14 +26,14 @@ namespace NPC.Enemy
         [SerializeField]
         private LayerMask layerMask;
 
-        private new void Awake()
+        protected override void Awake()
         {
             base.Awake();
             IsThisJoker = true;
             StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));
         }
 
-        private new void OnEnable()
+        protected override void OnEnable()
         {
             base.OnEnable();
             StateMachine.Initialize(new EnemyJokerWanderState(this, StateMachine));

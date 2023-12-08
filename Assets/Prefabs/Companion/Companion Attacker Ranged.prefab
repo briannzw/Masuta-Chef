@@ -145,6 +145,8 @@ MonoBehaviour:
   CurrentEnemy: {fileID: 0}
   ChildCollider: {fileID: 2867727414229033579}
   IsThisJoker: 0
+  Data:
+    icon: {fileID: 21300000, guid: cbe1fb536d6546345908025612f7acb6, type: 3}
   MaxDistanceFromPlayer: 20
   IsAltPath: 0
   IsFollowingEnemy: 0
@@ -154,8 +156,6 @@ MonoBehaviour:
   minDistanceFromPlayer: 6
   minDistanceSlotFromPlayer: 5
   AttackDistance: 8
-  data:
-    icon: {fileID: 0}
   wanderRadius: 2
   wanderInterval: 4
   rotationSpeed: 12
@@ -221,6 +221,8 @@ MonoBehaviour:
   character: {fileID: 0}
   maxLevel: 30
   expPerEnemyKill: 2
+  expPerSecond: 2
+  expNeededLvlUp: 10
   StatsPerLevel:
     DynamicStatList:
       _serializedList:
@@ -432,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.50980395}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1113,6 +1115,7 @@ MonoBehaviour:
   UltimateTimer: 1
   isCooldownUltimate: 0
   isUltimateCancelable: 0
+  UltTimer: 0
   data:
     icon: {fileID: 0}
   WeaponAnimator: {fileID: 7395055910845119106}
