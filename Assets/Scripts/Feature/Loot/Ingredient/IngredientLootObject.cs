@@ -12,7 +12,7 @@ namespace Loot.Object
         [Header("References")]
         private Ingredient ingredient;
         private int count = 1;
-        private PlayerAudioController audioController = GameManager.Instance.PlayerAudioController;
+        private PlayerAudioController audioController = GameManager.Instance?.PlayerAudioController;
 
         protected override void ReachedTarget()
         {

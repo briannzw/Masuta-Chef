@@ -973,7 +973,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2122,6 +2122,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5393955395654792721, guid: d661f148390273746a8c619250c9be20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30.000061
+      objectReference: {fileID: 0}
     - target: {fileID: 8775412077813489307, guid: d661f148390273746a8c619250c9be20,
         type: 3}
       propertyPath: chara
@@ -2270,6 +2275,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2408330182108557641, guid: f6c85cd99d2e90548b38983c34f6d8ff,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.64786696
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408330182108557641, guid: f6c85cd99d2e90548b38983c34f6d8ff,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.64786696
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408330182108557641, guid: f6c85cd99d2e90548b38983c34f6d8ff,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.64786696
+      objectReference: {fileID: 0}
     - target: {fileID: 5887911173395204614, guid: f6c85cd99d2e90548b38983c34f6d8ff,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2708,7 +2728,7 @@ PrefabInstance:
     - target: {fileID: 364535886153186109, guid: 4e6bea3427178664298767626daa01bf,
         type: 3}
       propertyPath: m_AmplitudeGain
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3128715596763421827, guid: 4e6bea3427178664298767626daa01bf,
         type: 3}
@@ -2730,6 +2750,11 @@ PrefabInstance:
       propertyPath: hurtEffect
       value: 
       objectReference: {fileID: 28581969}
+    - target: {fileID: 7610630533186902683, guid: 4e6bea3427178664298767626daa01bf,
+        type: 3}
+      propertyPath: shakeIntensity
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8538092388001844022, guid: 4e6bea3427178664298767626daa01bf,
         type: 3}
       propertyPath: m_LocalPosition.x

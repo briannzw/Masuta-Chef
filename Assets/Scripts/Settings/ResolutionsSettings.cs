@@ -22,8 +22,6 @@ public class ResolutionSettings : MonoBehaviour
         resolutionDropdown.ClearOptions();
         currentRefreshRate = Screen.currentResolution.refreshRate;
 
-        Debug.Log("RefreshRate: " + currentRefreshRate);
-
         for (int i = 0; i < resolutions.Length; i++)
         {
             if (resolutions[i].refreshRate == currentRefreshRate)
