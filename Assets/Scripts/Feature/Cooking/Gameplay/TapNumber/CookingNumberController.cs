@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Cooking.Gameplay.TapNumber
@@ -21,6 +22,9 @@ namespace Cooking.Gameplay.TapNumber
         public float TimingCircleScale;
         public float AccuracyCircleScale;
 
+        [Header("Internal")]
+        public int internalCount;
+
         private void Awake()
         {
             TimingCircle.rectTransform.localScale = Vector3.one * TimingCircleScale;
@@ -39,6 +43,7 @@ namespace Cooking.Gameplay.TapNumber
         {
             StartCoroutine(Countdown());
             StartCoroutine(DoScaleTiming());
+            StartCoroutine(DoScaleIngredient());
         }
 
         private void OnValidate()
@@ -49,18 +54,18 @@ namespace Cooking.Gameplay.TapNumber
         public void OnClick()
         {
             // Make sure that TimingCircle and AccuracyCircle Width and Height is the same.
-            if (TimingCircle.rectTransform.localScale.x <= AccuracyCircleScale) Manager.TapSuccess(int.Parse(NumberText.text));
-            else Manager.TapMissed(int.Parse(NumberText.text));
+            if (TimingCircle.rectTransform.localScale.x <= AccuracyCircleScale + .2f) Manager.TapSuccess(internalCount);
+            else Manager.TapMissed(internalCount);
             Vector3 particlePos = transform.position + new Vector3(0, 0, -5);
             // Some VFX(s)
-            Instantiate(hitEffect, particlePos, Quaternion.Euler(180f,0,0));
+            if(hitEffect != null) Instantiate(hitEffect, particlePos, Quaternion.Euler(180f,0,0));
             Destroy(gameObject);
-        }   
+        }
 
         private IEnumerator Countdown()
         {
             yield return new WaitForSeconds(Duration);
-            Manager.TapMissed(int.Parse(NumberText.text));
+            Manager.TapMissed(internalCount);
             Destroy(gameObject);
         }
 
@@ -69,15 +74,36 @@ namespace Cooking.Gameplay.TapNumber
             float time = 0;
             float endValue = 1f;
             Vector3 startScale = TimingCircle.rectTransform.localScale;
-            while (time < Duration)
+
+            float dur = Duration * .9f;
+            while (time < dur)
             {
                 if(Manager.GameEnded) Destroy(gameObject);
-                TimingCircle.rectTransform.localScale = Vector3.one * Mathf.Lerp(startScale.x, endValue, time / Duration);
+                TimingCircle.rectTransform.localScale = Vector3.one * Mathf.Lerp(startScale.x, endValue, time / dur);
                 time += Time.deltaTime;
                 yield return null;
             }
 
             TimingCircle.rectTransform.localScale = Vector3.one * endValue;
+        }
+
+        private IEnumerator DoScaleIngredient()
+        {
+            float time = 0;
+            float endValue = 1.5f;
+            Vector3 startScale = IngredientIcon.rectTransform.localScale;
+
+            float dur = Duration *.7f;
+            while (time < dur)
+            {
+                if (Manager.GameEnded) Destroy(gameObject);
+                IngredientIcon.color = new Color(IngredientIcon.color.r, IngredientIcon.color.g, IngredientIcon.color.b, Mathf.Lerp(0, 1, time / dur));
+                IngredientIcon.rectTransform.localScale = Vector3.one * Mathf.Lerp(startScale.x, endValue, time / dur);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            IngredientIcon.rectTransform.localScale = Vector3.one * endValue;
         }
     }
 }

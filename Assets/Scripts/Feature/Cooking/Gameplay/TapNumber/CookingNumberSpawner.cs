@@ -38,11 +38,11 @@ namespace Cooking.Gameplay.TapNumber
                 go.transform.localPosition = randomPos;
                 spawnedCount++;
                 CookingNumberController controller = go.GetComponent<CookingNumberController>();
-                controller.Duration = Random.Range(manager.NumberDuration[manager.CurrentDifficulty].Min, manager.NumberDuration[manager.CurrentDifficulty].Max);
+                //controller.Duration = Random.Range(manager.NumberDuration[manager.CurrentDifficulty].Min, manager.NumberDuration[manager.CurrentDifficulty].Max);
                 controller.Manager = manager;
                 controller.NumberText.text = spawnedCount.ToString();
-                if (spawnedCount >= manager.TargetCount[manager.CurrentDifficulty]) yield break;
-                yield return new WaitForSeconds(Random.Range(minMaxSpawnFrequency[manager.CurrentDifficulty].Min, minMaxSpawnFrequency[manager.CurrentDifficulty].Max));
+                //if (spawnedCount >= manager.TargetCount[manager.CurrentDifficulty]) yield break;
+                //yield return new WaitForSeconds(Random.Range(minMaxSpawnFrequency[manager.CurrentDifficulty].Min, minMaxSpawnFrequency[manager.CurrentDifficulty].Max));
             }
         }
 
