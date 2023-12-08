@@ -847,6 +847,7 @@ MonoBehaviour:
   surfaces:
   - {fileID: 1959936578}
   resultUI: {fileID: 2193618}
+  lightingTransform: {fileID: 410087040}
   characterDied:
     _serializedList: []
 --- !u!114 &666763696
@@ -2125,7 +2126,7 @@ PrefabInstance:
     - target: {fileID: 5393955395654792721, guid: d661f148390273746a8c619250c9be20,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 29.999939
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8775412077813489307, guid: d661f148390273746a8c619250c9be20,
         type: 3}
