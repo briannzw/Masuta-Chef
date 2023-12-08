@@ -13,5 +13,8 @@ namespace Level.Area
         public CrateSpawner CrateSpawner;
         public NavMeshSpawner DisasterSpawner;
         public SerializedDictionary<GameObject, List<NavMeshSpawner>> EnemySpawners;
+
+        [Header("Lighting")]
+        public Vector3 sunRotation = new Vector3(50f, -30f, 0f);
     }
 }
