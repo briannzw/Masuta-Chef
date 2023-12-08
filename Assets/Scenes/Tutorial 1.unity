@@ -937,7 +937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 0
+  m_AmplitudeGain: 0.3
   m_FrequencyGain: 1
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &271578309
@@ -2403,7 +2403,8 @@ MonoBehaviour:
   StatsManager: {fileID: 1178781492}
   PlayerAudioController: {fileID: 2017765214}
   AIAvoidancePredictionTime: 0.7
-  sceneLoadPrefab: {fileID: 0}
+  sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
+    type: 3}
 --- !u!1 &654917524
 GameObject:
   m_ObjectHideFlags: 0
