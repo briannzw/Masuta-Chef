@@ -57,6 +57,7 @@ namespace Level
             levelAreaInfo = levelArea.GetComponent<LevelAreaInfo>();
             waveManager.Spawners = levelAreaInfo.EnemySpawners;
             waveManager.disasterSpawner = levelAreaInfo.DisasterSpawner;
+            if (lightingTransform == null) return;
             lightingTransform.colorTemperature = levelAreaInfo.ColorTemperature;
             lightingTransform.intensity = levelAreaInfo.LightIntensity;
         }
