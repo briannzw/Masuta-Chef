@@ -15,19 +15,13 @@ namespace Cooking.Gameplay.TapNumber
         [Header("Parameters")]
         public float GameTime = 60f;
 
-        [Header("Difficulty")]
-        public CookingDifficulty CurrentDifficulty;
-        public SerializedDictionary<CookingDifficulty, int> TargetCount;
-        public SerializedDictionary<CookingDifficulty, int> TargetMissCount;
-        public SerializedDictionary<CookingDifficulty, CookingDifficultyFrequency> NumberDuration;
-
         private float timer = 0f;
         public bool GameEnded = false;
 
         private int successTap = 0;
         private int missedTap = 0;
 
-        private int lastTapNum = 0;
+        private int lastTapNum = -1;
 
         private void Awake()
         {
@@ -42,15 +36,12 @@ namespace Cooking.Gameplay.TapNumber
 
             timer += Time.deltaTime;
 
-            if (timer > GameTime || missedTap >= TargetMissCount[CurrentDifficulty] || successTap + missedTap >= TargetCount[CurrentDifficulty]) GameOver();
+            if (timer > GameTime) GameOver();
         }
 
         private void GameOver()
         {
             GameEnded = true;
-            // Show Result
-            Debug.Log(CookingIndicator.FinalResult.ToString());
-
             // Save to Recipe
 
             if (successTap == 0)
