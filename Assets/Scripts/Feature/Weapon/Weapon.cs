@@ -199,19 +199,20 @@ namespace Weapon
                             // Add Flat Mod to Base Value
                             if (mod.Type == StatModType.Flat)
                             {
-                                stats[modList.Key].BaseValue += mod.Value;
+                                stats[modList.Key].BaseValue += (modList.Key == WeaponStatsEnum.Speed) ? -mod.Value : mod.Value;
 
                                 if (!previousFlatModValue.ContainsKey(modList.Key))
                                     previousFlatModValue.Add(modList.Key, 0);
 
-                                previousFlatModValue[modList.Key] += mod.Value;
+                                previousFlatModValue[modList.Key] += (modList.Key == WeaponStatsEnum.Speed) ? -mod.Value : mod.Value;
                             }
                             // Add Percent Mod to Total Value
                             else
                             {
+                                StatModifier newMod = mod;
                                 // Change to percent
-                                mod.Value /= 100;
-                                stats[modList.Key].AddModifier(mod);
+                                newMod.Value /= 100 * (modList.Key == WeaponStatsEnum.Speed ? -1 : 1);
+                                stats[modList.Key].AddModifier(newMod);
                             }
                         }
                     }
