@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 266303182}
   - component: {fileID: 266303181}
   - component: {fileID: 266303186}
+  - component: {fileID: 266303187}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -581,6 +582,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &266303187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266303180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd73c2ec1a86cde4c86d76545e8eaa6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  versionText: {fileID: 2125026336}
 --- !u!1 &715683189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,7 +2072,7 @@ MonoBehaviour:
       _serializedList:
       - Key: Cactyrn-filled Chutney Sandwich
         Value:
-          CurrentBlueprint: 1
+          CurrentBlueprint: 33
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
@@ -2067,38 +2081,38 @@ MonoBehaviour:
           IsNotified: 0
       - Key: Orant and Chickpea Curry
         Value:
-          CurrentBlueprint: 1
-          CookingDone: 138
-          PerfectCookingDone: 124
-          ConsecutivePerfectCookingDone: 0
-          StatsIndex: U001
-          CookingPoint: 7
-          IsNotified: 0
-      - Key: Stuffed Bitter Gourdakin
-        Value:
-          CurrentBlueprint: 1
-          CookingDone: 2
+          CurrentBlueprint: 33
+          CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
           StatsIndex: 
-          CookingPoint: 10
+          CookingPoint: 0
+          IsNotified: 0
+      - Key: Stuffed Bitter Gourdakin
+        Value:
+          CurrentBlueprint: 33
+          CookingDone: 0
+          PerfectCookingDone: 0
+          ConsecutivePerfectCookingDone: 0
+          StatsIndex: 
+          CookingPoint: 0
           IsNotified: 0
     IngredientData:
       _serializedList:
       - Key: Cactryn
         Value:
-          Count: 4
+          Count: 12
           MaxCount: 200
       - Key: Gourda
         Value:
-          Count: 6
+          Count: 12
           MaxCount: 200
       - Key: Orant
         Value:
-          Count: 3
+          Count: 12
           MaxCount: 200
-  saveTime: 0
-  loadTime: 244
+  saveTime: 11
+  loadTime: 0
 --- !u!114 &1603759068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3362,7 +3376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v0.1.8
+  m_text: v
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 66c59a7ba630de645975946cbc9d1bc6, type: 2}
   m_sharedMaterial: {fileID: 4169942013799900288, guid: 66c59a7ba630de645975946cbc9d1bc6,
