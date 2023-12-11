@@ -4026,7 +4026,7 @@ PrefabInstance:
     - target: {fileID: 5393955395654792721, guid: d661f148390273746a8c619250c9be20,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 30.000244
+      value: 30.000122
       objectReference: {fileID: 0}
     - target: {fileID: 7526239677145813091, guid: d661f148390273746a8c619250c9be20,
         type: 3}
@@ -6831,6 +6831,7 @@ MonoBehaviour:
   surfaces:
   - {fileID: 1145280475}
   resultUI: {fileID: 0}
+  lightingTransform: {fileID: 0}
   characterDied:
     _serializedList: []
 --- !u!1 &1393628892
@@ -7180,6 +7181,7 @@ MonoBehaviour:
   sceneToLoad: LevelSelection
   sceneLoadPrefab: {fileID: 2142645593764424854, guid: 8be46429f3987f94f8af43b7c9df92a4,
     type: 3}
+  levelData: {fileID: 0}
 --- !u!4 &1409701675
 Transform:
   m_ObjectHideFlags: 0
@@ -9014,18 +9016,9 @@ MonoBehaviour:
   SaveData:
     RecipeData:
       _serializedList:
-      - Key: Stuffed Bitter Gourdakin
-        Value:
-          CurrentBlueprint: 8
-          CookingDone: 0
-          PerfectCookingDone: 0
-          ConsecutivePerfectCookingDone: 0
-          StatsIndex: 
-          CookingPoint: 0
-          IsNotified: 0
       - Key: Cactyrn-filled Chutney Sandwich
         Value:
-          CurrentBlueprint: 9
+          CurrentBlueprint: 12
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
@@ -9034,7 +9027,16 @@ MonoBehaviour:
           IsNotified: 0
       - Key: Orant and Chickpea Curry
         Value:
-          CurrentBlueprint: 8
+          CurrentBlueprint: 12
+          CookingDone: 0
+          PerfectCookingDone: 0
+          ConsecutivePerfectCookingDone: 0
+          StatsIndex: 
+          CookingPoint: 0
+          IsNotified: 0
+      - Key: Stuffed Bitter Gourdakin
+        Value:
+          CurrentBlueprint: 12
           CookingDone: 0
           PerfectCookingDone: 0
           ConsecutivePerfectCookingDone: 0
@@ -9043,12 +9045,20 @@ MonoBehaviour:
           IsNotified: 0
     IngredientData:
       _serializedList:
-      - Key: Chicken
+      - Key: Cactryn
         Value:
-          Count: 2
+          Count: 50
           MaxCount: 200
-  saveTime: 7
-  loadTime: 134
+      - Key: Gourda
+        Value:
+          Count: 50
+          MaxCount: 200
+      - Key: Orant
+        Value:
+          Count: 40
+          MaxCount: 200
+  saveTime: 15
+  loadTime: 0
 --- !u!114 &1831658052
 MonoBehaviour:
   m_ObjectHideFlags: 0
